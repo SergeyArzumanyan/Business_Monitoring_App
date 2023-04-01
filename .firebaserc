@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "truffle-sweets": {
+      "hosting": {
+        "truffle-sweets": [
+          "truffle-sweets"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "truffle-sweets"
+  }
+}

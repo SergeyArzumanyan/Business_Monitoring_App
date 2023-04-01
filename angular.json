@@ -97,6 +97,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "truffle-sweets:build:production",
+            "firebaseProject": "truffle-sweets",
+            "firebaseHostingSite": "truffle-sweets"
+          }
         }
       }
     }
