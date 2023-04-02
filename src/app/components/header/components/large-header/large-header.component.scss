@@ -1,0 +1,49 @@
+@import "app/core/global-css/colors";
+@import "app/core/global-css/fonts";
+
+.header-wrapper {
+  width: 100%;
+  height: 75px;
+  background-color: $white-300;
+  position: fixed;
+  top: 0;
+  opacity: 0.8;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-links-container {
+  list-style: none;
+  width: 400px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+
+  .header-link {
+    width: 100%;
+    height: 75px;
+    line-height: 75px;
+    font-size: $medium;
+    user-select: none;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.15s;
+  }
+  .header-link:hover {
+    background-color: $white-200;
+  }
+  .header-link:active {
+    background-color: $white-100;
+  }
+}
+
+.header-logo , .header-logo > img {
+  width: 75px;
+  heighT: 75px;
+  cursor: pointer;
+}
+
+.active {
+  border-bottom: 3px solid $skin-100;
+}

@@ -1,0 +1,8 @@
+<header>
+  <div *ngIf="!isMobile">
+    <app-large-header></app-large-header>
+  </div>
+  <div *ngIf="isMobile">
+      <app-small-header></app-small-header>
+  </div>
+</header>
