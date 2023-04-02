@@ -1,0 +1,12 @@
+.layout-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .content {
+    margin: 75px 0 0 0;
+    padding: 0;
+    flex: 1;
+  }
+}

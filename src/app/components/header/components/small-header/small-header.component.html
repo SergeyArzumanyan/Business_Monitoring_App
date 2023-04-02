@@ -1,0 +1,34 @@
+<div class="header-wrapper">
+
+  <div class="header-titles">
+
+    <div class="logo-wrapper">
+      <div class="header-logo">
+        <img src="/assets/Images/logo.jpg" alt="Logo">
+      </div>
+    </div>
+
+    <div class="hamburger-wrapper">
+      <div class="hamburger-menu"
+           [ngClass]="{'open': menu}"
+           (click)="toggleMenu()">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="header-links-wrapper">
+    <div class="header-links-container"
+         [ngClass]="{'visibility': menu}">
+      <li class="header-link">Sweets</li>
+      <li class="header-link">Products</li>
+      <li class="header-link">Add Sweet</li>
+    </div>
+  </div>
+
+
+</div>
