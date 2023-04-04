@@ -10,6 +10,5 @@ export class SmallHeaderComponent {
 
   public toggleMenu(): void {
     this.menu = !this.menu;
-    console.log("453456464646");
   }
 }

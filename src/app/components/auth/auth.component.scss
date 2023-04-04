@@ -1,0 +1,48 @@
+@import "/src/app/core/global-css/flex";
+@import "/src/app/core/global-css/colors";
+@import "/src/app/core/global-css/fonts";
+
+.auth-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.container {
+  width: 30%;
+  height: 400px;
+  background-color: $white-300;
+  border-radius: 12px;
+  border: 2px solid $skin-300;
+  gap: 40px;
+}
+
+.auth-header {
+  text-align: center;
+  font-size: $larger;
+}
+
+.auth-input {
+  font-size: $big;
+}
+
+@media (max-width: 650px) {
+  .container {
+    width: 75%;
+    height: 300px;
+
+    .auth-header {
+      font-size: $big;
+    }
+
+    .auth-input {
+      font-size: $medium;
+    }
+  }
+
+
+}
+
+:host ::ng-deep .ng-tns-c7-0.pi.ng-star-inserted.pi-eye,
+:host ::ng-deep .ng-tns-c7-0.pi.ng-star-inserted.pi-eye-slash {
+  cursor: pointer;
+}

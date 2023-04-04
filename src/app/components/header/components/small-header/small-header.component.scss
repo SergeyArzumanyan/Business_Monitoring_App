@@ -1,5 +1,6 @@
 @import "app/core/global-css/colors";
 @import "app/core/global-css/fonts";
+@import "app/core/global-css/flex";
 
 .header-wrapper {
   width: 100%;
@@ -11,13 +12,11 @@
 .header-titles {
   width: 100%;
   height: 65px;
-  background-color: $white-300;
-  display: flex;
-  justify-content: space-between;
+  background-color: $white-400;
 
   .header-logo , .header-logo > img {
     width: 65px;
-    height: 65px;
+    height: 64px;
     cursor: pointer;
   }
 
@@ -86,6 +85,10 @@
   }
 }
 
+.header-title-border {
+  border-bottom: 1px solid $skin-100;
+}
+
 .header-links-wrapper {
   width: 100%;
   height: auto;
@@ -105,7 +108,7 @@
     width: 100%;
     height: 65px;
     line-height: 65px;
-    background-color: $white-300;
+    background-color: $white-400;
     color: $gray-200;
     text-align: center;
     transition: 0.15s;

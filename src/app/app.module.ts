@@ -12,6 +12,9 @@ import { LargeHeaderComponent, SmallHeaderComponent } from '@components/header/c
 import { environment } from '../environments/environment';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { PasswordModule } from "primeng/password";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { ButtonModule } from "primeng/button";
 
 @NgModule({
   declarations: [
@@ -26,8 +29,11 @@ import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
     CommonModule,
     AppRoutingModule,
     FormsModule,
+    BrowserAnimationsModule,
+    PasswordModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideDatabase(() => getDatabase())
+    provideDatabase(() => getDatabase()),
+    ButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
