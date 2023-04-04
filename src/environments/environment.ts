@@ -1,5 +1,3 @@
-import { getDatabase } from "@angular/fire/database";
-
 export const environment =  {
   production: "false",
   firebase: {
@@ -12,5 +10,3 @@ export const environment =  {
     storageBucket: 'truffle-sweets.appspot.com',
   },
 };
-
-export const db = getDatabase();
