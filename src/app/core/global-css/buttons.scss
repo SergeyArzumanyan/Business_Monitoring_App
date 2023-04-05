@@ -1,0 +1,36 @@
+@import "/src/app/core/global-css/fonts";
+@import "/src/app/core/global-css/colors";
+$borderRadius: 8px;
+
+
+.btn-sm {
+  width: 100px;
+  height: 30px;
+  border: none;
+  outline: none;
+  font-size: $small;
+  border-radius: $borderRadius;
+}
+
+.btn-md {
+  width: 120px;
+  height: 40px;
+  border: none;
+  outline: none;
+  font-size: $medium;
+  border-radius: $borderRadius;
+}
+
+.btn-lg {
+  width: 150px;
+  height: 50px;
+  border: none;
+  outline: none;
+  font-size: $big;
+  border-radius: $borderRadius;
+}
+
+
+.primary {
+  background-color: $primary;
+}
