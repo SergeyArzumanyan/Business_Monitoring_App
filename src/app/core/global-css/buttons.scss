@@ -1,6 +1,7 @@
 @import "/src/app/core/global-css/fonts";
 @import "/src/app/core/global-css/colors";
 $borderRadius: 8px;
+$animationTime: 0.2s;
 
 
 .btn-sm {
@@ -10,6 +11,8 @@ $borderRadius: 8px;
   outline: none;
   font-size: $small;
   border-radius: $borderRadius;
+  cursor: pointer;
+  transition: $animationTime;
 }
 
 .btn-md {
@@ -19,6 +22,8 @@ $borderRadius: 8px;
   outline: none;
   font-size: $medium;
   border-radius: $borderRadius;
+  cursor: pointer;
+  transition: $animationTime;
 }
 
 .btn-lg {
@@ -28,9 +33,16 @@ $borderRadius: 8px;
   outline: none;
   font-size: $big;
   border-radius: $borderRadius;
+  cursor: pointer;
+  transition: $animationTime;
 }
 
 
 .primary {
+  color: $gray-100;
   background-color: $primary;
+}
+.primary:hover {
+  color: $black;
+  background-color: $skin-100;
 }

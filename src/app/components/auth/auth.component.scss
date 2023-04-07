@@ -28,9 +28,9 @@
   font-size: $big;
 }
 
-@media (max-width: 650px) {
+@media (max-width: 850px) {
   .container {
-    width: 75%;
+    width: 60%;
     height: 300px;
 
     .auth-header {

@@ -13,6 +13,7 @@
   width: 100%;
   height: 65px;
   background-color: $white-400;
+  border-bottom: 1px solid $skin-100;
 
   .header-logo , .header-logo > img {
     width: 65px;
@@ -115,11 +116,16 @@
     cursor: pointer;
   }
   .header-link:hover {
-    background-color: $white-200;
+    background-color: $skin-300;
+    color: $white-400;
   }
   .header-link:active {
-    background-color: $white-100;
+    background-color: $skin-100;
   }
+}
+
+.bottom-line {
+  border-bottom: 1px solid $skin-100;
 }
 
 .visibility {
@@ -128,5 +134,5 @@
 }
 
 .active {
-  background-color: $skin-200;
+  background-color: $skin-200 !important;
 }

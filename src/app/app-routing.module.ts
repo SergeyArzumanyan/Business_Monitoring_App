@@ -8,6 +8,18 @@ const routes: Routes = [
     component: AuthComponent
   },
   {
+    path: "products",
+    component: AuthComponent
+  },
+  {
+    path: "sweets",
+    component: AuthComponent
+  },
+  // {
+  //   path: "add-sweet",
+  //   component: AuthComponent
+  // },
+  {
     path: "",
     redirectTo: "", //All Sweets Component
     pathMatch: "full",
