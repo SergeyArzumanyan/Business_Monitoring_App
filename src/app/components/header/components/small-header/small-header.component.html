@@ -2,7 +2,7 @@
 
   <div class="header-titles flex justify-content-between">
 
-    <div class="logo-wrapper" [routerLink]="['/']">
+    <div class="logo-wrapper" [routerLink]="['/']" (click)="closeMenu()">
       <div class="header-logo">
         <img src="/assets/Images/logo.jpg" alt="Logo">
       </div>
@@ -24,9 +24,9 @@
   <div class="header-links-wrapper">
     <div class="header-links-container"
          [ngClass]="{'visibility': menu}">
-      <li class="header-link" [routerLink]="['sweets']" routerLinkActive="active">Sweets</li>
-      <li class="header-link" [routerLink]="['products']" routerLinkActive="active">Products</li>
-      <li class="header-link bottom-line" [routerLink]="['add-sweet']" routerLinkActive="active">Add Sweet</li>
+      <li class="header-link" [routerLink]="['sweets']" routerLinkActive="active" (click)="closeMenu()">Sweets</li>
+      <li class="header-link" [routerLink]="['products']" routerLinkActive="active" (click)="closeMenu()">Products</li>
+      <li class="header-link bottom-line" [routerLink]="['add-sweet']" routerLinkActive="active" (click)="closeMenu()">Add Sweet</li>
     </div>
   </div>
 

@@ -6,11 +6,11 @@ import { Component, HostListener } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  public isMobile = (window.innerWidth <= 850);
+  public isMobile = (window.innerWidth <= 700);
 
   @HostListener("window:resize", ["$event.target"])
   private onWindowResize(): void {
-    this.isMobile = (window.innerWidth <= 850);
+    this.isMobile = (window.innerWidth <= 700);
   }
 
 }
