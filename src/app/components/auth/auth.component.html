@@ -1,8 +1,13 @@
 <div class="auth-wrapper flex justify-content-center align-items-center">
   <div class="container flex col justify-content-center align-items-center">
     <h1 class="auth-header">Enter The Password</h1>
-    <p-password  class="auth-input" [toggleMask]="true" [feedback]="false"></p-password>
-    <button class="btn-md primary">Proceed</button>
+    <p-password class="auth-input"
+                [toggleMask]="true"
+                [feedback]="false"
+                placeholder="Enter the password.."
+                (keydown.enter)="checkPassword()"
+                [(ngModel)]="passwordInput"></p-password>
+    <button class="btn-md primary" (click)="checkPassword()" (keydown.enter)="checkPassword()">Proceed</button>
   </div>
 
 </div>
