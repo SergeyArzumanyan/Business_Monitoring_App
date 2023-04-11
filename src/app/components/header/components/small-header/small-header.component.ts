@@ -11,4 +11,8 @@ export class SmallHeaderComponent {
   public toggleMenu(): void {
     this.menu = !this.menu;
   }
+
+  public closeMenu(): void {
+    this.menu = false;
+  }
 }

@@ -11,7 +11,7 @@
 }
 
 .container {
-  width: 30%;
+  width: 35%;
   height: 400px;
   background-color: $white-300;
   border-radius: 12px;
@@ -30,7 +30,7 @@
 
 @media (max-width: 850px) {
   .container {
-    width: 60%;
+    width: 75%;
     height: 300px;
 
     .auth-header {
