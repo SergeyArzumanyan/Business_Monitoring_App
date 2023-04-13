@@ -1,0 +1,73 @@
+@import "/src/app/core/global-css/colors";
+@import "/src/app/core/global-css/fonts";
+@import "/src/app/core/global-css/buttons";
+@import "/src/app/core/global-css/flex";
+
+.sweets-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  padding: 30px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 75px;
+}
+
+.sweet-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 350px;
+  background-color: $white-300;
+  margin: 0 auto;
+  box-shadow: 4px 1px 0 5px $brown-300;
+  border-radius: $borderRadius;
+}
+
+.sweet-image-wrapper, .sweet-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: $borderRadius $borderRadius 0 0;
+}
+
+.sweet-card-info {
+  padding: 15px;
+}
+
+.sweet-name {
+  font-size: $large;
+}
+
+.sweet-price {
+  font-size: $medium;
+}
+
+.sweet-card-buttons {
+  align-self: flex-end;
+  width: 100%;
+  height: 60px;
+  border-radius: 0 0 $borderRadius $borderRadius;
+}
+
+.sweet-btn {
+  width: 100%;
+  height: 100%;
+  color: $white-400;
+  transition: $animationTime;
+}
+.sweet-btn:hover {
+  opacity: 0.80;
+}
+.edit-sweet-btn {
+  border-radius: 0 0 0 $borderRadius;
+}
+
+.delete-sweet-btn {
+  border-radius: 0 0 $borderRadius 0;
+}
