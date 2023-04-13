@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthComponent } from "@components/auth/auth.component";
+
+import { AuthComponent } from "@components/auth";
 import { SweetsComponent } from "@components/sweets";
+import { ProductsComponent } from "@components/products";
 
 const routes: Routes = [
   {
@@ -10,7 +12,8 @@ const routes: Routes = [
   },
   {
     path: "products",
-    component: AuthComponent
+    component: ProductsComponent,
+    canActivate: [] // guard for user's right entered password
   },
   {
     path: "sweets",
@@ -19,7 +22,8 @@ const routes: Routes = [
   },
   // {
   //   path: "add-sweet",
-  //   component: AuthComponent
+  //   component: AuthComponent,
+  // canActivate: [] // guard for user's right entered password
   // },
   {
     path: "",

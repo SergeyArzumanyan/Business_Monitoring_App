@@ -18,6 +18,9 @@ import { ButtonModule } from "primeng/button";
 import { SweetsComponent } from './components/sweets/sweets.component';
 import { LargeSweetsComponent } from './components/sweets/components/large-sweets/large-sweets.component';
 import { SmallSweetsComponent } from './components/sweets/components/small-sweets/small-sweets.component';
+import { ProductsComponent } from './components/products/products.component';
+import { LargeProductsComponent } from './components/products/components/large-products/large-products.component';
+import { SmallProductsComponent } from './components/products/components/small-products/small-products.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { SmallSweetsComponent } from './components/sweets/components/small-sweet
     SmallHeaderComponent,
     SweetsComponent,
     LargeSweetsComponent,
-    SmallSweetsComponent
+    SmallSweetsComponent,
+    ProductsComponent,
+    LargeProductsComponent,
+    SmallProductsComponent
   ],
   imports: [
     BrowserModule,
