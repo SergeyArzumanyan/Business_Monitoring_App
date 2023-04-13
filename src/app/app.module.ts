@@ -15,6 +15,9 @@ import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { PasswordModule } from "primeng/password";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ButtonModule } from "primeng/button";
+import { SweetsComponent } from './components/sweets/sweets.component';
+import { LargeSweetsComponent } from './components/sweets/components/large-sweets/large-sweets.component';
+import { SmallSweetsComponent } from './components/sweets/components/small-sweets/small-sweets.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { ButtonModule } from "primeng/button";
     AuthComponent,
     HeaderComponent,
     LargeHeaderComponent,
-    SmallHeaderComponent
+    SmallHeaderComponent,
+    SweetsComponent,
+    LargeSweetsComponent,
+    SmallSweetsComponent
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,8 @@ $animationTime: 0.2s;
 
 
 .btn-sm {
+  margin: 0;
+  padding: 0;
   width: 100px;
   height: 30px;
   border: none;
@@ -16,6 +18,8 @@ $animationTime: 0.2s;
 }
 
 .btn-md {
+  margin: 0;
+  padding: 0;
   width: 120px;
   height: 40px;
   border: none;
@@ -27,6 +31,8 @@ $animationTime: 0.2s;
 }
 
 .btn-lg {
+  margin: 0;
+  padding: 0;
   width: 150px;
   height: 50px;
   border: none;
@@ -45,4 +51,36 @@ $animationTime: 0.2s;
 .primary:hover {
   color: $black;
   background-color: $skin-100;
+}
+
+.red-btn {
+  background-color: $red-300;
+}
+
+.red-btn:hover {
+  background-color: $red-200;
+}
+
+.red-btn:active {
+  background-color: $red-100;
+}
+
+.red-btn.btn-disabled {
+  background-color: $red-disabled;
+}
+
+.blue-btn {
+  background-color: $blue-300;
+}
+
+.blue-btn:hover {
+  background-color: $blue-200;
+}
+
+.blue-btn:active {
+  background-color: $blue-100;
+}
+
+.blue-btn.btn-disabled {
+  background-color: $blue-disabled;
 }
