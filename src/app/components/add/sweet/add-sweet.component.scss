@@ -1,0 +1,211 @@
+@import "/src/app/core/global-css/fonts";
+@import "/src/app/core/global-css/buttons";
+@import "/src/app/core/global-css/colors";
+@import "/src/app/core/global-css/flex";
+
+$wrapperPadding: 50px;
+$containerPadding: 40px 40px 90px 40px;
+
+.form-wrapper {
+  width: 100%;
+  height: 100%;
+  padding: $wrapperPadding;
+}
+
+.form-container {
+  width: 400px;
+  height: max-content;
+  background-color: $white-300;
+  box-shadow: 0 0 2px 0 $skin-100;
+  border-radius: $borderRadius;
+  margin: 0 auto;
+  padding: $containerPadding;
+}
+
+.form-header {
+  font-size: $large;
+  color: $black;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.form-group {
+  width: 100%;
+}
+
+.form-label {
+  width: max-content;
+}
+
+.form-input ,:host ::ng-deep .p-inputnumber.p-component {
+  width: 100%;
+
+}
+
+.form-btn {
+  height: 50px;
+  width: 100%;
+  border-radius: 0 0 $borderRadius $borderRadius;
+  transform: translateY(-50px);
+}
+
+.selected-products-wrapper {
+  width: 100%;
+  margin: 10px auto;
+
+  .product-info {
+    width: 75px;
+    margin: 0;
+    padding: 5px;
+    box-shadow: -4px -1px 0 5px $skin-300;
+    border-radius: $borderRadius;
+
+    .product-name {
+      font-size: $medium;
+      color: $black;
+    }
+
+    .product-price, .product-actual-price {
+      font-size: $small;
+      color: green;
+    }
+  }
+
+  .product-form-group {
+    width: 100px !important;
+
+    .product-quantities {
+      text-align: center;
+      font-size: $small;
+    }
+
+    .product-input {
+      width: 100px !important;
+      font-size: $small !important;
+    }
+  }
+
+  .product-actual-price-wrapper {
+    width: 90px;
+    margin: 0 auto;
+
+    .product-actual-price {
+      text-align: center;
+      width: 100%;
+      word-break: break-word;
+    }
+  }
+
+  .sweet-actual-price {
+    font-size: $medium;
+    padding-bottom: 3px;
+    color: $black;
+    border-bottom: 1px solid $black;
+  }
+}
+
+.calc-container {
+  width: 320px;
+  margin: 10px auto;
+}
+
+
+.img-dropzone {
+  font-size: 16px;
+  width: 300px;
+  height: 150px;
+  display: table;
+  background-color: transparent !important;
+  border: 2px dashed #aaa;
+  margin: 25px auto;
+  border-radius: 1rem;
+}
+
+.img-browse {
+  color: #3B82F6;
+  cursor: pointer;
+}
+
+.img-browse:hover {
+  text-decoration: underline;
+}
+
+.drag-message {
+  color: $gray-100;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.img-container {
+  display: block;
+  width: 100%;
+  height: 200px;
+  position: relative;
+  margin: 0 auto;
+}
+
+.selected-sweet-image {
+  display: block;
+  width: 100%;
+  height: 200px;
+  border-radius: 10px;
+  margin: 0 auto;
+  object-fit: cover;
+}
+
+.img-cancel {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  text-align: center;
+  width: 15px;
+  height: 15px;
+  line-height: 15px;
+  font-size: 0.8rem;
+  padding: 0;
+  border-radius: 0.2rem;
+  background-color: $red-300;
+  color: $white-300;
+  cursor: pointer;
+  transition: $animationTime;
+}
+
+.img-cancel:hover {
+  background-color: $red-100;
+}
+
+.img-preview {
+  width: 100%;
+}
+
+:host ::ng-deep .p-multiselect.p-component,{
+  z-index: 1;
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .form-container {
+    width: 325px;
+  }
+
+  .product {
+    width: 270px;
+    margin: 0 auto;
+  }
+
+  .calc-container {
+    width: 250px;
+  }
+
+  .product-info, .product-form-group , .product-actual-price-wrapper {
+    margin: initial !important;
+    width: 60px !important;
+  }
+
+  .img-dropzone {
+    width: 100%;
+    padding: 10px;
+  }
+}

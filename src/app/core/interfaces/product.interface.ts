@@ -7,5 +7,5 @@ export interface IProduct {
 
 export interface IProductForm {
   Name: FormControl<string>,
-  Price: FormControl<number>;
+  Price: FormControl<number | null>;
 }

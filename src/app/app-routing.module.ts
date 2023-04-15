@@ -20,14 +20,14 @@ const routes: Routes = [
     component: SweetsComponent,
     canActivate: [] // guard for user's right entered password
   },
-  // {
-  //   path: "add-sweet",
-  //   component: AuthComponent,
-  // canActivate: [] // guard for user's right entered password
-  // },
+  {
+    path: 'add',
+    loadChildren: () => import('@components/add/add.module').then(m => m.AddModule),
+    canLoad: [] // guard for user's right entered password
+  },
   {
     path: "",
-    redirectTo: "sweets", //All Sweets Component
+    redirectTo: "sweets",
     pathMatch: "full",
   },
   {

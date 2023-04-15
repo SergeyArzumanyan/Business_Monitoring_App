@@ -21,12 +21,13 @@
 
   </div>
 
-  <div class="header-links-wrapper">
+  <div class="header-links-wrapper"
+       [ngClass]="{'header-height': !menu}">
     <div class="header-links-container"
          [ngClass]="{'visibility': menu}">
       <li class="header-link" [routerLink]="['sweets']" routerLinkActive="active" (click)="closeMenu()">Sweets</li>
       <li class="header-link" [routerLink]="['products']" routerLinkActive="active" (click)="closeMenu()">Products</li>
-      <li class="header-link bottom-line" [routerLink]="['add-sweet']" routerLinkActive="active" (click)="closeMenu()">Add Sweet</li>
+      <li class="header-link bottom-line" [routerLink]="['add']" routerLinkActive="active" (click)="closeMenu()">Add</li>
     </div>
   </div>
 

@@ -1,0 +1,81 @@
+<div class="form-wrapper flex justify-content-center align-items-center">
+  <form [formGroup]="productForm" (ngSubmit)="addProduct()">
+    <div class="form-container flex col align-items-center gap-30">
+      <h3 class="form-header">Add a product</h3>
+
+      <div class="form-group flex col gap-15">
+        <label class="form-label" for="product-name">Name</label>
+        <input formControlName="Name"
+               id="product-name"
+               class="form-input"
+               [ngClass]="{
+                    'ng-invalid':
+                    productForm.get('Name')?.hasError('required') && submitted
+                    ||
+                    productForm.get('Name')?.hasError('maxlength') && submitted
+                    ||
+                    productForm.get('Name')?.hasError('minlength') && submitted
+                    ||
+                    !productForm.value.Name?.trim() && submitted,
+                    'ng-dirty':
+                    productForm.get('Name')?.hasError('required')  && submitted
+                    ||
+                    productForm.get('Name')?.hasError('maxlength') && submitted
+                    ||
+                    productForm.get('Name')?.hasError('minlength') && submitted
+                    ||
+                    !productForm.value.Name?.trim() && submitted
+                    }"
+               type="text"
+               pInputText
+               placeholder="Enter product name...">
+
+        <small *ngIf="productForm.get('Name')?.hasError('required')  && submitted
+                        || !productForm.value.Name?.trim() && submitted"
+               class="p-error">
+          Name is required.
+        </small>
+
+        <small *ngIf="productForm.get('Name')?.hasError('minlength')  && submitted"
+               class="p-error">
+          Name is too short.
+        </small>
+
+        <small *ngIf="productForm.get('Name')?.hasError('maxlength')  && submitted"
+               class="p-error">
+          Name is too long.
+        </small>
+      </div>
+
+      <div class="form-group flex col gap-15">
+        <label class="form-label" for="product-price">Price</label>
+        <p-inputNumber formControlName="Price"
+                       class="form-input"
+                       [ngClass]="{
+                        'ng-invalid':
+                        productForm.get('Price')?.hasError('required') && submitted
+                        ||
+                        productForm.get('Price')?.hasError('maxlength') && submitted
+                        ||
+                        productForm.get('Price')?.hasError('minlength') && submitted,
+                        'ng-dirty':
+                        productForm.get('Price')?.hasError('required')  && submitted
+                        ||
+                        productForm.get('Price')?.hasError('maxlength') && submitted
+                        ||
+                        productForm.get('Price')?.hasError('minlength') && submitted
+                        }"
+                       inputId="product-price"
+                       placeholder="Enter price for 1kg...">
+        </p-inputNumber>
+
+        <small *ngIf="productForm.get('Price')?.hasError('required')  && submitted"
+               class="p-error">
+          Price is required.
+        </small>
+      </div>
+
+    </div>
+    <button type="submit" class="btn-md skin-btn form-btn">Add</button>
+  </form>
+</div>

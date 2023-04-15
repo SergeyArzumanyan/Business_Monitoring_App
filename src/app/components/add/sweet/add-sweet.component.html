@@ -1,0 +1,118 @@
+<div class="form-wrapper flex justify-content-center align-items-center">
+  <form [formGroup]="sweetForm" (ngSubmit)="addSweet()">
+    <div class="form-container flex col align-items-center gap-30">
+      <h3 class="form-header">Add a sweet</h3>
+
+      <div class="form-group flex col gap-15">
+        <label class="form-label" for="product-name">Name</label>
+        <input formControlName="Name"
+               id="product-name"
+               class="form-input"
+               [ngClass]="{
+                'ng-invalid':
+                sweetForm.get('Name')?.hasError('required') && submitted,
+                'ng-dirty':
+                sweetForm.get('Name')?.hasError('required')  && submitted
+                }"
+               type="text"
+               pInputText
+               placeholder="Enter product name...">
+
+        <small *ngIf="sweetForm.get('Name')?.hasError('required')  && submitted"
+               class="p-error">
+          Name is required.
+        </small>
+      </div>
+
+      <div class="form-group flex col gap-15">
+        <label class="form-label" for="sweet-products">Products</label>
+        <div class="multiselect-container">
+          <p-multiSelect inputId="sweet-products"
+                         [ngClass]="{
+                        'ng-invalid':
+                        sweetForm.get('Price')?.hasError('required') && submitted,
+                        'ng-dirty':
+                        sweetForm.get('Price')?.hasError('required')  && submitted
+                        }"
+                         [options]="products"
+                         [(ngModel)]="selectedProducts"
+                         (onChange)="calculateSweetPrice()"
+                         formControlName="Products"
+                         optionLabel="Name"
+                         placeholder="Select the products">
+          </p-multiSelect>
+        </div>
+        <ng-container *ngIf="selectedProducts.length > 0">
+
+          <div class="selected-products-wrapper flex col gap-20 align-items-center">
+            <div class="product flex justify-content-center gap-20" *ngFor="let product of selectedProducts; let i = index">
+              <div class="product-info flex col gap-10">
+                <label class="product-name" [for]="'product-quantity-' + i">{{ product['Name'] }}</label>
+                <span class="product-price">{{ product['Price'] }} AMD</span>
+              </div>
+              <div class="product-form-group form-group flex col gap-10">
+                <span class="product-quantities">1kg/1l/1</span>
+                <input [id]="'product-quantity-' + i"
+                       class="form-input product-input"
+                       type="text"
+                       pInputText
+
+                       (keyup)="onInputType($event.target , product['Price'], i)"
+                       pKeyFilter="num"
+                       placeholder="Quantity...">
+              </div>
+              <div class="product-actual-price-wrapper flex align-items-center">
+                <span class="product-actual-price">{{ product['ActualPrice'] || 0 }}</span>
+              </div>
+            </div>
+            <div class="calc-container flex justify-content-between gap-30">
+              <button class="btn-sm skin-btn" type="button" (click)="calculateSweetPrice()">Calculate</button>
+              <span class="sweet-actual-price">Actual Price: {{ sweetActualPrice || 0 }}</span>
+            </div>
+          </div>
+
+        </ng-container>
+
+        <small *ngIf="sweetForm.get('Products')?.hasError('required')  && submitted"
+               class="p-error">
+          Products are required.
+        </small>
+      </div>
+
+      <div class="form-group flex col gap-15">
+        <span class="image-label">Image</span>
+        <div class="img-dropzone"
+             imgDrag
+             (file)="imageDropped($event)">
+          <div class="drag-message">
+            Drag your image here or
+            <a class="img-browse"
+               (click)="imgInput.click()">browse</a>
+          </div>
+        </div>
+
+        <input style="display: none;"
+               #imgInput
+               type="file"
+               accept="image/png,image/jpg,image/jpeg"
+               formControlName="Image"
+               (change)="onFileChange($event)"/>
+
+        <div class="img-preview">
+          <div class="img-container" *ngIf="(sweetForm.controls.Image.value) || (sweet.Image)">
+            <div class="img-cancel" (click)="imageClear(sweet)">x</div>
+            <img [src]="(sweetForm.controls.Image.value) || (sweet.Image)"
+                 class="selected-sweet-image" alt="sweet-img">
+          </div>
+        </div>
+
+        <small *ngIf="sweetForm.get('Image')?.hasError('required')  && submitted"
+               class="p-error">
+          Image is required.
+        </small>
+
+      </div>
+    </div>
+    <button type="submit" class="btn-md skin-btn form-btn">Add</button>
+  </form>
+</div>

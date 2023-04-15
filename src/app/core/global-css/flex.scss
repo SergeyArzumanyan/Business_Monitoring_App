@@ -2,6 +2,10 @@
   display: flex;
 }
 
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
 .justify-content-start {
   justify-content: flex-start;
 }
@@ -12,6 +16,10 @@
 
 .justify-content-center {
   justify-content: center;
+}
+
+.justify-content-evenly {
+  justify-content: space-evenly;
 }
 
 .justify-content-around {
@@ -37,4 +45,40 @@
 
 .col {
   flex-direction: column;
+}
+
+.gap-10 {
+  gap: 10px;
+}
+
+.gap-15 {
+  gap: 15px;
+}
+
+.gap-20 {
+  gap: 20px;
+}
+
+.gap-25 {
+  gap: 25px;
+}
+
+.gap-30 {
+  gap: 30px;
+}
+
+.gap-35 {
+  gap: 35px;
+}
+
+.gap-40 {
+  gap: 40px;
+}
+
+.gap-45 {
+  gap: 45px;
+}
+
+.gap-50 {
+  gap: 50px;
 }

@@ -10,18 +10,22 @@ $white-400: #ffffff;
 $gray-100: #444444;
 $gray-200: #6b6a6a;
 $gray-300: #9f9f9f;
+$gray-disabled: #565454;
 
 $brown-100: #5b3e2c;
 $brown-200: #795037;
 $brown-300: #8a593b;
+$brown-disabled: #563723;
 
 $skin-100: #e5c0a9;
 $skin-200: #f3dcd1;
 $skin-300: #ecdbd5;
+$skin-disabled: #ce978e;
 
 $green-100: #00AF45;
 $green-200: #00CE51;
 $green-300: #00EA5C;
+$green-disabled: #065b24;
 
 $red-100: #b20101;
 $red-200: #f82a2a;
@@ -32,3 +36,8 @@ $blue-100: #0250b6;
 $blue-200: #467dff;
 $blue-300: #2a79f6;
 $blue-disabled: #2b4981;
+
+$edit-btn-300: $skin-100;
+$edit-btn-200:  #deaf93;
+$edit-btn-100: #e1a985;
+$edit-btn-disabled: #7a5a44;
