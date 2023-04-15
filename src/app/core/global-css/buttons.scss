@@ -67,6 +67,7 @@ $animationTime: 0.2s;
 
 .red-btn.btn-disabled {
   background-color: $red-disabled;
+  cursor: not-allowed;
 }
 
 .blue-btn {
@@ -83,4 +84,97 @@ $animationTime: 0.2s;
 
 .blue-btn.btn-disabled {
   background-color: $blue-disabled;
+  cursor: not-allowed;
+}
+
+.skin-btn {
+  background-color: $skin-300;
+}
+
+.skin-btn:hover {
+  background-color: $skin-200;
+}
+
+.skin-btn:active {
+  background-color: $skin-100;
+}
+
+.skin-btn.btn-disabled {
+  background-color: $skin-disabled;
+  cursor: not-allowed;
+}
+
+.skin-btn:focus:focus-visible {
+  box-shadow: 0 0 4px 0 $brown-300;
+}
+
+.brown-btn {
+  background-color: $brown-300;
+}
+
+.brown-btn:hover {
+  background-color: $brown-200;
+}
+
+.brown-btn:active {
+  background-color: $brown-100;
+}
+
+.brown-btn.btn-disabled {
+  background-color: $brown-disabled;
+  cursor: not-allowed;
+}
+
+.green-btn {
+  background-color: $green-300;
+}
+
+.green-btn:hover {
+  background-color: $green-200;
+}
+
+.green-btn:active {
+  background-color: $green-100;
+}
+
+.g  reen-btn.btn-disabled {
+  background-color: $green-disabled;
+  cursor: not-allowed;
+}
+
+.gray-btn {
+  background-color: $gray-300;
+}
+
+.gray-btn:hover {
+  background-color: $gray-200;
+}
+
+.gray-btn:active {
+  background-color: $gray-100;
+}
+
+.gray-btn.btn-disabled {
+  background-color: $gray-disabled;
+  cursor: not-allowed;
+}
+
+
+.edit-btn {
+  color: $black;
+  background-color: $edit-btn-300;
+}
+
+.edit-btn:hover {
+  background-color: $edit-btn-200;
+}
+
+.edit-btn:active {
+  color: $white-400;
+  background-color: $edit-btn-100;
+}
+
+.edit-btn-disabled {
+  background-color: $edit-btn-disabled;
+  cursor: not-allowed;
 }

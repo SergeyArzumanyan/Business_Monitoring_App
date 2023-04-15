@@ -7,6 +7,7 @@
   position: fixed;
   top: 0;
   opacity: 0.85;
+  z-index: 2;
 }
 
 .header-titles {
@@ -131,6 +132,10 @@
 .visibility {
   visibility: visible !important;
   opacity: 1 !important;
+}
+
+.header-height {
+  height: 0 !important;
 }
 
 .active {

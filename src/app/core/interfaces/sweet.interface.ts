@@ -4,15 +4,15 @@ import { IProduct } from "@Interfaces/product.interface";
 
 export interface ISweet {
   Name: string,
-  Image: string,
+  Image: string | null,
   Products: IProduct[],
   Price: number
 }
 
 export interface ISweetForm {
-  Name: FormControl<string>,
-  Image: FormControl<string>,
-  Products: FormControl<IProduct[]>,
-  Price: FormControl<number>,
+  Name: FormControl<string | null>,
+  Image: FormControl<string | null>,
+  Products: FormControl<IProduct[] | null>,
+  Price: FormControl<number | null>,
 }
 
