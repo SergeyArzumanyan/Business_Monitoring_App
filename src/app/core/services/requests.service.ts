@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-// import { Database, onValue, ref } from "@angular/fire/database";
+import { Observable } from "rxjs";
+
+import { AngularFireDatabase, AngularFireObject } from "@angular/fire/compat/database";
+
+import { ISweet } from "@Interfaces/sweet.interface";
+import { IProduct } from "@Interfaces/product.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -7,14 +12,19 @@ import { Injectable } from '@angular/core';
 
 export class RequestsService {
 
-  // constructor(private db: Database) {}
+  constructor(private db: AngularFireDatabase) {}
 
-  // public getData() {
-  //   const starCountRef = ref(this.db , '/');
-  //   onValue(starCountRef , (snapshot) => {
-  //     const data = snapshot.val();
-  //
-  //     console.log(data);
-  //   })
-  // }
+  public getSweets(): Observable<ISweet[] | null> {
+    const starCountRef: AngularFireObject<ISweet[]> = this.db.object('/sweets');
+    return starCountRef.valueChanges();
+  }
+
+  public getProducts(): Observable<IProduct[] | null> {
+    const starCountRef: AngularFireObject<IProduct[]> = this.db.object('/products');
+      return starCountRef.valueChanges();
+  }
+
+  public makeArray(data: any): any[] {
+    return Array.from(Object.values(data));
+  }
 }

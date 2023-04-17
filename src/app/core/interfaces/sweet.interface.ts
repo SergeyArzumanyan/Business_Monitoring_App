@@ -6,7 +6,7 @@ export interface ISweet {
   Name: string,
   Image: string | null,
   Products: IProduct[],
-  Price: number
+  Price: number | null
 }
 
 export interface ISweetForm {

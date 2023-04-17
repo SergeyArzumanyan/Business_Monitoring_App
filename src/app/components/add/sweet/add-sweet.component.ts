@@ -1,26 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 
 import { ISweet, ISweetForm } from "@Interfaces/sweet.interface";
 import { IProduct } from "@Interfaces/product.interface";
+import { SendingDataService } from "@Services/sending-data.service";
+import { RequestsService } from "@Services/requests.service";
 
 @Component({
   selector: 'app-sweet',
   templateUrl: './add-sweet.component.html',
   styleUrls: ['./add-sweet.component.scss']
 })
-export class AddSweetComponent {
+export class AddSweetComponent implements OnInit {
 
   public sweet: any = {};
   public sweetActualPrice: number = 0;
   public submitted: boolean = false;
 
-  public products: IProduct[] = [ // Will get them from firebase
-    { Name: 'Milk', Price: 450 },
-    { Name: 'Cacao', Price: 535 },
-    { Name: 'Egg', Price: 75 },
-    { Name: 'Dough', Price: 450 },
-  ];
+  public products: IProduct[] = [];
   public selectedProducts: any = [];
 
   public sweetForm: FormGroup<ISweetForm> = new FormGroup<ISweetForm>({
@@ -29,6 +26,26 @@ export class AddSweetComponent {
     Products: new FormControl([], [Validators.required]),
     Price: new FormControl(null, Validators.required)
   })
+
+  constructor(private Request: RequestsService,private Send: SendingDataService) {}
+
+  ngOnInit(): void {
+    this.requestProducts();
+  }
+
+  private requestProducts(): void {
+    this.Request.getProducts()
+      .subscribe({
+        next: (products: IProduct[] | null) => {
+          if (products) {
+            this.products = this.Request.makeArray(products);
+          }
+        },
+        error: () => {
+          console.log('something went wrong');
+        }
+      });
+  }
 
   public onInputType(inputElement: any, productPrice: number, index: number): void {
     this.selectedProducts[index].ActualPrice = Math.round(Number(inputElement.value) * productPrice);
@@ -83,13 +100,24 @@ export class AddSweetComponent {
       this.sweetForm.value.Image = this.sweetForm.controls.Image.value;
       this.submitted = true;
 
+      // this.sendingDataService.saveSweet();
+
         if (this.sweetForm.valid) {
           console.log(this.sweetForm.value); // Object that You need to send to firebase Sergo, add sweet to firebase.
+          if (this.sweetForm.value.Name &&  this.sweetForm.value.Products && this.sweetForm.value.Price) {
+            let sweet: ISweet = {
+              Name: this.sweetForm.value.Name,
+              Price: this.sweetForm.value.Price,
+              Products: this.sweetForm.value.Products,
+              Image: '123'
+            }
+            this.Send.saveSweet(sweet);
+          }
           this.sweetForm.reset();
           this.resetProducts();
           this.submitted = false;
         }
-    }, 1000);
+    }, 500);
 
   };
 }
