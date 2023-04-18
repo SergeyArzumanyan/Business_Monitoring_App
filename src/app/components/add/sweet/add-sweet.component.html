@@ -95,8 +95,7 @@
                #imgInput
                type="file"
                accept="image/png,image/jpg,image/jpeg"
-               formControlName="Image"
-               (change)="onFileChange($event)"/>
+               (change)="onFileChange($event)" />
 
         <div class="img-preview">
           <div class="img-container" *ngIf="(sweetForm.controls.Image.value) || (sweet.Image)">

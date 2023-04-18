@@ -34,7 +34,8 @@ export class DragDirective {
   public onDrop( event: DragEvent ): void {
     event.preventDefault();
     event.stopPropagation();
-    this.background = "#eee";
+    this.background = "#c2c2c2 !important";
+    this.border = "2px dotted #f3f3f3 !important";
 
     const reader = new FileReader();
 
