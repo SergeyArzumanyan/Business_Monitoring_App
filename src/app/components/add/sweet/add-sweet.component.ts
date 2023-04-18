@@ -37,9 +37,7 @@ export class AddSweetComponent implements OnInit {
     this.Request.getProducts()
       .subscribe({
         next: (products: IProduct[] | null) => {
-          if (products) {
-            this.products = this.Request.makeArray(products);
-          }
+          this.products = products ? this.Request.makeArray(products) : [];
         },
         error: () => {
           console.log('something went wrong');
@@ -62,33 +60,27 @@ export class AddSweetComponent implements OnInit {
     }
   }
 
+  public onFileChange( event: any ) {
+    const reader = new FileReader();
 
-  public onFileChange(event: any): void {
-    event.stopPropagation();
-    event.preventDefault();
+    if ( event.target.files && event.target.files.length ) {
+      const [ file ] = event.target.files;
+      reader.readAsDataURL( file );
 
-    const reader: FileReader = new FileReader();
-
-    if (event.target.files && event.target.files.length) {
-      const [file] = event.target.files;
-      reader.readAsDataURL(file);
-
-      reader.onload = (): void => {
-        this.sweetForm.controls.Image.setValue(reader.result as string);
+      reader.onload = () => {
+        this.sweetForm.controls.Image.setValue( reader.result as string );
       };
 
     }
   }
-
-  public imageDropped(Image: any): void {
-    this.sweetForm.controls.Image.setValue(Image);
+  public imageDropped( Image: any ): void {
+    this.sweetForm.controls.Image.setValue( Image );
   }
 
   public imageClear(sweet: ISweet): void {
-    sweet.Image = null;
-    this.sweetForm.patchValue(sweet);
+    sweet.Image = null
+    this.sweetForm.patchValue( sweet );
   }
-
   private resetProducts(): void {
     this.sweetForm.value.Products = [];
     this.sweetForm.controls.Products.setValue([]);
@@ -100,16 +92,13 @@ export class AddSweetComponent implements OnInit {
       this.sweetForm.value.Image = this.sweetForm.controls.Image.value;
       this.submitted = true;
 
-      // this.sendingDataService.saveSweet();
-
         if (this.sweetForm.valid) {
-          console.log(this.sweetForm.value); // Object that You need to send to firebase Sergo, add sweet to firebase.
           if (this.sweetForm.value.Name &&  this.sweetForm.value.Products && this.sweetForm.value.Price) {
             let sweet: ISweet = {
               Name: this.sweetForm.value.Name,
               Price: this.sweetForm.value.Price,
               Products: this.sweetForm.value.Products,
-              Image: '123'
+              Image: this.sweetForm.value.Image
             }
             this.Send.saveSweet(sweet);
           }

@@ -5,7 +5,7 @@ import { IProduct } from "@Interfaces/product.interface";
 export interface ISweet {
   Name: string,
   Image: string | null,
-  Products: IProduct[],
+  Products: IProduct[] | null,
   Price: number | null
 }
 

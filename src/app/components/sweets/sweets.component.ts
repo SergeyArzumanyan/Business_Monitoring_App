@@ -25,8 +25,7 @@ export class SweetsComponent implements OnInit, OnDestroy {
     this.subscribeToSweetChanges = this.Request.getSweets()
       .subscribe({
         next: (sweets: ISweet[] | null) => {
-          this.sweets = this.Request.makeArray(sweets);
-          console.log(this.sweets);
+          this.sweets = sweets ? this.Request.makeArray(sweets) : [];
         },
         error: () => {
           console.log('FAILED to get sweets.');
