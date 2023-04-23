@@ -18,7 +18,7 @@ import { KeyFilterModule } from "primeng/keyfilter";
     AddProductComponent,
     AddSweetComponent,
     AddComponent,
-    DragDirective
+    DragDirective,
   ],
   imports: [
     CommonModule,

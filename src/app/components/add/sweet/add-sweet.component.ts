@@ -13,6 +13,8 @@ import { RequestsService } from "@Services/requests.service";
 })
 export class AddSweetComponent implements OnInit {
 
+  public isEditMode: boolean = false;
+
   public sweet: any = {};
   public sweetActualPrice: number = 0;
   public submitted: boolean = false;
@@ -21,13 +23,17 @@ export class AddSweetComponent implements OnInit {
   public selectedProducts: any = [];
 
   public sweetForm: FormGroup<ISweetForm> = new FormGroup<ISweetForm>({
+    ID: new FormControl(null),
     Name: new FormControl(null, [Validators.required,]),
     Image: new FormControl(null, [Validators.required]),
     Products: new FormControl([], [Validators.required]),
     Price: new FormControl(null, Validators.required)
   })
 
-  constructor(private Request: RequestsService,private Send: SendingDataService) {}
+  constructor(
+    private Request: RequestsService,
+    private Send: SendingDataService
+  ) {}
 
   ngOnInit(): void {
     this.requestProducts();
@@ -88,6 +94,7 @@ export class AddSweetComponent implements OnInit {
   }
 
   public addSweet(): void {
+
     setTimeout(() => {
       this.sweetForm.value.Image = this.sweetForm.controls.Image.value;
       this.submitted = true;
@@ -96,7 +103,7 @@ export class AddSweetComponent implements OnInit {
           if (this.sweetForm.value.Name &&  this.sweetForm.value.Products && this.sweetForm.value.Price) {
             let sweet: ISweet = {
               Name: this.sweetForm.value.Name,
-              Price: this.sweetForm.value.Price,
+              CurrentPrice: this.sweetForm.value.Price,
               Products: this.sweetForm.value.Products,
               Image: this.sweetForm.value.Image
             }

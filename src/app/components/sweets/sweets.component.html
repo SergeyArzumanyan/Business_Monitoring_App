@@ -1,3 +1,10 @@
+<ng-container *ngIf="sweets.length === 0">
+  <div class="flex justify-content-center align-items-center" style="height: 100%;">
+    <p-progressSpinner class="p-progress-path"></p-progressSpinner>
+  </div>
+</ng-container>
+
+
 <div class="sweets-wrapper flex justify-content-center align-items-center">
   <div class="container">
 
@@ -10,11 +17,11 @@
       </div>
       <div class="sweet-card-info">
         <h3 class="sweet-name">{{ sweet.Name }}</h3>
-        <span class="sweet-price">{{ sweet.Price }} AMD</span>
+        <span class="sweet-price">{{ sweet.CurrentPrice }} AMD</span>
       </div>
       <div class="sweet-card-buttons flex justify-content-center align-items-center">
-        <button class="sweet-btn edit-sweet-btn btn-md edit-btn">Edit</button>
-        <button class="sweet-btn delete-sweet-btn btn-md brown-btn">Delete</button>
+        <button class="sweet-btn edit-sweet-btn btn-md edit-btn" (click)="editSweet(sweet.Name)">Edit</button>
+        <button class="sweet-btn delete-sweet-btn btn-md brown-btn" (click)="deleteSweet(sweet.Name)">Delete</button>
       </div>
     </div>
 

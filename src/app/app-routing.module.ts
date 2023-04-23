@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AuthComponent } from "@components/auth";
-import { SweetsComponent } from "@components/sweets";
 import { ProductsComponent } from "@components/products";
 
 const routes: Routes = [
@@ -16,9 +15,9 @@ const routes: Routes = [
     canActivate: [] // guard for user's right entered password
   },
   {
-    path: "sweets",
-    component: SweetsComponent,
-    canActivate: [] // guard for user's right entered password
+    path: 'sweets',
+    loadChildren: () => import('@components/sweets/sweets.module').then(m => m.SweetsModule),
+    canLoad: [] // guard for user's right entered password
   },
   {
     path: 'add',
@@ -32,7 +31,7 @@ const routes: Routes = [
   },
   {
     path: "**",
-    redirectTo: "auth",
+    redirectTo: "sweets",
     pathMatch: "full"
   }
 ];

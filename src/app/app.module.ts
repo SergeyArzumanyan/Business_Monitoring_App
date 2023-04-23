@@ -11,6 +11,7 @@ import { AuthComponent } from "@components/auth";
 import { HeaderComponent } from '@components/header';
 import { LargeHeaderComponent, SmallHeaderComponent } from '@components/header/components';
 import { SweetsComponent } from '@components/sweets';
+import { SweetComponent } from '@components/sweets/sweet/sweet.component';
 import { ProductsComponent } from '@components/products';
 import { LargeProductsComponent } from '@components/products/components/large-products';
 import { SmallProductsComponent } from '@components/products/components/small-products';
@@ -23,6 +24,7 @@ import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFireDatabaseModule } from "@angular/fire/compat/database";
 
 import { ButtonModule } from "primeng/button";
+import { ProgressSpinnerModule } from "primeng/progressspinner";
 
 @NgModule({
   declarations: [
@@ -32,25 +34,27 @@ import { ButtonModule } from "primeng/button";
     LargeHeaderComponent,
     SmallHeaderComponent,
     SweetsComponent,
+    SweetComponent,
     ProductsComponent,
     LargeProductsComponent,
     SmallProductsComponent,
   ],
-    imports: [
-        AppRoutingModule,
-        BrowserModule,
-        CommonModule,
-        HttpClientModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        AngularFireModule.initializeApp(environment.firebase),
-        AngularFireDatabaseModule,
-        provideFirebaseApp(() => initializeApp(environment.firebase)),
-        provideDatabase(() => getDatabase()),
-        PasswordModule,
-        ButtonModule,
-        NgOptimizedImage,
-    ],
+  imports: [
+    AppRoutingModule,
+    BrowserModule,
+    CommonModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideDatabase(() => getDatabase()),
+    PasswordModule,
+    ButtonModule,
+    NgOptimizedImage,
+    ProgressSpinnerModule,
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
