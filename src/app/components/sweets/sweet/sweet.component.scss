@@ -1,0 +1,104 @@
+@import "/src/app/core/global-css/colors";
+@import "/src/app/core/global-css/fonts";
+@import "/src/app/core/global-css/flex";
+@import "/src/app/core/global-css/buttons";
+
+$contentPadding: 35px;
+$innerPadding: 50px;
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+  padding: $contentPadding;
+}
+
+.container {
+  width: 85%;
+  height: 100%;
+  padding: $innerPadding;
+  background-color: $white-300;
+  border-radius: $borderRadius;
+  box-shadow: 0 0 2px 0 $skin-100;
+  position: relative;
+}
+
+.sweet-info, .sweet-products {
+  width: 100%;
+}
+
+.sweet-info {
+  .img-wrapper, .img-wrapper img {
+    width: 400px;
+    height: 300px;
+    border-radius: 10px;
+  }
+
+  .sweet-name {
+    max-width: 400px;
+    padding-bottom: 5px;
+    color: $gray-100;
+    border-bottom: 1px solid $gray-300;
+  }
+
+  .sweet-price {
+    color: $green-200;
+  }
+}
+
+.sweet-products {
+  height: 100%;
+
+  .products-header {
+    display: block;
+    width: 85%;
+    margin: 10px auto;
+    text-align: center;
+    padding-bottom: 5px;
+    color: $gray-100;
+    border-bottom: 1px solid $gray-300;
+  }
+
+  .product-name, .product-quantity {
+    color: $black;
+  }
+
+  .product-price {
+    color: $green-200;
+  }
+}
+
+.action-buttons {
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+}
+
+@media (max-width: 900px) {
+  .container {
+    width: 100%;
+    padding: 40px 40px 90px 40px;
+
+    .inner-container {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+
+  .sweet-info {
+    .img-wrapper, .img-wrapper img {
+      width: 100%;
+      height: 200px;
+    }
+
+    .sweet-name {
+      max-width: 100%;
+    }
+  }
+  .action-buttons {
+    width: 100%;
+    right: 0;
+    margin: 0 auto;
+    justify-content: center;
+  }
+
+}

@@ -19,6 +19,18 @@ export class RequestsService {
     return starCountRef.valueChanges();
   }
 
+  public getSweet(name: string | null): any {
+      // const starCountRef: AngularFireObject<ISweet> = this.db.object(`sweets/${id}`);
+      // return starCountRef.valueChanges();
+    const itemsRef = this.db.list(
+      'items',
+        ref => ref.orderByChild('name').equalTo(name)
+    );
+  return itemsRef.snapshotChanges();
+
+
+  }
+
   public getProducts(): Observable<IProduct[] | null> {
     const starCountRef: AngularFireObject<IProduct[]> = this.db.object('/products');
       return starCountRef.valueChanges();

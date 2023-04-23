@@ -1,7 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ISweet } from "@Interfaces/sweet.interface";
 import { Subscription } from "rxjs";
+import { Router } from "@angular/router";
+
+import { ISweet } from "@Interfaces/sweet.interface";
 import { RequestsService } from "@Services/requests.service";
+import { DeleteService } from "@Services/delete.service";
 
 @Component({
   selector: 'app-sweets',
@@ -9,9 +12,15 @@ import { RequestsService } from "@Services/requests.service";
   styleUrls: ['./sweets.component.scss']
 })
 export class SweetsComponent implements OnInit, OnDestroy {
+
   public sweets: ISweet[] = [];
   private subscribeToSweetChanges: Subscription | null = null;
-  constructor(private Request: RequestsService) {}
+
+  constructor(
+    private Request: RequestsService,
+    private Deletion: DeleteService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.requestSweets();
@@ -31,6 +40,14 @@ export class SweetsComponent implements OnInit, OnDestroy {
           console.log('FAILED to get sweets.');
         }
       })
+  }
+
+  public deleteSweet(name: string): void {
+    this.Deletion.deleteItemById('sweets', name);
+  }
+
+  public editSweet(name: string): void {
+    this.router.navigateByUrl(`sweets/${name}`).then();
   }
 
 }

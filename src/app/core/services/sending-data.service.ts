@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Database, getDatabase, ref, set } from "@angular/fire/database";
+import { Database, ref, set } from "@angular/fire/database";
 import { RequestsService } from "@Services/requests.service";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
-import { IProduct, IProductForm } from "@Interfaces/product.interface";
-import { ɵFormGroupValue, ɵTypedOrUntyped } from "@angular/forms";
+import { IProduct } from "@Interfaces/product.interface";
 import { ISweet } from "@Interfaces/sweet.interface";
 
 @Injectable({
