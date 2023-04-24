@@ -51,8 +51,9 @@ export class AddSweetComponent implements OnInit {
       });
   }
 
-  public onInputType(inputElement: any, productPrice: number, index: number): void {
-    this.selectedProducts[index].ActualPrice = Math.round(Number(inputElement.value) * productPrice);
+  public onInputType(inputElement: any, index: number): void {
+    this.selectedProducts[index].Quantity = Number(inputElement.value);
+    this.selectedProducts[index].ActualPrice = Math.round(this.selectedProducts[index].Quantity * this.selectedProducts[index].Price);
   }
 
   public calculateSweetPrice(): void {

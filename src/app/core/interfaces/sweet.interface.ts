@@ -3,17 +3,17 @@ import { FormControl } from "@angular/forms";
 import { IProduct } from "@Interfaces/product.interface";
 
 export interface ISweet {
-  Name: string,
-  Image: string | null,
-  Products: IProduct[] | null,
-  CurrentPrice: number | null
+  CurrentPrice: number | null;
+  Image: string | null;
+  Name: string;
+  Products: IProduct[] | null;
 }
 
 export interface ISweetForm {
-  ID: FormControl<number | null>,
-  Name: FormControl<string | null>,
-  Image: FormControl<string | null>,
-  Products: FormControl<IProduct[] | null>,
-  Price: FormControl<number | null>,
+  ID: FormControl<number | null>;
+  Image: FormControl<string | null>;
+  Name: FormControl<string | null>;
+  Price: FormControl<number | null>;
+  Products: FormControl<IProduct[] | null>;
 }
 

@@ -28,7 +28,7 @@
                     }"
                type="text"
                pInputText
-               placeholder="Enter product name...">
+               placeholder="Enter product's name...">
 
         <small *ngIf="productForm.get('Name')?.hasError('required')  && submitted
                         || !productForm.value.Name?.trim() && submitted"

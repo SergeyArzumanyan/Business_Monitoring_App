@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 
-import { IProduct, IProductForm } from "@Interfaces/product.interface";
+import { IProduct, IProductForm, IProductForSending } from "@Interfaces/product.interface";
 import { SendingDataService } from "@Services/sending-data.service";
 
 @Component({
@@ -21,7 +21,7 @@ export class AddProductComponent {
     ]),
     Price: new FormControl<number | null>(null, [
       Validators.required
-    ])
+    ]),
   })
 
 
@@ -31,12 +31,13 @@ export class AddProductComponent {
     setTimeout(() => {
         this.submitted = true;
         if (this.productForm.valid && this.productForm.value.Name && this.productForm.value.Price) {
-          let product: IProduct = {
+          let product: IProductForSending = {
             Name: this.productForm.value.Name,
-            Price: this.productForm.value.Price
+            Price: this.productForm.value.Price,
+            ActualPrice: 0,
+            Quantity: 0
           };
           this.Send.saveProduct(product);
-          console.log(this.productForm.value); // Object that You need to send to firebase Sergo, add product to firebase.
           this.productForm.reset();
           this.submitted = false;
         }
