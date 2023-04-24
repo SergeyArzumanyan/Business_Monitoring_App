@@ -1,8 +1,8 @@
 @import "/src/app/core/global-css/fonts";
 @import "/src/app/core/global-css/colors";
+
 $borderRadius: 8px;
 $animationTime: 0.2s;
-
 
 .btn-sm {
   margin: 0;
@@ -45,137 +45,144 @@ $animationTime: 0.2s;
 
 
 .primary {
-  color: $gray-100;
-  background-color: $primary;
+  color: $gray-100 !important;
+  background-color: $primary !important;
 }
 .primary:hover {
-  color: $black;
-  background-color: $skin-100;
+  color: $black !important;
+  background-color: $skin-100 !important;
 }
 
 .red-btn {
-  background-color: $red-300;
+  background-color: $red-300 !important;
+  cursor: pointer;
 }
 
 .red-btn:hover {
-  background-color: $red-200;
+  background-color: $red-200 !important;
 }
 
 .red-btn:active {
-  background-color: $red-100;
+  background-color: $red-100 !important;
 }
 
 .red-btn.btn-disabled {
-  background-color: $red-disabled;
+  background-color: $red-disabled !important;
   cursor: not-allowed;
 }
 
 .blue-btn {
-  background-color: $blue-300;
+  background-color: $blue-300 !important;
+  cursor: pointer;
 }
 
 .blue-btn:hover {
-  background-color: $blue-200;
+  background-color: $blue-200 !important;
 }
 
 .blue-btn:active {
-  background-color: $blue-100;
+  background-color: $blue-100 !important;
 }
 
 .blue-btn.btn-disabled {
-  background-color: $blue-disabled;
+  background-color: $blue-disabled !important;
   cursor: not-allowed;
 }
 
 .skin-btn {
-  background-color: $skin-300;
+  background-color: $skin-300 !important;
+  cursor: pointer;
 }
 
 .skin-btn:hover {
-  background-color: $skin-200;
+  background-color: $skin-200 !important;
 }
 
 .skin-btn:active {
-  background-color: $skin-100;
+  background-color: $skin-100 !important;
 }
 
 .skin-btn.btn-disabled {
-  background-color: $skin-disabled;
+  background-color: $skin-disabled !important;
   cursor: not-allowed;
 }
 
 .skin-btn:focus:focus-visible {
-  box-shadow: 0 0 4px 0 $brown-300;
+  box-shadow: 0 0 4px 0 $brown-300 !important;
 }
 
-.brown-btn {
-  color: $white-300;
-  background-color: $brown-300;
+.delete-btn {
+  color: $white-300 !important;
+  background-color: $brown-300 !important;
+  cursor: pointer;
 }
 
-.brown-btn:hover {
-  background-color: $brown-200;
+.delete-btn:hover {
+  background-color: $brown-200 !important;
 }
 
-.brown-btn:active {
-  background-color: $brown-100;
+.delete-btn:active {
+  background-color: $brown-100 !important;
 }
 
-.brown-btn.btn-disabled {
-  background-color: $brown-disabled;
+.delete-btn.btn-disabled {
+  background-color: $brown-disabled !important;
   cursor: not-allowed;
 }
 
 .green-btn {
-  background-color: $green-300;
+  background-color: $green-300 !important;
+  cursor: pointer;
 }
 
 .green-btn:hover {
-  background-color: $green-200;
+  background-color: $green-200 !important;
 }
 
 .green-btn:active {
-  background-color: $green-100;
+  background-color: $green-100 !important;
 }
 
-.g  reen-btn.btn-disabled {
-  background-color: $green-disabled;
+.green-btn.btn-disabled {
+  background-color: $green-disabled !important;
   cursor: not-allowed;
 }
 
 .gray-btn {
-  background-color: $gray-300;
+  background-color: $gray-300 !important;
+  cursor: pointer;
 }
 
 .gray-btn:hover {
-  background-color: $gray-200;
+  background-color: $gray-200 !important;
 }
 
 .gray-btn:active {
-  background-color: $gray-100;
+  background-color: $gray-100 !important;
 }
 
 .gray-btn.btn-disabled {
-  background-color: $gray-disabled;
+  background-color: $gray-disabled !important;
   cursor: not-allowed;
 }
 
 
 .edit-btn {
   color: $black;
-  background-color: $edit-btn-300;
+  background-color: $edit-btn-300 !important;
+  cursor: pointer;
 }
 
 .edit-btn:hover {
-  background-color: $edit-btn-200;
+  background-color: $edit-btn-200 !important;
 }
 
 .edit-btn:active {
   color: $white-400;
-  background-color: $edit-btn-100;
+  background-color: $edit-btn-100 !important;
 }
 
 .edit-btn-disabled {
-  background-color: $edit-btn-disabled;
+  background-color: $edit-btn-disabled !important;
   cursor: not-allowed;
 }

@@ -1,0 +1,78 @@
+@import "src/app/core/global-css/fonts";
+@import "src/app/core/global-css/flex";
+@import "src/app/core/global-css/buttons";
+@import "src/app/core/global-css/colors";
+
+$wrapperPadding: 50px;
+$innerPadding: 50px;
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+  padding: $wrapperPadding;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  padding: $innerPadding;
+  margin: 0;
+  background-color: $white-300;
+  border-radius: $borderRadius;
+  box-shadow: 0 0 2px 0 $skin-100;
+
+  table {
+    width: 100%;
+    margin: 0 auto;
+    border-collapse: collapse;
+
+    thead {
+      .interactions {
+        background-color: $edit-btn-300;
+      }
+    }
+
+    th, td {
+      text-align: center;
+      padding: 15px;
+      box-shadow: 0 0 1px 0 $black;
+      background-color: $table-background;
+      transition: $animationTime;
+      font-size: $medium;
+    }
+
+    th:hover, td:hover {
+      background-color: $white-200;
+    }
+
+    .product-price {
+      color: $green-200 !important;
+      background-color: $table-highlighted;
+      font-size: $small;
+    }
+
+    .product-price:hover {
+      background-color: $table-hovered;
+    }
+
+    .main-td {
+      width: 49%
+    }
+    .action-td {
+      width: 1%;
+    }
+  }
+}
+
+
+@media (max-width: 600px) {
+  .container {
+    padding: 25px 15px;
+  }
+
+ table {
+   td, th {
+     padding: 8px !important;
+   }
+ }
+}

@@ -1,7 +1,25 @@
-<ng-container *ngIf="!isMobile">
-  <app-large-products></app-large-products>
-</ng-container>
+<div class="wrapper flex justify-content-center align-items-center">
+  <div class="container">
 
-<ng-container *ngIf="isMobile">
-  <app-small-products></app-small-products>
-</ng-container>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th colspan="2" class="interactions">Interactions</th>
+        </tr>
+      </thead>
+      <tbody>
+      <ng-container *ngIf="products && products.length > 0">
+        <tr *ngFor="let product of products">
+          <td class="main-td">{{ product.Name }}</td>
+          <td class="main-td product-price">{{ product.Price }}</td>
+          <td class="action-td edit-btn"><i class="pi pi-pencil"></i></td>
+          <td class="action-td delete-btn" (click)="deleteProduct()"><i class="pi pi-trash"></i></td>
+        </tr>
+      </ng-container>
+      </tbody>
+    </table>
+
+  </div>
+</div>

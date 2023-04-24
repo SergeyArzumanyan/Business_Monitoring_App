@@ -13,8 +13,6 @@ import { LargeHeaderComponent, SmallHeaderComponent } from '@components/header/c
 import { SweetsComponent } from '@components/sweets';
 import { SweetComponent } from '@components/sweets/sweet/sweet.component';
 import { ProductsComponent } from '@components/products';
-import { LargeProductsComponent } from '@components/products/components/large-products';
-import { SmallProductsComponent } from '@components/products/components/small-products';
 
 import { environment } from '../environments/environment';
 import { provideDatabase, getDatabase } from '@angular/fire/database';
@@ -36,8 +34,6 @@ import { ProgressSpinnerModule } from "primeng/progressspinner";
     SweetsComponent,
     SweetComponent,
     ProductsComponent,
-    LargeProductsComponent,
-    SmallProductsComponent,
   ],
   imports: [
     AppRoutingModule,
