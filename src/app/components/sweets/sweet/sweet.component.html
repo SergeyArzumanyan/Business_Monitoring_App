@@ -12,12 +12,22 @@
         <div class="sweet-products flex col gap-20">
           <span class="products-header">Products</span>
 
-          <div class="product flex justify-content-center gap-15" *ngFor="let product of sweet.Products">  <!-- *ngFor products -->
-            <span class="product-name">{{ product.Name }}</span>
-            <span class="product-quantity">({{ product.Quantity }})</span>
-            <span class="product-price">({{ product.Price }} AMD)</span>
-            <span class="product-actual-price">{{ product.ActualPrice }} AMD</span>
-          </div>
+            <table>
+              <thead>
+              <th>Name</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>ActualPrice</th>
+              </thead>
+              <tbody>
+              <tr *ngFor="let product of sweet.Products">
+                <td class="product-name">{{ product.Name }}</td>
+                <td class="product-quantity">({{ product.Quantity }})</td>
+                <td class="product-price">({{ product.Price }} AMD)</td>
+                <td class="product-actual-price">{{ product.ActualPrice }} AMD</td>
+              </tr>
+              </tbody>
+            </table>
 
         </div>
       </div>
@@ -34,5 +44,7 @@
 
 
 <ng-container *ngIf="!sweet">
-  <span>LOADING...</span>
+  <div class="flex justify-content-center align-items-center" style="height: 100%;">
+    <p-progressSpinner class="p-progress-path"></p-progressSpinner>
+  </div>
 </ng-container>

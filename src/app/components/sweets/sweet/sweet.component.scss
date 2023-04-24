@@ -28,6 +28,7 @@ $innerPadding: 50px;
 
 .sweet-info {
   .img-wrapper, .img-wrapper img {
+    object-fit: cover;
     width: 400px;
     height: 300px;
     border-radius: 10px;
@@ -58,16 +59,44 @@ $innerPadding: 50px;
     border-bottom: 1px solid $gray-300;
   }
 
-  .product-name, .product-quantity {
-    color: $black;
+  table {
+    border-collapse: collapse;
+    background-color: #e0dfdf;
+
+    th {
+      font-size: $medium;
+    }
+
+    td {
+      font-size: $small;
+    }
+
+    td, th {
+      text-align: center;
+      padding: 8px;
+      color: $black;
+      box-shadow: 0 0 1px 0 $black;
+      transition: $animationTime;
+    }
+
+    td:hover, th:hover {
+      background-color: $white-200;
+    }
+
+    .product-name, .product-quantity {
+      color: $black;
+    }
+
+    .product-price, .product-actual-price {
+      color: $green-300 !important;
+      background-color: $table-highlighted;
+    }
+
+    .product-price:hover, .product-actual-price:hover {
+      background-color: $table-hovered !important;
+    }
   }
 
-  .product-price {
-    color: $green-100;
-  }
-  .product-actual-price {
-    color: $green-300;
-  }
 }
 
 .action-buttons {
@@ -124,4 +153,8 @@ $innerPadding: 50px;
       }
     }
   }
+}
+
+:host ::ng-deep .p-progress-spinner-circle {
+  stroke: $skin-100 !important;
 }
