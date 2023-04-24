@@ -17,7 +17,7 @@
                 }"
                  type="text"
                  pInputText
-                 placeholder="Enter product name...">
+                 placeholder="Enter sweet's name...">
 
           <small *ngIf="sweetForm.get('Name')?.hasError('required')  && submitted"
                  class="p-error">
@@ -58,7 +58,7 @@
                          type="text"
                          pInputText
 
-                         (keyup)="onInputType($event.target , product['Price'], i)"
+                         (keyup)="onInputType($event.target, i)"
                          pKeyFilter="num"
                          placeholder="Quantity...">
                 </div>

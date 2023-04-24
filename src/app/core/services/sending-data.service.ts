@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Database, ref, set } from "@angular/fire/database";
 import { RequestsService } from "@Services/requests.service";
 import { HttpClient } from "@angular/common/http";
-import { IProduct } from "@Interfaces/product.interface";
+import { IProduct, IProductForSending } from "@Interfaces/product.interface";
 import { ISweet } from "@Interfaces/sweet.interface";
 
 @Injectable({
@@ -29,7 +29,7 @@ export class SendingDataService {
       });
   }
 
-  public saveProduct(product: IProduct): void {
+  public saveProduct(product: IProductForSending): void {
     set(ref(this.db, `products/${+(new Date())}`), product)
       .then(() => {
         console.log('successfully sent.')
