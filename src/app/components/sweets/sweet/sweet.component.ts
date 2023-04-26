@@ -1,9 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { ISweet } from "@Interfaces/sweet.interface";
-import { RequestsService } from "@Services/requests.service";
 import { ActivatedRoute, Router } from "@angular/router";
-import { DeleteService } from "@Services/delete.service";
+import { take } from "rxjs";
+import { FormControl, FormGroup } from "@angular/forms";
+
 import { AngularFireDatabase } from "@angular/fire/compat/database";
+
+import { ISweet, ISweetForm } from "@Interfaces/sweet.interface";
+import { IProduct } from "@Interfaces/product.interface";
+import { RequestsService } from "@Services/requests.service";
+import { EditService } from "@Services/edit.service";
+import { DeleteService } from "@Services/delete.service";
 
 @Component({
   selector: 'app-sweet',
@@ -12,15 +18,27 @@ import { AngularFireDatabase } from "@angular/fire/compat/database";
 })
 export class SweetComponent implements OnInit {
 
+  public isEditMode: boolean = false;
   public sweet!: ISweet;
+  public submitted: boolean = false;
+  private initialSweetImage: string | null = null; // for keeping first downloaded Image (this is for not making additional network requests.
+
+  public editSweetForm: FormGroup<ISweetForm> = new FormGroup<ISweetForm>({
+    Image: new FormControl<string | null>(null),
+    Name: new FormControl<string | null>(null),
+    CurrentPrice: new FormControl<number | null>(null),
+    Products: new FormControl<IProduct[] | null>(null)
+  })
 
   constructor(
     private Request: RequestsService,
     private Deletion: DeleteService,
+    private Edition: EditService,
     private db: AngularFireDatabase,
     private route: ActivatedRoute,
     private router: Router
-    ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.Request.getSweet(this.route.snapshot.paramMap.get('sweet-id'))
@@ -30,18 +48,70 @@ export class SweetComponent implements OnInit {
         },
         error: () => {
           console.log('something went wrong.');
+          this.router.navigateByUrl('sweets');
         }
       })
   }
 
   public deleteSweet(Name: string): void {
-    this.Deletion.deleteItemById('sweets', 'Name', Name)
-      .subscribe((actions: any) => {
-        actions.forEach((action: any) => {
-          const key = action.payload.key;
-          this.db.object(`/sweets/${key}`).remove();
-        });
-        this.router.navigateByUrl('sweets')
+    this.router.navigateByUrl('sweets')
+      .then(() => {
+        this.Deletion.deleteItem('sweets', 'Name', Name)
+          .subscribe((actions: any) => {
+            actions.forEach((action: any) => {
+              const key = action.payload.key;
+              this.db.object(`/sweets/${key}`).remove();
+            });
+          })
       });
+  }
+
+  public editSweet(): void {
+    this.isEditMode = true;
+    this.initialSweetImage = this.sweet.Image; // for keeping first downloaded Image (this is for not making additional network requests.
+    this.editSweetForm.patchValue(this.sweet);
+  }
+
+  public cancelEditing(): void {
+    this.isEditMode = false;
+    this.editSweetForm.reset();
+    this.sweet.Image = this.initialSweetImage; // for keeping first downloaded Image (this is for not making additional network requests.
+  }
+
+  public onFileChange(event: any) {
+    this.editSweetForm.markAsDirty();
+    const reader = new FileReader();
+
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        this.editSweetForm.controls.Image.setValue(reader.result as string);
+      };
+
+    }
+  }
+
+  public imageDropped(Image: any): void {
+    this.editSweetForm.markAsDirty();
+    this.editSweetForm.controls.Image.setValue(Image);
+  }
+
+  public imageClear(sweet: ISweet): void {
+    sweet.Image = null
+    this.editSweetForm.patchValue(sweet);
+  }
+
+  public saveEditedSweet(): void {
+    this.Edition.editItem('sweets', 'Name', this.sweet.Name)
+      .pipe(take(1))
+      .subscribe((items: any) => {
+        if (this.sweet.Name !== this.editSweetForm.value.Name) {
+          this.router.navigateByUrl('sweets');
+        }
+        this.db.list('/sweets').update(items[0].key, this.editSweetForm.value);
+      });
+    this.isEditMode = false;
   }
 }

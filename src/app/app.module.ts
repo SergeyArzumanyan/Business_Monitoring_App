@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule, NgOptimizedImage } from "@angular/common";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HttpClientModule } from "@angular/common/http";
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { AuthComponent } from "@components/auth";
 import { HeaderComponent } from '@components/header';
 import { LargeHeaderComponent, SmallHeaderComponent } from '@components/header/components';
-import { SweetsComponent } from '@components/sweets';
-import { SweetComponent } from '@components/sweets/sweet/sweet.component';
+import { AuthComponent } from "@components/auth";
+import { SweetsModule } from "@components/sweets/sweets.module";
 import { ProductsComponent } from '@components/products';
+import { AddModule } from "@components/add/add.module";
 
 import { environment } from '../environments/environment';
 import { provideDatabase, getDatabase } from '@angular/fire/database';
@@ -23,6 +23,7 @@ import { AngularFireDatabaseModule } from "@angular/fire/compat/database";
 
 import { ButtonModule } from "primeng/button";
 import { ProgressSpinnerModule } from "primeng/progressspinner";
+import { InputNumberModule } from "primeng/inputnumber";
 
 @NgModule({
   declarations: [
@@ -31,17 +32,16 @@ import { ProgressSpinnerModule } from "primeng/progressspinner";
     HeaderComponent,
     LargeHeaderComponent,
     SmallHeaderComponent,
-    SweetsComponent,
-    SweetComponent,
     ProductsComponent,
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
     CommonModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
     FormsModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
@@ -50,6 +50,9 @@ import { ProgressSpinnerModule } from "primeng/progressspinner";
     ButtonModule,
     NgOptimizedImage,
     ProgressSpinnerModule,
+    InputNumberModule,
+    AddModule,
+    SweetsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

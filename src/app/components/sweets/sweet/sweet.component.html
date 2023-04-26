@@ -1,4 +1,10 @@
-<ng-container *ngIf="sweet">
+<ng-container *ngIf="!sweet">
+  <div class="flex justify-content-center align-items-center" style="height: 100%;">
+    <p-progressSpinner class="p-progress-path"></p-progressSpinner>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="sweet && !isEditMode else editBlock">
   <div class="wrapper flex justify-content-center align-items-center">
     <div class="container">
       <div class="inner-container flex justify-content-between gap-50">
@@ -12,29 +18,29 @@
         <div class="sweet-products flex col gap-20">
           <span class="products-header">Products</span>
 
-            <table>
-              <thead>
-              <th>Name</th>
-              <th>Quantity</th>
-              <th>Price</th>
-              <th>ActualPrice</th>
-              </thead>
-              <tbody>
-              <tr *ngFor="let product of sweet.Products">
-                <td class="product-name">{{ product.Name }}</td>
-                <td class="product-quantity">({{ product.Quantity }})</td>
-                <td class="product-price">({{ product.Price }} AMD)</td>
-                <td class="product-actual-price">{{ product.ActualPrice }} AMD</td>
-              </tr>
-              </tbody>
-            </table>
+          <table>
+            <thead>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>ActualPrice</th>
+            </thead>
+            <tbody>
+            <tr *ngFor="let product of sweet.Products">
+              <td class="product-name">{{ product.Name }}</td>
+              <td class="product-quantity">{{ product.Quantity }}</td>
+              <td class="product-price">{{ product.Price }} AMD</td>
+              <td class="product-actual-price">{{ product.ActualPrice }} AMD</td>
+            </tr>
+            </tbody>
+          </table>
 
         </div>
       </div>
 
       <div class="action-buttons flex gap-15 justify-content-end">
-        <button type="button" class="btn-md edit-btn">Edit</button>
-        <button type="button" class="btn-md brown-btn" (click)="deleteSweet(sweet.Name)">Delete</button>
+        <button type="button" class="btn-md skin-action-btn" (click)="editSweet()">Edit</button>
+        <button type="button" class="btn-md brown-action-btn" (click)="deleteSweet(sweet.Name)">Delete</button>
       </div>
 
     </div>
@@ -43,8 +49,105 @@
 </ng-container>
 
 
-<ng-container *ngIf="!sweet">
-  <div class="flex justify-content-center align-items-center" style="height: 100%;">
-    <p-progressSpinner class="p-progress-path"></p-progressSpinner>
-  </div>
-</ng-container>
+<ng-template #editBlock>
+  <ng-container *ngIf="sweet">
+    <div class="wrapper flex justify-content-center align-items-center">
+      <div class="container">
+
+        <div class="form-wrapper">
+          <form [formGroup]="editSweetForm" (ngSubmit)="saveEditedSweet()">
+            <div class="inner-container flex justify-content-between gap-50">
+
+              <div class="sweet-info flex col gap-20">
+                <div class="form-group flex col gap-15">
+                  <div class="img-dropzone"
+                       imgDrag
+                       (file)="imageDropped($event)">
+                    <div class="drag-message">
+                      Drag your image here or
+                      <a class="img-browse"
+                         (click)="imgInput.click()">browse</a>
+                    </div>
+                  </div>
+
+                  <input style="display: none;"
+                         #imgInput
+                         type="file"
+                         accept="image/png,image/jpg,image/jpeg"
+                         (change)="onFileChange($event)"/>
+
+                  <div class="img-preview">
+                    <div class="img-container" *ngIf="(editSweetForm.controls.Image.value) || (sweet.Image)">
+                      <div class="img-cancel" (click)="imageClear(sweet)">x</div>
+                      <img [src]="(editSweetForm.controls.Image.value) || (sweet.Image)"
+                           class="selected-sweet-image" alt="sweet-img">
+                    </div>
+                  </div>
+
+                  <small *ngIf="editSweetForm.get('Image')?.hasError('required')  && submitted"
+                         class="p-error">
+                    Image is required.
+                  </small>
+
+                </div>
+
+                <div class="flex col align-items-start gap-25">
+                  <div class="form-group flex justify-content-between align-items-center gap-20">
+                    <label for="Name">Name</label>
+                    <input formControlName="Name" id="Name" type="text" pInputText class="p-inputtext-sm">
+                  </div>
+
+                  <div class="form-group flex justify-content-between align-items-center gap-20">
+                    <label for="Price">Price</label>
+                    <p-inputNumber formControlName="CurrentPrice" inputId="Price"
+                                   class="p-inputtext-sm"></p-inputNumber>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="sweet-products flex col gap-20">
+                <span class="products-header">Products</span>
+
+                <table>
+                  <thead>
+                  <th>Name</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                  <th>ActualPrice</th>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let product of sweet.Products">
+                    <td class="product-name">{{ product.Name }}</td>
+                    <td class="product-quantity">{{ product.Quantity }}</td>
+                    <td class="product-price">{{ product.Price }} AMD</td>
+                    <td class="product-actual-price">{{ product.ActualPrice }} AMD</td>
+                  </tr>
+                  </tbody>
+                </table>
+
+              </div>
+            </div>
+            <div class="action-buttons flex gap-15 justify-content-end">
+              <button type="button"
+                      class="btn-md brown-action-btn"
+                      (click)="cancelEditing()">Cancel
+              </button>
+              <button type="submit"
+                      class="btn-md skin-action-btn"
+                      [disabled]="editSweetForm.pristine"
+                      [ngClass]="{'skin-action-btn-disabled': editSweetForm.pristine}">
+                <div class="flex justify-content-center gap-5">
+                  Save
+                  <i class="pi pi-check"></i>
+                </div>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </ng-container>
+
+</ng-template>

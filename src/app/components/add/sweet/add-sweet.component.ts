@@ -23,11 +23,10 @@ export class AddSweetComponent implements OnInit {
   public selectedProducts: any = [];
 
   public sweetForm: FormGroup<ISweetForm> = new FormGroup<ISweetForm>({
-    ID: new FormControl(null),
     Name: new FormControl(null, [Validators.required,]),
     Image: new FormControl(null, [Validators.required]),
     Products: new FormControl([], [Validators.required]),
-    Price: new FormControl(null, Validators.required)
+    CurrentPrice: new FormControl(null, Validators.required)
   })
 
   constructor(
@@ -63,7 +62,7 @@ export class AddSweetComponent implements OnInit {
         arrSum += product.ActualPrice;
       }
       this.sweetActualPrice = arrSum;
-      this.sweetForm.controls.Price.setValue(this.sweetActualPrice);
+      this.sweetForm.controls.CurrentPrice.setValue(this.sweetActualPrice);
     }
   }
 
@@ -101,14 +100,14 @@ export class AddSweetComponent implements OnInit {
       this.submitted = true;
 
         if (this.sweetForm.valid) {
-          if (this.sweetForm.value.Name &&  this.sweetForm.value.Products && this.sweetForm.value.Price) {
+          if (this.sweetForm.value.Name &&  this.sweetForm.value.Products && this.sweetForm.value.CurrentPrice) {
             let sweet: ISweet = {
               Name: this.sweetForm.value.Name,
-              CurrentPrice: this.sweetForm.value.Price,
+              CurrentPrice: this.sweetForm.value.CurrentPrice,
               Products: this.sweetForm.value.Products,
               Image: this.sweetForm.value.Image
             }
-            this.Send.saveSweet(sweet);
+            this.Send.createSweet(sweet);
           }
           this.sweetForm.reset();
           this.resetProducts();

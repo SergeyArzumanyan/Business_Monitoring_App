@@ -10,10 +10,9 @@ export interface ISweet {
 }
 
 export interface ISweetForm {
-  ID: FormControl<number | null>;
   Image: FormControl<string | null>;
   Name: FormControl<string | null>;
-  Price: FormControl<number | null>;
+  CurrentPrice: FormControl<number | null>;
   Products: FormControl<IProduct[] | null>;
 }
 

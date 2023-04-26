@@ -41,7 +41,7 @@ export class SweetsComponent implements OnInit {
   }
 
   public deleteSweet(Name: string): void {
-    this.Deletion.deleteItemById('sweets', 'Name', Name)
+    this.Deletion.deleteItem('sweets', 'Name', Name)
       .subscribe((actions: any) => {
         actions.forEach((action: any) => {
           const key = action.payload.key;

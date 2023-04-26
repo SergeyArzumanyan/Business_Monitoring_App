@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 
-import { IProduct, IProductForm, IProductForSending } from "@Interfaces/product.interface";
+import { IProductForm, IProductForSending } from "@Interfaces/product.interface";
 import { SendingDataService } from "@Services/sending-data.service";
 
 @Component({
@@ -37,7 +37,7 @@ export class AddProductComponent {
             ActualPrice: 0,
             Quantity: 0
           };
-          this.Send.saveProduct(product);
+          this.Send.createProduct(product);
           this.productForm.reset();
           this.submitted = false;
         }

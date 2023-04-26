@@ -14,8 +14,8 @@
         <tr *ngFor="let product of products">
           <td class="main-td">{{ product.Name }}</td>
           <td class="main-td product-price">{{ product.Price }}</td>
-          <td class="action-td edit-btn"><i class="pi pi-pencil"></i></td>
-          <td class="action-td delete-btn" (click)="deleteProduct()"><i class="pi pi-trash"></i></td>
+          <td class="action-td skin-action-btn"><i class="pi pi-pencil"></i></td>
+          <td class="action-td brown-action-btn" (click)="deleteProduct()"><i class="pi pi-trash"></i></td>
         </tr>
       </ng-container>
       </tbody>

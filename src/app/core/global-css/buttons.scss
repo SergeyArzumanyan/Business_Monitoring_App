@@ -71,6 +71,10 @@ $animationTime: 0.2s;
   cursor: not-allowed;
 }
 
+.red-btn-disabled:hover,  .red-btn-disabled:active {
+  background-color: $red-disabled !important;
+}
+
 .blue-btn {
   background-color: $blue-300 !important;
   cursor: pointer;
@@ -87,6 +91,10 @@ $animationTime: 0.2s;
 .blue-btn.btn-disabled {
   background-color: $blue-disabled !important;
   cursor: not-allowed;
+}
+
+.blue-btn-disabled:hover,  .blue-btn-disabled:active {
+  background-color: $blue-disabled !important;
 }
 
 .skin-btn {
@@ -107,27 +115,36 @@ $animationTime: 0.2s;
   cursor: not-allowed;
 }
 
+.skin-btn-disabled:hover,  .skin-btn-disabled:active {
+  background-color: $skin-disabled !important;
+}
+
 .skin-btn:focus:focus-visible {
   box-shadow: 0 0 4px 0 $brown-300 !important;
 }
 
-.delete-btn {
+.brown-action-btn {
   color: $white-300 !important;
   background-color: $brown-300 !important;
   cursor: pointer;
 }
 
-.delete-btn:hover {
+.brown-action-btn:hover {
   background-color: $brown-200 !important;
 }
 
-.delete-btn:active {
+.brown-action-btn:active {
   background-color: $brown-100 !important;
 }
 
-.delete-btn.btn-disabled {
+.brown-action-btn.btn-disabled {
   background-color: $brown-disabled !important;
   cursor: not-allowed;
+}
+
+.brown-action-btn-disabled:hover,  .brown-action-btn-disabled:active {
+  background-color: $brown-disabled !important;
+  color: $white-300 !important;
 }
 
 .green-btn {
@@ -148,6 +165,10 @@ $animationTime: 0.2s;
   cursor: not-allowed;
 }
 
+.green-btn-disabled:hover,  .green-btn-disabled:active {
+  background-color: $green-disabled !important;
+}
+
 .gray-btn {
   background-color: $gray-300 !important;
   cursor: pointer;
@@ -166,23 +187,31 @@ $animationTime: 0.2s;
   cursor: not-allowed;
 }
 
+.gray-btn-disabled:hover,  .gray-btn-disabled:active {
+  background-color: $gray-disabled !important;
+}
 
-.edit-btn {
+.skin-action-btn {
   color: $black;
   background-color: $edit-btn-300 !important;
   cursor: pointer;
 }
 
-.edit-btn:hover {
+.skin-action-btn:hover {
   background-color: $edit-btn-200 !important;
 }
 
-.edit-btn:active {
+.skin-action-btn:active {
   color: $white-400;
   background-color: $edit-btn-100 !important;
 }
 
-.edit-btn-disabled {
+.skin-action-btn-disabled {
   background-color: $edit-btn-disabled !important;
   cursor: not-allowed;
+}
+
+.skin-action-btn-disabled:hover,  .skin-action-btn-disabled:active {
+  background-color: $edit-btn-disabled !important;
+  color: $black !important;
 }

@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Database, ref, set } from "@angular/fire/database";
+import { Observable } from "rxjs";
+
+import { AngularFireDatabase } from "@angular/fire/compat/database";
 
 @Injectable({
   providedIn: 'root'
 })
 export class EditService {
 
-  constructor(private db: Database) {}
+  constructor(private db: AngularFireDatabase) {}
 
-  public editItemBId(itemsUrl: string, id: number, newItemData: any): void {
-    set(ref(this.db, `${itemsUrl}/${id}`), newItemData);
+  public editItem(itemsUrl: string, key: string, value: string): Observable<any> {
+    return this.db.list(`/${itemsUrl}`, ref => ref.orderByChild(key).equalTo(value)).snapshotChanges();
   }
-
 }
