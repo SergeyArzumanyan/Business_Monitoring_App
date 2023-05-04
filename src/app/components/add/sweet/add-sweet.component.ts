@@ -23,7 +23,7 @@ export class AddSweetComponent implements OnInit {
   public selectedProducts: any = [];
 
   public sweetForm: FormGroup<ISweetForm> = new FormGroup<ISweetForm>({
-    Name: new FormControl(null, [Validators.required,]),
+    Name: new FormControl(null, [Validators.required, Validators.maxLength(25)]),
     Image: new FormControl(null, [Validators.required]),
     Products: new FormControl([], [Validators.required]),
     CurrentPrice: new FormControl(null, Validators.required)
@@ -96,6 +96,11 @@ export class AddSweetComponent implements OnInit {
   public addSweet(): void {
 
     setTimeout(() => {
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: "smooth"
+      })
       this.sweetForm.value.Image = this.sweetForm.controls.Image.value;
       this.submitted = true;
 

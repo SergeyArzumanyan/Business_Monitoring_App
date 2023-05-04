@@ -3,6 +3,30 @@
 @import "/src/app/core/global-css/buttons";
 @import "/src/app/core/global-css/flex";
 
+.no-data-container {
+  width: 50%;
+  height: max-content;
+  background-color: $white-300;
+  padding: 25px 25px 40px 25px;
+  border-radius: 10px;
+  border: 1px solid $skin-100;
+
+  .no-data-message {
+    text-align: center;
+    font-size: $large;
+  }
+
+  .no-data-link {
+    text-align: center;
+    font-size: $small;
+
+    .add-sweet-link {
+      color: $blue-300;
+    }
+  }
+
+}
+
 .sweets-wrapper {
   width: 100%;
   height: 100%;
@@ -99,6 +123,12 @@
   .sweet-card-buttons {
     align-self: flex-end;
     height: 60px;
+  }
+}
+
+@media (max-width: 650px) {
+  .no-data-container {
+    width: 80% !important;
   }
 }
 

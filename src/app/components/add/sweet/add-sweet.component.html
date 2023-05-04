@@ -11,9 +11,13 @@
                  class="form-input"
                  [ngClass]="{
                 'ng-invalid':
-                sweetForm.get('Name')?.hasError('required') && submitted,
+                sweetForm.get('Name')?.hasError('required') && submitted
+                ||
+                sweetForm.get('Name')?.hasError('maxlength') && submitted,
                 'ng-dirty':
                 sweetForm.get('Name')?.hasError('required')  && submitted
+                ||
+                sweetForm.get('Name')?.hasError('maxlength') && submitted
                 }"
                  type="text"
                  pInputText
@@ -22,6 +26,10 @@
           <small *ngIf="sweetForm.get('Name')?.hasError('required')  && submitted"
                  class="p-error">
             Name is required.
+          </small>
+          <small *ngIf="sweetForm.get('Name')?.hasError('maxlength')  && submitted"
+                 class="p-error">
+            Name is too long.
           </small>
         </div>
 

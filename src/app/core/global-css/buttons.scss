@@ -43,6 +43,14 @@ $animationTime: 0.2s;
   transition: $animationTime;
 }
 
+.classic-link {
+  color: $blue-300;
+  text-decoration: none;
+}
+
+.classic-link:active {
+  color: $blue-100;
+}
 
 .primary {
   color: $gray-100 !important;

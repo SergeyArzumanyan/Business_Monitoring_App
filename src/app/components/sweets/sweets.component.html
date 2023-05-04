@@ -1,9 +1,21 @@
-<ng-container *ngIf="sweets.length === 0">
+<ng-container *ngIf="sweets.length === 0 && !stopLoading">
   <div class="flex justify-content-center align-items-center" style="height: 100%;">
     <p-progressSpinner class="p-progress-path"></p-progressSpinner>
   </div>
 </ng-container>
 
+<ng-container *ngIf="stopLoading">
+  <div class="flex justify-content-center align-items-center" style="height: 100%;">
+    <div class="no-data-container flex col gap-25">
+      <div class="no-data-message">
+        There are no sweets available :(
+      </div>
+      <div class="no-data-link">
+        You can add them <a [routerLink]="['/add/sweet']" class="classic-link">here</a>.
+      </div>
+    </div>
+  </div>
+</ng-container>
 
 <div class="sweets-wrapper flex justify-content-center align-items-center">
   <div class="container">

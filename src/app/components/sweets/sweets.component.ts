@@ -18,6 +18,8 @@ export class SweetsComponent implements OnInit {
   public sweets: ISweet[] = [];
   private subscribeToSweetChanges: Subscription | null = null;
 
+  public stopLoading: boolean = false;
+
   constructor(
     private Request: RequestsService,
     private Deletion: DeleteService,
@@ -35,6 +37,11 @@ export class SweetsComponent implements OnInit {
       .subscribe({
         next: (sweets: ISweet[] | null) => {
           this.sweets = sweets ? this.Request.makeArray(sweets) : [];
+          setTimeout(() => {
+            if (this.sweets.length === 0) {
+              this.stopLoading = true;
+            }
+          }, 1000);
         },
         error: () => {
           console.log('FAILED to get sweets.');
