@@ -47,9 +47,17 @@ export class SweetComponent implements OnInit {
   }
 
   public getSweet(): void {
-    this.Request.getSweet(this.route.snapshot.paramMap.get('sweet-id'))
+    let sweetID = Number(this.route.snapshot.paramMap.get('sweet-id'));
+    if (isNaN(sweetID)) {
+      this.router.navigateByUrl('sweets');
+      return;
+    }
+    this.Request.getSweet(sweetID)
       .subscribe({
         next: (data: ISweet[]) => {
+          if (data.length === 0) {
+            this.router.navigateByUrl('sweets');
+          }
           this.sweet = data[0];
         },
         error: () => {
@@ -124,14 +132,10 @@ export class SweetComponent implements OnInit {
   }
 
   public saveEditedSweet(): void {
-    console.log(this.sweet.Products);
     this.editSweetForm.controls.Products.setValue(this.sweet.Products);
     this.Edition.editItem('sweets', 'Name', this.sweet.Name)
       .pipe(take(1))
       .subscribe((items: any) => {
-        if (this.sweet.Name !== this.editSweetForm.value.Name) {
-          this.router.navigateByUrl('sweets');
-        }
         this.db.list('/sweets').update(items[0].key, this.editSweetForm.value);
       });
     this.isEditMode = false;

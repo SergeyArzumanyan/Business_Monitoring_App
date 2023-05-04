@@ -221,26 +221,26 @@ $animationTime: 0.2s;
 
 .skin-action-btn {
   color: $black;
-  background-color: $edit-btn-300 !important;
+  background-color: $skin-action-btn-300 !important;
   cursor: pointer;
 }
 
 .skin-action-btn:hover {
-  background-color: $edit-btn-200 !important;
+  background-color: $skin-action-btn-200 !important;
 }
 
 .skin-action-btn:active {
-  color: $white-400;
-  background-color: $edit-btn-100 !important;
+  color: $white-400 !important;
+  background-color: $skin-action-btn-100 !important;
 }
 
 .skin-action-btn-disabled {
-  background-color: $edit-btn-disabled !important;
+  background-color: $skin-action-btn-disabled !important;
   cursor: not-allowed;
 }
 
 .skin-action-btn-disabled:hover,  .skin-action-btn-disabled:active {
-  background-color: $edit-btn-disabled !important;
+  background-color: $skin-action-btn-disabled !important;
   color: $black !important;
 }
 

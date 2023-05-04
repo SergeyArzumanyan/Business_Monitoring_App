@@ -17,16 +17,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background-color: $edit-btn-300;
+  background-color: $skin-action-btn-300;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: $edit-btn-200;
+  background-color: $skin-action-btn-200;
   cursor: pointer;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: $edit-btn-disabled;
+  background-color: $skin-action-btn-disabled;
 }
 
 @media (max-width: 600px) {

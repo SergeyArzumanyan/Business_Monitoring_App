@@ -41,7 +41,7 @@ export class SweetsComponent implements OnInit {
             if (this.sweets.length === 0) {
               this.stopLoading = true;
             }
-          }, 1000);
+          }, 5000);
         },
         error: () => {
           console.log('FAILED to get sweets.');
@@ -73,8 +73,8 @@ export class SweetsComponent implements OnInit {
 
   }
 
-  public editSweet(Name: string): void {
-    this.router.navigateByUrl(`sweets/${Name}`);
+  public editSweet(ID: number | null): void {
+    this.router.navigateByUrl(`sweets/${ID}`);
   }
 
 }

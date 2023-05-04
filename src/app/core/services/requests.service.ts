@@ -14,15 +14,15 @@ import { IProduct } from "@Interfaces/product.interface";
 
 export class RequestsService {
 
-  constructor(private db: AngularFireDatabase, private http: HttpClient) {}
+  constructor(private db: AngularFireDatabase) {}
 
   public getSweets(): Observable<ISweet[] | null> {
     const starCountRef: AngularFireObject<ISweet[]> = this.db.object('/sweets');
     return starCountRef.valueChanges();
   }
 
-  public getSweet(Name: string | null): any {
-    return this.db.list<ISweet>('/sweets', ref => ref.orderByChild('Name').equalTo(Name)).valueChanges()
+  public getSweet(ID: number | null): any {
+    return this.db.list<ISweet>('/sweets', ref => ref.orderByChild('ID').equalTo(ID)).valueChanges()
   }
 
   public getProducts(): Observable<IProduct[] | null> {

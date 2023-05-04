@@ -107,6 +107,7 @@ export class AddSweetComponent implements OnInit {
         if (this.sweetForm.valid) {
           if (this.sweetForm.value.Name &&  this.sweetForm.value.Products && this.sweetForm.value.CurrentPrice) {
             let sweet: ISweet = {
+              ID: +(new Date()),
               Name: this.sweetForm.value.Name,
               CurrentPrice: this.sweetForm.value.CurrentPrice,
               Products: this.sweetForm.value.Products,
