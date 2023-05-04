@@ -6,6 +6,7 @@ import { ISweet } from "@Interfaces/sweet.interface";
 import { RequestsService } from "@Services/requests.service";
 import { DeleteService } from "@Services/delete.service";
 import { AngularFireDatabase } from "@angular/fire/compat/database";
+import { ConfirmationService } from "primeng/api";
 
 @Component({
   selector: 'app-sweets',
@@ -21,7 +22,8 @@ export class SweetsComponent implements OnInit {
     private Request: RequestsService,
     private Deletion: DeleteService,
     private router: Router,
-    private db: AngularFireDatabase
+    private db: AngularFireDatabase,
+    private confirmationService: ConfirmationService
   ) {}
 
   ngOnInit(): void {
@@ -41,13 +43,27 @@ export class SweetsComponent implements OnInit {
   }
 
   public deleteSweet(Name: string): void {
-    this.Deletion.deleteItem('sweets', 'Name', Name)
-      .subscribe((actions: any) => {
-        actions.forEach((action: any) => {
-          const key = action.payload.key;
-          this.db.object(`/sweets/${key}`).remove();
-        });
-      });
+
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to delete this sweet?',
+      header: 'Delete Sweet ?',
+      icon: 'pi pi-trash',
+      accept: () => {
+        this.Deletion.deleteItem('sweets', 'Name', Name)
+          .subscribe((actions: any) => {
+            actions.forEach((action: any) => {
+              const key = action.payload.key;
+              this.db.object(`/sweets/${key}`).remove();
+            });
+          });
+      },
+      reject: () => {
+        console.log('reject');
+      }
+    });
+
+
+
   }
 
   public editSweet(Name: string): void {

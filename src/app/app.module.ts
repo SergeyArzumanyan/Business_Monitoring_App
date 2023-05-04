@@ -24,6 +24,8 @@ import { AngularFireDatabaseModule } from "@angular/fire/compat/database";
 import { ButtonModule } from "primeng/button";
 import { ProgressSpinnerModule } from "primeng/progressspinner";
 import { InputNumberModule } from "primeng/inputnumber";
+import { ConfirmDialogModule } from "primeng/confirmdialog";
+import { ConfirmationService } from "primeng/api";
 
 @NgModule({
   declarations: [
@@ -51,10 +53,11 @@ import { InputNumberModule } from "primeng/inputnumber";
     NgOptimizedImage,
     ProgressSpinnerModule,
     InputNumberModule,
+    ConfirmDialogModule,
     AddModule,
     SweetsModule,
   ],
-  providers: [],
+  providers: [ConfirmationService],
   bootstrap: [AppComponent]
 })
 
