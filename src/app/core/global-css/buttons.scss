@@ -75,6 +75,10 @@ $animationTime: 0.2s;
   background-color: $red-disabled !important;
 }
 
+.red-btn:focus:focus-visible {
+  box-shadow: 0 0 0 4px $gray-100 !important;
+}
+
 .blue-btn {
   background-color: $blue-300 !important;
   cursor: pointer;
@@ -95,6 +99,10 @@ $animationTime: 0.2s;
 
 .blue-btn-disabled:hover,  .blue-btn-disabled:active {
   background-color: $blue-disabled !important;
+}
+
+.blue-btn:focus:focus-visible {
+  box-shadow: 0 0 0 4px $gray-100 !important;
 }
 
 .skin-btn {
@@ -120,7 +128,7 @@ $animationTime: 0.2s;
 }
 
 .skin-btn:focus:focus-visible {
-  box-shadow: 0 0 4px 0 $brown-300 !important;
+  box-shadow: 0 0 0 4px $brown-300 !important;
 }
 
 .brown-action-btn {
@@ -147,6 +155,10 @@ $animationTime: 0.2s;
   color: $white-300 !important;
 }
 
+.brown-action-btn:focus:focus-visible {
+  box-shadow: 0 0 0 4px $skin-100 !important;
+}
+
 .green-btn {
   background-color: $green-300 !important;
   cursor: pointer;
@@ -169,6 +181,10 @@ $animationTime: 0.2s;
   background-color: $green-disabled !important;
 }
 
+.green-btn:focus:focus-visible {
+  box-shadow: 0 0 0 4px $gray-100 !important;
+}
+
 .gray-btn {
   background-color: $gray-300 !important;
   cursor: pointer;
@@ -189,6 +205,10 @@ $animationTime: 0.2s;
 
 .gray-btn-disabled:hover,  .gray-btn-disabled:active {
   background-color: $gray-disabled !important;
+}
+
+.gray-btn:focus:focus-visible {
+  box-shadow: 0 0 0 4px $gray-200 !important;
 }
 
 .skin-action-btn {
@@ -216,9 +236,20 @@ $animationTime: 0.2s;
   color: $black !important;
 }
 
+.skin-action-btn:focus:focus-visible {
+  box-shadow: 0 0 0 4px $brown-300 !important;
+}
 
 @media (max-width: 650px) {
+  .btn-sm {
+    font-size: 12px !important;
+  }
+
   .btn-md {
+    font-size: 14px !important;
+  }
+
+  .btn-lg {
     font-size: 14px !important;
   }
 }

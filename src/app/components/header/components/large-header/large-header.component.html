@@ -1,14 +1,14 @@
 <div class="header-wrapper flex justify-content-between">
 
-  <div class="logo-wrapper" [routerLink]="['/']">
+  <div class="logo-wrapper" [routerLink]="['/']" tabindex="-1">
     <div class="header-logo">
       <img src="/assets/Images/logo.jpg" alt="Logo">
     </div>
   </div>
 
   <div class="header-links-container flex justify-content-between">
-    <li class="header-link" [routerLink]="['products']" routerLinkActive="active">Products</li>
-    <li class="header-link" [routerLink]="['sweets']" routerLinkActive="active">Sweets</li>
-    <li class="header-link" [routerLink]="['add']" routerLinkActive="active">Add</li>
+    <li class="header-link" [routerLink]="['products']" routerLinkActive="active" tabindex="-1">Products</li>
+    <li class="header-link" [routerLink]="['sweets']" routerLinkActive="active" tabindex="-1">Sweets</li>
+    <li class="header-link" [routerLink]="['add']" routerLinkActive="active" tabindex="-1">Add</li>
   </div>
 </div>
