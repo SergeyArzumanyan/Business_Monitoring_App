@@ -21,7 +21,7 @@ export class SweetComponent implements OnInit {
   public isEditMode: boolean = false;
   public sweet!: ISweet;
   public submitted: boolean = false;
-  private initialSweetImage: string | null = null; // for keeping first downloaded Image (this is for not making additional network requests.
+  private initialSweetImage: string | null = null; // for keeping first downloaded Image (this is for not making additional network requests.)
 
   public editSweetForm: FormGroup<ISweetForm> = new FormGroup<ISweetForm>({
     Image: new FormControl<string | null>(null),
@@ -41,6 +41,10 @@ export class SweetComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getSweet();
+  }
+
+  public getSweet(): void {
     this.Request.getSweet(this.route.snapshot.paramMap.get('sweet-id'))
       .subscribe({
         next: (data: ISweet[]) => {
@@ -104,6 +108,8 @@ export class SweetComponent implements OnInit {
   }
 
   public saveEditedSweet(): void {
+    console.log(this.sweet.Products);
+    this.editSweetForm.controls.Products.setValue(this.sweet.Products);
     this.Edition.editItem('sweets', 'Name', this.sweet.Name)
       .pipe(take(1))
       .subscribe((items: any) => {
@@ -113,5 +119,6 @@ export class SweetComponent implements OnInit {
         this.db.list('/sweets').update(items[0].key, this.editSweetForm.value);
       });
     this.isEditMode = false;
+    this.editSweetForm.markAsPristine();
   }
 }

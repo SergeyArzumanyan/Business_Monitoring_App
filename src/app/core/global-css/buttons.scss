@@ -215,3 +215,10 @@ $animationTime: 0.2s;
   background-color: $edit-btn-disabled !important;
   color: $black !important;
 }
+
+
+@media (max-width: 650px) {
+  .btn-md {
+    font-size: 14px !important;
+  }
+}

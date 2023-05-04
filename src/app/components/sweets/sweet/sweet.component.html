@@ -18,22 +18,25 @@
         <div class="sweet-products flex col gap-20">
           <span class="products-header">Products</span>
 
-          <table>
-            <thead>
-            <th>Name</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>ActualPrice</th>
-            </thead>
-            <tbody>
-            <tr *ngFor="let product of sweet.Products">
-              <td class="product-name">{{ product.Name }}</td>
-              <td class="product-quantity">{{ product.Quantity }}</td>
-              <td class="product-price">{{ product.Price }} AMD</td>
-              <td class="product-actual-price">{{ product.ActualPrice }} AMD</td>
-            </tr>
-            </tbody>
-          </table>
+          <div class="products-table-wrapper">
+            <table>
+              <thead>
+              <th>Name</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>ActualPrice</th>
+              </thead>
+              <tbody>
+              <tr *ngFor="let product of sweet.Products">
+                <td class="product-name">{{ product.Name }}</td>
+                <td class="product-quantity">{{ product.Quantity }}</td>
+                <td class="product-price">{{ product.Price }} AMD</td>
+                <td class="product-actual-price">{{ product.ActualPrice }} AMD</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+
 
         </div>
       </div>
@@ -54,7 +57,7 @@
     <div class="wrapper flex justify-content-center align-items-center">
       <div class="container">
 
-        <div class="form-wrapper">
+        <div class="edit-block-wrapper">
           <form [formGroup]="editSweetForm" (ngSubmit)="saveEditedSweet()">
             <div class="inner-container flex justify-content-between gap-50">
 
@@ -94,12 +97,17 @@
                 <div class="flex col align-items-start gap-25">
                   <div class="form-group flex justify-content-between align-items-center gap-20">
                     <label for="Name">Name</label>
-                    <input formControlName="Name" id="Name" type="text" pInputText class="p-inputtext-sm">
+                    <input formControlName="Name"
+                           id="Name"
+                           type="text"
+                           pInputText
+                           class="p-inputtext-sm">
                   </div>
 
                   <div class="form-group flex justify-content-between align-items-center gap-20">
                     <label for="Price">Price</label>
-                    <p-inputNumber formControlName="CurrentPrice" inputId="Price"
+                    <p-inputNumber formControlName="CurrentPrice"
+                                   inputId="Price"
                                    class="p-inputtext-sm"></p-inputNumber>
                   </div>
                 </div>
@@ -109,26 +117,26 @@
               <div class="sweet-products flex col gap-20">
                 <span class="products-header">Products</span>
 
-                <table>
-                  <thead>
-                  <th>Name</th>
-                  <th>Quantity</th>
-                  <th>Price</th>
-                  <th>ActualPrice</th>
-                  </thead>
-                  <tbody>
-                  <tr *ngFor="let product of sweet.Products">
-                    <td class="product-name">{{ product.Name }}</td>
-                    <td class="product-quantity">{{ product.Quantity }}</td>
-                    <td class="product-price">{{ product.Price }} AMD</td>
-                    <td class="product-actual-price">{{ product.ActualPrice }} AMD</td>
-                  </tr>
-                  </tbody>
-                </table>
+                <div class="products-wrapper flex col">
+                  <div class="product-scheme flex justify-content-around">
+                    <span class="product-scheme-item">Name</span>
+                    <span class="product-scheme-item">Quantity</span>
+                    <span class="product-scheme-item">Price</span>
+                    <span class="product-scheme-item">ActualPrice</span>
+                  </div>
+                  <div class="product flex" *ngFor="let product of sweet.Products">
+                    <input type="text" class="product-input" [value]="product.Name">
+                    <input type="number" class="product-input" [value]="product.Quantity">
+                    <input type="number" class="product-input" [value]="product.Price">
+                    <input type="number" class="product-input" [value]="product.ActualPrice" disabled>
+                  </div>
+
+                  <button type="button" class="align-self-center btn-sm skin-action-btn">Calculate</button>
+                </div>
 
               </div>
             </div>
-            <div class="action-buttons flex gap-15 justify-content-end">
+            <div class="action-buttons flex gap-15">
               <button type="button"
                       class="btn-md brown-action-btn"
                       (click)="cancelEditing()">Cancel
