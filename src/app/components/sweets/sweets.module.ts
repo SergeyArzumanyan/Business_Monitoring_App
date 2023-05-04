@@ -10,6 +10,7 @@ import { SweetsComponent } from "@components/sweets/sweets.component";
 import { ProgressSpinnerModule } from "primeng/progressspinner";
 import { InputNumberModule } from "primeng/inputnumber";
 import { InputTextModule } from "primeng/inputtext";
+import { ConfirmDialogModule } from "primeng/confirmdialog";
 
 @NgModule({
   declarations: [
@@ -23,7 +24,9 @@ import { InputTextModule } from "primeng/inputtext";
     ProgressSpinnerModule,
     AddModule,
     InputNumberModule,
-    InputTextModule
+    InputTextModule,
+    ConfirmDialogModule
   ]
 })
-export class SweetsModule { }
+export class SweetsModule {
+}

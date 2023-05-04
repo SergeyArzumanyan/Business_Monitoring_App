@@ -10,6 +10,7 @@ import { IProduct } from "@Interfaces/product.interface";
 import { RequestsService } from "@Services/requests.service";
 import { EditService } from "@Services/edit.service";
 import { DeleteService } from "@Services/delete.service";
+import { ConfirmationService } from "primeng/api";
 
 @Component({
   selector: 'app-sweet',
@@ -36,7 +37,8 @@ export class SweetComponent implements OnInit {
     private Edition: EditService,
     private db: AngularFireDatabase,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private confirmationService: ConfirmationService
   ) {
   }
 
@@ -58,16 +60,30 @@ export class SweetComponent implements OnInit {
   }
 
   public deleteSweet(Name: string): void {
-    this.router.navigateByUrl('sweets')
-      .then(() => {
-        this.Deletion.deleteItem('sweets', 'Name', Name)
-          .subscribe((actions: any) => {
-            actions.forEach((action: any) => {
-              const key = action.payload.key;
-              this.db.object(`/sweets/${key}`).remove();
-            });
-          })
-      });
+
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to delete this sweet?',
+      header: 'Delete Sweet ?',
+      icon: 'pi pi-trash',
+      accept: () => {
+        this.router.navigateByUrl('sweets')
+          .then(() => {
+            this.Deletion.deleteItem('sweets', 'Name', Name)
+              .subscribe((actions: any) => {
+                actions.forEach((action: any) => {
+                  const key = action.payload.key;
+                  this.db.object(`/sweets/${key}`).remove();
+                });
+              })
+          });
+      },
+      reject: () => {
+        console.log('reject');
+      }
+    });
+
+
+
   }
 
   public editSweet(): void {
