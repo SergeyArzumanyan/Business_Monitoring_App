@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { AuthService } from "@Services/auth.service";
+
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
@@ -7,10 +9,17 @@ import { Component } from '@angular/core';
 })
 export class AuthComponent {
 
-  public currentPassword: string = "Truffle2023";
   public passwordInput: string = "";
+  public isAuthenticated: boolean = this.authService.authenticated.getValue();
+  public passwordIsInvalid: boolean = false;
 
-  public checkPassword(): boolean {
-    return this.passwordInput === this.currentPassword;
+  constructor(private authService: AuthService) {}
+
+  public proceed(): void {
+    if (this.passwordInput.trim()) {
+      !this.authService.checkPassword(this.passwordInput) ? this.passwordIsInvalid = true : this.passwordIsInvalid = false;
+    } else {
+      console.log('input is empty.');
+    }
   }
 }

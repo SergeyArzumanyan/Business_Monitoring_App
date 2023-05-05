@@ -3,26 +3,29 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AuthComponent } from "@components/auth";
 import { ProductsComponent } from "@components/products";
+import { AuthGuard } from "@Guards/auth.guard";
+import { AuthRouteGuard } from "@Guards/auth-route.guard";
 
 const routes: Routes = [
   {
     path: "auth",
-    component: AuthComponent
+    component: AuthComponent,
+    canActivate: [AuthRouteGuard]
   },
   {
     path: "products",
     component: ProductsComponent,
-    canActivate: [] // guard for user's right entered password
+    canActivate: [AuthGuard]
   },
   {
     path: 'sweets',
     loadChildren: () => import('@components/sweets/sweets.module').then(m => m.SweetsModule),
-    canLoad: [] // guard for user's right entered password
+    canLoad: [AuthGuard]
   },
   {
     path: 'add',
     loadChildren: () => import('@components/add/add.module').then(m => m.AddModule),
-    canLoad: [] // guard for user's right entered password
+    canLoad: [AuthGuard]
   },
   {
     path: "",
