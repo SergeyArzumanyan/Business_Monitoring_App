@@ -19,6 +19,7 @@ export class AuthService {
       this.router.navigateByUrl('sweets');
       return true;
     } else {
+      this.authenticated.next(false);
       console.log('wrong passsword.');
       return false;
     }

@@ -6,9 +6,11 @@
     </div>
   </div>
 
-  <div class="header-links-container flex justify-content-between">
-    <li class="header-link" [routerLink]="['products']" routerLinkActive="active" tabindex="-1">Products</li>
-    <li class="header-link" [routerLink]="['sweets']" routerLinkActive="active" tabindex="-1">Sweets</li>
-    <li class="header-link" [routerLink]="['add']" routerLinkActive="active" tabindex="-1">Add</li>
-  </div>
+  <ng-container *ngIf="isAuthenticated.getValue() || isAlreadyAuthenticated">
+    <div class="header-links-container flex justify-content-between">
+      <li class="header-link" [routerLink]="['products']" routerLinkActive="active" tabindex="-1">Products</li>
+      <li class="header-link" [routerLink]="['sweets']" routerLinkActive="active" tabindex="-1">Sweets</li>
+      <li class="header-link" [routerLink]="['add']" routerLinkActive="active" tabindex="-1">Add</li>
+    </div>
+  </ng-container>
 </div>
