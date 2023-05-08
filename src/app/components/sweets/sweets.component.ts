@@ -7,6 +7,7 @@ import { RequestsService } from "@Services/requests.service";
 import { DeleteService } from "@Services/delete.service";
 import { AngularFireDatabase } from "@angular/fire/compat/database";
 import { ConfirmationService } from "primeng/api";
+import { ToastService } from "@Services/toast.service";
 
 @Component({
   selector: 'app-sweets',
@@ -25,7 +26,8 @@ export class SweetsComponent implements OnInit {
     private Deletion: DeleteService,
     private router: Router,
     private db: AngularFireDatabase,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -44,7 +46,8 @@ export class SweetsComponent implements OnInit {
           }, 5000);
         },
         error: () => {
-          console.log('FAILED to get sweets.');
+          this.toastService.showToast('error', 'Error', 'Failed To Get Sweets');
+
         }
       })
   }
@@ -63,9 +66,6 @@ export class SweetsComponent implements OnInit {
               this.db.object(`/sweets/${key}`).remove();
             });
           });
-      },
-      reject: () => {
-        console.log('reject');
       }
     });
 

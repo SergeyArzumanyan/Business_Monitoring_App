@@ -29,7 +29,7 @@ const routes: Routes = [
   },
   {
     path: "",
-    redirectTo: "sweets",
+    redirectTo: "auth",
     pathMatch: "full",
   },
   {

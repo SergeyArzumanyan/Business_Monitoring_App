@@ -5,6 +5,7 @@ import { ISweet, ISweetForm } from "@Interfaces/sweet.interface";
 import { IProduct } from "@Interfaces/product.interface";
 import { SendingDataService } from "@Services/sending-data.service";
 import { RequestsService } from "@Services/requests.service";
+import { ToastService } from "@Services/toast.service";
 
 @Component({
   selector: 'app-sweet',
@@ -31,7 +32,8 @@ export class AddSweetComponent implements OnInit {
 
   constructor(
     private Request: RequestsService,
-    private Send: SendingDataService
+    private Send: SendingDataService,
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -45,7 +47,7 @@ export class AddSweetComponent implements OnInit {
           this.products = products ? this.Request.makeArray(products) : [];
         },
         error: () => {
-          console.log('something went wrong');
+          this.toastService.showToast('error', 'Error', 'Something Went Wrong');
         }
       });
   }
