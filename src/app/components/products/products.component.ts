@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RequestsService } from "@Services/requests.service";
 
 import { IProduct } from "@Interfaces/product.interface";
+import { ToastService } from "@Services/toast.service";
 
 @Component({
   selector: 'app-products',
@@ -12,7 +13,7 @@ export class ProductsComponent implements OnInit {
 
   public products: IProduct[] | null = [];
 
-  constructor(private Request: RequestsService) {}
+  constructor(private Request: RequestsService, private toastService: ToastService) {}
 
   ngOnInit(): void {
     this.getProducts();
@@ -26,7 +27,7 @@ export class ProductsComponent implements OnInit {
           this.products = this.Request.makeArray(products);
         },
         error: () => {
-          console.log('FAILED to get products');
+          this.toastService.showToast('erorr', 'Error', 'Failed To Get Products');
         }
       })
   }

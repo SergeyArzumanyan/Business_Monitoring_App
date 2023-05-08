@@ -25,7 +25,8 @@ import { ButtonModule } from "primeng/button";
 import { ProgressSpinnerModule } from "primeng/progressspinner";
 import { InputNumberModule } from "primeng/inputnumber";
 import { ConfirmDialogModule } from "primeng/confirmdialog";
-import { ConfirmationService } from "primeng/api";
+import { ConfirmationService, MessageService } from "primeng/api";
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -54,10 +55,11 @@ import { ConfirmationService } from "primeng/api";
     ProgressSpinnerModule,
     InputNumberModule,
     ConfirmDialogModule,
+    ToastModule,
     AddModule,
     SweetsModule,
   ],
-  providers: [ConfirmationService],
+  providers: [ConfirmationService, MessageService],
   bootstrap: [AppComponent]
 })
 

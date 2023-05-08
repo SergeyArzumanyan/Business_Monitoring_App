@@ -11,6 +11,7 @@ import { RequestsService } from "@Services/requests.service";
 import { EditService } from "@Services/edit.service";
 import { DeleteService } from "@Services/delete.service";
 import { ConfirmationService } from "primeng/api";
+import { ToastService } from "@Services/toast.service";
 
 @Component({
   selector: 'app-sweet',
@@ -38,7 +39,8 @@ export class SweetComponent implements OnInit {
     private db: AngularFireDatabase,
     private route: ActivatedRoute,
     private router: Router,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private toastService: ToastService
   ) {
   }
 
@@ -61,7 +63,7 @@ export class SweetComponent implements OnInit {
           this.sweet = data[0];
         },
         error: () => {
-          console.log('something went wrong.');
+          this.toastService.showToast('error', 'Error', 'Something Went Wrong');
           this.router.navigateByUrl('sweets');
         }
       })
@@ -84,9 +86,6 @@ export class SweetComponent implements OnInit {
                 });
               })
           });
-      },
-      reject: () => {
-        console.log('reject');
       }
     });
 

@@ -11,13 +11,18 @@ import {
 import { Observable } from 'rxjs';
 
 import { AuthService } from "@Services/auth.service";
+import { ToastService } from "@Services/toast.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanLoad, CanActivate {
 
-  constructor(private authService: AuthService,private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private toastService: ToastService
+  ) {}
 
   canLoad(
     route: Route,
@@ -26,7 +31,7 @@ export class AuthGuard implements CanLoad, CanActivate {
     if (this.authService.authenticated.getValue() || sessionStorage.getItem('isAuthenticated')) {
       return true;
     } else {
-      console.log('Rejected.')
+      this.toastService.showToast('error', 'Error', 'Access Denied');
       this.router.navigateByUrl('auth');
       return false;
     }
@@ -39,7 +44,7 @@ export class AuthGuard implements CanLoad, CanActivate {
     if (this.authService.authenticated.getValue() || sessionStorage.getItem('isAuthenticated')) {
       return true;
     } else {
-      console.log('Rejected.');
+      this.toastService.showToast('error', 'Error', 'Access Denied');
       this.router.navigateByUrl('auth');
       return false;
     }
