@@ -13,8 +13,8 @@ $innerPadding: 50px;
 }
 
 .container {
-  width: 100%;
-  height: 100%;
+  width: 80%;
+  min-height: 80%;
   padding: $innerPadding;
   margin: 0;
   background-color: $white-300;
@@ -22,44 +22,40 @@ $innerPadding: 50px;
   box-shadow: 0 0 2px 0 $skin-100;
 
   table {
-    width: 100%;
+    width: 75%;
     margin: 0 auto;
     border-collapse: collapse;
 
-    thead {
-      .interactions {
-        background-color: $skin-action-btn-300;
-      }
-    }
-
-    th, td {
+    td, th {
       text-align: center;
       padding: 15px;
-      box-shadow: 0 0 1px 0 $black;
-      background-color: $table-background;
+      color: $black;
       transition: $animationTime;
-      font-size: $medium;
+      cursor: default;
     }
 
-    th:hover, td:hover {
+    th {
+      font-size: $medium;
+      font-weight: 700;
+      background-color: $table-background;
+      color: $gray-100;
+    }
+
+    th:hover {
       background-color: $white-200;
     }
 
-    .product-price {
-      color: $green-200 !important;
-      background-color: $table-highlighted;
+    td {
       font-size: $small;
+      background-color: $white-400;
     }
 
-    .product-price:hover {
-      background-color: $table-hovered;
+    td:hover {
+      background-color: $white-300;
     }
 
-    .main-td {
-      width: 49%
-    }
     .action-td {
-      width: 1%;
+      width: 50px !important;
     }
   }
 }

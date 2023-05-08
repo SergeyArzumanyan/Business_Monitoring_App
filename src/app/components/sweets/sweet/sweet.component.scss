@@ -40,10 +40,12 @@ $innerPadding: 50px;
           padding-bottom: 5px;
           color: $gray-100;
           border-bottom: 1px solid $gray-300;
+          font-size: $large;
         }
 
         .sweet-price {
-          color: $green-200;
+          color: $black;
+          font-size: $medium;
         }
       }
 
@@ -65,6 +67,14 @@ $innerPadding: 50px;
           width: 100%;
           border-collapse: collapse;
 
+          td, th {
+            text-align: center;
+            padding: 8px;
+            color: $black;
+            transition: $animationTime;
+            cursor: default;
+          }
+
           th {
             font-size: $medium;
             font-weight: 700;
@@ -85,12 +95,6 @@ $innerPadding: 50px;
             background-color: $white-300;
           }
 
-          td, th {
-            text-align: center;
-            padding: 8px;
-            color: $black;
-            transition: $animationTime;
-          }
 
           .product-name, .product-quantity {
             color: $black;
@@ -316,6 +320,14 @@ $innerPadding: 50px;
             }
           }
 
+          .sweet-name {
+            font-size: $medium;
+          }
+
+          .sweet-price {
+            font-size: $small;
+          }
+
           .form-group {
             .img-dropzone {
               .drag-message {
@@ -330,6 +342,7 @@ $innerPadding: 50px;
             width: 100% !important;
 
             td, th {
+              font-size: $small;
               padding: 5px !important;
             }
           }
