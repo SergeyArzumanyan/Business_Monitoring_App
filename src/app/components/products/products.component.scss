@@ -25,6 +25,7 @@ $innerPadding: 50px;
     width: 75%;
     margin: 0 auto;
     border-collapse: collapse;
+    border: 1px solid $skin-100;
 
     td, th {
       text-align: center;
@@ -56,6 +57,7 @@ $innerPadding: 50px;
 
     .action-td {
       width: 50px !important;
+      cursor: pointer;
     }
   }
 }
