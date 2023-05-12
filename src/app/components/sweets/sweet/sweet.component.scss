@@ -158,24 +158,10 @@ $innerPadding: 50px;
               margin: 0 auto;
 
               .img-cancel {
-                position: absolute;
                 top: 8px;
                 right: 10px;
                 text-align: center;
-                width: 15px;
-                height: 15px;
-                line-height: 15px;
-                font-size: 0.8rem;
-                padding: 0;
-                border-radius: 0.2rem;
-                background-color: $red-300;
                 color: $white-300;
-                cursor: pointer;
-                transition: $animationTime;
-              }
-
-              .img-cancel:hover {
-                background-color: $red-100;
               }
 
               .selected-sweet-image {

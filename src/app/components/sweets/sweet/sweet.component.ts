@@ -114,6 +114,10 @@ export class SweetComponent implements OnInit {
       reader.readAsDataURL(file);
 
       reader.onload = () => {
+        if (file.size > 6000000) {
+          this.toastService.showToast('error', 'Error', 'File Size Is Too Large, Please Choose Another One');
+          return;
+        }
         this.editSweetForm.controls.Image.setValue(reader.result as string);
       };
 
@@ -121,6 +125,7 @@ export class SweetComponent implements OnInit {
   }
 
   public imageDropped(Image: any): void {
+    console.log(Image);
     this.editSweetForm.markAsDirty();
     this.editSweetForm.controls.Image.setValue(Image);
   }

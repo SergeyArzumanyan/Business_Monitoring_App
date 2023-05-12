@@ -21,6 +21,7 @@ $containerPadding: 40px;
 }
 
 .form-header {
+  width: 100%;
   font-size: $large;
   color: $black;
   text-align: center;
@@ -51,4 +52,8 @@ $containerPadding: 40px;
   .form-container {
     width: 325px;
   }
+}
+
+:host ::ng-deep .pi.pi-arrow-left {
+  font-size: 12px;
 }
