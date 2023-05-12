@@ -1,4 +1,5 @@
 import { Directive, EventEmitter, HostBinding, HostListener, Output } from '@angular/core';
+import { ToastService } from "@Services/toast.service";
 
 @Directive( {
   selector: '[imgDrag]'
@@ -12,7 +13,7 @@ export class DragDirective {
   @HostBinding( "style.border" ) private border: string = "2px dotted #f3f3f3 !important";
   @HostBinding( "style.transition" ) private transition: string = "0.2s !important";
 
-  constructor() {}
+  constructor(private toastService: ToastService) {}
 
   @HostListener( "dragover", [ "$event" ] )
   public onDragOver( event: DragEvent ): void {
@@ -51,6 +52,10 @@ export class DragDirective {
         file.type === "image/jpg"
       ) {
         reader.onload = () => {
+          if (file.size > 6000000) {
+            this.toastService.showToast('error', 'Error', 'File Size Is Too Large, Please Choose Another One');
+            return;
+          }
           this.file.emit( reader.result );
         }
       } else {

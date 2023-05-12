@@ -43,6 +43,21 @@ $animationTime: 0.2s;
   transition: $animationTime;
 }
 
+.rounded-btn {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  border: none;
+  outline: none;
+  font-size: $small;
+  border-radius: 999999px;
+  cursor: pointer;
+  transition: $animationTime;
+}
+
 .classic-link {
   color: $blue-300;
   text-decoration: none;
