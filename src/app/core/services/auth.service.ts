@@ -22,7 +22,6 @@ export class AuthService {
       return true;
     } else {
       this.authenticated.next(false);
-      this.toastService.showToast('error', 'Error', 'Password Is Incorrect');
       return false;
     }
   }
