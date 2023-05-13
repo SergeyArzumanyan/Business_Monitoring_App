@@ -8,7 +8,7 @@ export interface IProduct {
 }
 
 export interface IProductForm {
-  Name: FormControl<string>;
+  Name: FormControl<string | null>;
   Price: FormControl<number | null>;
 }
 

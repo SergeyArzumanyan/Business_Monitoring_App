@@ -63,7 +63,13 @@ export class SweetsComponent implements OnInit {
           .subscribe((actions: any) => {
             actions.forEach((action: any) => {
               const key = action.payload.key;
-              this.db.object(`/sweets/${key}`).remove();
+              this.db.object(`/sweets/${key}`).remove()
+                .then(() => {
+                  this.toastService.showToast('success', 'Done', 'Sweet Deleted Successfully.');
+                })
+                .catch(() => {
+                  this.toastService.showToast('error', 'Error', 'Something Went Wrong.');
+                });
             });
           });
       }

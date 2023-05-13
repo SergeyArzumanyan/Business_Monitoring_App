@@ -2,6 +2,7 @@
 @import "src/app/core/global-css/flex";
 @import "src/app/core/global-css/buttons";
 @import "src/app/core/global-css/colors";
+@import "src/app/core/global-css/confirmation-buttons";
 
 $wrapperPadding: 50px;
 $innerPadding: 50px;
@@ -79,4 +80,90 @@ $innerPadding: 50px;
      padding: 8px !important;
    }
  }
+}
+
+
+.sweet-products {
+  width: 100%;
+  height: 100%;
+
+  .products-wrapper {
+    width: 100%;
+    border-radius: 4px;
+    padding: 0;
+    margin: 0;
+
+    .product-scheme {
+      background-color: $table-background;
+      border-radius: 4px;
+
+      .product-scheme-item {
+        flex: 1;
+        text-align: center;
+        margin: 0;
+        padding: 8px;
+        font-size: $medium;
+        font-weight: 700;
+        color: $gray-100;
+        transition: $animationTime;
+      }
+
+      .product-scheme-item:hover {
+        background-color: $white-200;
+      }
+    }
+
+    .product {
+      .product-input {
+        display: block;
+        width: 100%;
+        margin: 5px 2px;
+        padding: 8px;
+        outline: none;
+        background-color: $white-400;
+        box-shadow: 0 0 1px 0 $gray-100;
+        font-size: $medium;
+        transition: $animationTime;
+        border: 1px solid transparent;
+        border-radius: 5px;
+      }
+      .product-input:hover {
+        border: 1px solid $blue-300;
+      }
+      .product-input:focus {
+        border: 1px solid $blue-300;
+        box-shadow: 0 0 0 3px $blue-400;
+      }
+    }
+  }
+}
+
+@media (max-width: 1100px) {
+  .sweet-products {
+    .products-table-wrapper {
+      width: 75%;
+      margin: 0 auto;
+    }
+  }
+}
+
+@media (max-width: 650px) {
+  .sweet-products {
+    .products-table-wrapper {
+      width: 100% !important;
+
+      td, th {
+        font-size: $small;
+        padding: 5px !important;
+      }
+    }
+
+    .products-wrapper {
+      width: 100% !important;
+
+      .product-scheme-item, .product-input {
+        font-size: 14px !important;
+      }
+    }
+  }
 }

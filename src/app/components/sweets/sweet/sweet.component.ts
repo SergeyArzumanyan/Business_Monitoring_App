@@ -82,15 +82,18 @@ export class SweetComponent implements OnInit {
               .subscribe((actions: any) => {
                 actions.forEach((action: any) => {
                   const key = action.payload.key;
-                  this.db.object(`/sweets/${key}`).remove();
+                  this.db.object(`/sweets/${key}`).remove()
+                    .then(() => {
+                      this.toastService.showToast('success', 'Done', 'Sweet Deleted Successfully.');
+                    })
+                    .catch(() => {
+                      this.toastService.showToast('error', 'Error', 'Something Went Wrong.');
+                    });
                 });
               })
           });
       }
     });
-
-
-
   }
 
   public editSweet(): void {
@@ -125,7 +128,6 @@ export class SweetComponent implements OnInit {
   }
 
   public imageDropped(Image: any): void {
-    console.log(Image);
     this.editSweetForm.markAsDirty();
     this.editSweetForm.controls.Image.setValue(Image);
   }
@@ -140,7 +142,13 @@ export class SweetComponent implements OnInit {
     this.Edition.editItem('sweets', 'Name', this.sweet.Name)
       .pipe(take(1))
       .subscribe((items: any) => {
-        this.db.list('/sweets').update(items[0].key, this.editSweetForm.value);
+        this.db.list('/sweets').update(items[0].key, this.editSweetForm.value)
+          .then(() => {
+            this.toastService.showToast('success', 'Done', 'Sweet Edited Successfully.');
+        })
+          .catch(() => {
+            this.toastService.showToast('error', 'Error', 'Something Went Wrong.');
+          });
       });
     this.isEditMode = false;
     this.editSweetForm.markAsPristine();

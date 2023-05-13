@@ -16,8 +16,8 @@
         <tr *ngFor="let product of products">
           <td class="main-td">{{ product.Name }}</td>
           <td class="main-td product-price">{{ product.Price }}</td>
-          <td class="action-td skin-action-btn"><i class="pi pi-pencil"></i></td>
-          <td class="action-td brown-action-btn" (click)="deleteProduct()"><i class="pi pi-trash"></i></td>
+          <td class="action-td skin-action-btn" (click)="editProduct(product)"><i class="pi pi-pencil"></i></td>
+          <td class="action-td brown-action-btn" (click)="deleteProduct(product.Name)"><i class="pi pi-trash"></i></td>
         </tr>
       </ng-container>
       </tbody>
@@ -25,3 +25,83 @@
 
   </div>
 </div>
+
+<p-confirmDialog [breakpoints]="{'650px': '85vw'}"></p-confirmDialog>
+
+<p-dialog [(visible)]="ProductDialog"
+          [resizable]="false"
+          [draggable]="false"
+          [breakpoints]="{'1080px': '50vw','960px': '60vw', '640px': '85vw'}"
+          [style]="{width: '450px'}"
+          header="Edit Product"
+          [modal]="true"
+          (onHide)="hideProductDialog()"
+          styleClass="p-fluid">
+  <ng-template pTemplate="content">
+    <form [formGroup]="productForm" (ngSubmit)="saveProduct()">
+      <div class="w-100 flex col justify-content-center align-items-center gap-20">
+        <div class="w-100 flex col gap-15">
+          <label for="Name">Name</label>
+          <input class="p-inputtext-sm"
+                 [ngClass]="{
+                    'ng-invalid':
+                    productForm.get('Name')?.hasError('minlength')  && submitted
+                    ||
+                    productForm.get('Name')?.hasError('maxlength')  && submitted
+                    || !productForm.value.Name?.trim() && submitted,
+                    'ng-dirty':
+                    productForm.get('Name')?.hasError('minlength')  && submitted
+                    ||
+                    productForm.get('Name')?.hasError('maxlength')  && submitted
+                    || !productForm.value.Name?.trim() && submitted
+                    }"
+                 type="text"
+                 formControlName="Name"
+                 pInputText
+                 id="Name"
+                 autofocus />
+
+          <small *ngIf="productForm.get('Name')?.hasError('minlength')  && submitted"
+                 class="p-error">
+            Name is too short.
+          </small>
+
+          <small *ngIf="productForm.get('Name')?.hasError('maxlength')  && submitted"
+                 class="p-error">
+            Name is too long.
+          </small>
+        </div>
+
+        <div class="w-100 flex col gap-15">
+          <label for="Price">Price</label>
+          <p-inputNumber formControlName="Price"
+                         inputId="Price"
+                         class="p-inputtext-sm">
+          </p-inputNumber>
+        </div>
+
+      </div>
+    </form>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button type="button"
+            class="btn-md brown-action-btn"
+            (click)="hideProductDialog()">
+      <div class="flex justify-content-center gap-5">
+        Cancel
+        <i class="pi pi-times"></i>
+      </div>
+    </button>
+    <button type="submit"
+            class="btn-md skin-action-btn"
+            [disabled]="productForm.pristine"
+            [ngClass]="{'skin-action-btn-disabled': productForm.pristine}"
+            (click)="saveProduct()">
+      <div class="flex justify-content-center gap-5">
+        Save
+        <i class="pi pi-check"></i>
+      </div>
+    </button>
+  </ng-template>
+</p-dialog>

@@ -13,8 +13,8 @@ export class AddProductComponent {
 
   public submitted: boolean = false;
 
-  public productForm: FormGroup<IProductForm> = new FormGroup<any>({
-    Name: new FormControl<string>('', [
+  public productForm: FormGroup<IProductForm> = new FormGroup<IProductForm>({
+    Name: new FormControl<string | null>(null, [
       Validators.required,
       Validators.maxLength(20),
       Validators.minLength(2)
@@ -22,7 +22,7 @@ export class AddProductComponent {
     Price: new FormControl<number | null>(null, [
       Validators.required
     ]),
-  })
+  });
 
 
   constructor(private Send: SendingDataService) {}
