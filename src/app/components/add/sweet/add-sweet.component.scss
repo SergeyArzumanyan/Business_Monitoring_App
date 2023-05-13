@@ -62,13 +62,13 @@ $containerPadding: 40px 40px 90px 40px;
     border-radius: $borderRadius;
 
     .product-name {
+      word-break: break-word;
       font-size: $medium;
       color: $black;
     }
 
     .product-price, .product-actual-price {
       font-size: $small;
-      color: green;
     }
   }
 

@@ -7,6 +7,8 @@
 <ng-container *ngIf="sweet && !isEditMode else editBlock">
   <div class="wrapper flex justify-content-center align-items-center">
     <div class="container">
+    <button class="rounded-btn skin-btn" type="button" [routerLink]="['/sweets']"><i class="pi pi-arrow-left"></i></button>
+
       <div class="inner-container flex justify-content-between gap-50">
         <div class="sweet-info flex col gap-20">
           <div class="img-wrapper">

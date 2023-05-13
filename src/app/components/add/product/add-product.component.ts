@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 
 import { IProductForm, IProductForSending } from "@Interfaces/product.interface";
 import { SendingDataService } from "@Services/sending-data.service";
+import { onlyPositiveNumbers } from "@Validators/only-positive-numbers.validator";
 
 @Component({
   selector: 'app-product',
@@ -20,7 +21,8 @@ export class AddProductComponent {
       Validators.minLength(2)
     ]),
     Price: new FormControl<number | null>(null, [
-      Validators.required
+      Validators.required,
+      onlyPositiveNumbers()
     ]),
   });
 

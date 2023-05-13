@@ -1,6 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Subject, take, takeUntil } from "rxjs";
 
+import { onlyPositiveNumbers } from "@Validators/only-positive-numbers.validator";
 import { IProduct, IProductForm } from "@Interfaces/product.interface";
 import { RequestsService } from "@Services/requests.service";
 import { EditService } from "@Services/edit.service";
@@ -8,10 +11,7 @@ import { DeleteService } from "@Services/delete.service";
 import { ToastService } from "@Services/toast.service";
 
 import { AngularFireDatabase } from "@angular/fire/compat/database";
-
 import { ConfirmationService } from "primeng/api";
-import { Subject, take, takeUntil } from "rxjs";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
 
 @Component({
   selector: 'app-products',
@@ -29,7 +29,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
       Validators.maxLength(20),
       Validators.minLength(2)
     ]),
-    Price: new FormControl<number | null>(null),
+    Price: new FormControl<number | null>(null,
+      onlyPositiveNumbers()
+    ),
   });
   public submitted: boolean = false;
   public productInitName: any;
@@ -106,6 +108,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   public saveProduct(): void {
     this.submitted = true;
+    if (this.productForm.valid && this.productForm.value.Name?.trim() && this.productForm.value.Price) {
       this.Edition.editItem('products', 'Name', this.productInitName)
         .pipe(take(1))
         .subscribe((items: any) => {
@@ -119,5 +122,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
         });
       this.ProductDialog = false;
       this.productForm.markAsPristine();
+    }
   }
 }

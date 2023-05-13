@@ -61,13 +61,17 @@
                         ||
                         productForm.get('Price')?.hasError('maxlength') && submitted
                         ||
-                        productForm.get('Price')?.hasError('minlength') && submitted,
+                        productForm.get('Price')?.hasError('minlength') && submitted
+                        ||
+                        !productForm.value.Price && submitted,
                         'ng-dirty':
                         productForm.get('Price')?.hasError('required')  && submitted
                         ||
                         productForm.get('Price')?.hasError('maxlength') && submitted
                         ||
                         productForm.get('Price')?.hasError('minlength') && submitted
+                        ||
+                        !productForm.value.Price && submitted
                         }"
                        inputId="product-price"
                        placeholder="Enter price for 1kg...">
@@ -77,6 +81,12 @@
                class="p-error">
           Price is required.
         </small>
+
+        <small *ngIf="productForm.get('Price')?.hasError('isNotPositive')  && submitted"
+               class="p-error">
+          Price must be greater than 0.
+        </small>
+
       </div>
 
     </div>

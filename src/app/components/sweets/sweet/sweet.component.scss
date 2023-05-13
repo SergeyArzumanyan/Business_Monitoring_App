@@ -5,7 +5,7 @@
 @import "/src/app/core/global-css/confirmation-buttons";
 
 $contentPadding: 35px;
-$innerPadding: 50px;
+$innerPadding: 20px;
 
 .wrapper {
   width: 100%;
@@ -22,6 +22,7 @@ $innerPadding: 50px;
     position: relative;
 
     .inner-container {
+      padding: 30px;
 
       .sweet-info, .sweet-products {
         width: 100%;

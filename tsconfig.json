@@ -27,7 +27,8 @@
       "@components/*": ["app/components/*"],
       "@Interfaces/*": ["app/core/interfaces/*"],
       "@Services/*": ["app/core/services/*"],
-      "@Guards/*": ["app/core/guards/*"]
+      "@Guards/*": ["app/core/guards/*"],
+      "@Validators/*": ["app/core/validators/*"]
     }
   },
   "angularCompilerOptions": {

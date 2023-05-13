@@ -48,7 +48,7 @@
   height: 425px;
   background-color: $white-300;
   margin: 0 auto;
-  box-shadow: -3px -1px 0 6px $skin-100;
+  box-shadow: 2px 4px 0 6px $skin-100;
   border-radius: $borderRadius;
 }
 
@@ -89,7 +89,7 @@
 
 .delete-sweet-btn {
   border-radius: 0 0 $borderRadius 0;
-  box-shadow: 1px 2px 0 1.5px $brown-300;
+  box-shadow: 4px 4px 0 4px $brown-300;
 }
 
 @media (min-width: 1600px) {
@@ -115,6 +115,7 @@
     justify-content: space-between;
     height: 350px;
     margin: 0 auto;
+    box-shadow: 3px 3px 0 6px $skin-100;
   }
 
   .sweet-image-wrapper, .sweet-image {
@@ -130,6 +131,10 @@
 @media (max-width: 650px) {
   .no-data-container {
     width: 80% !important;
+  }
+
+  .delete-sweet-btn {
+    box-shadow: 4px 4px 0 4.5px $brown-300;
   }
 }
 

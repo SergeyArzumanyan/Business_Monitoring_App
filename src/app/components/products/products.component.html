@@ -61,6 +61,11 @@
                  id="Name"
                  autofocus />
 
+          <small *ngIf="!productForm.value.Name?.trim() && submitted"
+                 class="p-error">
+            Name can't be empty.
+          </small>
+
           <small *ngIf="productForm.get('Name')?.hasError('minlength')  && submitted"
                  class="p-error">
             Name is too short.
@@ -76,8 +81,28 @@
           <label for="Price">Price</label>
           <p-inputNumber formControlName="Price"
                          inputId="Price"
+                         [ngClass]="{
+                        'ng-invalid':
+                        productForm.get('Price')?.hasError('isNotPositive')  && submitted
+                        ||
+                        !productForm.value.Price && submitted,
+                        'ng-dirty':
+                        productForm.get('Price')?.hasError('isNotPositive')  && submitted
+                        ||
+                        !productForm.value.Price && submitted
+                        }"
                          class="p-inputtext-sm">
           </p-inputNumber>
+
+          <small *ngIf="!productForm.value.Price && submitted"
+                 class="p-error">
+            Price can't be empty.
+          </small>
+
+          <small *ngIf="productForm.get('Price')?.hasError('isNotPositive')  && submitted"
+                 class="p-error">
+            Price must be greater than 0.
+          </small>
         </div>
 
       </div>
