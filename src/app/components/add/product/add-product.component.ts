@@ -22,6 +22,7 @@ export class AddProductComponent {
     ]),
     Price: new FormControl<number | null>(null, [
       Validators.required,
+      Validators.max(500000),
       onlyPositiveNumbers()
     ]),
   });

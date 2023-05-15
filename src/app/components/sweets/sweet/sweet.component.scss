@@ -211,20 +211,7 @@ $innerPadding: 20px;
               width: 100%;
               margin: 5px 2px;
               padding: 8px;
-              outline: none;
-              background-color: $white-400;
-              box-shadow: 0 0 1px 0 $gray-100;
               font-size: $medium;
-              transition: $animationTime;
-              border: 1px solid transparent;
-              border-radius: 5px;
-            }
-            .product-input:hover {
-              border: 1px solid $blue-300;
-            }
-            .product-input:focus {
-              border: 1px solid $blue-300;
-              box-shadow: 0 0 0 3px $blue-400;
             }
           }
         }
@@ -366,4 +353,8 @@ $innerPadding: 20px;
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   display: none;
+}
+
+:host ::ng-deep .pi.pi-arrow-left {
+  font-size: 12px;
 }

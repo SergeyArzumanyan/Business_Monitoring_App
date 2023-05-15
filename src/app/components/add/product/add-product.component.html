@@ -87,6 +87,11 @@
           Price must be greater than 0.
         </small>
 
+        <small *ngIf="productForm.get('Price')?.hasError('max')  && submitted"
+               class="p-error">
+          Price is too large.
+        </small>
+
       </div>
 
     </div>

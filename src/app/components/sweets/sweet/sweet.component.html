@@ -127,10 +127,10 @@
                     <span class="product-scheme-item">ActualPrice</span>
                   </div>
                   <div class="product flex" *ngFor="let product of sweet.Products">
-                    <input type="text" class="product-input" [value]="product.Name">
-                    <input type="number" class="product-input" [value]="product.Quantity">
-                    <input type="number" class="product-input" [value]="product.Price">
-                    <input type="number" class="product-input" [value]="product.ActualPrice" disabled>
+                    <input type="text" class="product-input p-inputtext" [value]="product.Name">
+                    <input type="number" class="product-input p-inputtext" [value]="product.Quantity">
+                    <input type="number" class="product-input p-inputtext" [value]="product.Price">
+                    <input type="number" class="product-input p-inputtext" [value]="product.ActualPrice" disabled>
                   </div>
 
                   <button type="button" class="align-self-center btn-sm skin-action-btn" style="margin-top: 5px;">Calculate</button>

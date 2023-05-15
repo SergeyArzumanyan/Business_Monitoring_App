@@ -36,3 +36,12 @@ body {
     height: 10px;
   }
 }
+
+.p-inputtext:hover {
+  border: 1px solid $skin-100 !important;
+}
+
+.p-inputtext:focus {
+  border: 1px solid $skin-100 !important;
+  box-shadow: 0 0 0 3px $skin-300 !important;
+}
