@@ -37,11 +37,29 @@ body {
   }
 }
 
-.p-inputtext:hover {
+.p-inputtext:hover, .p-multiselect.p-component:hover {
   border: 1px solid $skin-100 !important;
 }
 
-.p-inputtext:focus {
+.p-inputtext:focus, .p-multiselect:not(.p-disabled).p-focus {
   border: 1px solid $skin-100 !important;
   box-shadow: 0 0 0 3px $skin-300 !important;
+}
+
+.p-checkbox-box:hover {
+  border-color: $skin-100 !important;
+}
+
+.p-checkbox:not(p-checkbox-disabled) .p-checkbox-box.p-focus {
+  border: 1px solid $skin-100 !important;
+  box-shadow: 0 0 0 3px $skin-300 !important;
+}
+
+.p-multiselect-close:focus {
+  box-shadow: 0 0 0 3px $skin-300 !important;
+}
+
+.p-multiselect-item:focus {
+  box-shadow: 0 0 0 3px $skin-300 !important;
+
 }
