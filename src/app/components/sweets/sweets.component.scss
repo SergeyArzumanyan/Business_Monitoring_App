@@ -141,3 +141,13 @@
 :host ::ng-deep .p-progress-spinner-circle {
   stroke: $skin-100 !important;
 }
+
+.edit-sweet-btn:focus:focus-visible {
+  box-shadow: 0 1px 0 7px $brown-300 !important;
+  z-index: 1;
+}
+
+.delete-sweet-btn:focus:focus-visible {
+  box-shadow: 0 1px 0 7px $skin-100 !important;
+  z-index: 1;
+}
