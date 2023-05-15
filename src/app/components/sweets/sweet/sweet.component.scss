@@ -303,6 +303,10 @@ $innerPadding: 20px;
           }
 
           .form-group {
+            label {
+              width: 50px;
+            }
+
             .img-dropzone {
               .drag-message {
                 font-size: 14px;
