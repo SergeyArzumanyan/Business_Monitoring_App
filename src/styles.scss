@@ -55,8 +55,29 @@ body {
   box-shadow: 0 0 0 3px $skin-300 !important;
 }
 
+.p-checkbox-box.p-highlight {
+  background-color: $skin-100 !important;
+  border: 1px solid $brown-300 !important;
+}
+
+.p-checkbox-icon {
+  color: $brown-100 !important;
+}
+
+.p-multiselect-items  {
+  padding: 0 !important;
+}
+
 .p-multiselect-close:focus {
   box-shadow: 0 0 0 3px $skin-300 !important;
+}
+
+.p-multiselect-item {
+  background: transparent !important;
+}
+
+.p-multiselect-item.p-highlight span {
+  color: $brown-100 !important;
 }
 
 .p-multiselect-item:focus {
