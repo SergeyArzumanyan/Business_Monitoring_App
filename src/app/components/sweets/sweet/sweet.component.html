@@ -30,10 +30,26 @@
               </thead>
               <tbody>
               <tr *ngFor="let product of sweet.Products">
-                <td class="product-name">{{ product.Name }}</td>
-                <td class="product-quantity">{{ product.Quantity }}</td>
-                <td class="product-price">{{ product.Price }} AMD</td>
-                <td class="product-actual-price">{{ product.ActualPrice }} AMD</td>
+                <td [pTooltip]="product.Name"
+                    [showDelay]="250"
+                    tooltipPosition="bottom">
+                  <div class="product-name">{{ product.Name }}</div>
+                </td>
+                <td>
+                  <div class="product-quantity">
+                    {{ product.Quantity }}
+                  </div>
+                </td>
+                <td>
+                  <div class="product-price">
+                    {{ product.Price }} AMD
+                  </div>
+                </td>
+                <td>
+                  <div class="product-actual-price">
+                    {{ product.ActualPrice }} AMD
+                  </div>
+                </td>
               </tr>
               </tbody>
             </table>

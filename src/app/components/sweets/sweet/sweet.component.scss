@@ -216,9 +216,14 @@ $innerPadding: 20px;
             }
 
             .product-actual-price-edit-mode {
-              color: $black;
+              background-color: $white-400;
+              color: $gray-200;
               font-size: $small;
               flex: 1;
+              padding: 10px;
+              margin: 0 2px;
+              border-radius: 5px;
+              cursor: default;
             }
           }
         }
@@ -287,10 +292,10 @@ $innerPadding: 20px;
     flex-direction: column;
 
     .container {
-      padding: 20px 10px 35px 10px !important;
+      padding: 20px 0 35px 0   !important;
 
       .inner-container {
-        padding: 20px !important;
+        padding: 30px !important;
 
         .sweet-info {
           .img-wrapper {
@@ -332,6 +337,14 @@ $innerPadding: 20px;
               font-size: $small;
               padding: 5px !important;
             }
+
+            tr {
+              .product-name {
+                max-width: 75px !important;
+                overflow: hidden;
+                text-overflow: ellipsis;
+              }
+            }
           }
 
           .products-wrapper {
@@ -339,6 +352,22 @@ $innerPadding: 20px;
 
             .product-scheme-item, .product-input {
               font-size: 14px !important;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 470px) {
+    .wrapper {
+      .container {
+        .inner-container {
+          .sweet-products {
+            .product {
+              .product-actual-price-edit-mode {
+                padding: 1px !important;
+              }
             }
           }
         }

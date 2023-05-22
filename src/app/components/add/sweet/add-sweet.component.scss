@@ -200,3 +200,8 @@ $containerPadding: 40px 40px 90px 40px;
 :host ::ng-deep .pi {
   font-size: 10px;
 }
+
+:host ::ng-deep .p-inputnumber-input {
+  width: 120px !important;
+  font-size: $small !important;
+}

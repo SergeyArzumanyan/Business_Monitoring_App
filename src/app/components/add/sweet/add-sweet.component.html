@@ -65,14 +65,21 @@
                 </div>
                 <div class="product-form-group form-group flex col gap-10">
                   <span class="product-quantities">1kg/1l/1</span>
-                  <input [id]="'product-quantity-' + i"
-                         class="form-input product-input"
-                         type="text"
-                         pInputText
+<!--                  <input [id]="'product-quantity-' + i"-->
+<!--                         class="form-input product-input"-->
+<!--                         type="text"-->
+<!--                         pInputText-->
 
-                         (keyup)="onInputType($event.target, i)"
-                         pKeyFilter="num"
-                         placeholder="Quantity...">
+<!--                         (keyup)="onInputType($event.target, i)"-->
+<!--                         pKeyFilter="num"-->
+<!--                         placeholder="Quantity...">-->
+                  <p-inputNumber [id]="'product-quantity-' + i"
+                                 class="form-input product-input"
+                                 (keyup)="onInputType($event.target, i)"
+                                 [min]="0"
+                                 placeholder="Quantity...">
+                  </p-inputNumber>
+
                 </div>
                 <div class="product-actual-price-wrapper flex align-items-center">
                   <span class="product-actual-price">{{ product['ActualPrice'] || 0 }}</span>

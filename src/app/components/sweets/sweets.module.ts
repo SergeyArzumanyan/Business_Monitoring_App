@@ -11,22 +11,24 @@ import { ProgressSpinnerModule } from "primeng/progressspinner";
 import { InputNumberModule } from "primeng/inputnumber";
 import { InputTextModule } from "primeng/inputtext";
 import { ConfirmDialogModule } from "primeng/confirmdialog";
+import { TooltipModule } from "primeng/tooltip";
 
 @NgModule({
   declarations: [
     SweetComponent,
     SweetsComponent
   ],
-  imports: [
-    CommonModule,
-    SweetsRoutingModule,
-    ReactiveFormsModule,
-    ProgressSpinnerModule,
-    AddModule,
-    InputNumberModule,
-    InputTextModule,
-    ConfirmDialogModule
-  ]
+    imports: [
+        CommonModule,
+        SweetsRoutingModule,
+        ReactiveFormsModule,
+        ProgressSpinnerModule,
+        AddModule,
+        InputNumberModule,
+        InputTextModule,
+        ConfirmDialogModule,
+        TooltipModule
+    ]
 })
 export class SweetsModule {
 }
