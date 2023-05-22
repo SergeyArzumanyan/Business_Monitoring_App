@@ -212,6 +212,13 @@ $innerPadding: 20px;
               margin: 5px 2px;
               padding: 8px;
               font-size: $medium;
+              flex: 1;
+            }
+
+            .product-actual-price-edit-mode {
+              color: $black;
+              font-size: $small;
+              flex: 1;
             }
           }
         }
@@ -283,6 +290,8 @@ $innerPadding: 20px;
       padding: 20px 10px 35px 10px !important;
 
       .inner-container {
+        padding: 20px !important;
+
         .sweet-info {
           .img-wrapper {
             width: 100% !important;
