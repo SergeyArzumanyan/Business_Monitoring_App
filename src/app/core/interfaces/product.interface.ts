@@ -1,7 +1,8 @@
 import { FormControl } from "@angular/forms";
 
 export interface IProduct {
-  ActualPrice?: number;
+  ID: number;
+  TotalPrice?: number;
   Name: string;
   Price: number | null;
   Quantity: number;
@@ -13,7 +14,8 @@ export interface IProductForm {
 }
 
 export interface IProductForSending {
-  ActualPrice: number;
+  ID: number;
+  TotalPrice: number;
   Name: string;
   Price: number;
   Quantity: number | null;

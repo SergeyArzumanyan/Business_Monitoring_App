@@ -17,7 +17,7 @@ export class AddSweetComponent implements OnInit {
   public isEditMode: boolean = false;
 
   public sweet: any = {};
-  public sweetActualPrice: number = 0;
+  public sweetTotalPrice: number = 0;
   public submitted: boolean = false;
 
   public products: IProduct[] = [];
@@ -54,17 +54,17 @@ export class AddSweetComponent implements OnInit {
 
   public onInputType(inputElement: any, index: number): void {
     this.selectedProducts[index].Quantity = Number(inputElement.value);
-    this.selectedProducts[index].ActualPrice = Math.round(this.selectedProducts[index].Quantity * this.selectedProducts[index].Price);
+    this.selectedProducts[index].TotalPrice = Math.round(this.selectedProducts[index].Quantity * this.selectedProducts[index].Price);
   }
 
   public calculateSweetPrice(): void {
     let arrSum: number = 0;
     for (let product of this.selectedProducts) {
-      if (product.ActualPrice && product.ActualPrice !== 0) {
-        arrSum += product.ActualPrice;
+      if (product.TotalPrice && product.TotalPrice !== 0) {
+        arrSum += product.TotalPrice;
       }
-      this.sweetActualPrice = arrSum;
-      this.sweetForm.controls.CurrentPrice.setValue(this.sweetActualPrice);
+      this.sweetTotalPrice = arrSum;
+      this.sweetForm.controls.CurrentPrice.setValue(this.sweetTotalPrice);
     }
   }
 
@@ -92,7 +92,7 @@ export class AddSweetComponent implements OnInit {
   private resetProducts(): void {
     this.sweetForm.value.Products = [];
     this.sweetForm.controls.Products.setValue([]);
-    this.sweetActualPrice = 0;
+    this.sweetTotalPrice = 0;
   }
 
   public addSweet(): void {

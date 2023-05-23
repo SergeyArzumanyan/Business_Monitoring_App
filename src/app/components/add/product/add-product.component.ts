@@ -35,9 +35,10 @@ export class AddProductComponent {
         this.submitted = true;
         if (this.productForm.valid && this.productForm.value.Name && this.productForm.value.Price) {
           let product: IProductForSending = {
+            ID: +(new Date()),
             Name: this.productForm.value.Name,
             Price: this.productForm.value.Price,
-            ActualPrice: 0,
+            TotalPrice: 0,
             Quantity: 0
           };
           this.Send.createProduct(product);

@@ -47,7 +47,7 @@
                 </td>
                 <td>
                   <div class="product-actual-price">
-                    {{ product.ActualPrice }} AMD
+                    {{ product.TotalPrice }} AMD
                   </div>
                 </td>
               </tr>
@@ -147,7 +147,7 @@
                     <input type="text" class="product-input p-inputtext" [value]="product.Name">
                     <input type="number" class="product-input p-inputtext" [value]="product.Quantity">
                     <input type="number" class="product-input p-inputtext" [value]="product.Price">
-                    <div class="product-actual-price-edit-mode text-center">{{ product.ActualPrice }} AMD</div>
+                    <div class="product-actual-price-edit-mode text-center">{{ product.TotalPrice }} AMD</div>
                   </div>
 
                   <button type="button" class="align-self-center btn-sm skin-action-btn" style="margin-top: 5px;">Calculate</button>

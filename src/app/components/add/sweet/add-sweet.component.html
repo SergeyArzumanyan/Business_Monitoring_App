@@ -82,12 +82,12 @@
 
                 </div>
                 <div class="product-actual-price-wrapper flex align-items-center">
-                  <span class="product-actual-price">{{ product['ActualPrice'] || 0 }}</span>
+                  <span class="product-actual-price">{{ product['TotalPrice'] || 0 }}</span>
                 </div>
               </div>
               <div class="calc-container flex justify-content-between gap-30">
                 <button class="btn-sm skin-btn" type="button" (click)="calculateSweetPrice()">Calculate</button>
-                <span class="sweet-actual-price">Actual Price: {{ sweetActualPrice || 0 }}</span>
+                <span class="sweet-actual-price">Actual Price: {{ sweetTotalPrice || 0 }}</span>
               </div>
             </div>
 

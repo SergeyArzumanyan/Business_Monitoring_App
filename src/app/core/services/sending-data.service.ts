@@ -19,7 +19,8 @@ export class SendingDataService {
 
 
   public createSweet(sweet: ISweet): void {
-    set(ref(this.db , `sweets/${+(new Date())}`), sweet)
+    // set(ref(this.db , `sweets/${+(new Date())}`), sweet)
+    set(ref(this.db , `sweets/${sweet.Name}`), sweet)
       .then(() => {
         this.toastService.showToast('success', 'Done', 'Sweet Created Successfully');
       })
@@ -29,7 +30,7 @@ export class SendingDataService {
   }
 
   public createProduct(product: IProductForSending): void {
-    set(ref(this.db, `products/${+(new Date())}`), product)
+    set(ref(this.db, `products/${product.Name}`), product)
       .then(() => {
         this.toastService.showToast('success', 'Done', 'Product Created Successfully');
       })
