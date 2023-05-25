@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 
-import { ISweet, ISweetForm } from "@Interfaces/sweet.interface";
-import { IProduct } from "@Interfaces/product.interface";
+import { ISweet, ISweetForm, ISweetProduct } from "@Interfaces/sweet.interface";
+import { IProduct, IProductForSending } from "@Interfaces/product.interface";
 import { SendingDataService } from "@Services/sending-data.service";
 import { RequestsService } from "@Services/requests.service";
 import { ToastService } from "@Services/toast.service";
@@ -27,7 +27,6 @@ export class AddSweetComponent implements OnInit {
     Name: new FormControl(null, [Validators.required, Validators.maxLength(25)]),
     Image: new FormControl(null, [Validators.required]),
     Products: new FormControl([], [Validators.required]),
-    CurrentPrice: new FormControl(null, Validators.required)
   })
 
   constructor(
@@ -64,7 +63,7 @@ export class AddSweetComponent implements OnInit {
         arrSum += product.TotalPrice;
       }
       this.sweetTotalPrice = arrSum;
-      this.sweetForm.controls.CurrentPrice.setValue(this.sweetTotalPrice);
+      // this.sweetForm.controls.CurrentPrice.setValue(this.sweetTotalPrice);
     }
   }
 
@@ -87,12 +86,29 @@ export class AddSweetComponent implements OnInit {
 
   public imageClear(sweet: ISweet): void {
     sweet.Image = null
-    this.sweetForm.patchValue( sweet );
+    // this.sweetForm.patchValue( sweet );
   }
   private resetProducts(): void {
     this.sweetForm.value.Products = [];
     this.sweetForm.controls.Products.setValue([]);
     this.sweetTotalPrice = 0;
+  }
+
+  private generateProductsForSweet(selectedProducts: IProduct[]): ISweetProduct[] {
+    let productsToSend: ISweetProduct[] = [];
+
+    if (selectedProducts) {
+      for (let product of selectedProducts) {
+        let transformedProduct: ISweetProduct = {
+          ProductID: product.ID,
+          Quantity: product.Quantity
+        }
+
+        productsToSend.push(transformedProduct);
+      }
+    }
+
+    return productsToSend;
   }
 
   public addSweet(): void {
@@ -106,13 +122,12 @@ export class AddSweetComponent implements OnInit {
       this.sweetForm.value.Image = this.sweetForm.controls.Image.value;
       this.submitted = true;
 
-        if (this.sweetForm.valid) {
-          if (this.sweetForm.value.Name &&  this.sweetForm.value.Products && this.sweetForm.value.CurrentPrice) {
+      if (this.sweetForm.valid) {
+          if (this.sweetForm.value.Name &&  this.sweetForm.value.Products) {
             let sweet: ISweet = {
               ID: +(new Date()),
               Name: this.sweetForm.value.Name,
-              CurrentPrice: this.sweetForm.value.CurrentPrice,
-              Products: this.sweetForm.value.Products,
+              Products: this.generateProductsForSweet(this.sweetForm.value.Products),
               Image: this.sweetForm.value.Image
             }
             this.Send.createSweet(sweet);

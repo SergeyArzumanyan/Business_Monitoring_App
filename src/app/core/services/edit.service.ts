@@ -10,7 +10,7 @@ export class EditService {
 
   constructor(private db: AngularFireDatabase) {}
 
-  public editItem(itemsUrl: string, key: string, value: string): Observable<any> {
+  public editItem(itemsUrl: string, key: string, value: number): Observable<any> {
     return this.db.list(`/${itemsUrl}`, ref => ref.orderByChild(key).equalTo(value)).snapshotChanges();
   }
 }

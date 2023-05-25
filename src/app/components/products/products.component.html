@@ -17,7 +17,7 @@
           <td class="main-td">{{ product.Name }}</td>
           <td class="main-td product-price">{{ product.Price }}</td>
           <td class="action-td skin-action-btn" (click)="editProduct(product)"><i class="pi pi-pencil"></i></td>
-          <td class="action-td brown-action-btn" (click)="deleteProduct(product.Name)"><i class="pi pi-trash"></i></td>
+          <td class="action-td brown-action-btn" (click)="deleteProduct(product)"><i class="pi pi-trash"></i></td>
         </tr>
       </ng-container>
       </tbody>
@@ -102,6 +102,11 @@
           <small *ngIf="productForm.get('Price')?.hasError('isNotPositive')  && submitted"
                  class="p-error">
             Price must be greater than 0.
+          </small>
+
+          <small *ngIf="productForm.get('Price')?.hasError('max')  && submitted"
+                 class="p-error">
+            Price is too large.
           </small>
         </div>
 

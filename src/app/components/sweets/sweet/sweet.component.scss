@@ -215,7 +215,7 @@ $innerPadding: 20px;
               flex: 1;
             }
 
-            .product-actual-price-edit-mode {
+            .product-edit-mode-div {
               background-color: $white-400;
               color: $gray-200;
               font-size: $small;
@@ -365,7 +365,7 @@ $innerPadding: 20px;
         .inner-container {
           .sweet-products {
             .product {
-              .product-actual-price-edit-mode {
+              .product-edit-mode-div {
                 padding: 1px !important;
               }
             }

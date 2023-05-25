@@ -5,8 +5,7 @@ import { FormControl, FormGroup } from "@angular/forms";
 
 import { AngularFireDatabase } from "@angular/fire/compat/database";
 
-import { ISweet, ISweetForm } from "@Interfaces/sweet.interface";
-import { IProduct } from "@Interfaces/product.interface";
+import { ISweet, ISweetForm, ISweetProduct } from "@Interfaces/sweet.interface";
 import { RequestsService } from "@Services/requests.service";
 import { EditService } from "@Services/edit.service";
 import { DeleteService } from "@Services/delete.service";
@@ -28,8 +27,7 @@ export class SweetComponent implements OnInit {
   public editSweetForm: FormGroup<ISweetForm> = new FormGroup<ISweetForm>({
     Image: new FormControl<string | null>(null),
     Name: new FormControl<string | null>(null),
-    CurrentPrice: new FormControl<number | null>(null),
-    Products: new FormControl<IProduct[] | null>(null)
+    Products: new FormControl<any[] | null>(null)
   })
 
   constructor(
@@ -69,7 +67,7 @@ export class SweetComponent implements OnInit {
       })
   }
 
-  public deleteSweet(Name: string): void {
+  public deleteSweet(sweet: ISweet): void {
 
     this.confirmationService.confirm({
       message: 'Are you sure that you want to delete this sweet?',
@@ -78,7 +76,7 @@ export class SweetComponent implements OnInit {
       accept: () => {
         this.router.navigateByUrl('sweets')
           .then(() => {
-            this.Deletion.deleteItem('sweets', 'Name', Name)
+            this.Deletion.deleteItem('sweets', 'ID', sweet.ID)
               .subscribe((actions: any) => {
                 actions.forEach((action: any) => {
                   const key = action.payload.key;
@@ -99,7 +97,7 @@ export class SweetComponent implements OnInit {
   public editSweet(): void {
     this.isEditMode = true;
     this.initialSweetImage = this.sweet.Image; // for keeping first downloaded Image (this is for not making additional network requests.
-    this.editSweetForm.patchValue(this.sweet);
+    // this.editSweetForm.patchValue(this.sweet);
   }
 
   public cancelEditing(): void {
@@ -134,12 +132,12 @@ export class SweetComponent implements OnInit {
 
   public imageClear(sweet: ISweet): void {
     sweet.Image = null
-    this.editSweetForm.patchValue(sweet);
+    // this.editSweetForm.patchValue(sweet);
   }
 
   public saveEditedSweet(): void {
-    this.editSweetForm.controls.Products.setValue(this.sweet.Products);
-    this.Edition.editItem('sweets', 'Name', this.sweet.Name)
+    // this.editSweetForm.controls.Products.setValue(this.sweet.Products);
+    this.Edition.editItem('sweets', 'ID', this.sweet.ID)
       .pipe(take(1))
       .subscribe((items: any) => {
         this.db.list('/sweets').update(items[0].key, this.editSweetForm.value)

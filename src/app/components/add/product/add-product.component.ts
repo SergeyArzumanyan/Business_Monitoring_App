@@ -31,21 +31,17 @@ export class AddProductComponent {
   constructor(private Send: SendingDataService) {}
 
   public addProduct(): void {
-    setTimeout(() => {
-        this.submitted = true;
-        if (this.productForm.valid && this.productForm.value.Name && this.productForm.value.Price) {
-          let product: IProductForSending = {
-            ID: +(new Date()),
-            Name: this.productForm.value.Name,
-            Price: this.productForm.value.Price,
-            TotalPrice: 0,
-            Quantity: 0
-          };
-          this.Send.createProduct(product);
-          this.productForm.reset();
-          this.submitted = false;
-        }
-    }, 500);
+      this.submitted = true;
+      if (this.productForm.valid && this.productForm.value.Name && this.productForm.value.Price) {
+        let product: IProductForSending = {
+          ID: +(new Date()),
+          Name: this.productForm.value.Name,
+          Price: this.productForm.value.Price
+        };
+        this.Send.createProduct(product);
+        this.productForm.reset();
+        this.submitted = false;
+      }
   }
 
 }

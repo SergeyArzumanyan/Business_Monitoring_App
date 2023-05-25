@@ -10,7 +10,7 @@ export class DeleteService {
 
   constructor(private db: AngularFireDatabase) {}
 
-  public deleteItem(items: string, key: string, value: string): any {
+  public deleteItem(items: string, key: string, value: number): any {
     return this.db.list(`/${items}`, ref => ref.orderByChild(key).equalTo(value))
       .snapshotChanges()
       .pipe(take(1))

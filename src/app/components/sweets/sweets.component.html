@@ -31,11 +31,11 @@
           </div>
           <div class="sweet-card-info">
             <h3 class="sweet-name">{{ sweet.Name }}</h3>
-            <span class="sweet-price">{{ sweet.CurrentPrice }} AMD</span>
+            <span class="sweet-price">CalculatedPrice AMD</span>
           </div>
           <div class="sweet-card-buttons flex justify-content-center align-items-center">
             <button class="sweet-btn edit-sweet-btn btn-md skin-action-btn" (click)="editSweet(sweet.ID)">Edit</button>
-            <button class="sweet-btn delete-sweet-btn btn-md brown-action-btn" (click)="deleteSweet(sweet.Name)">Delete</button>
+            <button class="sweet-btn delete-sweet-btn btn-md brown-action-btn" (click)="deleteSweet(sweet)">Delete</button>
           </div>
         </div>
 

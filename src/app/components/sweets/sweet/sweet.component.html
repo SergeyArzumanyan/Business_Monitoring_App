@@ -15,7 +15,7 @@
             <img [src]="sweet.Image" alt="Sweet-Img">
           </div>
           <span class="sweet-name">{{ sweet.Name }}</span>
-          <span class="sweet-price">{{ sweet.CurrentPrice }} AMD</span>
+          <span class="sweet-price">CalculatedPrice AMD</span>
         </div>
         <div class="sweet-products flex col gap-20">
           <span class="products-header">Products</span>
@@ -29,28 +29,28 @@
               <th>TotalPrice</th>
               </thead>
               <tbody>
-              <tr *ngFor="let product of sweet.Products">
-                <td [pTooltip]="product.Name"
-                    [showDelay]="250"
-                    tooltipPosition="bottom">
-                  <div class="product-name">{{ product.Name }}</div>
-                </td>
-                <td>
-                  <div class="product-quantity">
-                    {{ product.Quantity }}
-                  </div>
-                </td>
-                <td>
-                  <div class="product-price">
-                    {{ product.Price }} AMD
-                  </div>
-                </td>
-                <td>
-                  <div class="product-actual-price">
-                    {{ product.TotalPrice }} AMD
-                  </div>
-                </td>
-              </tr>
+<!--              <tr *ngFor="let product of sweet.Products">-->
+<!--                <td [pTooltip]="product.Name"-->
+<!--                    [showDelay]="250"-->
+<!--                    tooltipPosition="bottom">-->
+<!--                  <div class="product-name">{{ product.Name }}</div>-->
+<!--                </td>-->
+<!--                <td>-->
+<!--                  <div class="product-quantity">-->
+<!--                    {{ product.Quantity }}-->
+<!--                  </div>-->
+<!--                </td>-->
+<!--                <td>-->
+<!--                  <div class="product-price">-->
+<!--                    {{ product.Price }} AMD-->
+<!--                  </div>-->
+<!--                </td>-->
+<!--                <td>-->
+<!--                  <div class="product-actual-price">-->
+<!--                    {{ product.TotalPrice }} AMD-->
+<!--                  </div>-->
+<!--                </td>-->
+<!--              </tr>-->
               </tbody>
             </table>
           </div>
@@ -61,7 +61,7 @@
 
       <div class="action-buttons flex gap-15 justify-content-end">
         <button type="button" class="btn-md skin-action-btn" (click)="editSweet()">Edit</button>
-        <button type="button" class="btn-md brown-action-btn" (click)="deleteSweet(sweet.Name)">Delete</button>
+        <button type="button" class="btn-md brown-action-btn" (click)="deleteSweet(sweet)">Delete</button>
       </div>
 
     </div>
@@ -122,12 +122,8 @@
                            class="p-inputtext-sm sweet-input">
                   </div>
 
-                  <div class="form-group flex justify-content-between align-items-center gap-20">
-                    <label for="Price">Price</label>
-                    <p-inputNumber formControlName="CurrentPrice"
-                                   inputId="Price"
-                                   class="p-inputtext-sm sweet-input">
-                    </p-inputNumber>
+                  <div class="w-100 text-center sweet-price">
+                    CalculatedPrice AMD
                   </div>
                 </div>
 
@@ -143,12 +139,12 @@
                     <span class="product-scheme-item">Price</span>
                     <span class="product-scheme-item">TotalPrice</span>
                   </div>
-                  <div class="product flex align-items-center" *ngFor="let product of sweet.Products">
-                    <input type="text" class="product-input p-inputtext" [value]="product.Name">
-                    <input type="number" class="product-input p-inputtext" [value]="product.Quantity">
-                    <input type="number" class="product-input p-inputtext" [value]="product.Price">
-                    <div class="product-actual-price-edit-mode text-center">{{ product.TotalPrice }} AMD</div>
-                  </div>
+<!--                  <div class="product flex align-items-center" *ngFor="let product of sweet.Products">-->
+<!--                    <input type="text" class="product-input p-inputtext" [value]="product.Name">-->
+<!--                    <input type="number" class="product-input p-inputtext" [value]="product.Quantity">-->
+<!--                    <div class="product-edit-mode-div text-center">{{ product.Price }} AMD</div>-->
+<!--                    <div class="product-edit-mode-div text-center">{{ product.TotalPrice }} AMD</div>-->
+<!--                  </div>-->
 
                   <button type="button" class="align-self-center btn-sm skin-action-btn" style="margin-top: 5px;">Calculate</button>
                 </div>

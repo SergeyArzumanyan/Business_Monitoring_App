@@ -21,6 +21,8 @@ import { ConfirmationService } from "primeng/api";
 export class ProductsComponent implements OnInit, OnDestroy {
 
   public products: IProduct[] | null = [];
+  private product: IProduct | null = null;
+
   private unsubscribe$: Subject<void> = new Subject<void>();
 
   public ProductDialog: boolean = false;
@@ -30,11 +32,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
       Validators.minLength(2)
     ]),
     Price: new FormControl<number | null>(null,
-      onlyPositiveNumbers()
-    ),
+      [
+        Validators.max(500000),
+        onlyPositiveNumbers()
+      ]),
   });
   public submitted: boolean = false;
-  public productInitName: any;
 
   constructor(
     private Request: RequestsService,
@@ -70,14 +73,14 @@ export class ProductsComponent implements OnInit, OnDestroy {
       })
   }
 
-  public deleteProduct(Name: string): void {
+  public deleteProduct(product: IProduct): void {
 
     this.confirmationService.confirm({
       message: 'Are you sure that you want to delete this product?',
       header: 'Delete Product ?',
       icon: 'pi pi-trash',
       accept: () => {
-      this.Deletion.deleteItem('products', 'Name', Name)
+      this.Deletion.deleteItem('products', 'ID', product.ID)
         .subscribe((actions: any) => {
           actions.forEach((action: any) => {
             const key = action.payload.key;
@@ -95,9 +98,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   public editProduct(product: IProduct): void {
+    this.product = product;
     this.productForm.patchValue(product);
     this.ProductDialog = true;
-    this.productInitName = this.productForm.value.Name;
   }
 
   public hideProductDialog(): void {
@@ -108,8 +111,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   public saveProduct(): void {
     this.submitted = true;
-    if (this.productForm.valid && this.productForm.value.Name?.trim() && this.productForm.value.Price) {
-      this.Edition.editItem('products', 'Name', this.productInitName)
+    if (this.productForm.valid && this.productForm.value.Name?.trim() && this.productForm.value.Price && this.product?.ID) {
+      this.Edition.editItem('products', 'ID', this.product?.ID)
         .pipe(take(1))
         .subscribe((items: any) => {
           this.db.list('/products').update(items[0].key, this.productForm.value)

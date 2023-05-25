@@ -52,14 +52,14 @@ export class SweetsComponent implements OnInit {
       })
   }
 
-  public deleteSweet(Name: string): void {
+  public deleteSweet(sweet: ISweet): void {
 
     this.confirmationService.confirm({
       message: 'Are you sure that you want to delete this sweet?',
       header: 'Delete Sweet ?',
       icon: 'pi pi-trash',
       accept: () => {
-        this.Deletion.deleteItem('sweets', 'Name', Name)
+        this.Deletion.deleteItem('sweets', 'ID', sweet.ID)
           .subscribe((actions: any) => {
             actions.forEach((action: any) => {
               const key = action.payload.key;
