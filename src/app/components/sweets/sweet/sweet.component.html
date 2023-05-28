@@ -15,7 +15,7 @@
             <img [src]="sweet.Image" [alt]="sweet.Name">
           </div>
           <span class="sweet-name">{{ sweet.Name }}</span>
-          <span class="sweet-price">CalculatedPrice AMD</span>
+          <span class="sweet-price">{{ sweet?.TotalPrice }} AMD</span>
         </div>
         <div class="sweet-products flex col gap-20">
           <span class="products-header">Products</span>
@@ -29,28 +29,28 @@
               <th>TotalPrice</th>
               </thead>
               <tbody>
-<!--              <tr *ngFor="let product of sweet.Products">-->
-<!--                <td [pTooltip]="product.Name"-->
-<!--                    [showDelay]="250"-->
-<!--                    tooltipPosition="bottom">-->
-<!--                  <div class="product-name">{{ product.Name }}</div>-->
-<!--                </td>-->
-<!--                <td>-->
-<!--                  <div class="product-quantity">-->
-<!--                    {{ product.Quantity }}-->
-<!--                  </div>-->
-<!--                </td>-->
-<!--                <td>-->
-<!--                  <div class="product-price">-->
-<!--                    {{ product.Price }} AMD-->
-<!--                  </div>-->
-<!--                </td>-->
-<!--                <td>-->
-<!--                  <div class="product-actual-price">-->
-<!--                    {{ product.TotalPrice }} AMD-->
-<!--                  </div>-->
-<!--                </td>-->
-<!--              </tr>-->
+              <tr *ngFor="let product of sweetProducts">
+                <td [pTooltip]="product.Name"
+                    [showDelay]="250"
+                    tooltipPosition="bottom">
+                  <div class="product-name">{{ product.Name }}</div>
+                </td>
+                <td>
+                  <div class="product-quantity">
+                    {{ product.Quantity }}
+                  </div>
+                </td>
+                <td>
+                  <div class="product-price">
+                    {{ product.Price }} AMD
+                  </div>
+                </td>
+                <td>
+                  <div class="product-actual-price">
+                    {{ product.TotalPrice }} AMD
+                  </div>
+                </td>
+              </tr>
               </tbody>
             </table>
           </div>
@@ -76,58 +76,58 @@
       <div class="container">
 
         <div class="edit-block-wrapper">
-          <form [formGroup]="editSweetForm" (ngSubmit)="saveEditedSweet()">
             <div class="inner-container flex justify-content-between gap-50">
-
-              <div class="sweet-info flex col gap-20">
-                <div class="form-group flex col gap-15">
-                  <div class="img-dropzone"
-                       imgDrag
-                       (file)="imageDropped($event)">
-                    <div class="drag-message">
-                      Drag your image here or
-                      <a class="img-browse"
-                         (click)="imgInput.click()">browse</a>
+              <form [formGroup]="editSweetForm" (ngSubmit)="saveEditedSweet()">
+                <div class="sweet-info flex col gap-20">
+                  <div class="form-group flex col gap-15">
+                    <div class="img-dropzone"
+                         imgDrag
+                         (file)="imageDropped($event)">
+                      <div class="drag-message">
+                        Drag your image here or
+                        <a class="img-browse"
+                           (click)="imgInput.click()">browse</a>
+                      </div>
                     </div>
-                  </div>
 
-                  <input style="display: none;"
-                         #imgInput
-                         type="file"
-                         accept="image/png,image/jpg,image/jpeg"
-                         (change)="onFileChange($event)"/>
+                    <input style="display: none;"
+                           #imgInput
+                           type="file"
+                           accept="image/png,image/jpg,image/jpeg"
+                           (change)="onFileChange($event)"/>
 
-                  <div class="img-preview">
-                    <div class="img-container" *ngIf="(editSweetForm.controls.Image.value) || (sweet.Image)">
-                      <div class="rounded-btn gray-btn img-cancel" (click)="imageClear(sweet)">x</div>
-                      <img [src]="(editSweetForm.controls.Image.value) || (sweet.Image)"
-                           class="selected-sweet-image" alt="sweet-img">
+                    <div class="img-preview">
+                      <div class="img-container" *ngIf="(editSweetForm.controls.Image.value) || (sweet.Image)">
+                        <div class="rounded-btn gray-btn img-cancel" (click)="imageClear(sweet)">x</div>
+                        <img [src]="(editSweetForm.controls.Image.value) || (sweet.Image)"
+                             class="selected-sweet-image" alt="sweet-img">
+                      </div>
                     </div>
+
+                    <small *ngIf="editSweetForm.get('Image')?.hasError('required')  && submitted"
+                           class="p-error">
+                      Image is required.
+                    </small>
+
                   </div>
 
-                  <small *ngIf="editSweetForm.get('Image')?.hasError('required')  && submitted"
-                         class="p-error">
-                    Image is required.
-                  </small>
+                  <div class="flex col align-items-start gap-25">
+                    <div class="form-group flex justify-content-between align-items-center gap-20">
+                      <label for="Name">Name</label>
+                      <input formControlName="Name"
+                             id="Name"
+                             type="text"
+                             pInputText
+                             class="p-inputtext-sm sweet-input">
+                    </div>
 
+                    <div class="w-100 text-center sweet-price">
+                      {{ sweet?.TotalPrice }} AMD
+                    </div>
+
+                  </div>
                 </div>
-
-                <div class="flex col align-items-start gap-25">
-                  <div class="form-group flex justify-content-between align-items-center gap-20">
-                    <label for="Name">Name</label>
-                    <input formControlName="Name"
-                           id="Name"
-                           type="text"
-                           pInputText
-                           class="p-inputtext-sm sweet-input">
-                  </div>
-
-                  <div class="w-100 text-center sweet-price">
-                    CalculatedPrice AMD
-                  </div>
-                </div>
-
-              </div>
+              </form>
 
               <div class="sweet-products flex col gap-20">
                 <span class="products-header">Products</span>
@@ -139,14 +139,14 @@
                     <span class="product-scheme-item">Price</span>
                     <span class="product-scheme-item">TotalPrice</span>
                   </div>
-<!--                  <div class="product flex align-items-center" *ngFor="let product of sweet.Products">-->
-<!--                    <input type="text" class="product-input p-inputtext" [value]="product.Name">-->
-<!--                    <input type="number" class="product-input p-inputtext" [value]="product.Quantity">-->
-<!--                    <div class="product-edit-mode-div text-center">{{ product.Price }} AMD</div>-->
-<!--                    <div class="product-edit-mode-div text-center">{{ product.TotalPrice }} AMD</div>-->
-<!--                  </div>-->
+                  <div class="product flex align-items-center" *ngFor="let product of sweetProducts">
+                    <input type="text" class="product-input p-inputtext" [(ngModel)]="product.Name">
+                    <input type="number" class="product-input p-inputtext" [(ngModel)]="product.Quantity">
+                    <div class="product-edit-mode-div text-center">{{ product.Price }} AMD</div>
+                    <div class="product-edit-mode-div text-center">{{ product.TotalPrice }} AMD</div>
+                  </div>
 
-                  <button type="button" class="align-self-center btn-sm skin-action-btn" style="margin-top: 5px;">Calculate</button>
+<!--                  <button type="button" class="align-self-center btn-sm skin-action-btn" style="margin-top: 5px;">Calculate</button>-->
                 </div>
 
               </div>
@@ -160,9 +160,10 @@
                   <i class="pi pi-times"></i>
                 </div>
               </button>
-              <button type="submit"
+              <button type="button"
                       class="btn-md skin-action-btn"
                       [disabled]="editSweetForm.pristine"
+                      (click)="saveEditedSweet()"
                       [ngClass]="{'skin-action-btn-disabled': editSweetForm.pristine}">
                 <div class="flex justify-content-center gap-5">
                   Save
@@ -170,11 +171,9 @@
                 </div>
               </button>
             </div>
-          </form>
+          </div>
         </div>
-      </div>
     </div>
-
   </ng-container>
 
 </ng-template>

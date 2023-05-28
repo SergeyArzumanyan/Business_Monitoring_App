@@ -5,12 +5,13 @@ import { FormControl, FormGroup } from "@angular/forms";
 
 import { AngularFireDatabase } from "@angular/fire/compat/database";
 
-import { ISweet, ISweetForm, ISweetProduct } from "@Interfaces/sweet.interface";
+import { ISweet, ISweetProduct, ISweetFormEditing } from "@Interfaces/sweet.interface";
 import { RequestsService } from "@Services/requests.service";
 import { EditService } from "@Services/edit.service";
 import { DeleteService } from "@Services/delete.service";
 import { ConfirmationService } from "primeng/api";
 import { ToastService } from "@Services/toast.service";
+import { IProduct } from "@Interfaces/product.interface";
 
 @Component({
   selector: 'app-sweet',
@@ -21,13 +22,14 @@ export class SweetComponent implements OnInit {
 
   public isEditMode: boolean = false;
   public sweet!: ISweet;
+  public sweetProducts: IProduct[] | null = [];
   public submitted: boolean = false;
   private initialSweetImage: string | null = null; // for keeping first downloaded Image (this is for not making additional network requests.)
 
-  public editSweetForm: FormGroup<ISweetForm> = new FormGroup<ISweetForm>({
+  public editSweetForm: FormGroup<ISweetFormEditing> = new FormGroup<ISweetFormEditing>({
     Image: new FormControl<string | null>(null),
     Name: new FormControl<string | null>(null),
-    Products: new FormControl<any[] | null>(null)
+    Products: new FormControl<ISweetProduct[] | null>(null)
   })
 
   constructor(
@@ -59,6 +61,7 @@ export class SweetComponent implements OnInit {
             this.router.navigateByUrl('sweets');
           }
           this.sweet = data[0];
+          this.getProductsBasedOnSweet(this.sweet.Products);
         },
         error: () => {
           this.toastService.showToast('error', 'Error', 'Something Went Wrong');
@@ -97,7 +100,31 @@ export class SweetComponent implements OnInit {
   public editSweet(): void {
     this.isEditMode = true;
     this.initialSweetImage = this.sweet.Image; // for keeping first downloaded Image (this is for not making additional network requests.
-    // this.editSweetForm.patchValue(this.sweet);
+    this.editSweetForm.patchValue(this.sweet);
+  }
+
+  private getProductsBasedOnSweet(sweetProducts: ISweetProduct[] | null): void {
+    if (sweetProducts) {
+      for (let product of sweetProducts) {
+        let productQuantity = product.Quantity;
+
+        this.Request.getProductsBasedOnSweet(product.ProductID)
+          .subscribe({
+            next: (product: IProduct[]) => {
+              product[0].Quantity = productQuantity;
+              product[0].TotalPrice = productQuantity * product[0].Price;
+
+              !this.sweet.TotalPrice ?
+                this.sweet.TotalPrice = product[0].TotalPrice :
+                this.sweet.TotalPrice += product[0].TotalPrice;
+
+              this.sweetProducts?.push(product[0]);
+            }
+          })
+      }
+    } else {
+      return;
+    }
   }
 
   public cancelEditing(): void {
@@ -132,11 +159,10 @@ export class SweetComponent implements OnInit {
 
   public imageClear(sweet: ISweet): void {
     sweet.Image = null
-    // this.editSweetForm.patchValue(sweet);
+    this.editSweetForm.patchValue(sweet);
   }
 
   public saveEditedSweet(): void {
-    // this.editSweetForm.controls.Products.setValue(this.sweet.Products);
     this.Edition.editItem('sweets', 'ID', this.sweet.ID)
       .pipe(take(1))
       .subscribe((items: any) => {

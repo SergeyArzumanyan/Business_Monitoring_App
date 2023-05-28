@@ -8,6 +8,8 @@ import { DeleteService } from "@Services/delete.service";
 import { AngularFireDatabase } from "@angular/fire/compat/database";
 import { ConfirmationService } from "primeng/api";
 import { ToastService } from "@Services/toast.service";
+import { IProduct } from "@Interfaces/product.interface";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
   selector: 'app-sweets',
@@ -39,6 +41,8 @@ export class SweetsComponent implements OnInit {
       .subscribe({
         next: (sweets: ISweet[] | null) => {
           this.sweets = sweets ? this.Request.makeArray(sweets) : [];
+          this.getProductsBasedOnSweets(this.sweets);
+
           setTimeout(() => {
             if (this.sweets.length === 0) {
               this.stopLoading = true;
@@ -50,6 +54,30 @@ export class SweetsComponent implements OnInit {
 
         }
       })
+  }
+
+  private getProductsBasedOnSweets(sweets: ISweet[]): void {
+    for (let sweet of sweets) {
+      if (sweet.Products) {
+        for (let product of sweet.Products) {
+          let productQuantity = product.Quantity;
+
+          this.Request.getProductsBasedOnSweet(product.ProductID)
+            .subscribe({
+              next: (product: IProduct[]) => {
+                if (!sweet.TotalPrice) {
+                  sweet.TotalPrice = product[0].Price * productQuantity;
+                } else {
+                  sweet.TotalPrice += product[0].Price * productQuantity;
+                }
+              },
+              error: (err: HttpErrorResponse) => {
+                this.toastService.showToast('error', 'Error', err.message);
+              }
+            })
+        }
+      }
+    }
   }
 
   public deleteSweet(sweet: ISweet): void {

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 
-import { ISweet, ISweetForm, ISweetProduct } from "@Interfaces/sweet.interface";
-import { IProduct, IProductForSending } from "@Interfaces/product.interface";
+import { ISweet, ISweetProduct, ISweetFormAdding } from "@Interfaces/sweet.interface";
+import { IProduct } from "@Interfaces/product.interface";
 import { SendingDataService } from "@Services/sending-data.service";
 import { RequestsService } from "@Services/requests.service";
 import { ToastService } from "@Services/toast.service";
@@ -23,7 +23,7 @@ export class AddSweetComponent implements OnInit {
   public products: IProduct[] = [];
   public selectedProducts: any = [];
 
-  public sweetForm: FormGroup<ISweetForm> = new FormGroup<ISweetForm>({
+  public sweetForm: FormGroup<ISweetFormAdding> = new FormGroup<ISweetFormAdding>({
     Name: new FormControl(null, [Validators.required, Validators.maxLength(25)]),
     Image: new FormControl(null, [Validators.required]),
     Products: new FormControl([], [Validators.required]),

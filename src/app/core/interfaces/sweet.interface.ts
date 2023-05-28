@@ -7,12 +7,19 @@ export interface ISweet {
   Image: string | null;
   Name: string;
   Products: ISweetProduct[] | null;
+  TotalPrice?: number;
 }
 
-export interface ISweetForm {
+export interface ISweetFormAdding {
   Image: FormControl<string | null>;
   Name: FormControl<string | null>;
   Products: FormControl<IProduct[] | null>;
+}
+
+export interface ISweetFormEditing {
+  Image: FormControl<string | null>;
+  Name: FormControl<string | null>;
+  Products: FormControl<ISweetProduct[] | null>;
 }
 
 export interface ISweetProduct {

@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { environment } from "../../../environments/environment";
 
 import { AngularFireDatabase, AngularFireObject } from "@angular/fire/compat/database";
 
-import { ISweet } from "@Interfaces/sweet.interface";
+import { ISweet, ISweetProduct } from "@Interfaces/sweet.interface";
 import { IProduct } from "@Interfaces/product.interface";
 
 @Injectable({
@@ -21,13 +19,17 @@ export class RequestsService {
     return starCountRef.valueChanges();
   }
 
-  public getSweet(ID: number | null): any {
+  public getSweet(ID: number | null): Observable<ISweet[]> {
     return this.db.list<ISweet>('/sweets', ref => ref.orderByChild('ID').equalTo(ID)).valueChanges()
   }
 
   public getProducts(): Observable<IProduct[] | null> {
     const starCountRef: AngularFireObject<IProduct[]> = this.db.object('/products');
       return starCountRef.valueChanges();
+  }
+
+  public getProductsBasedOnSweet(ID: number | null): Observable<IProduct[]> {
+    return this.db.list<IProduct>('/products', ref => ref.orderByChild('ID').equalTo(ID)).valueChanges()
   }
 
   public makeArray(data: any): any[] {

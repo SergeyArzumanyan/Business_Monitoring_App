@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { AddModule } from "@components/add/add.module";
 import { SweetsRoutingModule } from './sweets-routing.module';
@@ -27,7 +27,8 @@ import { TooltipModule } from "primeng/tooltip";
         InputNumberModule,
         InputTextModule,
         ConfirmDialogModule,
-        TooltipModule
+        TooltipModule,
+        FormsModule
     ]
 })
 export class SweetsModule {

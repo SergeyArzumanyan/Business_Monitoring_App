@@ -5,6 +5,7 @@ export interface IProduct {
   Name: string;
   Price: number;
   Quantity: number;
+  TotalPrice?: number;
 }
 
 export interface IProductForm {
