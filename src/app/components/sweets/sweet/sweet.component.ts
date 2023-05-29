@@ -5,13 +5,20 @@ import { FormControl, FormGroup } from "@angular/forms";
 
 import { AngularFireDatabase } from "@angular/fire/compat/database";
 
-import { ISweet, ISweetProduct, ISweetFormEditing } from "@Interfaces/sweet.interface";
-import { RequestsService } from "@Services/requests.service";
-import { EditService } from "@Services/edit.service";
-import { DeleteService } from "@Services/delete.service";
+import {
+  ISweet,
+  IProduct,
+  ISweetProduct,
+  ISweetFormEditing
+} from "@Core/interfaces";
+import {
+  RequestsService,
+  EditService,
+  DeleteService,
+  ToastService
+} from "@Core/services";
+
 import { ConfirmationService } from "primeng/api";
-import { ToastService } from "@Services/toast.service";
-import { IProduct } from "@Interfaces/product.interface";
 
 @Component({
   selector: 'app-sweet',

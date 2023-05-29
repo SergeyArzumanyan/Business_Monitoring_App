@@ -1,19 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SweetsComponent, SweetComponent } from "@Components/sweets";
+
+import { ProductsComponent } from "@Components/products";
 
 const routes: Routes = [
   {
     path: "",
-    component: SweetsComponent
-  },
-  {
-    path: ":sweet-id",
-    component: SweetComponent
+    component: ProductsComponent
   },
   {
     path: "**",
-    redirectTo: "sweets",
+    redirectTo: "products",
     pathMatch: "full"
   }
 ];
@@ -22,4 +19,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class SweetsRoutingModule { }
+export class ProductsRoutingModule { }

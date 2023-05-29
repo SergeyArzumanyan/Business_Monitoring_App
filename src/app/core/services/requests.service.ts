@@ -3,8 +3,10 @@ import { Observable } from "rxjs";
 
 import { AngularFireDatabase, AngularFireObject } from "@angular/fire/compat/database";
 
-import { ISweet, ISweetProduct } from "@Interfaces/sweet.interface";
-import { IProduct } from "@Interfaces/product.interface";
+import {
+  ISweet,
+  IProduct
+} from "@Core/interfaces";
 
 @Injectable({
   providedIn: 'root'

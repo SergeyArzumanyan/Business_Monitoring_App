@@ -3,12 +3,17 @@ import { Router } from "@angular/router";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Subject, take, takeUntil } from "rxjs";
 
-import { onlyPositiveNumbers } from "@Validators/only-positive-numbers.validator";
-import { IProduct, IProductForm } from "@Interfaces/product.interface";
-import { RequestsService } from "@Services/requests.service";
-import { EditService } from "@Services/edit.service";
-import { DeleteService } from "@Services/delete.service";
-import { ToastService } from "@Services/toast.service";
+import { onlyPositiveNumbers } from "@Core/validators";
+import {
+  IProduct,
+  IProductForm
+} from "@Core/interfaces";
+import {
+  RequestsService,
+  EditService,
+  DeleteService,
+  ToastService
+} from "@Core/services";
 
 import { AngularFireDatabase } from "@angular/fire/compat/database";
 import { ConfirmationService } from "primeng/api";

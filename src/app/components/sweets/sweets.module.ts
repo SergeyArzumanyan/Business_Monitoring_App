@@ -2,34 +2,27 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
-import { AddModule } from "@components/add/add.module";
-import { SweetsRoutingModule } from './sweets-routing.module';
-import { SweetComponent } from "@components/sweets/sweet";
-import { SweetsComponent } from "@components/sweets/sweets.component";
+import { SweetsRoutingModule } from "@Components/sweets/sweets-routing.module";
+import {
+  SweetComponent,
+  SweetsComponent
+} from "@Components/sweets";
 
-import { ProgressSpinnerModule } from "primeng/progressspinner";
-import { InputNumberModule } from "primeng/inputnumber";
-import { InputTextModule } from "primeng/inputtext";
-import { ConfirmDialogModule } from "primeng/confirmdialog";
-import { TooltipModule } from "primeng/tooltip";
+import { SharedModule } from "@Shared/shared.module";
+
 
 @NgModule({
   declarations: [
-    SweetComponent,
-    SweetsComponent
+    SweetsComponent,
+    SweetComponent
   ],
-    imports: [
-        CommonModule,
-        SweetsRoutingModule,
-        ReactiveFormsModule,
-        ProgressSpinnerModule,
-        AddModule,
-        InputNumberModule,
-        InputTextModule,
-        ConfirmDialogModule,
-        TooltipModule,
-        FormsModule
-    ]
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SweetsRoutingModule,
+    SharedModule,
+  ]
 })
 export class SweetsModule {
 }

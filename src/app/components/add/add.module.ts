@@ -1,37 +1,29 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { AddRoutingModule } from './add-routing.module';
-import { AddProductComponent } from "@components/add/product";
 import { ReactiveFormsModule } from "@angular/forms";
-import { AddSweetComponent } from "@components/add/sweet";
-import { AddComponent } from './add.component';
-import { DragDirective } from "../../core/directives/drag.directive";
 
-import { InputTextModule } from "primeng/inputtext";
-import { InputNumberModule } from "primeng/inputnumber";
-import { MultiSelectModule } from "primeng/multiselect";
-import { KeyFilterModule } from "primeng/keyfilter";
+import { AddRoutingModule } from "@Components/add/add-routing.module";
+
+import {
+  AddComponent,
+  AddSweetComponent,
+  AddProductComponent,
+} from "@Components/add";
+
+import { SharedModule } from "@Shared/shared.module";
 
 
 @NgModule({
   declarations: [
     AddProductComponent,
     AddSweetComponent,
-    AddComponent,
-    DragDirective,
-  ],
-  exports: [
-    DragDirective
+    AddComponent
   ],
   imports: [
     CommonModule,
     AddRoutingModule,
-    InputTextModule,
-    InputNumberModule,
-    MultiSelectModule,
-    KeyFilterModule,
     ReactiveFormsModule,
+    SharedModule,
   ]
 })
 export class AddModule { }

@@ -24,11 +24,9 @@
     ],
     "baseUrl": "src",
     "paths": {
-      "@components/*": ["app/components/*"],
-      "@Interfaces/*": ["app/core/interfaces/*"],
-      "@Services/*": ["app/core/services/*"],
-      "@Guards/*": ["app/core/guards/*"],
-      "@Validators/*": ["app/core/validators/*"]
+      "@Components/*": ["app/components/*"],
+      "@Core/*": ["app/core/*"],
+      "@Shared/*": ["app/shared/*"]
     }
   },
   "angularCompilerOptions": {

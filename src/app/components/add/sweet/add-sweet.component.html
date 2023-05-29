@@ -41,6 +41,7 @@
           <label class="form-label" for="sweet-products">Products</label>
           <div class="multiselect-container">
             <p-multiSelect inputId="sweet-products"
+                           id="sweet-products"
                            [ngClass]="{
                         'ng-invalid':
                         sweetForm.get('Price')?.hasError('required') && submitted,
