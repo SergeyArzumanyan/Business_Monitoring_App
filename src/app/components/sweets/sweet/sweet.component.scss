@@ -392,11 +392,6 @@ $innerPadding: 20px;
   width: 100%;
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  display: none;
-}
-
 :host ::ng-deep .pi.pi-arrow-left {
   font-size: 12px;
 }
