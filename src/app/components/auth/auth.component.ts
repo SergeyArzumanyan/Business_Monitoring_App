@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-
-import { AuthService } from "@Services/auth.service";
-import { ToastService } from "@Services/toast.service";
 import { ActivatedRoute } from "@angular/router";
+
+import {
+  AuthService,
+  ToastService
+} from "@Core/services";
 
 @Component({
   selector: 'app-auth',

@@ -1,4 +1,6 @@
 import { Component, HostListener } from '@angular/core';
+import { BehaviorSubject } from "rxjs";
+import { AuthService } from "@Core/services";
 
 @Component({
   selector: 'app-header',
@@ -7,6 +9,10 @@ import { Component, HostListener } from '@angular/core';
 })
 export class HeaderComponent {
   public isMobile: boolean = (window.innerWidth <= 900);
+  public isAuthenticated: BehaviorSubject<boolean> = this.authService.authenticated;
+  public isAlreadyAuthenticated: boolean = !!sessionStorage.getItem('isAuthenticated');
+
+  constructor(private authService: AuthService) {}
 
   @HostListener("window:resize", ["$event.target"])
   private onWindowResize(): void {

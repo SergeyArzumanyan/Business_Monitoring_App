@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Database, ref, set } from "@angular/fire/database";
 
-import { ISweet } from "@Interfaces/sweet.interface";
-import { IProductForSending } from "@Interfaces/product.interface";
-import { ToastService } from "@Services/toast.service";
+import {
+  ISweet,
+  IProductForSending
+} from "@Core/interfaces";
+import { ToastService } from "@Core/services";
 
 @Injectable({
   providedIn: 'root'

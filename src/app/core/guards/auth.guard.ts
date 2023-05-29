@@ -10,8 +10,10 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { AuthService } from "@Services/auth.service";
-import { ToastService } from "@Services/toast.service";
+import {
+  AuthService,
+  ToastService
+} from "@Core/services";
 
 @Injectable({
   providedIn: 'root'

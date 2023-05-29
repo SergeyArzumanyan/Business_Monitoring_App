@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { BehaviorSubject } from "rxjs";
-import { AuthService } from "@Services/auth.service";
+import { AuthService } from "@Core/services";
+
 
 @Component({
   selector: 'app-small-header',
@@ -8,12 +9,12 @@ import { AuthService } from "@Services/auth.service";
   styleUrls: ['./small-header.component.scss']
 })
 export class SmallHeaderComponent {
+  @Input() isAlreadyAuthenticated: boolean = false
+
   public menu: boolean = false;
   public isAuthenticated: BehaviorSubject<boolean> = this.authService.authenticated;
-  public isAlreadyAuthenticated: boolean = !!sessionStorage.getItem('isAuthenticated');
 
   constructor(private authService: AuthService) {}
-
 
   public toggleMenu(): void {
     this.menu = !this.menu;

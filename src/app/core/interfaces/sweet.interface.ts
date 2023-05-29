@@ -1,6 +1,6 @@
 import { FormControl } from "@angular/forms";
 
-import { IProduct } from "@Interfaces/product.interface";
+import { IProduct } from "@Core/interfaces";
 
 export interface ISweet {
   ID: number;

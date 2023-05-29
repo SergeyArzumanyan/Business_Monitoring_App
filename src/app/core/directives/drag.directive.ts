@@ -1,5 +1,6 @@
 import { Directive, EventEmitter, HostBinding, HostListener, Output } from '@angular/core';
-import { ToastService } from "@Services/toast.service";
+
+import { ToastService } from "@Core/services";
 
 @Directive( {
   selector: '[imgDrag]'

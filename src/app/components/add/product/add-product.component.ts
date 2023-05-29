@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import {
+  FormControl,
+  FormGroup,
+  Validators
+} from "@angular/forms";
 
-import { IProductForm, IProductForSending } from "@Interfaces/product.interface";
-import { SendingDataService } from "@Services/sending-data.service";
-import { onlyPositiveNumbers } from "@Validators/only-positive-numbers.validator";
+import { IProductForm, IProductForSending } from "@Core/interfaces";
+import { SendingDataService } from "@Core/services";
+import { onlyPositiveNumbers } from "@Core/validators";
 
 @Component({
   selector: 'app-product',

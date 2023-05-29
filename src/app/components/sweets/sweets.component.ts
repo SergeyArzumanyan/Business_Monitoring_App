@@ -1,15 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from "rxjs";
 import { Router } from "@angular/router";
+import { HttpErrorResponse } from "@angular/common/http";
+import { Subscription } from "rxjs";
 
-import { ISweet } from "@Interfaces/sweet.interface";
-import { RequestsService } from "@Services/requests.service";
-import { DeleteService } from "@Services/delete.service";
+import {
+  ISweet,
+  IProduct
+} from "@Core/interfaces";
+import {
+  RequestsService,
+  DeleteService,
+  ToastService
+} from "@Core/services";
+
 import { AngularFireDatabase } from "@angular/fire/compat/database";
 import { ConfirmationService } from "primeng/api";
-import { ToastService } from "@Services/toast.service";
-import { IProduct } from "@Interfaces/product.interface";
-import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
   selector: 'app-sweets',

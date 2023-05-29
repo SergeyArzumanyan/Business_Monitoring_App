@@ -1,11 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 
-import { ISweet, ISweetProduct, ISweetFormAdding } from "@Interfaces/sweet.interface";
-import { IProduct } from "@Interfaces/product.interface";
-import { SendingDataService } from "@Services/sending-data.service";
-import { RequestsService } from "@Services/requests.service";
-import { ToastService } from "@Services/toast.service";
+import {
+  ISweet,
+  IProduct,
+  ISweetProduct,
+  ISweetFormAdding
+} from "@Core/interfaces";
+import {
+  SendingDataService,
+  RequestsService,
+  ToastService
+} from "@Core/services";
 
 @Component({
   selector: 'app-sweet',

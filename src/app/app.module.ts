@@ -7,20 +7,20 @@ import { HttpClientModule } from "@angular/common/http";
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { HeaderComponent } from '@components/header';
-import { LargeHeaderComponent, SmallHeaderComponent } from '@components/header/components';
-import { AuthComponent } from "@components/auth";
-import { SweetsModule } from "@components/sweets/sweets.module";
-import { ProductsComponent } from '@components/products';
-import { AddModule } from "@components/add/add.module";
+import {
+  HeaderComponent,
+  LargeHeaderComponent,
+  SmallHeaderComponent
+} from '@Components/header';
+import { AuthComponent } from "@Components/auth";
 
-import { environment } from '../environments/environment';
+import { environment } from '../environments';
 import { provideDatabase, getDatabase } from '@angular/fire/database';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { PasswordModule } from "primeng/password";
 import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFireDatabaseModule } from "@angular/fire/compat/database";
 
+import { PasswordModule } from "primeng/password";
 import { ButtonModule } from "primeng/button";
 import { ProgressSpinnerModule } from "primeng/progressspinner";
 import { InputNumberModule } from "primeng/inputnumber";
@@ -37,8 +37,7 @@ import { InputTextModule } from "primeng/inputtext";
     AuthComponent,
     HeaderComponent,
     LargeHeaderComponent,
-    SmallHeaderComponent,
-    ProductsComponent,
+    SmallHeaderComponent
   ],
   imports: [
     AppRoutingModule,
@@ -59,13 +58,14 @@ import { InputTextModule } from "primeng/inputtext";
     InputNumberModule,
     ConfirmDialogModule,
     ToastModule,
-    AddModule,
-    SweetsModule,
     DialogModule,
     RippleModule,
     InputTextModule,
   ],
-  providers: [ConfirmationService, MessageService],
+  providers: [
+    ConfirmationService,
+    MessageService
+  ],
   bootstrap: [AppComponent]
 })
 
