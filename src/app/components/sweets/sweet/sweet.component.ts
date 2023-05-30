@@ -30,6 +30,7 @@ export class SweetComponent implements OnInit {
   public isEditMode: boolean = false;
   public sweet!: ISweet;
   public sweetProducts: IProduct[] | null = [];
+  private alreadyLoadedProducts: boolean = false;
   public submitted: boolean = false;
   private initialSweetImage: string | null = null; // for keeping first downloaded Image (this is for not making additional network requests.)
 
@@ -68,7 +69,11 @@ export class SweetComponent implements OnInit {
             this.router.navigateByUrl('sweets');
           }
           this.sweet = data[0];
-          this.getProductsBasedOnSweet(this.sweet.Products);
+          if (!this.alreadyLoadedProducts) {
+            this.getProductsBasedOnSweet(this.sweet.Products);
+          } else {
+            this.calculateSweetPriceAfterEdit(this.sweetProducts);
+          }
         },
         error: () => {
           this.toastService.showToast('error', 'Error', 'Something Went Wrong');
@@ -78,7 +83,6 @@ export class SweetComponent implements OnInit {
   }
 
   public deleteSweet(sweet: ISweet): void {
-
     this.confirmationService.confirm({
       message: 'Are you sure that you want to delete this sweet?',
       header: 'Delete Sweet ?',
@@ -87,6 +91,7 @@ export class SweetComponent implements OnInit {
         this.router.navigateByUrl('sweets')
           .then(() => {
             this.Deletion.deleteItem('sweets', 'ID', sweet.ID)
+              .pipe(take(1))
               .subscribe((actions: any) => {
                 actions.forEach((action: any) => {
                   const key = action.payload.key;
@@ -110,29 +115,44 @@ export class SweetComponent implements OnInit {
     this.editSweetForm.patchValue(this.sweet);
   }
 
-  private getProductsBasedOnSweet(sweetProducts: ISweetProduct[] | null): void {
-    if (sweetProducts) {
-      for (let product of sweetProducts) {
-        let productQuantity = product.Quantity;
+  private getProductsBasedOnSweet(productsOfSweet: ISweetProduct[] | null): void {
+    if (productsOfSweet) {
+      for (let productOfSweet of productsOfSweet) {
+        let productQuantity = productOfSweet.Quantity;
 
-        this.Request.getProductsBasedOnSweet(product.ProductID)
+        this.Request.getProductsBasedOnSweet(productOfSweet.ProductID)
+          .pipe(take(1))
           .subscribe({
             next: (product: IProduct[]) => {
               product[0].Quantity = productQuantity;
               product[0].TotalPrice = productQuantity * product[0].Price;
 
-              !this.sweet.TotalPrice ?
-                this.sweet.TotalPrice = product[0].TotalPrice :
-                this.sweet.TotalPrice += product[0].TotalPrice;
-
               this.sweetProducts?.push(product[0]);
+              this.calculateSweetPrice(product[0].TotalPrice);
+
             }
           })
       }
+      this.alreadyLoadedProducts = true;
     } else {
       return;
     }
   }
+
+  private calculateSweetPrice(productTotalPrice: number): void {
+    !this.sweet.TotalPrice ?
+      this.sweet.TotalPrice = productTotalPrice :
+      this.sweet.TotalPrice += productTotalPrice!;
+  }
+
+  private calculateSweetPriceAfterEdit(sweetProducts: IProduct[] | null): void {
+    for (let product of sweetProducts!) {
+      !this.sweet.TotalPrice ?
+        this.sweet.TotalPrice = product.TotalPrice :
+        this.sweet.TotalPrice += product.TotalPrice!;
+    }
+  }
+
 
   public cancelEditing(): void {
     this.isEditMode = false;
