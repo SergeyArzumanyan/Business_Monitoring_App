@@ -14,12 +14,8 @@
                  id="product-name"
                  class="form-input"
                  [ngClass]="{
-                'ng-invalid':
+                'ng-invalid ng-dirty':
                 sweetForm.get('Name')?.hasError('required') && submitted
-                ||
-                sweetForm.get('Name')?.hasError('maxlength') && submitted,
-                'ng-dirty':
-                sweetForm.get('Name')?.hasError('required')  && submitted
                 ||
                 sweetForm.get('Name')?.hasError('maxlength') && submitted
                 }"
@@ -43,10 +39,8 @@
             <p-multiSelect inputId="sweet-products"
                            id="sweet-products"
                            [ngClass]="{
-                        'ng-invalid':
-                        sweetForm.get('Price')?.hasError('required') && submitted,
-                        'ng-dirty':
-                        sweetForm.get('Price')?.hasError('required')  && submitted
+                        'ng-invalid ng-dirty':
+                        sweetForm.get('Price')?.hasError('required') && submitted
                         }"
                            [options]="products"
                            [(ngModel)]="selectedProducts"

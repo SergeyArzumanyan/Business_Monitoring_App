@@ -13,16 +13,8 @@
                id="product-name"
                class="form-input p-inputtext-sm"
                [ngClass]="{
-                    'ng-invalid':
+                    'ng-invalid ng-dirty':
                     productForm.get('Name')?.hasError('required') && submitted
-                    ||
-                    productForm.get('Name')?.hasError('maxlength') && submitted
-                    ||
-                    productForm.get('Name')?.hasError('minlength') && submitted
-                    ||
-                    !productForm.value.Name?.trim() && submitted,
-                    'ng-dirty':
-                    productForm.get('Name')?.hasError('required')  && submitted
                     ||
                     productForm.get('Name')?.hasError('maxlength') && submitted
                     ||
@@ -56,16 +48,8 @@
         <p-inputNumber formControlName="Price"
                        class="form-input"
                        [ngClass]="{
-                        'ng-invalid':
+                        'ng-invalid ng-dirty':
                         productForm.get('Price')?.hasError('required') && submitted
-                        ||
-                        productForm.get('Price')?.hasError('maxlength') && submitted
-                        ||
-                        productForm.get('Price')?.hasError('minlength') && submitted
-                        ||
-                        !productForm.value.Price && submitted,
-                        'ng-dirty':
-                        productForm.get('Price')?.hasError('required')  && submitted
                         ||
                         productForm.get('Price')?.hasError('maxlength') && submitted
                         ||

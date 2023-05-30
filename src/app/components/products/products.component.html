@@ -44,12 +44,7 @@
           <label for="Name">Name</label>
           <input class="p-inputtext-sm"
                  [ngClass]="{
-                    'ng-invalid':
-                    productForm.get('Name')?.hasError('minlength')  && submitted
-                    ||
-                    productForm.get('Name')?.hasError('maxlength')  && submitted
-                    || !productForm.value.Name?.trim() && submitted,
-                    'ng-dirty':
+                    'ng-invalid ng-dirty':
                     productForm.get('Name')?.hasError('minlength')  && submitted
                     ||
                     productForm.get('Name')?.hasError('maxlength')  && submitted
@@ -83,11 +78,7 @@
                          inputId="Price"
                          id="Price"
                          [ngClass]="{
-                        'ng-invalid':
-                        productForm.get('Price')?.hasError('isNotPositive')  && submitted
-                        ||
-                        !productForm.value.Price && submitted,
-                        'ng-dirty':
+                        'ng-invalid ng-dirty':
                         productForm.get('Price')?.hasError('isNotPositive')  && submitted
                         ||
                         !productForm.value.Price && submitted

@@ -8,8 +8,7 @@
                   placeholder="Enter the password.."
                   (keydown.enter)="proceed()"
                   [ngClass]="{
-                'ng-invalid': passwordIsInvalid,
-                'ng-dirty': passwordIsInvalid
+                'ng-invalid ng-dirty': passwordIsInvalid
                 }"
                   [(ngModel)]="passwordInput">
       </p-password>
