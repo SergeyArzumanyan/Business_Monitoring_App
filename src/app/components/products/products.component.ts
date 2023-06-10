@@ -83,7 +83,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.confirmationService.confirm({
       message: 'Are you sure that you want to delete this product?',
       header: 'Delete Product ?',
-      icon: 'pi pi-trash',
+      icon: 'pi pi-trash icon-big',
       accept: () => {
       this.Deletion.deleteItem('products', 'ID', product.ID)
         .subscribe((actions: any) => {

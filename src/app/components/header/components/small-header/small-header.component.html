@@ -29,9 +29,24 @@
            [ngClass]="{'header-height': !menu}">
         <div class="header-links-container"
              [ngClass]="{'visibility': menu}">
-          <li class="header-link" [routerLink]="['sweets']" routerLinkActive="active" (click)="closeMenu()">Sweets</li>
-          <li class="header-link" [routerLink]="['products']" routerLinkActive="active" (click)="closeMenu()">Products</li>
-          <li class="header-link bottom-line" [routerLink]="['add']" routerLinkActive="active" (click)="closeMenu()">Add</li>
+          <li class="header-link" [routerLink]="['sweets']" routerLinkActive="active" (click)="closeMenu()">
+            <div class="flex justify-content-center align-items-center gap-10">
+              Sweets
+              <i class="fa-solid fa-cake-candles icon-md"></i>
+            </div>
+          </li>
+          <li class="header-link" [routerLink]="['products']" routerLinkActive="active" (click)="closeMenu()">
+            <div class="flex justify-content-center align-items-center gap-10">
+              Products
+              <i class="fa-solid fa-utensils icon-md"></i>
+            </div>
+          </li>
+          <li class="header-link bottom-line" [routerLink]="['add']" routerLinkActive="active" (click)="closeMenu()">
+            <div class="flex justify-content-center align-items-center gap-10">
+              Add
+              <i class="fa-solid fa-plus icon-md"></i>
+            </div>
+          </li>
         </div>
       </div>
     </ng-container>

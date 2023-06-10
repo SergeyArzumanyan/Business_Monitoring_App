@@ -86,7 +86,7 @@ export class SweetComponent implements OnInit {
     this.confirmationService.confirm({
       message: 'Are you sure that you want to delete this sweet?',
       header: 'Delete Sweet ?',
-      icon: 'pi pi-trash',
+      icon: 'pi pi-trash icon-big',
       accept: () => {
         this.router.navigateByUrl('sweets')
           .then(() => {
@@ -190,6 +190,7 @@ export class SweetComponent implements OnInit {
   }
 
   public saveEditedSweet(): void {
+    console.log('sweete to send => ' , this.sweetProducts);
     this.Edition.editItem('sweets', 'ID', this.sweet.ID)
       .pipe(take(1))
       .subscribe((items: any) => {

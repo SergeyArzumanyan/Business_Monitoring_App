@@ -16,8 +16,8 @@
         <tr *ngFor="let product of products">
           <td class="main-td">{{ product.Name }}</td>
           <td class="main-td product-price">{{ product.Price }}</td>
-          <td class="action-td skin-action-btn" (click)="editProduct(product)"><i class="pi pi-pencil"></i></td>
-          <td class="action-td brown-action-btn" (click)="deleteProduct(product)"><i class="pi pi-trash"></i></td>
+          <td class="action-td skin-action-btn" (click)="editProduct(product)"><i class="pi pi-pencil icon-md"></i></td>
+          <td class="action-td brown-action-btn" (click)="deleteProduct(product)"><i class="pi pi-trash icon-md"></i></td>
         </tr>
       </ng-container>
       </tbody>
@@ -111,20 +111,21 @@
     <button type="button"
             class="btn-md brown-action-btn"
             (click)="hideProductDialog()">
-      <div class="flex justify-content-center gap-5">
+      <span class="flex justify-content-center align-items-center gap-5">
         Cancel
-        <i class="pi pi-times"></i>
-      </div>
+        <i class="pi pi-times icon-sm"></i>
+      </span>
     </button>
+
     <button type="submit"
             class="btn-md skin-action-btn"
             [disabled]="productForm.pristine"
             [ngClass]="{'skin-action-btn-disabled': productForm.pristine}"
             (click)="saveProduct()">
-      <div class="flex justify-content-center gap-5">
+      <span class="flex justify-content-center align-items-center gap-5">
         Save
-        <i class="pi pi-check"></i>
-      </div>
+        <i class="pi pi-check icon-sm"></i>
+      </span>
     </button>
   </ng-template>
 </p-dialog>

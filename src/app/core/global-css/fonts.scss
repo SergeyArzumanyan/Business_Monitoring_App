@@ -1,5 +1,22 @@
+$Xsmall: 12px;
 $small: 14px;
 $medium: 16px;
 $big: 20px;
 $large: 24px;
 $larger: 28px;
+
+.icon-xs {
+  font-size: $Xsmall;
+}
+
+.icon-sm {
+  font-size: $small;
+}
+
+.icon-md {
+  font-size: $medium;
+}
+
+.icon-big {
+  font-size: $big;
+}

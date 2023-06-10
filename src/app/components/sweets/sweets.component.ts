@@ -90,7 +90,7 @@ export class SweetsComponent implements OnInit {
     this.confirmationService.confirm({
       message: 'Are you sure that you want to delete this sweet?',
       header: 'Delete Sweet ?',
-      icon: 'pi pi-trash',
+      icon: 'pi pi-trash icon-big',
       accept: () => {
         this.Deletion.deleteItem('sweets', 'ID', sweet.ID)
           .subscribe((actions: any) => {

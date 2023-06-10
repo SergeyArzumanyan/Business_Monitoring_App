@@ -34,8 +34,18 @@
             <span class="sweet-price">{{ sweet.TotalPrice }} AMD</span>
           </div>
           <div class="sweet-card-buttons flex justify-content-center align-items-center">
-            <button class="sweet-btn edit-sweet-btn btn-md skin-action-btn" (click)="editSweet(sweet.ID)">Edit</button>
-            <button class="sweet-btn delete-sweet-btn btn-md brown-action-btn" (click)="deleteSweet(sweet)">Delete</button>
+            <button class="sweet-btn edit-sweet-btn btn-md skin-action-btn" (click)="editSweet(sweet.ID)">
+              <span class="flex justify-content-center align-items-center">
+                More
+                <i class="pi pi-angle-right icon-md"></i>
+              </span>
+            </button>
+            <button class="sweet-btn delete-sweet-btn btn-md brown-action-btn" (click)="deleteSweet(sweet)">
+              <span class="flex justify-content-center align-items-center gap-5">
+                Delete
+              <i class="pi pi-trash icon-sm"></i>
+              </span>
+            </button>
           </div>
         </div>
 

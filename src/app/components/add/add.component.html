@@ -3,8 +3,18 @@
     <h1 class="add-header">Add Items</h1>
 
     <div class="links flex">
-      <button class="btn-md link-btn skin-btn" [routerLink]="['sweet']">Sweet</button>
-      <button class="btn-md link-btn skin-btn" [routerLink]="['product']">Product</button>
+      <button class="btn-md link-btn skin-btn" [routerLink]="['sweet']">
+        <span class="flex justify-content-center align-items-center gap-10">
+          Sweet
+          <i class="fa-solid fa-cake-candles icon-md"></i>
+        </span>
+      </button>
+      <button class="btn-md link-btn skin-btn" [routerLink]="['product']">
+        <span class="flex justify-content-center align-items-center gap-10">
+          Product
+          <i class="fa-solid fa-utensils icon-md"></i>
+        </span>
+      </button>
     </div>
   </div>
 </div>
