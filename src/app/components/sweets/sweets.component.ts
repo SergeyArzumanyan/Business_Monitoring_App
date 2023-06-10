@@ -62,10 +62,10 @@ export class SweetsComponent implements OnInit {
   }
 
   private getProductsBasedOnSweets(sweets: ISweet[]): void {
-    for (let sweet of sweets) {
+    for (const sweet of sweets) {
       if (sweet.Products) {
-        for (let product of sweet.Products) {
-          let productQuantity = product.Quantity;
+        for (const product of sweet.Products) {
+          const productQuantity = product.Quantity;
 
           this.Request.getProductsBasedOnSweet(product.ProductID)
             .subscribe({

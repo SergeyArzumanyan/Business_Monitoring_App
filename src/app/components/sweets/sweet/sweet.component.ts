@@ -57,7 +57,7 @@ export class SweetComponent implements OnInit {
   }
 
   public getSweet(): void {
-    let sweetID = Number(this.route.snapshot.paramMap.get('sweet-id'));
+    const sweetID = Number(this.route.snapshot.paramMap.get('sweet-id'));
     if (isNaN(sweetID)) {
       this.router.navigateByUrl('sweets');
       return;
@@ -117,8 +117,8 @@ export class SweetComponent implements OnInit {
 
   private getProductsBasedOnSweet(productsOfSweet: ISweetProduct[] | null): void {
     if (productsOfSweet) {
-      for (let productOfSweet of productsOfSweet) {
-        let productQuantity = productOfSweet.Quantity;
+      for (const productOfSweet of productsOfSweet) {
+        const productQuantity = productOfSweet.Quantity;
 
         this.Request.getProductsBasedOnSweet(productOfSweet.ProductID)
           .pipe(take(1))
@@ -146,7 +146,7 @@ export class SweetComponent implements OnInit {
   }
 
   private calculateSweetPriceAfterEdit(sweetProducts: IProduct[] | null): void {
-    for (let product of sweetProducts!) {
+    for (const product of sweetProducts!) {
       !this.sweet.TotalPrice ?
         this.sweet.TotalPrice = product.TotalPrice :
         this.sweet.TotalPrice += product.TotalPrice!;

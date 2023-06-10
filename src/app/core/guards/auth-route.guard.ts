@@ -12,7 +12,9 @@ export class AuthRouteGuard implements CanActivate {
   constructor(private router: Router, private toastService: ToastService) {}
 
   canActivate(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     route: ActivatedRouteSnapshot,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     if (!sessionStorage.getItem('isAuthenticated')) {

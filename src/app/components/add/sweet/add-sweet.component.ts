@@ -67,7 +67,7 @@ export class AddSweetComponent implements OnInit {
 
   public calculateSweetPrice(): void {
     let arrSum: number = 0;
-    for (let product of this.selectedProducts) {
+    for (const product of this.selectedProducts) {
       if (product.TotalPrice && product.TotalPrice !== 0) {
         arrSum += product.TotalPrice;
       }
@@ -104,11 +104,11 @@ export class AddSweetComponent implements OnInit {
   }
 
   private generateProductsForSweet(selectedProducts: IProduct[]): ISweetProduct[] {
-    let productsToSend: ISweetProduct[] = [];
+    const productsToSend: ISweetProduct[] = [];
 
     if (selectedProducts) {
-      for (let product of selectedProducts) {
-        let transformedProduct: ISweetProduct = {
+      for (const product of selectedProducts) {
+        const transformedProduct: ISweetProduct = {
           ProductID: product.ID,
           Quantity: product.Quantity
         }
@@ -133,7 +133,7 @@ export class AddSweetComponent implements OnInit {
 
       if (this.sweetForm.valid) {
           if (this.sweetForm.value.Name &&  this.sweetForm.value.Products) {
-            let sweet: ISweet = {
+            const sweet: ISweet = {
               ID: +(new Date()),
               Name: this.sweetForm.value.Name,
               Products: this.generateProductsForSweet(this.sweetForm.value.Products),
@@ -147,5 +147,5 @@ export class AddSweetComponent implements OnInit {
         }
     }, 500);
 
-  };
+  }
 }

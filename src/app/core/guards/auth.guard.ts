@@ -27,7 +27,9 @@ export class AuthGuard implements CanLoad, CanActivate {
   ) {}
 
   canLoad(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     route: Route,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     if (this.authService.authenticated.getValue() || sessionStorage.getItem('isAuthenticated')) {
@@ -40,7 +42,9 @@ export class AuthGuard implements CanLoad, CanActivate {
   }
 
   canActivate(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     route: ActivatedRouteSnapshot,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     if (this.authService.authenticated.getValue() || sessionStorage.getItem('isAuthenticated')) {
