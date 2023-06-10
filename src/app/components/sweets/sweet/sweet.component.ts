@@ -115,7 +115,8 @@ export class SweetComponent implements OnInit {
     this.editSweetForm.patchValue(this.sweet);
   }
 
-  private getProductsBasedOnSweet(productsOfSweet: ISweetProduct[] | null): void {
+  private getProductsBasedOnSweet(productsOfSweet: ISweetProduct[] | null | undefined): void {
+    this.sweetProducts = [];
     if (productsOfSweet) {
       for (const productOfSweet of productsOfSweet) {
         const productQuantity = productOfSweet.Quantity;
@@ -124,11 +125,10 @@ export class SweetComponent implements OnInit {
           .pipe(take(1))
           .subscribe({
             next: (product: IProduct[]) => {
-              product[0].Quantity = productQuantity;
-              product[0].TotalPrice = productQuantity * product[0].Price;
+              this.calculateProductProperties(product[0], productQuantity)
 
               this.sweetProducts?.push(product[0]);
-              this.calculateSweetPrice(product[0].TotalPrice);
+              this.calculateSweetPrice(product[0].TotalPrice!);
 
             }
           })
@@ -139,6 +139,11 @@ export class SweetComponent implements OnInit {
     }
   }
 
+  private calculateProductProperties(product: IProduct, quantity: number): void {
+      product.Quantity = quantity;
+      product.TotalPrice = quantity * product.Price;
+}
+
   private calculateSweetPrice(productTotalPrice: number): void {
     !this.sweet.TotalPrice ?
       this.sweet.TotalPrice = productTotalPrice :
@@ -146,6 +151,7 @@ export class SweetComponent implements OnInit {
   }
 
   private calculateSweetPriceAfterEdit(sweetProducts: IProduct[] | null): void {
+    this.sweet.TotalPrice = 0;
     for (const product of sweetProducts!) {
       !this.sweet.TotalPrice ?
         this.sweet.TotalPrice = product.TotalPrice :
@@ -189,14 +195,34 @@ export class SweetComponent implements OnInit {
     this.editSweetForm.patchValue(sweet);
   }
 
+  private EditProductsForSweet(): ISweetProduct[] {
+    const EditedProductsForSending: ISweetProduct[] = [];
+
+    if (this.sweetProducts) {
+      for (const product of this.sweetProducts) {
+        const mutatedProduct: ISweetProduct = {
+          ProductID: product.ID,
+          Quantity: product.Quantity
+        }
+        EditedProductsForSending.push(mutatedProduct);
+      }
+    }
+
+    return EditedProductsForSending;
+  }
+
   public saveEditedSweet(): void {
-    console.log('sweete to send => ' , this.sweetProducts);
+
+    this.editSweetForm.value.Products = this.EditProductsForSweet();
+
     this.Edition.editItem('sweets', 'ID', this.sweet.ID)
       .pipe(take(1))
       .subscribe((items: any) => {
         this.db.list('/sweets').update(items[0].key, this.editSweetForm.value)
           .then(() => {
             this.toastService.showToast('success', 'Done', 'Sweet Edited Successfully.');
+            this.getProductsBasedOnSweet(this.editSweetForm.value.Products);
+            this.calculateSweetPriceAfterEdit(this.sweetProducts);
         })
           .catch(() => {
             this.toastService.showToast('error', 'Error', 'Something Went Wrong.');

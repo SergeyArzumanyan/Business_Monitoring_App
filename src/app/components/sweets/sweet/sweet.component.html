@@ -151,7 +151,7 @@
                   </div>
                   <div class="product flex align-items-center" *ngFor="let product of sweetProducts">
                     <div class="product-edit-mode-div text-center">{{ product.Name }}</div>
-                    <input type="number" class="product-input p-inputtext" [(ngModel)]="product.Quantity">
+                    <input type="number" class="product-input p-inputtext" [(ngModel)]="product.Quantity" (input)="this.editSweetForm.markAsDirty()">
                     <div class="product-edit-mode-div text-center">{{ product.Price }} AMD</div>
                     <div class="product-edit-mode-div text-center">{{ product.TotalPrice }} AMD</div>
                   </div>
