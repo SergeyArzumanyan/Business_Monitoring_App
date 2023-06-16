@@ -8,49 +8,63 @@ $containerPadding: 40px;
 .form-wrapper {
   width: 100%;
   height: 100%;
+
+  .form-container {
+    width: 400px;
+    height: 425px;
+    background-color: $white-300;
+    box-shadow: 0 0 2px 0 $skin-100;
+    border-radius: $borderRadius;
+    margin: 0 auto;
+    padding: $containerPadding;
+
+    .w-100.flex {
+      .form-header {
+        width: 100%;
+        font-size: $large;
+        color: $black;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+      }
+    }
+
+    .form-group {
+      width: 100%;
+
+      .form-label {
+        width: max-content;
+      }
+
+      .form-input {
+        width: 100%;
+        font-size: $small !important;
+        padding: 14px 12px !important;
+      }
+    }
+  }
+
+  .form-btn {
+    height: 50px !important;
+    width: 100% !important;
+    border-radius: 0 0 $borderRadius $borderRadius;
+    transform: translateY(-50px);
+  }
 }
 
-.form-container {
-  width: 400px;
-  height: 425px;
-  background-color: $white-300;
-  box-shadow: 0 0 2px 0 $skin-100;
-  border-radius: $borderRadius;
-  margin: 0 auto;
-  padding: $containerPadding;
-}
-
-.form-header {
-  width: 100%;
-  font-size: $large;
-  color: $black;
-  text-align: center;
-  margin: 0;
-  padding: 0;
-}
-
-.form-group {
-  width: 100%;
-}
-
-.form-label {
-  width: max-content;
-}
-
-.form-input ,:host ::ng-deep .p-inputnumber.p-component {
-  width: 100%;
-}
-
-.form-btn {
-  height: 50px !important;
-  width: 100% !important;
-  border-radius: 0 0 $borderRadius $borderRadius;
-  transform: translateY(-50px);
-}
 
 @media (max-width: 900px) {
   .form-container {
     width: 325px;
+  }
+}
+
+// pInputNumber
+:host ::ng-deep .p-inputnumber.p-component {
+  width: 100% !important;
+
+  span {
+    font-size: $small !important;
   }
 }
 

@@ -8,25 +8,26 @@
 .auth-wrapper {
   width: 100%;
   height: 100%;
+
+  .container {
+    width: 35%;
+    height: 400px;
+    background-color: $white-300;
+    border-radius: 12px;
+    border: 2px solid $skin-300;
+    gap: 40px;
+
+    .auth-header {
+      text-align: center;
+      font-size: $larger;
+    }
+
+    div .auth-input {
+        font-size: $big;
+      }
+  }
 }
 
-.container {
-  width: 35%;
-  height: 400px;
-  background-color: $white-300;
-  border-radius: 12px;
-  border: 2px solid $skin-300;
-  gap: 40px;
-}
-
-.auth-header {
-  text-align: center;
-  font-size: $larger;
-}
-
-.auth-input {
-  font-size: $big;
-}
 
 @media (max-width: 850px) {
   .container {
@@ -37,7 +38,7 @@
       font-size: $big;
     }
 
-    .auth-input {
+    div .auth-input {
       font-size: $medium;
     }
   }

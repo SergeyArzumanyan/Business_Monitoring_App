@@ -10,162 +10,159 @@ $containerPadding: 40px 40px 90px 40px;
   width: 100%;
   height: 100%;
   padding: $wrapperPadding;
-}
 
-.form-container {
-  width: 400px;
-  height: max-content;
-  background-color: $white-300;
-  box-shadow: 0 0 2px 0 $skin-100;
-  border-radius: $borderRadius;
-  margin: 0 auto;
-  padding: $containerPadding;
-}
-
-.form-header {
-  width: 100%;
-  font-size: $large;
-  color: $black;
-  text-align: center;
-  margin: 0;
-  padding: 0;
-}
-
-.form-group {
-  width: 100%;
-}
-
-.form-label {
-  width: max-content;
-}
-
-.form-input ,:host ::ng-deep .p-inputnumber.p-component {
-  width: 100%;
-}
-
-.form-btn {
-  height: 50px !important;
-  width: 100% !important;
-  border-radius: 0 0 $borderRadius $borderRadius;
-  transform: translateY(-50px);
-}
-
-.selected-products-wrapper {
-  width: 100%;
-  margin: 10px auto;
-
-  .product-info {
-    width: 75px;
-    margin: 0;
-    padding: 5px;
-    box-shadow: -4px -1px 0 5px $skin-300;
+  .form-container {
+    width: 400px;
+    height: max-content;
+    background-color: $white-300;
+    box-shadow: 0 0 2px 0 $skin-100;
     border-radius: $borderRadius;
-
-    .product-name {
-      word-break: break-word;
-      font-size: $medium;
-      color: $black;
-    }
-
-    .product-price, .product-actual-price {
-      font-size: $small;
-    }
-  }
-
-  .product-form-group {
-    width: 100px !important;
-
-    .product-quantities {
-      text-align: center;
-      font-size: $small;
-    }
-
-    .product-input {
-      width: 100px !important;
-      font-size: $small !important;
-    }
-  }
-
-  .product-actual-price-wrapper {
-    width: 90px;
     margin: 0 auto;
+    padding: $containerPadding;
 
-    .product-actual-price {
-      text-align: center;
+    .w-100.flex {
+      .form-header {
+        width: 100%;
+        font-size: $large;
+        color: $black;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+      }
+    }
+
+    .form-group {
       width: 100%;
-      word-break: break-word;
+
+      .form-label {
+        width: max-content;
+      }
+
+      .form-input ,:host ::ng-deep .p-inputnumber.p-component {
+        width: 100%;
+      }
+
+      .selected-products-wrapper {
+        width: 100%;
+        margin: 10px auto;
+
+        .product-info {
+          width: 75px;
+          margin: 0;
+          padding: 5px;
+          box-shadow: -4px -1px 0 5px $skin-300;
+          border-radius: $borderRadius;
+
+          .product-name {
+            word-break: break-word;
+            font-size: $medium;
+            color: $black;
+          }
+
+          .product-price, .product-actual-price {
+            font-size: $small;
+          }
+        }
+
+        .product-form-group {
+          width: 100px !important;
+
+          .product-quantities {
+            text-align: center;
+            font-size: $small;
+          }
+
+          .product-input {
+            width: 100px !important;
+            font-size: $small !important;
+          }
+        }
+
+        .product-actual-price-wrapper {
+          width: 90px;
+          margin: 0 auto;
+
+          .product-actual-price {
+            text-align: center;
+            width: 100%;
+            word-break: break-word;
+          }
+        }
+
+        .sweet-actual-price {
+          text-align: center;
+          font-size: $medium;
+          padding-bottom: 3px;
+          color: $black;
+          border-bottom: 1px solid $black;
+        }
+
+        .calc-container {
+          width: 320px;
+          margin: 10px auto;
+        }
+      }
+
+      .img-dropzone {
+        font-size: 16px;
+        width: 300px;
+        height: 150px;
+        display: table;
+        background-color: transparent !important;
+        border: 2px dashed #aaa;
+        margin: 25px auto;
+        border-radius: 1rem;
+
+        .drag-message {
+          width: 100%;
+          height: 100%;
+          color: $gray-100;
+          text-align: center;
+
+          &:hover {
+            cursor: default;
+          }
+        }
+      }
+
+      .img-preview {
+        width: 100%;
+
+        .img-container {
+          display: block;
+          width: 100%;
+          height: 200px;
+          position: relative;
+          margin: 0 auto;
+
+          .img-cancel {
+            top: 8px;
+            right: 10px;
+            text-align: center;
+            color: $white-300;
+          }
+
+          .selected-sweet-image {
+            display: block;
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+            margin: 0 auto;
+            object-fit: cover;
+          }
+        }
+      }
     }
   }
 
-  .sweet-actual-price {
-    text-align: center;
-    font-size: $medium;
-    padding-bottom: 3px;
-    color: $black;
-    border-bottom: 1px solid $black;
+  .form-btn {
+    height: 50px !important;
+    width: 100% !important;
+    border-radius: 0 0 $borderRadius $borderRadius;
+    transform: translateY(-50px);
   }
 }
 
-.calc-container {
-  width: 320px;
-  margin: 10px auto;
-}
-
-
-.img-dropzone {
-  font-size: 16px;
-  width: 300px;
-  height: 150px;
-  display: table;
-  background-color: transparent !important;
-  border: 2px dashed #aaa;
-  margin: 25px auto;
-  border-radius: 1rem;
-}
-
-.img-browse {
-  color: #3B82F6;
-  cursor: pointer;
-}
-
-.img-browse:hover {
-  text-decoration: underline;
-}
-
-.drag-message {
-  width: 100%;
-  height: 100%;
-  color: $gray-100;
-  text-align: center;
-}
-
-.img-container {
-  display: block;
-  width: 100%;
-  height: 200px;
-  position: relative;
-  margin: 0 auto;
-}
-
-.selected-sweet-image {
-  display: block;
-  width: 100%;
-  height: 200px;
-  border-radius: 10px;
-  margin: 0 auto;
-  object-fit: cover;
-}
-
-.img-cancel {
-  top: 8px;
-  right: 10px;
-  text-align: center;
-  color: $white-300;
-}
-
-.img-preview {
-  width: 100%;
-}
 
 :host ::ng-deep .p-multiselect.p-component,{
   z-index: 1;

@@ -86,7 +86,6 @@ export class SweetsComponent implements OnInit {
   }
 
   public deleteSweet(sweet: ISweet): void {
-
     this.confirmationService.confirm({
       message: 'Are you sure that you want to delete this sweet?',
       header: 'Delete Sweet ?',
@@ -107,13 +106,5 @@ export class SweetsComponent implements OnInit {
           });
       }
     });
-
-
-
   }
-
-  public editSweet(ID: number | null): void {
-    this.router.navigateByUrl(`sweets/${ID}`);
-  }
-
 }

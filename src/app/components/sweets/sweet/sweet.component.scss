@@ -45,6 +45,7 @@ $innerPadding: 20px;
         }
 
         .sweet-price {
+          text-align: left;
           color: $black;
           font-size: $medium;
         }
@@ -81,21 +82,20 @@ $innerPadding: 20px;
             font-weight: 700;
             background-color: $table-background;
             color: $gray-100;
-          }
 
-          th:hover {
-            background-color: $white-200;
+            &:hover {
+              background-color: $white-200;
+            }
           }
 
           td {
             font-size: $small;
             background-color: $white-400;
-          }
 
-          td:hover {
-            background-color: $white-300;
+            &:hover {
+              background-color: $white-300;
+            }
           }
-
 
           .product-name, .product-quantity {
             color: $black;
@@ -134,17 +134,8 @@ $innerPadding: 20px;
 
             .drag-message {
               color: $gray-100;
-              display: table-cell;
-              vertical-align: middle;
               text-align: center;
-
-              .img-browse {
-                color: #3B82F6;
-                cursor: pointer;
-              }
-              .img-browse:hover {
-                text-decoration: underline;
-              }
+              font-size: $small;
             }
           }
 
@@ -198,10 +189,10 @@ $innerPadding: 20px;
               font-weight: 700;
               color: $gray-100;
               transition: $animationTime;
-            }
 
-            .product-scheme-item:hover {
-              background-color: $white-200;
+              &:hover {
+                background-color: $white-200;
+              }
             }
           }
 
@@ -313,6 +304,7 @@ $innerPadding: 20px;
           }
 
           .sweet-price {
+            text-align: left;
             font-size: $small;
           }
 

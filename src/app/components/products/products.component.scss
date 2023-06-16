@@ -1,3 +1,4 @@
+
 @import "src/app/core/global-css/fonts";
 @import "src/app/core/global-css/flex";
 @import "src/app/core/global-css/buttons";
@@ -11,75 +12,77 @@ $innerPadding: 50px;
   width: 100%;
   height: 100%;
   padding: $wrapperPadding;
-}
 
-.container {
-  width: 80%;
-  min-height: 80%;
-  padding: $innerPadding;
-  margin: 0;
-  background-color: $white-300;
-  border-radius: $borderRadius;
-  box-shadow: 0 0 2px 0 $skin-100;
+  .container {
+    width: 80%;
+    min-height: 80%;
+    padding: $innerPadding;
+    margin: 0;
+    background-color: $white-300;
+    border-radius: $borderRadius;
+    box-shadow: 0 0 2px 0 $skin-100;
 
-  table {
-    width: 75%;
-    margin: 0 auto;
-    border-collapse: collapse;
+    table {
+      width: 75%;
+      margin: 0 auto;
+      border-collapse: collapse;
 
-    td, th {
-      text-align: center;
-      padding: 15px;
-      color: $black;
-      transition: $animationTime;
-      cursor: default;
-    }
+      td, th {
+        text-align: center;
+        padding: 15px;
+        color: $black;
+        transition: $animationTime;
+        cursor: default;
+      }
 
-    th {
-      font-size: $medium;
-      font-weight: 700;
-      background-color: $table-background;
-      color: $gray-100;
-    }
+      th {
+        font-size: $medium;
+        font-weight: 700;
+        background-color: $table-background;
+        color: $gray-100;
+      }
 
-    th:hover {
-      background-color: $white-200;
-    }
+      th:hover {
+        background-color: $white-200;
+      }
 
-    td {
-      font-size: $small;
-      background-color: $white-400;
-    }
+      td {
+        font-size: $small;
+        background-color: $white-400;
+      }
 
-    td:hover {
-      background-color: $white-300;
-    }
+      td:hover {
+        background-color: $white-300;
+      }
 
-    .action-td {
-      width: 50px !important;
-      cursor: pointer;
+      .action-td {
+        width: 50px !important;
+        cursor: pointer;
+      }
     }
   }
 }
+
+
 
 
 @media (max-width: 600px) {
   .wrapper {
     padding: 30px;
+
+    .container {
+      width: 100%;
+      padding: 25px 15px;
+
+      table {
+        width: 100% !important;
+
+        td, th {
+          padding: 8px !important;
+        }
+      }
+    }
   }
-
-  .container {
-    width: 100%;
-    padding: 25px 15px;
-  }
-
- table {
-   width: 100% !important;
-
-   td, th {
-     padding: 8px !important;
-   }
- }
 }
 
 

@@ -27,14 +27,15 @@
             <img
               [src]="sweet.Image"
               class="sweet-image"
-              alt="...">
+              [routerLink]="[sweet.ID]"
+              [alt]="sweet.Name">
           </div>
           <div class="sweet-card-info">
             <h3 class="sweet-name">{{ sweet.Name }}</h3>
             <span class="sweet-price">{{ sweet.TotalPrice }} AMD</span>
           </div>
           <div class="sweet-card-buttons flex justify-content-center align-items-center">
-            <button class="sweet-btn edit-sweet-btn btn-md skin-action-btn" (click)="editSweet(sweet.ID)">
+            <button class="sweet-btn edit-sweet-btn btn-md skin-action-btn" [routerLink]="[sweet.ID]">
               <span class="flex justify-content-center align-items-center">
                 More
                 <i class="pi pi-angle-right icon-md"></i>

@@ -46,7 +46,6 @@
       <div class="form-group flex col gap-15">
         <label class="form-label" for="product-price">Price</label>
         <p-inputNumber formControlName="Price"
-                       class="form-input"
                        [ngClass]="{
                         'ng-invalid ng-dirty':
                         productForm.get('Price')?.hasError('required') && submitted

@@ -93,9 +93,9 @@ export class AddSweetComponent implements OnInit {
     this.sweetForm.controls.Image.setValue( Image );
   }
 
-  public imageClear(sweet: ISweet): void {
+  public imageClear(sweet: any): void {
     sweet.Image = null
-    // this.sweetForm.patchValue( sweet );
+    this.sweetForm.patchValue( sweet );
   }
   private resetProducts(): void {
     this.sweetForm.value.Products = [];

@@ -11,36 +11,38 @@
   opacity: 0.8;
   border-bottom: 1px solid $skin-100;
   z-index: 2;
-}
 
-.header-links-container {
-  list-style: none;
-  width: 400px;
-  margin: 0;
-  padding: 0;
-
-  .header-link {
-    width: 100%;
-    height: 75px;
-    line-height: 75px;
-    font-size: $medium;
-    user-select: none;
-    text-align: center;
+  .header-logo , .header-logo > img {
+    width: 75px;
+    height: 74px;
     cursor: pointer;
-    transition: 0.15s;
   }
-  .header-link:hover {
-    background-color: $white-200;
-  }
-  .header-link:active {
-    background-color: $white-100;
-  }
-}
 
-.header-logo , .header-logo > img {
-  width: 75px;
-  height: 74px;
-  cursor: pointer;
+  .header-links-container {
+    list-style: none;
+    width: 400px;
+    margin: 0;
+    padding: 0;
+
+    .header-link {
+      width: 100%;
+      height: 75px;
+      line-height: 75px;
+      font-size: $medium;
+      user-select: none;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.15s;
+
+      &:hover {
+        background-color: $white-200;
+      }
+
+      &:active {
+        background-color: $white-100;
+      }
+    }
+  }
 }
 
 .active {
