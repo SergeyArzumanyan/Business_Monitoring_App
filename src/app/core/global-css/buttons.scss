@@ -61,206 +61,207 @@ $animationTime: 0.2s;
 .classic-link {
   color: $blue-300;
   text-decoration: none;
-}
 
-.classic-link:active {
-  color: $blue-100;
+  &:active {
+    color: $blue-100;
+  }
 }
 
 .primary {
   color: $gray-100 !important;
   background-color: $primary !important;
-}
-.primary:hover {
-  color: $black !important;
-  background-color: $skin-100 !important;
+
+  &:hover {
+    color: $black !important;
+    background-color: $skin-100 !important;
+  }
 }
 
 .red-btn {
   background-color: $red-300 !important;
   cursor: pointer;
-}
 
-.red-btn:hover {
-  background-color: $red-200 !important;
-}
+  &:hover {
+    background-color: $red-200 !important;
+  }
 
-.red-btn:active {
-  background-color: $red-100 !important;
-}
+  &:active {
+    background-color: $red-100 !important;
+  }
 
-.red-btn.btn-disabled {
-  background-color: $red-disabled !important;
-  cursor: not-allowed;
-}
+  &:focus:focus-visible {
+    box-shadow: 0 0 0 4px $gray-100 !important;
+  }
 
-.red-btn-disabled:hover,  .red-btn-disabled:active {
-  background-color: $red-disabled !important;
-}
+  &.btn-disabled {
+    background-color: $red-disabled !important;
+    cursor: not-allowed;
+  }
 
-.red-btn:focus:focus-visible {
-  box-shadow: 0 0 0 4px $gray-100 !important;
+  &.disabled:hover, &.disabled:active {
+    background-color: $red-disabled !important;
+  }
 }
 
 .blue-btn {
   background-color: $blue-300 !important;
   cursor: pointer;
-}
 
-.blue-btn:hover {
-  background-color: $blue-200 !important;
-}
+  &:hover {
+    background-color: $blue-200 !important;
+  }
 
-.blue-btn:active {
-  background-color: $blue-100 !important;
-}
+  &:active {
+    background-color: $blue-100 !important;
+  }
 
-.blue-btn.btn-disabled {
-  background-color: $blue-disabled !important;
-  cursor: not-allowed;
-}
+  &:focus:focus-visible {
+    box-shadow: 0 0 0 4px $gray-100 !important;
+  }
 
-.blue-btn-disabled:hover,  .blue-btn-disabled:active {
-  background-color: $blue-disabled !important;
-}
+  &.btn-disabled {
+    background-color: $blue-disabled !important;
+    cursor: not-allowed;
+  }
 
-.blue-btn:focus:focus-visible {
-  box-shadow: 0 0 0 4px $gray-100 !important;
+  &.disabled:hover, &.disabled:active {
+    background-color: $blue-disabled !important;
+  }
 }
 
 .skin-btn {
   background-color: $skin-300 !important;
   cursor: pointer;
-}
 
-.skin-btn:hover {
-  background-color: $skin-200 !important;
-}
+  &:hover {
+    background-color: $skin-200 !important;
+  }
 
-.skin-btn:active {
-  background-color: $skin-100 !important;
-}
+  &:active {
+    background-color: $skin-100 !important;
+  }
 
-.skin-btn.btn-disabled {
-  background-color: $skin-disabled !important;
-  cursor: not-allowed;
-}
+  &:focus:focus-visible {
+    box-shadow: 0 0 0 4px $brown-300 !important;
+  }
 
-.skin-btn-disabled:hover,  .skin-btn-disabled:active {
-  background-color: $skin-disabled !important;
-}
+  &.btn-disabled {
+    background-color: $skin-disabled !important;
+    cursor: not-allowed;
+  }
 
-.skin-btn:focus:focus-visible {
-  box-shadow: 0 0 0 4px $brown-300 !important;
+  &.disabled:hover, &.disabled:active {
+    background-color: $skin-disabled !important;
+  }
 }
 
 .brown-action-btn {
   color: $white-300 !important;
   background-color: $brown-300 !important;
   cursor: pointer;
-}
 
-.brown-action-btn:hover {
-  background-color: $brown-200 !important;
-}
+  &:hover {
+    background-color: $brown-200 !important;
+  }
 
-.brown-action-btn:active {
-  background-color: $brown-100 !important;
-}
+  &:active {
+    background-color: $brown-100 !important;
+  }
 
-.brown-action-btn.btn-disabled {
-  background-color: $brown-disabled !important;
-  cursor: not-allowed;
-}
+  &:focus:focus-visible {
+    box-shadow: 0 0 0 4px $skin-100 !important;
+  }
 
-.brown-action-btn-disabled:hover,  .brown-action-btn-disabled:active {
-  background-color: $brown-disabled !important;
-  color: $white-300 !important;
-}
+  &.btn-disabled {
+    background-color: $brown-disabled !important;
+    cursor: not-allowed;
+  }
 
-.brown-action-btn:focus:focus-visible {
-  box-shadow: 0 0 0 4px $skin-100 !important;
+  &.disabled:hover, &.disabled:active {
+    background-color: $brown-disabled !important;
+    color: $white-300 !important;
+  }
 }
 
 .green-btn {
   background-color: $green-300 !important;
   cursor: pointer;
-}
 
-.green-btn:hover {
-  background-color: $green-200 !important;
-}
+  &:hover {
+    background-color: $green-200 !important;
+  }
 
-.green-btn:active {
-  background-color: $green-100 !important;
-}
+  &:active {
+    background-color: $green-100 !important;
+  }
 
-.green-btn.btn-disabled {
-  background-color: $green-disabled !important;
-  cursor: not-allowed;
-}
+  &:focus:focus-visible {
+    box-shadow: 0 0 0 4px $gray-100 !important;
+  }
 
-.green-btn-disabled:hover,  .green-btn-disabled:active {
-  background-color: $green-disabled !important;
-}
+  &.btn-disabled {
+    background-color: $green-disabled !important;
+    cursor: not-allowed;
+  }
 
-.green-btn:focus:focus-visible {
-  box-shadow: 0 0 0 4px $gray-100 !important;
+  &.disabled:hover, &.disabled:active {
+    background-color: $green-disabled !important;
+  }
 }
 
 .gray-btn {
   background-color: $gray-300 !important;
   cursor: pointer;
-}
 
-.gray-btn:hover {
-  background-color: $gray-200 !important;
-}
+  &:hover {
+    background-color: $gray-200 !important;
+  }
 
-.gray-btn:active {
-  background-color: $gray-100 !important;
-}
+  &:active {
+    background-color: $gray-100 !important;
+  }
 
-.gray-btn.btn-disabled {
-  background-color: $gray-disabled !important;
-  cursor: not-allowed;
-}
+  &:focus:focus-visible {
+    box-shadow: 0 0 0 4px $gray-200 !important;
+  }
 
-.gray-btn-disabled:hover,  .gray-btn-disabled:active {
-  background-color: $gray-disabled !important;
-}
+  &.btn-disabled {
+    background-color: $gray-disabled !important;
+    cursor: not-allowed;
+  }
 
-.gray-btn:focus:focus-visible {
-  box-shadow: 0 0 0 4px $gray-200 !important;
+  &.disabled:hover, &.disabled:active {
+    background-color: $gray-disabled !important;
+  }
 }
 
 .skin-action-btn {
   color: $black;
   background-color: $skin-action-btn-300 !important;
   cursor: pointer;
-}
 
-.skin-action-btn:hover {
-  background-color: $skin-action-btn-200 !important;
-}
+  &:hover {
+    background-color: $skin-action-btn-200 !important;
+  }
 
-.skin-action-btn:active {
-  color: $white-400 !important;
-  background-color: $skin-action-btn-100 !important;
-}
+  &:active {
+    color: $white-400 !important;
+    background-color: $skin-action-btn-100 !important;
+  }
 
-.skin-action-btn-disabled {
-  background-color: $skin-action-btn-disabled !important;
-  cursor: not-allowed;
-}
+  &:focus:focus-visible {
+    box-shadow: 0 0 0 4px $brown-300 !important;
+  }
 
-.skin-action-btn-disabled:hover,  .skin-action-btn-disabled:active {
-  background-color: $skin-action-btn-disabled !important;
-  color: $black !important;
-}
+  &.btn-disabled {
+    background-color: $skin-action-btn-disabled !important;
+    cursor: not-allowed;
+  }
 
-.skin-action-btn:focus:focus-visible {
-  box-shadow: 0 0 0 4px $brown-300 !important;
+  &.disabled:hover, &.disabled:active {
+    background-color: $skin-action-btn-disabled !important;
+    color: $black !important;
+  }
 }
 
 @media (max-width: 650px) {

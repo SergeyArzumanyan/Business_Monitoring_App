@@ -92,10 +92,13 @@
           <div class="img-dropzone"
                imgDrag
                (file)="imageDropped($event)">
-            <div class="drag-message">
-              Drag your image here or
+            <div class="drag-message flex justify-content-center align-items-center gap-5">
+              <span>Drag your image here or</span>
               <a class="img-browse"
-                 (click)="imgInput.click()">browse</a>
+                 (click)="imgInput.click()">
+                browse
+              </a>
+              <i class="pi pi-image icon-big"></i>
             </div>
           </div>
 

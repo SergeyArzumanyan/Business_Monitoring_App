@@ -6,17 +6,17 @@ $large: 24px;
 $larger: 28px;
 
 .icon-xs {
-  font-size: $Xsmall;
+  font-size: $Xsmall !important;
 }
 
 .icon-sm {
-  font-size: $small;
+  font-size: $small !important;
 }
 
 .icon-md {
-  font-size: $medium;
+  font-size: $medium !important;
 }
 
 .icon-big {
-  font-size: $big;
+  font-size: $big !important;
 }
