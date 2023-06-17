@@ -55,7 +55,7 @@ $containerPadding: 40px;
 
 @media (max-width: 900px) {
   .form-container {
-    width: 325px;
+    width: 325px !important;
   }
 }
 

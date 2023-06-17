@@ -171,16 +171,16 @@ $containerPadding: 40px 40px 90px 40px;
 
 @media (max-width: 900px) {
   .form-container {
-    width: 325px;
+    width: 325px !important;
   }
 
   .product {
-    width: 270px;
+    width: 270px !important;
     margin: 0 auto;
   }
 
   .calc-container {
-    width: 250px;
+    width: 250px !important;
   }
 
   .product-info, .product-form-group , .product-actual-price-wrapper {
@@ -189,8 +189,8 @@ $containerPadding: 40px 40px 90px 40px;
   }
 
   .img-dropzone {
-    width: 100%;
-    padding: 10px;
+    width: 100% !important;
+    padding: 10px !important;
   }
 }
 
