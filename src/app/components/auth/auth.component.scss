@@ -31,8 +31,8 @@
 
 @media (max-width: 850px) {
   .container {
-    width: 75%;
-    height: 300px;
+    width: 75% !important;
+    height: 300px !important;
 
     .auth-header {
       font-size: $big;

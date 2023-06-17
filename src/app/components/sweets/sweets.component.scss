@@ -129,25 +129,24 @@
 
 @media (max-width: 900px) {
   .container {
-    padding: 30px;
+    padding: 30px !important;
     grid-template-columns: 1fr !important;
-    gap: 75px;
+    gap: 75px !important;
 
     .sweet-card {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      height: 350px;
-      margin: 0 auto;
+      height: 350px !important;
+      margin: 0 auto !important;
       box-shadow: 2.5px 3.5px 0 6px $skin-100 !important;
 
       .sweet-image-wrapper, .sweet-image-wrapper > .sweet-image {
-        height: 150px;
+        height: 165px !important;
       }
 
       .sweet-card-buttons {
-        align-self: flex-end;
-        height: 60px;
+        height: 60px !important;
       }
     }
   }
