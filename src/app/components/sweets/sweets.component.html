@@ -23,7 +23,11 @@
       <div class="container">
 
         <div class="sweet-card" *ngFor="let sweet of sweets">
-          <div class="sweet-image-wrapper">
+          <div class="sweet-image-wrapper flex justify-content-center align-items-center">
+            <div class="image-more flex justify-content-center align-items-center">
+              <span>View More</span>
+              <i class="pi pi-angle-right icon-md"></i>
+            </div>
             <img
               [src]="sweet.Image"
               class="sweet-image"
