@@ -119,7 +119,7 @@
 
 @media (min-width: 1600px) {
   .sweet-card {
-    height: 500px;
+    height: 500px !important;
 
     .sweet-image-wrapper, .sweet-image-wrapper > .sweet-image {
       height: 325px !important;
@@ -139,7 +139,7 @@
       justify-content: space-between;
       height: 350px;
       margin: 0 auto;
-      box-shadow: 3px 3px 0 6px $skin-100;
+      box-shadow: 2.5px 3.5px 0 6px $skin-100 !important;
 
       .sweet-image-wrapper, .sweet-image-wrapper > .sweet-image {
         height: 150px;
@@ -151,17 +151,11 @@
       }
     }
   }
-
-
 }
 
 @media (max-width: 650px) {
   .no-data-container {
     width: 80% !important;
-  }
-
-  .delete-sweet-btn {
-    box-shadow: 4px 4px 0 4.5px $brown-300;
   }
 }
 
