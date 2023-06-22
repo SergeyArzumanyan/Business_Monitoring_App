@@ -14,6 +14,7 @@ import { MultiSelectModule } from "primeng/multiselect";
 import { KeyFilterModule } from "primeng/keyfilter";
 import { TooltipModule } from "primeng/tooltip";
 import { DragDirective } from "@Core/directives";
+import { InputMaskModule } from "primeng/inputmask";
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { DragDirective } from "@Core/directives";
     MultiSelectModule,
     KeyFilterModule,
     TooltipModule,
+    InputMaskModule,
   ],
   exports: [
     PasswordModule,
@@ -49,7 +51,8 @@ import { DragDirective } from "@Core/directives";
     MultiSelectModule,
     KeyFilterModule,
     TooltipModule,
-    DragDirective
+    DragDirective,
+    InputMaskModule,
   ]
 })
 export class SharedModule { }

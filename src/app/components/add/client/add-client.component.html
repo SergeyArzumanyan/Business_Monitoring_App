@@ -1,0 +1,69 @@
+<div class="form-wrapper flex justify-content-center align-items-center">
+  <form>
+    <div class="form-container flex col align-items-center gap-30">
+
+      <div class="w-100 flex">
+        <button class="rounded-btn skin-btn" type="button" [routerLink]="['add']"><i class="pi pi-arrow-left"></i></button>
+        <h3 class="form-header">Add Client</h3>
+      </div>
+
+      <div class="form-group flex col gap-15">
+        <label class="form-label" for="Name">Name</label>
+        <input id="Name"
+               class="form-input p-inputtext-sm"
+               [ngClass]="{}"
+               type="text"
+               pInputText
+               placeholder="Enter client's name...">
+
+<!--        <small *ngIf="productForm.get('Name')?.hasError('required')  && submitted-->
+<!--                        || !productForm.value.Name?.trim() && submitted"-->
+<!--               class="p-error">-->
+<!--          Name is required.-->
+<!--        </small>-->
+
+<!--        <small *ngIf="productForm.get('Name')?.hasError('minlength')  && submitted"-->
+<!--               class="p-error">-->
+<!--          Name is too short.-->
+<!--        </small>-->
+
+<!--        <small *ngIf="productForm.get('Name')?.hasError('maxlength')  && submitted"-->
+<!--               class="p-error">-->
+<!--          Name is too long.-->
+<!--        </small>-->
+      </div>
+
+      <div class="form-group flex col gap-15">
+        <label class="form-label" for="Surname">Surname</label>
+        <input id="Surname"
+               class="form-input p-inputtext-sm"
+               [ngClass]="{}"
+               type="text"
+               pInputText
+               placeholder="Enter client's surname...">
+      </div>
+
+      <div class="form-group flex col gap-15">
+        <label for="PhoneNumber">PhoneNumber</label>
+        <p-inputMask mask="999-99-99-99-99" placeholder="+374 91 xx xx xx" id="PhoneNumber"></p-inputMask>
+      </div>
+
+      <div class="form-group flex col gap-15">
+        <label class="form-label" for="Address">Address</label>
+        <input id="Address"
+               class="form-input p-inputtext-sm"
+               [ngClass]="{}"
+               type="text"
+               pInputText
+               placeholder="Enter client's address...">
+      </div>
+
+    </div>
+    <button type="submit" class="btn-md skin-btn form-btn">
+      <span class="flex justify-content-center align-items-center gap-5">
+        Add
+        <i class="fa-solid fa-square-plus icon-md"></i>
+      </span>
+    </button>
+  </form>
+</div>

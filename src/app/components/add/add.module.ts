@@ -8,6 +8,7 @@ import {
   AddComponent,
   AddSweetComponent,
   AddProductComponent,
+  AddClientComponent,
 } from "@Components/add";
 
 import { SharedModule } from "@Shared/shared.module";
@@ -17,13 +18,14 @@ import { SharedModule } from "@Shared/shared.module";
   declarations: [
     AddProductComponent,
     AddSweetComponent,
-    AddComponent
+    AddComponent,
+    AddClientComponent,
   ],
-  imports: [
-    CommonModule,
-    AddRoutingModule,
-    ReactiveFormsModule,
-    SharedModule,
-  ]
+    imports: [
+        CommonModule,
+        AddRoutingModule,
+        ReactiveFormsModule,
+        SharedModule,
+    ]
 })
 export class AddModule { }
