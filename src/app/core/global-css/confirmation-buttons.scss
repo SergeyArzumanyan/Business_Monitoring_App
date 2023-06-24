@@ -1,5 +1,7 @@
 @import "src/app/core/global-css/colors";
 
+//    No Button Start
+
 :host ::ng-deep .p-element.p-ripple.p-confirm-dialog-reject.p-button.p-component {
   background-color: $skin-action-btn-300 !important;
   color: $black;
@@ -16,6 +18,11 @@
 :host ::ng-deep .p-element.p-ripple.p-confirm-dialog-reject.p-button.p-component:focus:focus-visible, :host ::ng-deep .p-element.p-ripple.p-confirm-dialog-reject.p-button.p-component:focus {
   box-shadow: 0 0 0 4px $brown-300 !important;
 }
+
+//    No Button End
+
+
+//    Yes Button Start
 
 :host ::ng-deep .p-element.p-ripple.p-confirm-dialog-accept.p-button.p-component {
   background-color: $brown-300 !important;
@@ -34,3 +41,5 @@
 :host ::ng-deep .p-element.p-ripple.p-confirm-dialog-accept.p-button.p-component:focus:focus-visible, :host ::ng-deep .p-element.p-ripple.p-confirm-dialog-accept.p-button.p-component:focus {
   box-shadow: 0 0 0 4px $skin-100 !important;
 }
+
+//    Yes Button End

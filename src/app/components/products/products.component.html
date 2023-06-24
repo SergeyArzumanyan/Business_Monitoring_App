@@ -109,7 +109,7 @@
 
   <ng-template pTemplate="footer">
     <button type="button"
-            class="btn-md brown-action-btn"
+            class="btn-md brown-action-btn dialog-btn"
             (click)="hideProductDialog()">
       <span class="flex justify-content-center align-items-center gap-5">
         Cancel
@@ -118,7 +118,7 @@
     </button>
 
     <button type="submit"
-            class="btn-md skin-action-btn"
+            class="btn-md skin-action-btn dialog-btn"
             [disabled]="productForm.pristine"
             [ngClass]="{'skin-action-btn-disabled': productForm.pristine}"
             (click)="saveProduct()">

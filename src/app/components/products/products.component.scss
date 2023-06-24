@@ -1,4 +1,3 @@
-
 @import "src/app/core/global-css/fonts";
 @import "src/app/core/global-css/flex";
 @import "src/app/core/global-css/buttons";
@@ -168,5 +167,12 @@ $innerPadding: 50px;
         font-size: 14px !important;
       }
     }
+  }
+}
+
+:host ::ng-deep .p-dialog-footer {
+  .dialog-btn {
+    width: 130px !important;
+    height: 40px !important;
   }
 }
