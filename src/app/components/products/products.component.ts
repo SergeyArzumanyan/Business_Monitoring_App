@@ -28,8 +28,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
   public products: IProduct[] | null = [];
   private product: IProduct | null = null;
 
-  private unsubscribe$: Subject<void> = new Subject<void>();
-
   public ProductDialog: boolean = false;
   public productForm: FormGroup<IProductForm> = new FormGroup<IProductForm>({
     Name: new FormControl<string | null>(null, [
@@ -43,6 +41,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
       ]),
   });
   public submitted: boolean = false;
+
+  private unsubscribe$: Subject<void> = new Subject<void>();
 
   constructor(
     private Request: RequestsService,
@@ -64,9 +64,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   private getProducts(): void {
     this.Request.getProducts()
-      .pipe(
-        takeUntil(this.unsubscribe$)
-      )
+      .pipe(takeUntil(this.unsubscribe$))
       .subscribe({
         next: (products: IProduct[] | null) => {
           this.products = this.Request.makeArray(products);
@@ -85,8 +83,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
       icon: 'pi pi-trash icon-big',
       accept: () => {
       this.Deletion.deleteItem('products', 'ID', product.ID)
+        .pipe(take(1))
         .subscribe((action: firebaseItemDeletion[]) => {
-          this.Deletion.removeItem('products', action[0].payload.key, 'Product');
+          this.Deletion.removeItem('products', action[0].payload.key, 'Product', true);
         });
       }
     });

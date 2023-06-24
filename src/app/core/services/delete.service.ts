@@ -20,10 +20,12 @@ export class DeleteService {
       .pipe(take(1))
   }
 
-  public removeItem(items: string, key: string, item: string): void {
+  public removeItem(items: string, key: string, item: string, showToast: boolean): void {
     this.db.object(`/${items}/${key}`).remove()
       .then(() => {
-        this.toastService.showToast('success', 'Done', `${item} Deleted Successfully.`);
+        if (showToast) {
+          this.toastService.showToast('success', 'Done', `${item} Deleted Successfully.`);
+        }
       })
       .catch(() => {
         this.toastService.showToast('error', 'Error', 'Something Went Wrong.');

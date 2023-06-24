@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Subject, takeUntil } from "rxjs";
 
 import {
   ISweet,
@@ -18,7 +19,7 @@ import {
   templateUrl: './add-sweet.component.html',
   styleUrls: ['./add-sweet.component.scss']
 })
-export class AddSweetComponent implements OnInit {
+export class AddSweetComponent implements OnInit, OnDestroy {
 
   public isEditMode: boolean = false;
 
@@ -35,6 +36,8 @@ export class AddSweetComponent implements OnInit {
     Products: new FormControl([], [Validators.required]),
   })
 
+  private unsubscribe: Subject<void> = new Subject<void>();
+
   constructor(
     private Request: RequestsService,
     private Send: SendingDataService,
@@ -45,8 +48,14 @@ export class AddSweetComponent implements OnInit {
     this.requestProducts();
   }
 
+  ngOnDestroy(): void {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
+  }
+
   private requestProducts(): void {
     this.Request.getProducts()
+      .pipe(takeUntil(this.unsubscribe))
       .subscribe({
         next: (products: IProduct[] | null) => {
           this.products = products ? this.Request.makeArray(products) : [];

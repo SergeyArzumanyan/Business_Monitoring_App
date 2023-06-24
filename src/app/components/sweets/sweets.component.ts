@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { HttpErrorResponse } from "@angular/common/http";
-import { Subscription } from "rxjs";
+import { Subject, Subscription, takeUntil } from "rxjs";
 
 import {
   ISweet,
@@ -22,12 +22,14 @@ import { ConfirmationService } from "primeng/api";
   templateUrl: './sweets.component.html',
   styleUrls: ['./sweets.component.scss']
 })
-export class SweetsComponent implements OnInit {
+export class SweetsComponent implements OnInit, OnDestroy {
 
   public sweets: ISweet[] = [];
   private subscribeToSweetChanges: Subscription | null = null;
 
   public stopLoading: boolean = false;
+
+  private unsubscribe$: Subject<void> = new Subject<void>();
 
   constructor(
     private Request: RequestsService,
@@ -42,8 +44,14 @@ export class SweetsComponent implements OnInit {
     this.requestSweets();
   }
 
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
+
   private requestSweets(): void {
     this.subscribeToSweetChanges = this.Request.getSweets()
+      .pipe(takeUntil(this.unsubscribe$))
       .subscribe({
         next: (sweets: ISweet[] | null) => {
           this.sweets = sweets ? this.Request.makeArray(sweets) : [];
@@ -69,6 +77,7 @@ export class SweetsComponent implements OnInit {
           const productQuantity = product.Quantity;
 
           this.Request.getProductsBasedOnSweet(product.ProductID)
+            .pipe(takeUntil(this.unsubscribe$))
             .subscribe({
               next: (product: IProduct[]) => {
                 this.calculationService.calculateSweetPriceInSweets(sweet, product, productQuantity);
@@ -89,8 +98,9 @@ export class SweetsComponent implements OnInit {
       icon: 'pi pi-trash icon-big',
       accept: () => {
         this.Deletion.deleteItem('sweets', 'ID', sweet.ID)
+          .pipe(takeUntil(this.unsubscribe$))
           .subscribe((action: firebaseItemDeletion[]) => {
-            this.Deletion.removeItem('sweets', action[0].payload.key, 'Sweet');
+            this.Deletion.removeItem('sweets', action[0].payload.key, 'Sweet', false);
           });
       }
     });

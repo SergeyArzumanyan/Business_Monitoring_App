@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
-import { take } from "rxjs";
+import { Subject, take, takeUntil } from "rxjs";
 import { FormControl, FormGroup } from "@angular/forms";
 
 import {
@@ -25,7 +25,7 @@ import { ConfirmationService } from "primeng/api";
   templateUrl: './sweet.component.html',
   styleUrls: ['./sweet.component.scss']
 })
-export class SweetComponent implements OnInit {
+export class SweetComponent implements OnInit, OnDestroy {
 
   public isEditMode: boolean = false;
   public sweet!: ISweet;
@@ -33,6 +33,8 @@ export class SweetComponent implements OnInit {
   private alreadyLoadedProducts: boolean = false;
   public submitted: boolean = false;
   private initialSweetImage: string | null = null; // for keeping first downloaded Image (this is for not making additional network requests.)
+
+  private unsubscribe$: Subject<void> = new Subject<void>();
 
   public editSweetForm: FormGroup<ISweetFormEditing> = new FormGroup<ISweetFormEditing>({
     Image: new FormControl<string | null>(null),
@@ -55,6 +57,11 @@ export class SweetComponent implements OnInit {
     this.getSweet();
   }
 
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
+
   public getSweet(): void {
     const sweetID = Number(this.route.snapshot.paramMap.get('sweet-id'));
 
@@ -63,6 +70,7 @@ export class SweetComponent implements OnInit {
       return;
     }
     this.Request.getSweet(sweetID)
+      .pipe(takeUntil(this.unsubscribe$))
       .subscribe({
         next: (data: ISweet[]) => {
           if (data.length === 0) {
@@ -71,7 +79,7 @@ export class SweetComponent implements OnInit {
           this.sweet = data[0];
           if (!this.alreadyLoadedProducts) {
             this.getProductsBasedOnSweet(this.sweet.Products!);
-          } else {
+          } else if (this.sweet) {
             this.calculationService.calculateSweetPriceAfterEdit(this.sweet, this.sweetProducts);
           }
         },
@@ -93,7 +101,7 @@ export class SweetComponent implements OnInit {
             this.Deletion.deleteItem('sweets', 'ID', sweet.ID)
               .pipe(take(1))
               .subscribe((action: firebaseItemDeletion[]) => {
-                this.Deletion.removeItem('sweets', action[0].payload.key, 'Sweet');
+                this.Deletion.removeItem('sweets', action[0].payload.key, 'Sweet', true);
               })
           });
       }

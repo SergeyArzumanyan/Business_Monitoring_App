@@ -5,10 +5,12 @@ import {
   ISweet,
   ISweetProduct,
   IProduct,
+  firebaseItemDeletion,
 } from "@Core/interfaces";
 
 import {
   RequestsService,
+  DeleteService,
   ToastService,
 } from "@Core/services";
 
@@ -19,6 +21,7 @@ export class CalculationService {
 
   constructor(
     private Request: RequestsService,
+    private Deletion: DeleteService,
     private toastService: ToastService,
   ) {}
 
@@ -44,14 +47,23 @@ export class CalculationService {
 
 //      For Sweets Page Calculations
   public calculateSweetPriceInSweets(sweet: ISweet, product: IProduct[], productQuantity: number): void {
-    !sweet.TotalPrice ?
-      sweet.TotalPrice = product[0].Price * productQuantity :
-      sweet.TotalPrice += product[0].Price * productQuantity;
+    if (product.length > 0) {
+      !sweet.TotalPrice ?
+        sweet.TotalPrice = product[0].Price * productQuantity :
+        sweet.TotalPrice += product[0].Price * productQuantity;
+    } else {
+      this.Deletion.deleteItem('sweets', 'ID', sweet.ID)
+        .pipe(take(1))
+        .subscribe((action: firebaseItemDeletion[]) => {
+          this.Deletion.removeItem('sweets', action[0].payload.key, 'Sweet', false);
+        });
+    }
   }
 
   //    For Sweet Inner Page Calculation
   public calculateSweetPriceAfterEdit(sweet: ISweet, sweetProducts: IProduct[] | null): void {
     sweet.TotalPrice = 0;
+
     for (const product of sweetProducts!) {
       !sweet.TotalPrice ?
         sweet.TotalPrice = product.TotalPrice :
