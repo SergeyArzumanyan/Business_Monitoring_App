@@ -3,19 +3,19 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { take } from "rxjs";
 import { FormControl, FormGroup } from "@angular/forms";
 
-import { AngularFireDatabase } from "@angular/fire/compat/database";
-
 import {
   ISweet,
   IProduct,
   ISweetProduct,
-  ISweetFormEditing
+  ISweetFormEditing,
+  firebaseItemDeletion,
 } from "@Core/interfaces";
 import {
   RequestsService,
   EditService,
   DeleteService,
-  ToastService
+  ToastService,
+  CalculationService,
 } from "@Core/services";
 
 import { ConfirmationService } from "primeng/api";
@@ -44,13 +44,12 @@ export class SweetComponent implements OnInit {
     private Request: RequestsService,
     private Deletion: DeleteService,
     private Edition: EditService,
-    private db: AngularFireDatabase,
     private route: ActivatedRoute,
     private router: Router,
     private confirmationService: ConfirmationService,
-    private toastService: ToastService
-  ) {
-  }
+    private toastService: ToastService,
+    private calculationService: CalculationService,
+  ) {}
 
   ngOnInit(): void {
     this.getSweet();
@@ -58,6 +57,7 @@ export class SweetComponent implements OnInit {
 
   public getSweet(): void {
     const sweetID = Number(this.route.snapshot.paramMap.get('sweet-id'));
+
     if (isNaN(sweetID)) {
       this.router.navigateByUrl('sweets');
       return;
@@ -70,9 +70,9 @@ export class SweetComponent implements OnInit {
           }
           this.sweet = data[0];
           if (!this.alreadyLoadedProducts) {
-            this.getProductsBasedOnSweet(this.sweet.Products);
+            this.getProductsBasedOnSweet(this.sweet.Products!);
           } else {
-            this.calculateSweetPriceAfterEdit(this.sweetProducts);
+            this.calculationService.calculateSweetPriceAfterEdit(this.sweet, this.sweetProducts);
           }
         },
         error: () => {
@@ -92,17 +92,8 @@ export class SweetComponent implements OnInit {
           .then(() => {
             this.Deletion.deleteItem('sweets', 'ID', sweet.ID)
               .pipe(take(1))
-              .subscribe((actions: any) => {
-                actions.forEach((action: any) => {
-                  const key = action.payload.key;
-                  this.db.object(`/sweets/${key}`).remove()
-                    .then(() => {
-                      this.toastService.showToast('success', 'Done', 'Sweet Deleted Successfully.');
-                    })
-                    .catch(() => {
-                      this.toastService.showToast('error', 'Error', 'Something Went Wrong.');
-                    });
-                });
+              .subscribe((action: firebaseItemDeletion[]) => {
+                this.Deletion.removeItem('sweets', action[0].payload.key, 'Sweet');
               })
           });
       }
@@ -115,55 +106,48 @@ export class SweetComponent implements OnInit {
     this.editSweetForm.patchValue(this.sweet);
   }
 
-  private getProductsBasedOnSweet(productsOfSweet: ISweetProduct[] | null | undefined): void {
-    this.sweetProducts = [];
-    if (productsOfSweet) {
-      for (const productOfSweet of productsOfSweet) {
-        const productQuantity = productOfSweet.Quantity;
+  public cancelEditing(): void {
+    this.isEditMode = false;
+    this.editSweetForm.reset();
+    this.sweet.Image = this.initialSweetImage; // for keeping first downloaded Image (this is for not making additional network requests.
+  }
 
-        this.Request.getProductsBasedOnSweet(productOfSweet.ProductID)
-          .pipe(take(1))
-          .subscribe({
-            next: (product: IProduct[]) => {
-              this.calculateProductProperties(product[0], productQuantity)
+  public saveEditedSweet(): void {
 
-              this.sweetProducts?.push(product[0]);
-              this.calculateSweetPrice(product[0].TotalPrice!);
+    this.editSweetForm.value.Products = this.EditProductsForSweet();
 
-            }
+    this.Edition.editItem('sweets', 'ID', this.sweet.ID)
+      .pipe(take(1))
+      .subscribe((items: any) => {
+          this.Edition.updateCurrentItem('sweets', this.editSweetForm.value, items[0].key)
+          .then(() => {
+            this.toastService.showToast('success', 'Done', 'Sweet Edited Successfully.');
+            this.getProductsBasedOnSweet(this.editSweetForm.value.Products!);
+
+            this.calculationService.calculateSweetPriceAfterEdit(this.sweet, this.sweetProducts);
           })
-      }
+          .catch(() => {
+            this.toastService.showToast('error', 'Error', 'Something Went Wrong.');
+          });
+      });
+    this.isEditMode = false;
+    this.editSweetForm.markAsPristine();
+  }
+
+  private getProductsBasedOnSweet(productsOfSweet: ISweetProduct[]): void {
+    this.sweetProducts = [];
+
+    if (productsOfSweet) {
+      this.calculationService.calcTotalSweetPrice(this.sweet, productsOfSweet, this.sweetProducts);
       this.alreadyLoadedProducts = true;
     } else {
       return;
     }
   }
 
-  private calculateProductProperties(product: IProduct, quantity: number): void {
-      product.Quantity = quantity;
-      product.TotalPrice = quantity * product.Price;
-}
-
-  private calculateSweetPrice(productTotalPrice: number): void {
-    !this.sweet.TotalPrice ?
-      this.sweet.TotalPrice = productTotalPrice :
-      this.sweet.TotalPrice += productTotalPrice!;
-  }
-
-  private calculateSweetPriceAfterEdit(sweetProducts: IProduct[] | null): void {
-    this.sweet.TotalPrice = 0;
-    for (const product of sweetProducts!) {
-      !this.sweet.TotalPrice ?
-        this.sweet.TotalPrice = product.TotalPrice :
-        this.sweet.TotalPrice += product.TotalPrice!;
-    }
-  }
-
-
-  public cancelEditing(): void {
-    this.isEditMode = false;
-    this.editSweetForm.reset();
-    this.sweet.Image = this.initialSweetImage; // for keeping first downloaded Image (this is for not making additional network requests.
+  public imageDropped(Image: any): void {
+    this.editSweetForm.markAsDirty();
+    this.editSweetForm.controls.Image.setValue(Image);
   }
 
   public onFileChange(event: any) {
@@ -183,11 +167,6 @@ export class SweetComponent implements OnInit {
       };
 
     }
-  }
-
-  public imageDropped(Image: any): void {
-    this.editSweetForm.markAsDirty();
-    this.editSweetForm.controls.Image.setValue(Image);
   }
 
   public imageClear(sweet: ISweet): void {
@@ -211,24 +190,4 @@ export class SweetComponent implements OnInit {
     return EditedProductsForSending;
   }
 
-  public saveEditedSweet(): void {
-
-    this.editSweetForm.value.Products = this.EditProductsForSweet();
-
-    this.Edition.editItem('sweets', 'ID', this.sweet.ID)
-      .pipe(take(1))
-      .subscribe((items: any) => {
-        this.db.list('/sweets').update(items[0].key, this.editSweetForm.value)
-          .then(() => {
-            this.toastService.showToast('success', 'Done', 'Sweet Edited Successfully.');
-            this.getProductsBasedOnSweet(this.editSweetForm.value.Products);
-            this.calculateSweetPriceAfterEdit(this.sweetProducts);
-        })
-          .catch(() => {
-            this.toastService.showToast('error', 'Error', 'Something Went Wrong.');
-          });
-      });
-    this.isEditMode = false;
-    this.editSweetForm.markAsPristine();
-  }
 }

@@ -6,16 +6,16 @@ import { Subject, take, takeUntil } from "rxjs";
 import { onlyPositiveNumbers } from "@Core/validators";
 import {
   IProduct,
-  IProductForm
+  IProductForm,
+  firebaseItemDeletion,
 } from "@Core/interfaces";
 import {
   RequestsService,
   EditService,
   DeleteService,
-  ToastService
+  ToastService,
 } from "@Core/services";
 
-import { AngularFireDatabase } from "@angular/fire/compat/database";
 import { ConfirmationService } from "primeng/api";
 
 @Component({
@@ -48,10 +48,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
     private Request: RequestsService,
     private confirmationService: ConfirmationService,
     private router: Router,
-    private db: AngularFireDatabase,
     private Deletion: DeleteService,
     private Edition: EditService,
-    private toastService: ToastService
+    private toastService: ToastService,
   ) {}
 
   ngOnInit(): void {
@@ -86,17 +85,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
       icon: 'pi pi-trash icon-big',
       accept: () => {
       this.Deletion.deleteItem('products', 'ID', product.ID)
-        .subscribe((actions: any) => {
-          actions.forEach((action: any) => {
-            const key = action.payload.key;
-            this.db.object(`/products/${key}`).remove()
-              .then(() => {
-                this.toastService.showToast('success', 'Done', 'Product Deleted Successfully.');
-              })
-              .catch(() => {
-                this.toastService.showToast('error', 'Error', 'Something Went Wrong.');
-              });
-          });
+        .subscribe((action: firebaseItemDeletion[]) => {
+          this.Deletion.removeItem('products', action[0].payload.key, 'Product');
         });
       }
     });
@@ -120,7 +110,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
       this.Edition.editItem('products', 'ID', this.product?.ID)
         .pipe(take(1))
         .subscribe((items: any) => {
-          this.db.list('/products').update(items[0].key, this.productForm.value)
+          this.Edition.updateCurrentItem('products', this.productForm.value, items[0].key)
             .then(() => {
               this.toastService.showToast('success', 'Done', 'Product Edited Successfully.');
             })

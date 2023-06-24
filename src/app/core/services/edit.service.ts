@@ -13,4 +13,8 @@ export class EditService {
   public editItem(itemsUrl: string, key: string, value: number): Observable<any> {
     return this.db.list(`/${itemsUrl}`, ref => ref.orderByChild(key).equalTo(value)).snapshotChanges();
   }
+
+  public updateCurrentItem(items: string, newValue: any, itemsKey: string): Promise<void> {
+    return this.db.list(`/${items}`).update(itemsKey, newValue);
+  }
 }

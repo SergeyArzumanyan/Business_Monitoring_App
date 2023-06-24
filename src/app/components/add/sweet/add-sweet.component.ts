@@ -38,7 +38,7 @@ export class AddSweetComponent implements OnInit {
   constructor(
     private Request: RequestsService,
     private Send: SendingDataService,
-    private toastService: ToastService
+    private toastService: ToastService,
   ) {}
 
   ngOnInit(): void {

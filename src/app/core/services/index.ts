@@ -4,3 +4,4 @@ export * from './edit.service';
 export * from './requests.service';
 export * from './sending-data.service';
 export * from './toast.service';
+export * from './calculation.service';

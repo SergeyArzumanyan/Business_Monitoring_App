@@ -5,15 +5,16 @@ import { Subscription } from "rxjs";
 
 import {
   ISweet,
-  IProduct
+  IProduct,
+  firebaseItemDeletion,
 } from "@Core/interfaces";
 import {
   RequestsService,
   DeleteService,
-  ToastService
+  ToastService,
+  CalculationService,
 } from "@Core/services";
 
-import { AngularFireDatabase } from "@angular/fire/compat/database";
 import { ConfirmationService } from "primeng/api";
 
 @Component({
@@ -32,9 +33,9 @@ export class SweetsComponent implements OnInit {
     private Request: RequestsService,
     private Deletion: DeleteService,
     private router: Router,
-    private db: AngularFireDatabase,
     private confirmationService: ConfirmationService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private calculationService: CalculationService,
   ) {}
 
   ngOnInit(): void {
@@ -70,11 +71,7 @@ export class SweetsComponent implements OnInit {
           this.Request.getProductsBasedOnSweet(product.ProductID)
             .subscribe({
               next: (product: IProduct[]) => {
-                if (!sweet.TotalPrice) {
-                  sweet.TotalPrice = product[0].Price * productQuantity;
-                } else {
-                  sweet.TotalPrice += product[0].Price * productQuantity;
-                }
+                this.calculationService.calculateSweetPriceInSweets(sweet, product, productQuantity);
               },
               error: (err: HttpErrorResponse) => {
                 this.toastService.showToast('error', 'Error', err.message);
@@ -92,17 +89,8 @@ export class SweetsComponent implements OnInit {
       icon: 'pi pi-trash icon-big',
       accept: () => {
         this.Deletion.deleteItem('sweets', 'ID', sweet.ID)
-          .subscribe((actions: any) => {
-            actions.forEach((action: any) => {
-              const key = action.payload.key;
-              this.db.object(`/sweets/${key}`).remove()
-                .then(() => {
-                  this.toastService.showToast('success', 'Done', 'Sweet Deleted Successfully.');
-                })
-                .catch(() => {
-                  this.toastService.showToast('error', 'Error', 'Something Went Wrong.');
-                });
-            });
+          .subscribe((action: firebaseItemDeletion[]) => {
+            this.Deletion.removeItem('sweets', action[0].payload.key, 'Sweet');
           });
       }
     });
