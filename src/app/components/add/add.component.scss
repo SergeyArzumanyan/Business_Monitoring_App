@@ -26,7 +26,7 @@ $links-gap: 25px;
     }
 
     .links {
-      flex-direction: column;
+      flex-wrap: wrap;
       width: 100%;
       height: 100%;
       margin: 0;
@@ -44,17 +44,20 @@ $links-gap: 25px;
 
 @media (max-width: 900px) {
   .wrapper {
-    padding: 50px 0;
-  }
+    padding: 50px 30px !important;
 
-  .container {
-    width: 100%;
-    height: 60% !important;
+    .container {
+      width: 100% !important;
+      height: 60% !important;
 
-    .links {
-      .link-btn {
-        width: 100% !important;
-        height: 50px !important;
+      .links {
+        flex-direction: column !important;
+        flex-wrap: nowrap !important;
+
+        .link-btn {
+          width: 100% !important;
+          height: 50px !important;
+        }
       }
     }
   }

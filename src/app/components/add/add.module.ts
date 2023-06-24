@@ -9,6 +9,7 @@ import {
   AddSweetComponent,
   AddProductComponent,
   AddClientComponent,
+  AddOrderComponent,
 } from "@Components/add";
 
 import { SharedModule } from "@Shared/shared.module";
@@ -20,6 +21,7 @@ import { SharedModule } from "@Shared/shared.module";
     AddSweetComponent,
     AddComponent,
     AddClientComponent,
+    AddOrderComponent,
   ],
     imports: [
         CommonModule,

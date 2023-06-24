@@ -11,7 +11,7 @@ $containerPadding: 40px;
 
   .form-container {
     width: 400px;
-    height: 650px;
+    height: 500px;
     background-color: $white-300;
     box-shadow: 0 0 2px 0 $skin-100;
     border-radius: $borderRadius;
@@ -60,15 +60,27 @@ $containerPadding: 40px;
 }
 
 // pInputNumber
-:host ::ng-deep .p-inputnumber.p-component, :host ::ng-deep .p-inputmask.p-component {
+:host ::ng-deep .p-inputnumber.p-component {
   width: 100% !important;
-  font-size: $small !important;
 
   span {
     font-size: $small !important;
   }
 }
 
+:host ::ng-deep .p-inputnumber-input.p-component {
+  width: 100% !important;
+  font-size: $small !important;
+}
+
 :host ::ng-deep .pi.pi-arrow-left {
   font-size: 12px;
 }
+
+// pMultiSelect
+:host ::ng-deep .p-multiselect.p-component {
+  font-size: $small !important;
+  font-weight: $normal !important;
+  width: 100%;
+}
+

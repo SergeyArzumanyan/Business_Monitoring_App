@@ -6,6 +6,7 @@ import {
   AddProductComponent,
   AddSweetComponent,
   AddClientComponent,
+  AddOrderComponent,
 } from "@Components/add";
 
 const routes: Routes = [
@@ -24,6 +25,10 @@ const routes: Routes = [
   {
     path: 'client',
     component: AddClientComponent
+  },
+  {
+    path: 'order',
+    component: AddOrderComponent
   },
   {
     path: '**',

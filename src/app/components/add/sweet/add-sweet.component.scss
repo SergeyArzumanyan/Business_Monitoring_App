@@ -163,12 +163,6 @@ $containerPadding: 40px 40px 90px 40px;
   }
 }
 
-
-:host ::ng-deep .p-multiselect.p-component,{
-  z-index: 1;
-  width: 100%;
-}
-
 @media (max-width: 900px) {
   .form-container {
     width: 325px !important;
@@ -201,4 +195,11 @@ $containerPadding: 40px 40px 90px 40px;
 :host ::ng-deep .p-inputnumber-input {
   width: 120px !important;
   font-size: $small !important;
+}
+
+:host ::ng-deep .p-multiselect.p-component {
+  font-size: $small !important;
+  font-weight: $normal !important;
+  z-index: 1;
+  width: 100%;
 }

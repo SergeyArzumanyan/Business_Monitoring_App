@@ -2,6 +2,8 @@
 @import "src/app/core/global-css/colors";
 @import "src/app/core/global-css/fonts";
 
+//    Global Configs Start
+
 * {
   font-family: 'Roboto', sans-serif;
   box-sizing: border-box;
@@ -12,6 +14,11 @@ body {
   padding: 0;
   color: $black;
 }
+
+//    Global Configs End
+
+
+//    Scrollbar Styling Start
 
 ::-webkit-scrollbar {
   width: 12px;
@@ -31,10 +38,6 @@ body {
   background-color: $skin-action-btn-disabled;
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  display: none;
-}
 
 @media (max-width: 600px) {
   ::-webkit-scrollbar {
@@ -42,6 +45,36 @@ input::-webkit-inner-spin-button {
     height: 10px;
   }
 }
+
+//    Scrollbar Styling End
+
+
+//    Text-Selection Styling Start
+
+::-moz-selection { /* For Firefox */
+  color: white;
+  background: #68D6F1;
+}
+
+::selection {
+  color: white;
+  background: #68D6F1;
+}
+
+//    Text-Selection Styling End
+
+
+//    HTML Input Buttons Styling Start
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  display: none;
+}
+
+//    HTML Input Buttons Styling End
+
+
+//    PrimeNg Configs Start
 
 .p-inputtext:hover, .p-multiselect.p-component:hover {
   border: 1px solid $skin-100 !important;
@@ -94,3 +127,14 @@ input::-webkit-inner-spin-button {
 .p-tooltip-text {
   font-size: $small !important;
 }
+
+.p-component.p-inputnumber-button {
+  background-color: $brown-300 !important;
+  border: none;
+}
+
+.p-component.p-inputnumber-button:focus {
+  box-shadow: none !important;
+}
+
+//    PrimeNg Configs End
