@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { SweetsComponent, SweetComponent } from "@Components/sweets";
+import { EditModeGuard } from "@Core/guards";
 
 const routes: Routes = [
   {
@@ -9,7 +11,8 @@ const routes: Routes = [
   },
   {
     path: ":sweet-id",
-    component: SweetComponent
+    component: SweetComponent,
+    canDeactivate: [EditModeGuard]
   },
   {
     path: "**",
