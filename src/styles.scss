@@ -76,6 +76,9 @@ input::-webkit-inner-spin-button {
 
 //    PrimeNg Configs Start
 
+
+  //    InputText Start
+
 .p-inputtext:hover, .p-multiselect.p-component:hover {
   border: 1px solid $skin-100 !important;
 }
@@ -84,6 +87,11 @@ input::-webkit-inner-spin-button {
   border: 1px solid $skin-100 !important;
   box-shadow: 0 0 0 3px $skin-300 !important;
 }
+
+  //    InputText End
+
+
+  //    Checkbox Start
 
 .p-checkbox-box:hover {
   border-color: $skin-100 !important;
@@ -103,16 +111,35 @@ input::-webkit-inner-spin-button {
   color: $brown-100 !important;
 }
 
+  //    Checkbox End
+
+  //    MultiSelect Start
+
 .p-multiselect-items  {
   padding: 0 !important;
+}
+
+.p-multiselect-filter {
+  height: 35px !important;
+}
+
+.p-multiselect-filter-icon {
+  top: 58% !important;
 }
 
 .p-multiselect-close:focus {
   box-shadow: 0 0 0 3px $skin-300 !important;
 }
 
+.p-multiselect-empty-message {
+  font-size: $small !important;
+  color: $black !important;
+}
+
 .p-multiselect-item {
   background: transparent !important;
+  color: $black !important;
+  font-size: $small !important;
 }
 
 .p-multiselect-item.p-highlight span {
@@ -124,9 +151,18 @@ input::-webkit-inner-spin-button {
 
 }
 
+  //    MultiSelect End
+
+
+  //    ToolTip Start
+
 .p-tooltip-text {
   font-size: $small !important;
 }
+
+  //    ToolTip End
+
+  //    InputNumber Start
 
 .p-component.p-inputnumber-button {
   background-color: $brown-300 !important;
@@ -136,5 +172,8 @@ input::-webkit-inner-spin-button {
 .p-component.p-inputnumber-button:focus {
   box-shadow: none !important;
 }
+
+  //    InputNumber End
+
 
 //    PrimeNg Configs End
