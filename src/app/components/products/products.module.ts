@@ -12,13 +12,13 @@ import { SharedModule } from "@Shared/shared.module";
   declarations: [
     ProductsComponent
   ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    SharedModule,
-    ProductsRoutingModule
-  ]
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        SharedModule,
+        ProductsRoutingModule,
+    ]
 })
 export class ProductsModule {
 }

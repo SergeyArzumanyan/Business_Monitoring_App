@@ -4,58 +4,52 @@
 $borderRadius: 8px;
 $animationTime: 0.2s;
 
-.btn-sm {
+@mixin btn-basic {
   margin: 0;
   padding: 0;
-  width: 100px;
-  height: 30px;
   border: none;
   outline: none;
-  font-size: $small;
   border-radius: $borderRadius;
   cursor: pointer;
   transition: $animationTime;
+}
+
+.btn-xs {
+  @include btn-basic;
+  width: 75px;
+  height: 30px;
+  font-size: $small;
+}
+
+.btn-sm {
+  @include btn-basic;
+  width: 100px;
+  height: 30px;
+  font-size: $small;
 }
 
 .btn-md {
-  margin: 0;
-  padding: 0;
+  @include btn-basic;
   width: 120px;
   height: 40px;
-  border: none;
-  outline: none;
   font-size: $medium;
-  border-radius: $borderRadius;
-  cursor: pointer;
-  transition: $animationTime;
 }
 
 .btn-lg {
-  margin: 0;
-  padding: 0;
+  @include btn-basic;
   width: 150px;
   height: 50px;
-  border: none;
-  outline: none;
   font-size: $big;
-  border-radius: $borderRadius;
-  cursor: pointer;
-  transition: $animationTime;
 }
 
 .rounded-btn {
+  @include btn-basic;
   position: absolute;
-  margin: 0;
-  padding: 0;
   width: 25px;
   height: 25px;
   line-height: 25px;
-  border: none;
-  outline: none;
   font-size: $small;
   border-radius: 999999px;
-  cursor: pointer;
-  transition: $animationTime;
 }
 
 .classic-link {

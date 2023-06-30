@@ -1,6 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 
+import {
+  DFiltersComponent,
+  FiltersComponent,
+  MFiltersComponent,
+} from '@Shared/components';
+
 import { PasswordModule } from "primeng/password";
 import { ButtonModule } from "primeng/button";
 import { ProgressSpinnerModule } from "primeng/progressspinner";
@@ -18,7 +24,10 @@ import { InputMaskModule } from "primeng/inputmask";
 
 @NgModule({
   declarations: [
-    DragDirective
+    DragDirective,
+    FiltersComponent,
+    DFiltersComponent,
+    MFiltersComponent,
   ],
   imports: [
     CommonModule,
@@ -53,6 +62,9 @@ import { InputMaskModule } from "primeng/inputmask";
     TooltipModule,
     DragDirective,
     InputMaskModule,
+    DFiltersComponent,
+    MFiltersComponent,
+    FiltersComponent,
   ]
 })
 export class SharedModule { }

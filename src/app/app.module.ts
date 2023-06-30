@@ -37,7 +37,7 @@ import { InputTextModule } from "primeng/inputtext";
     AuthComponent,
     HeaderComponent,
     LargeHeaderComponent,
-    SmallHeaderComponent
+    SmallHeaderComponent,
   ],
   imports: [
     AppRoutingModule,

@@ -1,0 +1,10 @@
+<ng-container *ngIf="!isMobile; else mobileFilters">
+  <app-d-filters [showName]="true"
+                 [showPrice]="true">
+  </app-d-filters>
+</ng-container>
+
+<ng-template #mobileFilters>
+  <app-m-filters>
+  </app-m-filters>
+</ng-template>

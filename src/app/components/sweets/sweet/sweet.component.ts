@@ -8,7 +8,7 @@ import {
   IProduct,
   ISweetProduct,
   ISweetFormEditing,
-  firebaseItemDeletion,
+  IFirebaseItemDeletion,
 } from "@Core/interfaces";
 import {
   RequestsService,
@@ -33,6 +33,8 @@ export class SweetComponent implements OnInit, OnDestroy {
   private alreadyLoadedProducts: boolean = false;
   public submitted: boolean = false;
   private initialSweetImage: string | null = null; // for keeping first downloaded Image (this is for not making additional network requests.)
+
+  public pending: boolean = false;
 
   private unsubscribe$: Subject<void> = new Subject<void>();
 
@@ -63,6 +65,7 @@ export class SweetComponent implements OnInit, OnDestroy {
   }
 
   public getSweet(): void {
+    this.pending = true;
     const sweetID = Number(this.route.snapshot.paramMap.get('sweet-id'));
 
     if (isNaN(sweetID)) {
@@ -76,6 +79,7 @@ export class SweetComponent implements OnInit, OnDestroy {
           if (data.length === 0) {
             this.router.navigateByUrl('sweets');
           }
+          this.pending = false;
           this.sweet = data[0];
           if (!this.alreadyLoadedProducts) {
             this.getProductsBasedOnSweet(this.sweet.Products!);
@@ -84,6 +88,7 @@ export class SweetComponent implements OnInit, OnDestroy {
           }
         },
         error: () => {
+          this.pending = false;
           this.toastService.showToast('error', 'Error', 'Something Went Wrong');
           this.router.navigateByUrl('sweets');
         }
@@ -100,7 +105,7 @@ export class SweetComponent implements OnInit, OnDestroy {
           .then(() => {
             this.Deletion.deleteItem('sweets', 'ID', sweet.ID)
               .pipe(take(1))
-              .subscribe((action: firebaseItemDeletion[]) => {
+              .subscribe((action: IFirebaseItemDeletion[]) => {
                 this.Deletion.removeItem('sweets', action[0].payload.key, 'Sweet', true);
               })
           });

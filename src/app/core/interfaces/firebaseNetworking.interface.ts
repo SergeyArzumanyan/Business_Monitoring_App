@@ -1,4 +1,4 @@
-export interface firebaseItemDeletion {
+export interface IFirebaseItemDeletion {
   key: string;
   payload: any;
   prevKey: any;

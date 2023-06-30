@@ -4,22 +4,21 @@
 @import "/src/app/core/global-css/flex";
 @import "/src/app/core/global-css/confirmation-buttons";
 
-.no-data-container {
+.empty-message {
   width: 50%;
   height: max-content;
   background-color: $white-300;
-  padding: 25px 25px 40px 25px;
+  padding: 50px 25px 50px 25px;
   border-radius: 10px;
   border: 1px solid $skin-100;
+  text-align: center;
 
-  .no-data-message {
-    text-align: center;
+  .message {
     font-size: $large;
   }
 
-  .no-data-link {
-    text-align: center;
-    font-size: $small;
+  .link {
+    font-size: $medium;
 
     .add-sweet-link {
       color: $blue-300;
@@ -153,13 +152,9 @@
 }
 
 @media (max-width: 650px) {
-  .no-data-container {
+  .empty-message {
     width: 80% !important;
   }
-}
-
-:host ::ng-deep .p-progress-spinner-circle {
-  stroke: $skin-100 !important;
 }
 
 .edit-sweet-btn:focus:focus-visible {
@@ -171,3 +166,19 @@
   box-shadow: 0 1px 0 7px $skin-100 !important;
   z-index: 1;
 }
+
+//    Loading Start
+
+.loading-wrapper {
+  .loading-text {
+    font-size: $larger;
+  }
+}
+
+:host ::ng-deep .p-progress-spinner,
+:host ::ng-deep .p-progress-spinner-svg {
+  width: 50px !important;
+  height: 50px !important;
+}
+
+//    Loading End

@@ -5,7 +5,7 @@ import {
   ISweet,
   ISweetProduct,
   IProduct,
-  firebaseItemDeletion,
+  IFirebaseItemDeletion,
 } from "@Core/interfaces";
 
 import {
@@ -54,7 +54,7 @@ export class CalculationService {
     } else {
       this.Deletion.deleteItem('sweets', 'ID', sweet.ID)
         .pipe(take(1))
-        .subscribe((action: firebaseItemDeletion[]) => {
+        .subscribe((action: IFirebaseItemDeletion[]) => {
           this.Deletion.removeItem('sweets', action[0].payload.key, 'Sweet', false);
         });
     }

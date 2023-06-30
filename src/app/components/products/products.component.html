@@ -1,27 +1,55 @@
 <div class="wrapper flex justify-content-center align-items-center">
   <div class="container flex col gap-15">
 
-    <h2 class="text-center">Products</h2>
+    <app-filters [showName]="true"
+                 [showPrice]="true">
+    </app-filters>
 
-    <table>
-      <thead>
+    <h2 class="table-name text-center">Products</h2>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
         <tr>
           <th>Name</th>
           <th>Price</th>
           <th colspan="2" class="interactions">Interactions</th>
         </tr>
-      </thead>
-      <tbody>
-      <ng-container *ngIf="products && products.length > 0">
-        <tr *ngFor="let product of products">
-          <td class="main-td">{{ product.Name }}</td>
-          <td class="main-td product-price">{{ product.Price }}</td>
-          <td class="action-td skin-action-btn" (click)="editProduct(product)"><i class="pi pi-pencil icon-md"></i></td>
-          <td class="action-td brown-action-btn" (click)="deleteProduct(product)"><i class="pi pi-trash icon-md"></i></td>
-        </tr>
+        </thead>
+        <tbody>
+        <ng-container *ngIf="products && products.length > 0 && !pending">
+          <tr *ngFor="let product of products">
+            <td class="main-td">{{ product.Name }}</td>
+            <td class="main-td product-price">{{ product.Price }}</td>
+            <td class="action-td skin-action-btn" (click)="editProduct(product)">
+              <i class="pi pi-pencil icon-sm"></i>
+            </td>
+            <td class="action-td brown-action-btn" (click)="deleteProduct(product)">
+              <i class="pi pi-trash icon-sm"></i>
+            </td>
+          </tr>
+        </ng-container>
+        </tbody>
+      </table>
+
+      <ng-container *ngIf="!products?.length && !pending">
+        <div class="empty-message w-100 flex col gap-20">
+          <div class="message">
+            There Are No Products Available
+          </div>
+          <div class="link">
+            You Can Add Some <a [routerLink]="['/add/product']" class="classic-link">Here</a>.
+          </div>
+        </div>
       </ng-container>
-      </tbody>
-    </table>
+
+      <ng-container *ngIf="pending">
+        <div class="loading-wrapper w-100 flex gap-10 justify-content-center align-items-center">
+          <span class="loading-text">Please Wait</span>
+          <p-progressSpinner class="p-progress-path"></p-progressSpinner>
+        </div>
+      </ng-container>
+    </div>
 
   </div>
 </div>

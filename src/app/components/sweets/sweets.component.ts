@@ -6,7 +6,7 @@ import { Subject, Subscription, takeUntil } from "rxjs";
 import {
   ISweet,
   IProduct,
-  firebaseItemDeletion,
+  IFirebaseItemDeletion,
 } from "@Core/interfaces";
 import {
   RequestsService,
@@ -27,7 +27,7 @@ export class SweetsComponent implements OnInit, OnDestroy {
   public sweets: ISweet[] = [];
   private subscribeToSweetChanges: Subscription | null = null;
 
-  public stopLoading: boolean = false;
+  public pending: boolean = false;
 
   private unsubscribe$: Subject<void> = new Subject<void>();
 
@@ -50,20 +50,17 @@ export class SweetsComponent implements OnInit, OnDestroy {
   }
 
   private requestSweets(): void {
+    this.pending = true;
     this.subscribeToSweetChanges = this.Request.getSweets()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe({
         next: (sweets: ISweet[] | null) => {
+          this.pending = false;
           this.sweets = sweets ? this.Request.makeArray(sweets) : [];
           this.getProductsBasedOnSweets(this.sweets);
-
-          setTimeout(() => {
-            if (this.sweets.length === 0) {
-              this.stopLoading = true;
-            }
-          }, 5000);
         },
         error: () => {
+          this.pending = false;
           this.toastService.showToast('error', 'Error', 'Failed To Get Sweets');
 
         }
@@ -71,22 +68,21 @@ export class SweetsComponent implements OnInit, OnDestroy {
   }
 
   private getProductsBasedOnSweets(sweets: ISweet[]): void {
+    this.pending = true;
     for (const sweet of sweets) {
-      if (sweet.Products) {
-        for (const product of sweet.Products) {
-          const productQuantity = product.Quantity;
-
-          this.Request.getProductsBasedOnSweet(product.ProductID)
-            .pipe(takeUntil(this.unsubscribe$))
-            .subscribe({
-              next: (product: IProduct[]) => {
-                this.calculationService.calculateSweetPriceInSweets(sweet, product, productQuantity);
-              },
-              error: (err: HttpErrorResponse) => {
-                this.toastService.showToast('error', 'Error', err.message);
-              }
-            })
-        }
+      for (const productOfSweet of sweet.Products!) {
+        this.Request.getProductsBasedOnSweet(productOfSweet.ProductID)
+          .pipe(takeUntil(this.unsubscribe$))
+          .subscribe({
+            next: (product: IProduct[]) => {
+              this.pending = false;
+              this.calculationService.calculateSweetPriceInSweets(sweet, product, productOfSweet.Quantity);
+            },
+            error: (err: HttpErrorResponse) => {
+              this.pending = false;
+              this.toastService.showToast('error', 'Error', err.message);
+            }
+          })
       }
     }
   }
@@ -99,7 +95,7 @@ export class SweetsComponent implements OnInit, OnDestroy {
       accept: () => {
         this.Deletion.deleteItem('sweets', 'ID', sweet.ID)
           .pipe(takeUntil(this.unsubscribe$))
-          .subscribe((action: firebaseItemDeletion[]) => {
+          .subscribe((action: IFirebaseItemDeletion[]) => {
             this.Deletion.removeItem('sweets', action[0].payload.key, 'Sweet', false);
           });
       }

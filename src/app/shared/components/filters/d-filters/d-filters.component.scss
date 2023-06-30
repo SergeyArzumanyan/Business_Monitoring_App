@@ -1,0 +1,37 @@
+@import '/src/app/core/global-css/flex';
+@import '/src/app/core/global-css/fonts';
+@import '/src/app/core/global-css/buttons';
+@import '/src/app/core/global-css/colors';
+
+
+.filters-wrapper {
+  padding: 20px 25px;
+  background-color: $table-background;
+  border-radius: $borderRadius;
+
+  .filters-header {
+    font-size: $medium;
+    font-weight: $semiBold;
+  }
+
+  .inputs-wrapper {
+    .filter-block {
+      .filter-label {
+        font-size: $small;
+      }
+
+      .filter-input {
+        width: 140px !important;
+        font-size: $Xsmall !important;
+      }
+    }
+  }
+}
+
+//    Rounding Table Borders End
+
+// TODO Make This For filters Globally
+:host ::ng-deep .p-inputnumber-input.p-component {
+  width: 140px !important;
+  font-size: $Xsmall !important;
+}

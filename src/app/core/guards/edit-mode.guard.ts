@@ -24,7 +24,7 @@ export class EditModeGuard implements CanDeactivate<any> {
       this.confirmationService.confirm({
         message: 'Are you sure you want to discard your changes ?',
         header: 'Discard Changes ?',
-        icon: 'pi pi-sign-out icon-big',
+        icon: 'fa-solid fa-circle-exclamation icon-big',
         accept: (): void => {
           observer.next(true); // Allow deactivation
           observer.complete();

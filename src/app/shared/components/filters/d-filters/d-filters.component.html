@@ -1,0 +1,40 @@
+<div class="w-100 filters-wrapper flex gap-10 justify-content-between align-items-center">
+
+  <div class="w-100 h-100 filters-heading flex gap-5 justify-content-start align-items-center">
+    <span class="filters-header">
+      Filters
+    </span>
+    <i class="fa-solid fa-filter icon-md"></i>
+  </div>
+
+  <div class="w-100 h-100 inputs-wrapper flex justify-content-end align-items-center gap-10">
+
+    <ng-container *ngIf="showName">
+      <div class="filter-block flex justify-content-center align-items-center gap-10">
+        <label class="filter-label" for="ProductNameFilter">Name</label>
+          <input type="text"
+                 class="filter-input p-inputtext-sm"
+                 id="ProductNameFilter"
+                 pInputText
+                 placeholder="Search By Name...">
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="showPrice">
+      <div class="filter-block flex justify-content-center align-items-center gap-10">
+        <label class="filter-label" for="ProductPriceFilter">Price</label>
+        <p-inputNumber inputId="ProductPriceFilter"
+                       class="filter-input p-inputtext-sm"
+                       id="ProductPriceFilter"
+                       placeholder="Search By Price...">
+        </p-inputNumber>
+      </div>
+    </ng-container>
+
+  </div>
+
+  <div class="apply-wrapper">
+    <button class="btn-xs skin-action-btn">Apply</button>
+  </div>
+
+</div>

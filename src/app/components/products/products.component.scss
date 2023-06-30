@@ -4,7 +4,7 @@
 @import "src/app/core/global-css/colors";
 @import "src/app/core/global-css/confirmation-buttons";
 
-$wrapperPadding: 50px;
+$wrapperPadding: 50px 50px 100px 50px;
 $innerPadding: 50px;
 
 .wrapper {
@@ -15,50 +15,77 @@ $innerPadding: 50px;
   .container {
     width: 80%;
     min-height: 80%;
+    height: 100%;
     padding: $innerPadding;
     margin: 0;
     background-color: $white-300;
     border-radius: $borderRadius;
     box-shadow: 0 0 2px 0 $skin-100;
 
-    table {
+    .table-wrapper {
       width: 75%;
       margin: 0 auto;
-      border-collapse: collapse;
 
-      td, th {
-        text-align: center;
-        padding: 15px;
-        color: $black;
-        transition: $animationTime;
-        cursor: default;
+      table {
+        width: 100%;
+        border-collapse: collapse;
+
+        td, th {
+          text-align: center;
+          padding: 12px;
+          color: $black;
+          transition: $animationTime;
+          cursor: default;
+        }
+
+        th {
+          font-size: $medium;
+          font-weight: 700;
+          background-color: $table-background;
+          color: $gray-100;
+        }
+
+        th:hover {
+          background-color: $white-200;
+        }
+
+        td {
+          font-size: $small;
+          background-color: $white-400;
+        }
+
+        td:hover {
+          background-color: $white-300;
+        }
+
+        .action-td {
+          width: 50px !important;
+          cursor: pointer;
+        }
       }
 
-      th {
-        font-size: $medium;
-        font-weight: 700;
-        background-color: $table-background;
-        color: $gray-100;
-      }
-
-      th:hover {
-        background-color: $white-200;
-      }
-
-      td {
-        font-size: $small;
+      .empty-message {
+        min-height: 130px;
+        padding: 25px;
         background-color: $white-400;
+        text-align: center;
+
+        .message {
+          font-size: $large;
+        }
+
+        .link {
+          font-size: $medium;
+        }
       }
 
-      td:hover {
-        background-color: $white-300;
-      }
-
-      .action-td {
-        width: 50px !important;
-        cursor: pointer;
+      .loading-wrapper {
+        min-height: 130px;
+        padding: 10px;
+        background-color: $table-loading;
       }
     }
+
   }
 }
 
@@ -67,17 +94,31 @@ $innerPadding: 50px;
 
 @media (max-width: 600px) {
   .wrapper {
-    padding: 30px;
+    padding: 30px !important;
 
     .container {
-      width: 100%;
-      padding: 25px 15px;
+      width: 100% !important;
+      padding: 25px 20px !important;
 
-      table {
+      .table-wrapper {
         width: 100% !important;
 
-        td, th {
-          padding: 8px !important;
+        table {
+          tr {
+            td, th {
+              padding: 8px !important;
+            }
+          }
+        }
+
+        .empty-message {
+          .message {
+            font-size: $big !important;
+          }
+
+          .link {
+            font-size: $small !important;
+          }
         }
       }
     }
@@ -176,3 +217,53 @@ $innerPadding: 50px;
     height: 40px !important;
   }
 }
+
+//    Rounding Table Borders Start
+
+table th:first-child {
+  border-top-left-radius: 25px;
+}
+
+table th:last-child {
+  border-top-right-radius: 10px;
+}
+
+table tr:last-child td:first-child {
+  border-bottom-left-radius: 10px;
+}
+
+table tr:last-child td:last-child {
+  border-bottom-right-radius: 25px;
+}
+
+@media (max-width: 600px) {
+  table th:first-child {
+    border-top-left-radius: $borderRadius !important;
+  }
+
+  table th:last-child {
+    border-top-right-radius: $borderRadius !important;
+  }
+
+  table tr:last-child td:first-child {
+    border-bottom-left-radius: $borderRadius !important;
+  }
+
+  table tr:last-child td:last-child {
+    border-bottom-right-radius: $borderRadius !important;
+  }
+}
+
+
+//    TODO Move to tavle.scss
+
+:host ::ng-deep .p-progress-spinner-circle {
+  stroke: $black !important;
+}
+
+:host ::ng-deep .p-progress-spinner,
+:host ::ng-deep .p-progress-spinner-svg {
+  width: 25px !important;
+  height: 25px !important;
+}
+

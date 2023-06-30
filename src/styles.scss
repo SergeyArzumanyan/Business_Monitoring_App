@@ -49,6 +49,15 @@ body {
 //    Scrollbar Styling End
 
 
+//    Loading Start
+
+.p-progress-spinner-circle, .loading-text {
+  stroke: $black !important;
+}
+
+//   Loading End
+
+
 //    Text-Selection Styling Start
 
 ::-moz-selection { /* For Firefox */

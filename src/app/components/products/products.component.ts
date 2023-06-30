@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Subject, take, takeUntil } from "rxjs";
@@ -7,7 +7,7 @@ import { onlyPositiveNumbers } from "@Core/validators";
 import {
   IProduct,
   IProductForm,
-  firebaseItemDeletion,
+  IFirebaseItemDeletion,
 } from "@Core/interfaces";
 import {
   RequestsService,
@@ -25,8 +25,16 @@ import { ConfirmationService } from "primeng/api";
 })
 export class ProductsComponent implements OnInit, OnDestroy {
 
+  public isMobile = false;
+  @HostListener("window:resize", ["$event.target"])
+  private onWindowResize(): void {
+    this.isMobile = (window.innerWidth <= 900);
+  }
+
   public products: IProduct[] | null = [];
   private product: IProduct | null = null;
+
+  public pending: boolean = false;
 
   public ProductDialog: boolean = false;
   public productForm: FormGroup<IProductForm> = new FormGroup<IProductForm>({
@@ -63,13 +71,17 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   private getProducts(): void {
+    this.pending = true;
+
     this.Request.getProducts()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe({
         next: (products: IProduct[] | null) => {
-          this.products = this.Request.makeArray(products);
+          this.pending = false;
+          this.products = products ? this.Request.makeArray(products)  : [];
         },
         error: () => {
+          this.pending = false;
           this.toastService.showToast('error', 'Error', 'Failed To Get Products');
         }
       })
@@ -84,9 +96,15 @@ export class ProductsComponent implements OnInit, OnDestroy {
       accept: () => {
       this.Deletion.deleteItem('products', 'ID', product.ID)
         .pipe(take(1))
-        .subscribe((action: firebaseItemDeletion[]) => {
-          this.Deletion.removeItem('products', action[0].payload.key, 'Product', true);
-        });
+      .subscribe({
+          next: (action: IFirebaseItemDeletion[]) => {
+            this.Deletion.removeItem('products', action[0].payload.key, 'Product', true);
+            this.toastService.showToast('success', 'Done', 'Product Deleted Successfully');
+          },
+          error: () => {
+            this.toastService.showToast('error', 'Error', 'Something Went Wrong.');
+          }
+        })
       }
     });
   }
@@ -105,15 +123,18 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   public saveProduct(): void {
     this.submitted = true;
+    this.pending = true;
     if (this.productForm.valid && this.productForm.value.Name?.trim() && this.productForm.value.Price && this.product?.ID) {
       this.Edition.editItem('products', 'ID', this.product?.ID)
         .pipe(take(1))
         .subscribe((items: any) => {
           this.Edition.updateCurrentItem('products', this.productForm.value, items[0].key)
             .then(() => {
+              this.pending = false;
               this.toastService.showToast('success', 'Done', 'Product Edited Successfully.');
             })
             .catch(() => {
+              this.pending = false;
               this.toastService.showToast('error', 'Error', 'Something Went Wrong.');
             });
         });
