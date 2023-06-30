@@ -7,10 +7,10 @@ import { Component, HostListener, Input } from '@angular/core';
 })
 export class FiltersComponent {
 
-  public isMobile: boolean = (window.innerWidth <= 900);
+  public isMobile: boolean = (window.innerWidth <= 1000);
   @HostListener("window:resize", ["$event.target"])
   private onWindowResize(): void {
-    this.isMobile = (window.innerWidth <= 900);
+    this.isMobile = (window.innerWidth <= 1000);
   }
 
   @Input() showName = false;

@@ -107,7 +107,11 @@ export class SweetComponent implements OnInit, OnDestroy {
               .pipe(take(1))
               .subscribe((action: IFirebaseItemDeletion[]) => {
                 this.Deletion.removeItem('sweets', action[0].payload.key, 'Sweet', true);
+                this.toastService.showToast('success', 'Done', 'Sweet Deleted Successfully.');
               })
+          })
+          .catch(() => {
+            this.toastService.showToast('error', 'Error', 'Something Went Wrong.');
           });
       }
     });

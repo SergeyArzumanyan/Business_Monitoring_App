@@ -20,6 +20,7 @@ $innerPadding: 20px;
     border-radius: $borderRadius;
     box-shadow: 0 0 2px 0 $skin-100;
     position: relative;
+    transition: $animationTime;
 
     .inner-container {
       padding: 30px;
@@ -421,6 +422,20 @@ $innerPadding: 20px;
 :host ::ng-deep .p-progress-spinner-svg {
   width: 50px !important;
   height: 50px !important;
+}
+
+@media (max-width: 600px) {
+  .loading-wrapper {
+    .loading-text {
+      font-size: $large;
+    }
+  }
+
+  :host ::ng-deep .p-progress-spinner,
+  :host ::ng-deep .p-progress-spinner-svg {
+    width: 40px !important;
+    height: 40px !important;
+  }
 }
 
 //    Loading End

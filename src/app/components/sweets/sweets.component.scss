@@ -4,32 +4,7 @@
 @import "/src/app/core/global-css/flex";
 @import "/src/app/core/global-css/confirmation-buttons";
 
-.empty-message {
-  width: 50%;
-  height: max-content;
-  background-color: $white-300;
-  padding: 50px 25px 50px 25px;
-  border-radius: 10px;
-  border: 1px solid $skin-100;
-  text-align: center;
-
-  .message {
-    font-size: $large;
-  }
-
-  .link {
-    font-size: $medium;
-
-    .add-sweet-link {
-      color: $blue-300;
-    }
-  }
-}
-
 .sweets-wrapper {
-  width: 100%;
-  height: 100%;
-
   .container {
     width: 100%;
     height: 100%;
@@ -37,6 +12,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 50px;
+    transition: $animationTime;
 
     .sweet-card {
       display: block;
@@ -167,6 +143,28 @@
   z-index: 1;
 }
 
+.empty-message {
+  width: 50%;
+  height: max-content;
+  background-color: $white-300;
+  padding: 50px 25px 50px 25px;
+  border-radius: 10px;
+  border: 1px solid $skin-100;
+  text-align: center;
+
+  .message {
+    font-size: $large;
+  }
+
+  .link {
+    font-size: $medium;
+
+    .add-sweet-link {
+      color: $blue-300;
+    }
+  }
+}
+
 //    Loading Start
 
 .loading-wrapper {
@@ -179,6 +177,20 @@
 :host ::ng-deep .p-progress-spinner-svg {
   width: 50px !important;
   height: 50px !important;
+}
+
+@media (max-width: 600px) {
+  .loading-wrapper {
+    .loading-text {
+      font-size: $large;
+    }
+  }
+
+  :host ::ng-deep .p-progress-spinner,
+  :host ::ng-deep .p-progress-spinner-svg {
+    width: 40px !important;
+    height: 40px !important;
+  }
 }
 
 //    Loading End

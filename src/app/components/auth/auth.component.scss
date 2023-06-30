@@ -5,48 +5,55 @@
 
 
 
-.auth-wrapper {
-  width: 100%;
-  height: 100%;
+.wrapper {
+  padding: 50px;
 
   .container {
-    width: 35%;
-    height: 400px;
+    width: 400px;
+    height: 320px;
     background-color: $white-300;
     border-radius: 12px;
     border: 2px solid $skin-300;
     gap: 40px;
+    transition: $animationTime;
 
     .auth-header {
       text-align: center;
       font-size: $larger;
+      font-weight: $semiBold;
     }
-
-    div .auth-input {
-        font-size: $big;
-      }
   }
 }
 
 
 @media (max-width: 850px) {
-  .container {
-    width: 75% !important;
-    height: 300px !important;
+  .wrapper {
+    padding: 30px !important;
 
-    .auth-header {
-      font-size: $big;
-    }
+    .container {
+      width: 350px !important;
+      height: 250px !important;
 
-    div .auth-input {
-      font-size: $medium;
+      .auth-header {
+        font-size: $medium !important;
+      }
     }
   }
-
-
 }
 
-:host ::ng-deep .ng-tns-c7-0.pi.ng-star-inserted.pi-eye,
-:host ::ng-deep .ng-tns-c7-0.pi.ng-star-inserted.pi-eye-slash {
-  cursor: pointer;
+:host ::ng-deep .pi-eye,
+:host ::ng-deep .pi-eye-slash {
+  cursor: pointer !important;
+}
+
+:host ::ng-deep .p-component.p-password-input {
+  width: 200px !important;
+  font-size: $Xsmall !important;
+}
+
+@media (max-width: 600px) {
+  :host ::ng-deep .p-component.p-password-input {
+    width: 175px !important;
+    height: 35px !important;
+  }
 }

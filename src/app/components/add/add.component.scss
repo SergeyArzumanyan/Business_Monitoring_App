@@ -6,8 +6,6 @@
 $links-gap: 25px;
 
 .wrapper {
-  width: 100%;
-  height: 100%;
   padding: 50px 50px 100px 50px;
 
   .container {
@@ -17,6 +15,7 @@ $links-gap: 25px;
     background-color: $white-300;
     box-shadow: 0 0 2px 0 $skin-100;
     border-radius: $borderRadius;
+    transition: $animationTime;
 
     .add-header {
       width: 100%;
@@ -32,11 +31,13 @@ $links-gap: 25px;
       margin: 0;
       padding: 25px 15px;
       gap: $links-gap;
+      transition: $animationTime;
 
       .link-btn {
         width: calc(50% - $links-gap);
         height: 70px !important;
         font-size: $medium;
+        transition: $animationTime;
       }
     }
   }
