@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./d-filters.component.scss']
 })
 export class DFiltersComponent {
-  @Input() showName = false;
-  @Input() showPrice = false;
+  @Input() showName: boolean = false;
+  @Input() showPrice: boolean = false;
 
 }

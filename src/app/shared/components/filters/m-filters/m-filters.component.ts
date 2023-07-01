@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-m-filters',
@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./m-filters.component.scss']
 })
 export class MFiltersComponent {
+  public isFilterOverlayVisible: boolean = false;
 
+  @Input() showName: boolean = false;
+  @Input() showPrice: boolean = false;
+
+  public toggleFilterOverlay(): void {
+    this.isFilterOverlayVisible = !this.isFilterOverlayVisible;
+  }
 }

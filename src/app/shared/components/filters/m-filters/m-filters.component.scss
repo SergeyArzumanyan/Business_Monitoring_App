@@ -2,3 +2,75 @@
 @import '/src/app/core/global-css/fonts';
 @import '/src/app/core/global-css/buttons';
 @import '/src/app/core/global-css/colors';
+
+.filters-wrapper {
+  background-color: $white-200;
+  padding: 10px 20px;
+  height: 50px;
+  border-radius: $borderRadius;
+
+  .filter-menu-wrapper {
+    width: 40px;
+    border-radius: $borderRadius;
+  }
+}
+
+.overlay-wrapper {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: 65px;
+  left: 0;
+  z-index: 0;
+  transition: $animationTime;
+
+  .overlay-shadow {
+    width: 100%;
+    height: 100vh;
+    background-color: $gray-background;
+    opacity: 0;
+    visibility: hidden;
+    transition: $animationTime;
+  }
+
+  .filters-panel {
+    background-color: $white-300;
+    transition: $animationTime;
+    padding: 20px;
+
+    .filter-actions-block {}
+
+    .filter-block {
+      .filter-label {
+        font-size: $small;
+      }
+
+      .filter-input {
+        width: 100% !important;
+        height: 35px !important;
+        font-size: $Xsmall !important;
+      }
+    }
+  }
+}
+
+.visible-overlay {
+  opacity: 1 !important;
+  visibility: visible !important;
+  z-index: 1 !important;
+}
+
+.visible-shadow {
+  opacity: 0.5 !important;
+  visibility: visible !important;
+}
+
+// TODO Make This For filters Globally
+:host ::ng-deep .p-inputnumber.p-component {
+  width: 100% !important;
+}
+
+:host ::ng-deep .p-inputnumber-input.p-component {
+  height: 35px !important;
+  font-size: $Xsmall !important;
+}

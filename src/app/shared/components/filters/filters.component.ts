@@ -13,6 +13,6 @@ export class FiltersComponent {
     this.isMobile = (window.innerWidth <= 1000);
   }
 
-  @Input() showName = false;
-  @Input() showPrice = false;
+  @Input() showName: boolean = false;
+  @Input() showPrice: boolean = false;
 }
