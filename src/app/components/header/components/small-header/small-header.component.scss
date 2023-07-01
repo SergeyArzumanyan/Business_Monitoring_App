@@ -1,8 +1,4 @@
-@import "app/core/global-css/colors";
-@import "app/core/global-css/fonts";
-@import "app/core/global-css/flex";
-@import "app/core/global-css/buttons";
-
+@import "/src/app/core/global-css/GlobalCssConfigs";
 
 .page-wrapper {
   overflow: hidden;

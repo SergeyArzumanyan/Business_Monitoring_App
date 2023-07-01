@@ -1,8 +1,4 @@
-@import "src/app/core/global-css/fonts";
-@import "src/app/core/global-css/flex";
-@import "src/app/core/global-css/buttons";
-@import "src/app/core/global-css/colors";
-@import "src/app/core/global-css/confirmation-buttons";
+@import 'src/app/core/global-css/GlobalCssConfigs';
 
 
 .wrapper {
@@ -18,76 +14,8 @@
     border-radius: $borderRadius;
     box-shadow: 0 0 2px 0 $skin-100;
     transition: $animationTime;
-
-    .table-wrapper {
-      width: 75%;
-      margin: 0 auto;
-
-      table {
-        width: 100%;
-        border-collapse: collapse;
-
-        td, th {
-          text-align: center;
-          padding: 12px;
-          color: $black;
-          transition: $animationTime;
-          cursor: default;
-        }
-
-        th {
-          font-size: $medium;
-          font-weight: 700;
-          background-color: $table-background;
-          color: $gray-100;
-        }
-
-        th:hover {
-          background-color: $white-200;
-        }
-
-        td {
-          font-size: $small;
-          background-color: $white-400;
-        }
-
-        td:hover {
-          background-color: $white-300;
-        }
-
-        .action-td {
-          width: 50px !important;
-          cursor: pointer;
-        }
-      }
-
-      .empty-message {
-        min-height: 130px;
-        padding: 25px;
-        background-color: $white-400;
-        text-align: center;
-
-        .message {
-          font-size: $large;
-        }
-
-        .link {
-          font-size: $medium;
-        }
-      }
-
-      .loading-wrapper {
-        min-height: 130px;
-        padding: 10px;
-        background-color: $table-loading;
-      }
-    }
-
   }
 }
-
-
-
 
 @media (max-width: 600px) {
   .wrapper {
@@ -96,114 +24,6 @@
     .container {
       width: 100% !important;
       padding: 25px 20px !important;
-
-      .table-wrapper {
-        width: 100% !important;
-
-        table {
-          tr {
-            td, th {
-              padding: 8px !important;
-            }
-          }
-        }
-
-        .empty-message {
-          .message {
-            font-size: $big !important;
-          }
-
-          .link {
-            font-size: $small !important;
-          }
-        }
-      }
-    }
-  }
-}
-
-
-.sweet-products {
-  width: 100%;
-  height: 100%;
-
-  .products-wrapper {
-    width: 100%;
-    border-radius: 4px;
-    padding: 0;
-    margin: 0;
-
-    .product-scheme {
-      background-color: $table-background;
-      border-radius: 4px;
-
-      .product-scheme-item {
-        flex: 1;
-        text-align: center;
-        margin: 0;
-        padding: 8px;
-        font-size: $medium;
-        font-weight: 700;
-        color: $gray-100;
-        transition: $animationTime;
-      }
-
-      .product-scheme-item:hover {
-        background-color: $white-200;
-      }
-    }
-
-    .product {
-      .product-input {
-        display: block;
-        width: 100%;
-        margin: 5px 2px;
-        padding: 8px;
-        outline: none;
-        background-color: $white-400;
-        box-shadow: 0 0 1px 0 $gray-100;
-        font-size: $medium;
-        transition: $animationTime;
-        border: 1px solid transparent;
-        border-radius: 5px;
-      }
-      .product-input:hover {
-        border: 1px solid $blue-300;
-      }
-      .product-input:focus {
-        border: 1px solid $blue-300;
-        box-shadow: 0 0 0 3px $blue-400;
-      }
-    }
-  }
-}
-
-@media (max-width: 1100px) {
-  .sweet-products {
-    .products-table-wrapper {
-      width: 75%;
-      margin: 0 auto;
-    }
-  }
-}
-
-@media (max-width: 650px) {
-  .sweet-products {
-    .products-table-wrapper {
-      width: 100% !important;
-
-      td, th {
-        font-size: $small;
-        padding: 5px !important;
-      }
-    }
-
-    .products-wrapper {
-      width: 100% !important;
-
-      .product-scheme-item, .product-input {
-        font-size: 14px !important;
-      }
     }
   }
 }
@@ -213,49 +33,6 @@
     width: 130px !important;
     height: 40px !important;
   }
-}
-
-//    Rounding Table Borders Start
-
-table th:first-child {
-  border-top-left-radius: 25px;
-}
-
-table th:last-child {
-  border-top-right-radius: 10px;
-}
-
-table tr:last-child td:first-child {
-  border-bottom-left-radius: 10px;
-}
-
-table tr:last-child td:last-child {
-  border-bottom-right-radius: 25px;
-}
-
-@media (max-width: 600px) {
-  table th:first-child {
-    border-top-left-radius: $borderRadius !important;
-  }
-
-  table th:last-child {
-    border-top-right-radius: $borderRadius !important;
-  }
-
-  table tr:last-child td:first-child {
-    border-bottom-left-radius: $borderRadius !important;
-  }
-
-  table tr:last-child td:last-child {
-    border-bottom-right-radius: $borderRadius !important;
-  }
-}
-
-
-//    TODO Move to tavle.scss
-
-:host ::ng-deep .p-progress-spinner-circle {
-  stroke: $black !important;
 }
 
 :host ::ng-deep .p-progress-spinner,

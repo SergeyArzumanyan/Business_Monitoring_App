@@ -1,0 +1,254 @@
+@import '/src/app/core/global-css/flex';
+@import '/src/app/core/global-css/fonts';
+@import '/src/app/core/global-css/buttons';
+@import '/src/app/core/global-css/colors';
+
+//    Rounding Table Borders Start
+
+table th:first-child {
+  border-top-left-radius: 25px;
+}
+
+table th:last-child {
+  border-top-right-radius: 10px;
+}
+
+table tr:last-child td:first-child {
+  border-bottom-left-radius: 10px;
+}
+
+table tr:last-child td:last-child {
+  border-bottom-right-radius: 25px;
+}
+
+@media (max-width: 600px) {
+  table th:first-child {
+    border-top-left-radius: $borderRadius !important;
+  }
+
+  table th:last-child {
+    border-top-right-radius: $borderRadius !important;
+  }
+
+  table tr:last-child td:first-child {
+    border-bottom-left-radius: $borderRadius !important;
+  }
+
+  table tr:last-child td:last-child {
+    border-bottom-right-radius: $borderRadius !important;
+  }
+}
+
+//    Rounding Table Borders End
+
+
+//    Loading Styling Start
+
+:host ::ng-deep .p-progress-spinner-circle {
+  stroke: $black !important;
+}
+
+//    Loading Styling End
+
+
+//  -----------------    Filters Section Start  --------------------
+
+//    Filters Structure Start
+
+.filters-wrapper {
+  padding: 20px 25px;
+  background-color: $table-background;
+  border-radius: $borderRadius;
+
+  .filters-header {
+    font-size: $medium;
+    font-weight: $semiBold;
+  }
+
+  .inputs-wrapper {
+    .filter-block {
+      .filter-label {
+        font-size: $small;
+      }
+
+      .filter-input {
+        width: 140px !important;
+        font-size: $Xsmall !important;
+      }
+    }
+  }
+
+  .filter-menu-wrapper {
+    width: 40px;
+    border-radius: $borderRadius;
+  }
+}
+
+
+.overlay-wrapper {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: 65px;
+  left: 0;
+  z-index: 0;
+  transition: $animationTime;
+
+  .overlay-shadow {
+    width: 100%;
+    height: 100vh;
+    background-color: $gray-background;
+    opacity: 0;
+    visibility: hidden;
+    transition: $animationTime;
+  }
+
+  .filters-panel {
+    background-color: $white-300;
+    transition: $animationTime;
+    padding: 20px;
+
+    .filter-actions-block {}
+
+    .filter-block {
+      .filter-label {
+        font-size: $small;
+      }
+
+      .filter-input {
+        width: 100% !important;
+        height: 35px !important;
+        font-size: $Xsmall !important;
+      }
+    }
+  }
+}
+
+
+.visible-overlay {
+  opacity: 1 !important;
+  visibility: visible !important;
+  z-index: 1 !important;
+}
+
+.visible-shadow {
+  opacity: 0.5 !important;
+  visibility: visible !important;
+}
+
+//    Filters Structure End
+
+//    Input Styling Start
+
+.p-inputnumber-input.p-component {
+  font-size: $Xsmall !important;
+}
+
+//    Input Styling End
+
+
+//  -----------------    Filters Section End  -----------------
+
+
+//  -----------------    Table Section Start  -----------------
+
+.table-wrapper {
+  width: 75%;
+  margin: 0 auto;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    td, th {
+      text-align: center;
+      padding: 12px;
+      color: $black;
+      transition: $animationTime;
+      cursor: default;
+    }
+
+    th {
+      font-size: $medium;
+      font-weight: 700;
+      background-color: $table-background;
+      color: $gray-100;
+    }
+
+    th:hover {
+      background-color: $white-200;
+    }
+
+    td {
+      font-size: $small;
+      background-color: $white-400;
+    }
+
+    td:hover {
+      background-color: $white-300;
+    }
+
+    .action-td {
+      width: 50px !important;
+      cursor: pointer;
+    }
+  }
+
+  .empty-message {
+    min-height: 130px;
+    padding: 25px;
+    background-color: $white-400;
+    text-align: center;
+
+    .message {
+      font-size: $large;
+    }
+
+    .link {
+      font-size: $medium;
+    }
+  }
+
+  .loading-wrapper {
+    min-height: 130px;
+    padding: 10px;
+    background-color: $table-loading;
+  }
+}
+
+@media (max-width: 650px) {
+  .table-wrapper {
+    table {
+      td, th {
+        font-size: $small !important;
+        padding: 5px !important;
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .table-wrapper {
+    width: 100% !important;
+
+    table {
+      tr {
+        td, th {
+          padding: 8px !important;
+        }
+      }
+    }
+
+    .empty-message {
+      .message {
+        font-size: $big !important;
+      }
+
+      .link {
+        font-size: $small !important;
+      }
+    }
+  }
+}
+
+//  -----------------    Table Section End  -----------------

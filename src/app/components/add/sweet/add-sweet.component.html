@@ -109,7 +109,7 @@
 
           <div class="img-preview">
             <div class="img-container" *ngIf="(sweetForm.controls.Image.value) || (sweet.Image)">
-              <div class="rounded-btn gray-btn img-cancel" (click)="imageClear(sweet)"><i class="pi pi-times"></i></div>
+              <div class="rounded-btn gray-btn img-cancel" (click)="imageClear(sweet)"><i class="pi pi-times img-cancel"></i></div>
               <img [src]="(sweetForm.controls.Image.value) || (sweet.Image)"
                    class="selected-sweet-image" [alt]="sweet.Name">
             </div>
