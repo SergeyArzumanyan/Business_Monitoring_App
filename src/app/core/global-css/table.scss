@@ -73,6 +73,7 @@ table tr:last-child td:last-child {
 
       .filter-input {
         width: 140px !important;
+        height: 35px !important;
         font-size: $Xsmall !important;
       }
     }
@@ -89,6 +90,7 @@ table tr:last-child td:last-child {
   visibility: hidden;
   opacity: 0;
   position: absolute;
+  height: calc(100% - 65px) !important;
   top: 65px;
   left: 0;
   z-index: 0;
@@ -96,7 +98,7 @@ table tr:last-child td:last-child {
 
   .overlay-shadow {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     background-color: $gray-background;
     opacity: 0;
     visibility: hidden;

@@ -8,7 +8,7 @@ import { AuthService } from "@Core/services";
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  public isMobile: boolean = (window.innerWidth <= 900);
+  public isMobile: boolean = (window.innerWidth <= 1000);
   public isAuthenticated: BehaviorSubject<boolean> = this.authService.authenticated;
   public isAlreadyAuthenticated: boolean = !!sessionStorage.getItem('isAuthenticated');
 
@@ -16,7 +16,7 @@ export class HeaderComponent {
 
   @HostListener("window:resize", ["$event.target"])
   private onWindowResize(): void {
-    this.isMobile = (window.innerWidth <= 900);
+    this.isMobile = (window.innerWidth <= 1000);
   }
 
 }
