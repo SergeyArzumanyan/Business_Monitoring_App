@@ -55,7 +55,7 @@ export class CalculationService {
       this.Deletion.deleteItem('sweets', 'ID', sweet.ID)
         .pipe(take(1))
         .subscribe((action: IFirebaseItemDeletion[]) => {
-          this.Deletion.removeItem('sweets', action[0].payload.key, 'Sweet', false);
+          this.Deletion.removeItem('sweets', action[0].payload.key, 'Sweet');
         });
     }
   }

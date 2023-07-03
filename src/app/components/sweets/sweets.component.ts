@@ -68,7 +68,9 @@ export class SweetsComponent implements OnInit, OnDestroy {
   }
 
   private getProductsBasedOnSweets(sweets: ISweet[]): void {
-    this.pending = true;
+    if (sweets.length > 0) {
+      this.pending = true;
+    }
     for (const sweet of sweets) {
       for (const productOfSweet of sweet.Products!) {
         this.Request.getProductsBasedOnSweet(productOfSweet.ProductID)
@@ -96,7 +98,7 @@ export class SweetsComponent implements OnInit, OnDestroy {
         this.Deletion.deleteItem('sweets', 'ID', sweet.ID)
           .pipe(takeUntil(this.unsubscribe$))
           .subscribe((action: IFirebaseItemDeletion[]) => {
-            this.Deletion.removeItem('sweets', action[0].payload.key, 'Sweet', false);
+            this.Deletion.removeItem('sweets', action[0].payload.key, 'Sweet');
           });
       }
     });

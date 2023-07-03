@@ -1,12 +1,10 @@
 @import 'src/app/core/global-css/GlobalCssConfigs';
 
-
 .wrapper {
   padding: 50px 50px 100px 50px;
 
   .container {
     width: 80%;
-    min-height: 70%;
     padding: 50px;
     margin: 0;
     background-color: $white-300;
@@ -18,11 +16,12 @@
 
 @media (max-width: 600px) {
   .wrapper {
+    align-items: flex-start !important;
     padding: 30px !important;
 
     .container {
       width: 100% !important;
-      padding: 25px 20px !important;
+      padding: 25px 30px !important;
     }
   }
 }

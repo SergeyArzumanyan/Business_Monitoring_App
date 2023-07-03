@@ -3,7 +3,7 @@ import { Database, ref, set } from "@angular/fire/database";
 
 import {
   ISweet,
-  IProductForSending
+  IProductForSending,
 } from "@Core/interfaces";
 import { ToastService } from "@Core/services";
 
@@ -21,7 +21,6 @@ export class SendingDataService {
 
 
   public createSweet(sweet: ISweet): void {
-    // set(ref(this.db , `sweets/${+(new Date())}`), sweet)
     set(ref(this.db , `sweets/${+(new Date())}`), sweet)
       .then(() => {
         this.toastService.showToast('success', 'Done', 'Sweet Created Successfully');
@@ -31,7 +30,7 @@ export class SendingDataService {
       });
   }
 
-  public createProduct(product: IProductForSending): void {
+  public createProduct(product: Partial<IProductForSending>): void {
     set(ref(this.db, `products/${+(new Date())}`), product)
       .then(() => {
         this.toastService.showToast('success', 'Done', 'Product Created Successfully');

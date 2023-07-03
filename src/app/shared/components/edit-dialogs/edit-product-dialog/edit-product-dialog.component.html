@@ -1,0 +1,76 @@
+    <form [formGroup]="ProductForm" (ngSubmit)="saveProduct()">
+      <div class="w-100 flex col justify-content-center align-items-center gap-20">
+        <div class="w-100 flex col gap-15">
+          <label for="Name">Name</label>
+          <input class="p-inputtext-sm"
+                 [ngClass]="{
+                    'ng-invalid ng-dirty':
+                    ProductForm.get('Name')?.hasError('minlength')  && submitted
+                    ||
+                    ProductForm.get('Name')?.hasError('maxlength')  && submitted
+                    ||
+                    ProductForm.get('Name')?.hasError('required') && submitted
+                    ||
+                    ProductForm.get('Name')?.hasError('nonWhiteSpace') && submitted
+                    }"
+                 type="text"
+                 formControlName="Name"
+                 (keydown.enter)="!ProductForm.pristine ? saveProduct() : ''"
+                 pInputText
+                 id="Name"
+                 autofocus />
+
+          <small *ngIf="ProductForm.get('Name')?.hasError('required') && submitted"
+                 class="p-error">
+            Field can't be empty.
+          </small>
+
+          <small *ngIf="ProductForm.get('Name')?.hasError('onlyWhitespace') && submitted"
+                 class="p-error">
+            Field can't be only spaces.
+          </small>
+
+          <small *ngIf="ProductForm.get('Name')?.hasError('minlength')  && submitted"
+                 class="p-error">
+            Name is too short.
+          </small>
+
+          <small *ngIf="ProductForm.get('Name')?.hasError('maxlength')  && submitted"
+                 class="p-error">
+            Name is too long.
+          </small>
+        </div>
+
+        <div class="w-100 flex col gap-15">
+          <label for="Price">Price</label>
+          <p-inputNumber formControlName="Price"
+                         (keydown.enter)="!ProductForm.pristine ? saveProduct() : ''"
+                         inputId="Price"
+                         id="Price"
+                         [ngClass]="{
+                        'ng-invalid ng-dirty':
+                        ProductForm.get('Price')?.hasError('isNotPositive')  && submitted
+                        ||
+                        ProductForm.get('Price')?.hasError('required') && submitted
+                        }"
+                         class="p-inputtext-sm">
+          </p-inputNumber>
+
+          <small *ngIf="ProductForm.get('Price')?.hasError('required') && submitted"
+                 class="p-error">
+            Field can't be empty.
+          </small>
+
+          <small *ngIf="ProductForm.get('Price')?.hasError('isNotPositive')  && submitted"
+                 class="p-error">
+            Price must be greater than 0.
+          </small>
+
+          <small *ngIf="ProductForm.get('Price')?.hasError('max')  && submitted"
+                 class="p-error">
+            Price is too large.
+          </small>
+        </div>
+
+      </div>
+    </form>

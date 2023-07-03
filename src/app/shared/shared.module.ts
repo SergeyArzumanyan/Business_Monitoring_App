@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { RouterLink } from "@angular/router";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import {
-  DFiltersComponent,
+  TableComponent,
   FiltersComponent,
+  DFiltersComponent,
   MFiltersComponent,
+  EditProductDialogComponent,
 } from '@Shared/components';
 
 import { PasswordModule } from "primeng/password";
@@ -28,24 +32,29 @@ import { InputMaskModule } from "primeng/inputmask";
     FiltersComponent,
     DFiltersComponent,
     MFiltersComponent,
+    TableComponent,
+    EditProductDialogComponent,
   ],
-  imports: [
-    CommonModule,
-    PasswordModule,
-    ButtonModule,
-    NgOptimizedImage,
-    ProgressSpinnerModule,
-    InputNumberModule,
-    ConfirmDialogModule,
-    ToastModule,
-    DialogModule,
-    RippleModule,
-    InputTextModule,
-    MultiSelectModule,
-    KeyFilterModule,
-    TooltipModule,
-    InputMaskModule,
-  ],
+    imports: [
+        CommonModule,
+        PasswordModule,
+        ButtonModule,
+        NgOptimizedImage,
+        ProgressSpinnerModule,
+        InputNumberModule,
+        ConfirmDialogModule,
+        ToastModule,
+        DialogModule,
+        RippleModule,
+        InputTextModule,
+        MultiSelectModule,
+        KeyFilterModule,
+        TooltipModule,
+        InputMaskModule,
+        RouterLink,
+        FormsModule,
+        ReactiveFormsModule,
+    ],
   exports: [
     PasswordModule,
     ButtonModule,
@@ -65,6 +74,8 @@ import { InputMaskModule } from "primeng/inputmask";
     DFiltersComponent,
     MFiltersComponent,
     FiltersComponent,
+    TableComponent,
+    EditProductDialogComponent,
   ]
 })
-export class SharedModule { }
+export class SharedModule {}

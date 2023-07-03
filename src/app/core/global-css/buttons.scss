@@ -87,12 +87,12 @@ $animationTime: 0.2s;
     box-shadow: 0 0 0 4px $gray-100 !important;
   }
 
-  &.btn-disabled {
+  &-disabled {
     background-color: $red-disabled !important;
     cursor: not-allowed;
   }
 
-  &.disabled:hover, &.disabled:active {
+  &-disabled:hover, &-disabled:active {
     background-color: $red-disabled !important;
   }
 }
@@ -113,12 +113,12 @@ $animationTime: 0.2s;
     box-shadow: 0 0 0 4px $gray-100 !important;
   }
 
-  &.btn-disabled {
+  &-disabled {
     background-color: $blue-disabled !important;
     cursor: not-allowed;
   }
 
-  &.disabled:hover, &.disabled:active {
+  &-disabled:hover, &-disabled:active {
     background-color: $blue-disabled !important;
   }
 }
@@ -140,12 +140,12 @@ $animationTime: 0.2s;
     box-shadow: 0 0 0 4px $brown-300 !important;
   }
 
-  &.btn-disabled {
+  &-disabled {
     background-color: $skin-disabled !important;
     cursor: not-allowed;
   }
 
-  &.disabled:hover, &.disabled:active {
+  &-disabled:hover, &-disabled:active {
     background-color: $skin-disabled !important;
   }
 }
@@ -167,12 +167,12 @@ $animationTime: 0.2s;
     box-shadow: 0 0 0 4px $skin-100 !important;
   }
 
-  &.btn-disabled {
+  &-disabled {
     background-color: $brown-disabled !important;
     cursor: not-allowed;
   }
 
-  &.disabled:hover, &.disabled:active {
+  &-disabled:hover, &-disabled:active {
     background-color: $brown-disabled !important;
     color: $white-300 !important;
   }
@@ -194,12 +194,12 @@ $animationTime: 0.2s;
     box-shadow: 0 0 0 4px $gray-100 !important;
   }
 
-  &.btn-disabled {
+  &-disabled {
     background-color: $green-disabled !important;
     cursor: not-allowed;
   }
 
-  &.disabled:hover, &.disabled:active {
+  &-disabled:hover, &-disabled:active {
     background-color: $green-disabled !important;
   }
 }
@@ -220,12 +220,12 @@ $animationTime: 0.2s;
     box-shadow: 0 0 0 4px $gray-200 !important;
   }
 
-  &.btn-disabled {
+  &-disabled {
     background-color: $gray-disabled !important;
     cursor: not-allowed;
   }
 
-  &.disabled:hover, &.disabled:active {
+  &-disabled:hover, &-disabled:active {
     background-color: $gray-disabled !important;
   }
 }
@@ -248,12 +248,12 @@ $animationTime: 0.2s;
     box-shadow: 0 0 0 4px $brown-300 !important;
   }
 
-  &.btn-disabled {
+  &-disabled {
     background-color: $skin-action-btn-disabled !important;
-    cursor: not-allowed;
+    cursor: not-allowed !important;
   }
 
-  &.disabled:hover, &.disabled:active {
+  &-disabled:hover, &-disabled:active {
     background-color: $skin-action-btn-disabled !important;
     color: $black !important;
   }

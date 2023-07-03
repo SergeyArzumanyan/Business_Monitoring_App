@@ -168,6 +168,9 @@ table tr:last-child td:last-child {
       color: $black;
       transition: $animationTime;
       cursor: default;
+      max-width: 75px;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
 
     th {
@@ -236,7 +239,7 @@ table tr:last-child td:last-child {
     table {
       tr {
         td, th {
-          padding: 8px !important;
+          padding: 10px !important;
         }
       }
     }

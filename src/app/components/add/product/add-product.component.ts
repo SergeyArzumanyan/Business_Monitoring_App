@@ -5,7 +5,7 @@ import {
   Validators
 } from "@angular/forms";
 
-import { IProductForm, IProductForSending } from "@Core/interfaces";
+import { IProductForm } from "@Core/interfaces";
 import { SendingDataService } from "@Core/services";
 import { onlyPositiveNumbers } from "@Core/validators";
 
@@ -19,6 +19,7 @@ export class AddProductComponent {
   public submitted: boolean = false;
 
   public productForm: FormGroup<IProductForm> = new FormGroup<IProductForm>({
+    ID: new FormControl<number | null>(null),
     Name: new FormControl<string | null>(null, [
       Validators.required,
       Validators.maxLength(20),
@@ -36,13 +37,9 @@ export class AddProductComponent {
 
   public addProduct(): void {
       this.submitted = true;
-      if (this.productForm.valid && this.productForm.value.Name && this.productForm.value.Price) {
-        const product: IProductForSending = {
-          ID: +(new Date()),
-          Name: this.productForm.value.Name,
-          Price: this.productForm.value.Price
-        };
-        this.Send.createProduct(product);
+      if (this.productForm.valid) {
+        this.productForm.controls.ID.setValue( +(new Date()) );
+        this.Send.createProduct(this.productForm.value);
         this.productForm.reset();
         this.submitted = false;
       }

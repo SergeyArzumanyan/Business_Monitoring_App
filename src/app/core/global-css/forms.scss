@@ -195,22 +195,24 @@ $containerPadding: 40px;
 //    Form Structure End
 
 
-//    pInputNumber Start
+//    pInputNumber/pInputText Start
 
 :host ::ng-deep .p-inputnumber.p-component {
   width: 100% !important;
+  height: 40px !important;
 
   span {
     font-size: $small !important;
   }
 }
 
-:host ::ng-deep .p-inputnumber-input.p-component {
+:host ::ng-deep .p-inputnumber-input.p-component, :host ::ng-deep .p-inputtext.p-component {
   width: 100% !important;
+  height: 40px !important;
   font-size: $small !important;
 }
 
-//    pInputNumber End
+//    pInputNumber/pInputText End
 
 
 //    pInputMask Start
@@ -250,6 +252,11 @@ $containerPadding: 40px;
   font-size: $small !important;
   font-weight: $normal !important;
   width: 100%;
+  height: 40px !important;
+}
+
+:host ::ng-deep .p-overlay.p-component {
+  min-width: auto !important;
 }
 
 //    pMultiSelect End

@@ -1,0 +1,120 @@
+<app-filters [showName]="showName"
+             [showPrice]="showPrice">
+</app-filters>
+
+<h2 class="table-name text-center">{{ TableName | titlecase }}</h2>
+
+<div class="table-wrapper">
+  <table>
+    <thead>
+    <tr>
+      <ng-container *ngIf="TableItems && TableItems.length > 0 && !Pending">
+
+        <ng-container *ngFor="let ArrayObject of TableItems; let first = first">
+          <ng-container *ngIf="first">
+            <th *ngFor="let ObjectKeyValue of ArrayObject | keyvalue">
+              {{ ObjectKeyValue.key }}
+            </th>
+          </ng-container>
+        </ng-container>
+
+        <ng-container *ngIf="TableActions">
+          <th colspan="2" class="table-actions">Actions</th>
+        </ng-container>
+
+      </ng-container>
+
+    </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngIf="TableItems && TableItems.length > 0 && !Pending">
+      <ng-container *ngFor="let ArrayObject of TableItems">
+        <tr>
+          <td *ngFor="let ObjectKeyValue of ArrayObject | keyvalue"
+              [pTooltip]="makeTooltip(ObjectKeyValue.value)"
+              tooltipPosition="bottom"
+              [showDelay]="300">
+            {{ ObjectKeyValue.value }}
+          </td>
+
+          <ng-container *ngIf="TableActions">
+            <td class="action-td skin-action-btn" (click)="editItem(ArrayObject)">
+              <i class="pi pi-pencil icon-sm"></i>
+            </td>
+            <td class="action-td brown-action-btn" (click)="deleteItem(ArrayObject)">
+              <i class="pi pi-trash icon-sm"></i>
+            </td>
+          </ng-container>
+        </tr>
+      </ng-container>
+    </ng-container>
+    </tbody>
+  </table>
+
+  <ng-container *ngIf="!TableItems?.length && !Pending">
+    <div class="empty-message w-100 flex col gap-20">
+      <div class="message">
+        There Are No {{ ItemName }}s Available
+      </div>
+      <div class="link">
+        You Can Add Some <a [routerLink]="['add', ItemApiName]" class="classic-link">Here</a>.
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="Pending">
+    <div class="loading-wrapper w-100 flex gap-10 justify-content-center align-items-center">
+      <span class="loading-text">Please Wait</span>
+      <p-progressSpinner class="p-progress-path"></p-progressSpinner>
+    </div>
+  </ng-container>
+</div>
+
+
+<p-dialog [(visible)]="EditDialog"
+          [dismissableMask]="true"
+          [resizable]="false"
+          [draggable]="false"
+          [breakpoints]="{'1080px': '50vw','960px': '60vw', '640px': '85vw'}"
+          [style]="{width: '450px'}"
+          header="Edit Item"
+          [modal]="true"
+          (onHide)="hideEditDialog()"
+          styleClass="p-fluid">
+
+  <ng-template pTemplate="content">
+    <app-edit-product-dialog
+      *ngIf="EditDialog"
+      (hideEditDialog)="hideFromChildren($event)"
+      [ProductDialog]="EditDialog"
+      [Product]="RowElement"
+      [ProductForm]="EditDialogForm">
+    </app-edit-product-dialog>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button type="button"
+            class="btn-md brown-action-btn dialog-btn"
+            (click)="hideEditDialog()">
+      <span class="flex justify-content-center align-items-center gap-5">
+        Cancel
+        <i class="pi pi-times icon-sm"></i>
+      </span>
+    </button>
+
+    <button type="submit"
+            class="btn-md skin-action-btn dialog-btn"
+            [disabled]="EditDialogForm.pristine"
+            [ngClass]="{'skin-action-btn-disabled': EditDialogForm.pristine}"
+            (click)="saveItem()">
+      <span class="flex justify-content-center align-items-center gap-5">
+        Save
+        <i class="pi pi-check icon-sm"></i>
+      </span>
+    </button>
+  </ng-template>
+
+</p-dialog>
+
+
+<p-confirmDialog [breakpoints]="{'650px': '85vw'}" [dismissableMask]="true"></p-confirmDialog>

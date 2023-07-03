@@ -9,12 +9,13 @@ export interface  IProduct {
 }
 
 export interface IProductForm {
+  ID: FormControl<number | null>;
   Name: FormControl<string | null>;
   Price: FormControl<number | null>;
 }
 
 export interface IProductForSending {
-  ID: number;
-  Name: string;
-  Price: number;
+  ID: number | null;
+  Name: string | null;
+  Price: number | null;
 }

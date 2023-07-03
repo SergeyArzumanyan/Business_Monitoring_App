@@ -167,10 +167,10 @@
 
       .sweet-products {
         .products-wrapper {
-          width: 100%;
+          width: 75%;
           border-radius: 4px;
           padding: 0;
-          margin: 0;
+          margin: 0 auto;
 
           .product-scheme {
             background-color: $table-background;
@@ -274,13 +274,6 @@
       justify-content: center;
     }
   }
-
-  .edit-block-wrapper {
-    .products-wrapper {
-      width: 75%;
-      margin: 0 auto !important;
-    }
-  }
 }
 
 
@@ -354,22 +347,6 @@
             .product {
               .product-edit-mode-div-price {
                 padding: 3px !important;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-
-  @media (max-width: 470px) {
-    .wrapper {
-      .container {
-        .inner-container {
-          .sweet-products {
-            .product {
-              .product-edit-mode-div {
-                //padding: 1px !important;
               }
             }
           }

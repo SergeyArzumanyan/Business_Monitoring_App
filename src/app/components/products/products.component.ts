@@ -1,17 +1,15 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { Subject, take, takeUntil } from "rxjs";
+import { Subject, takeUntil } from "rxjs";
 
-import { onlyPositiveNumbers } from "@Core/validators";
+import { onlyPositiveNumbers, onlyWhiteSpaceValidator } from "@Core/validators";
 import {
   IProduct,
   IProductForm,
-  IFirebaseItemDeletion,
 } from "@Core/interfaces";
 import {
   RequestsService,
-  EditService,
   DeleteService,
   ToastService,
 } from "@Core/services";
@@ -32,23 +30,24 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   public products: IProduct[] | null = [];
-  private product: IProduct | null = null;
 
-  public pending: boolean = false;
-
-  public ProductDialog: boolean = false;
-  public productForm: FormGroup<IProductForm> = new FormGroup<IProductForm>({
+  public ProductForm: FormGroup<IProductForm> = new FormGroup<IProductForm>({
+    ID: new FormControl<number | null>(null),
     Name: new FormControl<string | null>(null, [
+      Validators.required,
+      onlyWhiteSpaceValidator(),
       Validators.maxLength(20),
-      Validators.minLength(2)
+      Validators.minLength(2),
     ]),
     Price: new FormControl<number | null>(null,
       [
+        Validators.required,
         Validators.max(500000),
-        onlyPositiveNumbers()
+        onlyPositiveNumbers(),
       ]),
   });
-  public submitted: boolean = false;
+
+  public pending: boolean = false;
 
   private unsubscribe$: Subject<void> = new Subject<void>();
 
@@ -57,7 +56,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
     private confirmationService: ConfirmationService,
     private router: Router,
     private Deletion: DeleteService,
-    private Edition: EditService,
     private toastService: ToastService,
   ) {}
 
@@ -85,61 +83,5 @@ export class ProductsComponent implements OnInit, OnDestroy {
           this.toastService.showToast('error', 'Error', 'Failed To Get Products');
         }
       })
-  }
-
-  public deleteProduct(product: IProduct): void {
-
-    this.confirmationService.confirm({
-      message: 'Are you sure that you want to delete this product?',
-      header: 'Delete Product ?',
-      icon: 'pi pi-trash icon-big',
-      accept: () => {
-      this.Deletion.deleteItem('products', 'ID', product.ID)
-        .pipe(take(1))
-      .subscribe({
-          next: (action: IFirebaseItemDeletion[]) => {
-            this.Deletion.removeItem('products', action[0].payload.key, 'Product', true);
-            this.toastService.showToast('success', 'Done', 'Product Deleted Successfully');
-          },
-          error: () => {
-            this.toastService.showToast('error', 'Error', 'Something Went Wrong.');
-          }
-        })
-      }
-    });
-  }
-
-  public editProduct(product: IProduct): void {
-    this.product = product;
-    this.productForm.patchValue(product);
-    this.ProductDialog = true;
-  }
-
-  public hideProductDialog(): void {
-    this.productForm.reset();
-    this.ProductDialog = false;
-    this.submitted = false;
-  }
-
-  public saveProduct(): void {
-    this.submitted = true;
-    this.pending = true;
-    if (this.productForm.valid && this.productForm.value.Name?.trim() && this.productForm.value.Price && this.product?.ID) {
-      this.Edition.editItem('products', 'ID', this.product?.ID)
-        .pipe(take(1))
-        .subscribe((items: any) => {
-          this.Edition.updateCurrentItem('products', this.productForm.value, items[0].key)
-            .then(() => {
-              this.pending = false;
-              this.toastService.showToast('success', 'Done', 'Product Edited Successfully.');
-            })
-            .catch(() => {
-              this.pending = false;
-              this.toastService.showToast('error', 'Error', 'Something Went Wrong.');
-            });
-        });
-      this.ProductDialog = false;
-      this.productForm.markAsPristine();
-    }
   }
 }

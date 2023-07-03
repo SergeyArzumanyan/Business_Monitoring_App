@@ -1,159 +1,16 @@
 <div class="w-100 h-100 wrapper flex justify-content-center align-items-center">
   <div class="container flex col gap-15">
 
-    <app-filters [showName]="true"
-                 [showPrice]="true">
-    </app-filters>
-
-    <h2 class="table-name text-center">Products</h2>
-
-    <div class="table-wrapper">
-      <table>
-        <thead>
-        <tr>
-          <th>Name</th>
-          <th>Price</th>
-          <th colspan="2" class="interactions">Interactions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <ng-container *ngIf="products && products.length > 0 && !pending">
-          <tr *ngFor="let product of products">
-            <td class="main-td">{{ product.Name }}</td>
-            <td class="main-td product-price">{{ product.Price }}</td>
-            <td class="action-td skin-action-btn" (click)="editProduct(product)">
-              <i class="pi pi-pencil icon-sm"></i>
-            </td>
-            <td class="action-td brown-action-btn" (click)="deleteProduct(product)">
-              <i class="pi pi-trash icon-sm"></i>
-            </td>
-          </tr>
-        </ng-container>
-        </tbody>
-      </table>
-
-      <ng-container *ngIf="!products?.length && !pending">
-        <div class="empty-message w-100 flex col gap-20">
-          <div class="message">
-            There Are No Products Available
-          </div>
-          <div class="link">
-            You Can Add Some <a [routerLink]="['/add/product']" class="classic-link">Here</a>.
-          </div>
-        </div>
-      </ng-container>
-
-      <ng-container *ngIf="pending">
-        <div class="loading-wrapper w-100 flex gap-10 justify-content-center align-items-center">
-          <span class="loading-text">Please Wait</span>
-          <p-progressSpinner class="p-progress-path"></p-progressSpinner>
-        </div>
-      </ng-container>
-    </div>
+    <app-table [showName]="true"
+               [showPrice]="true"
+               [TableItems]="products"
+               [TableName]="'Products'"
+               [TableActions]="true"
+               [ItemName]="'Product'"
+               [ItemApiName]="'products'"
+               [EditDialogForm]="ProductForm"
+               [Pending]="pending">
+    </app-table>
 
   </div>
 </div>
-
-<p-confirmDialog [breakpoints]="{'650px': '85vw'}"></p-confirmDialog>
-
-<p-dialog [(visible)]="ProductDialog"
-          [dismissableMask]="true"
-          [resizable]="false"
-          [draggable]="false"
-          [breakpoints]="{'1080px': '50vw','960px': '60vw', '640px': '85vw'}"
-          [style]="{width: '450px'}"
-          header="Edit Product"
-          [modal]="true"
-          (onHide)="hideProductDialog()"
-          styleClass="p-fluid">
-  <ng-template pTemplate="content">
-    <form [formGroup]="productForm" (ngSubmit)="saveProduct()">
-      <div class="w-100 flex col justify-content-center align-items-center gap-20">
-        <div class="w-100 flex col gap-15">
-          <label for="Name">Name</label>
-          <input class="p-inputtext-sm"
-                 [ngClass]="{
-                    'ng-invalid ng-dirty':
-                    productForm.get('Name')?.hasError('minlength')  && submitted
-                    ||
-                    productForm.get('Name')?.hasError('maxlength')  && submitted
-                    || !productForm.value.Name?.trim() && submitted
-                    }"
-                 type="text"
-                 formControlName="Name"
-                 pInputText
-                 id="Name"
-                 autofocus />
-
-          <small *ngIf="!productForm.value.Name?.trim() && submitted"
-                 class="p-error">
-            Name can't be empty.
-          </small>
-
-          <small *ngIf="productForm.get('Name')?.hasError('minlength')  && submitted"
-                 class="p-error">
-            Name is too short.
-          </small>
-
-          <small *ngIf="productForm.get('Name')?.hasError('maxlength')  && submitted"
-                 class="p-error">
-            Name is too long.
-          </small>
-        </div>
-
-        <div class="w-100 flex col gap-15">
-          <label for="Price">Price</label>
-          <p-inputNumber formControlName="Price"
-                         inputId="Price"
-                         id="Price"
-                         [ngClass]="{
-                        'ng-invalid ng-dirty':
-                        productForm.get('Price')?.hasError('isNotPositive')  && submitted
-                        ||
-                        !productForm.value.Price && submitted
-                        }"
-                         class="p-inputtext-sm">
-          </p-inputNumber>
-
-          <small *ngIf="!productForm.value.Price && submitted"
-                 class="p-error">
-            Price can't be empty.
-          </small>
-
-          <small *ngIf="productForm.get('Price')?.hasError('isNotPositive')  && submitted"
-                 class="p-error">
-            Price must be greater than 0.
-          </small>
-
-          <small *ngIf="productForm.get('Price')?.hasError('max')  && submitted"
-                 class="p-error">
-            Price is too large.
-          </small>
-        </div>
-
-      </div>
-    </form>
-  </ng-template>
-
-  <ng-template pTemplate="footer">
-    <button type="button"
-            class="btn-md brown-action-btn dialog-btn"
-            (click)="hideProductDialog()">
-      <span class="flex justify-content-center align-items-center gap-5">
-        Cancel
-        <i class="pi pi-times icon-sm"></i>
-      </span>
-    </button>
-
-    <button type="submit"
-            class="btn-md skin-action-btn dialog-btn"
-            [disabled]="productForm.pristine"
-            [ngClass]="{'skin-action-btn-disabled': productForm.pristine}"
-            (click)="saveProduct()">
-      <span class="flex justify-content-center align-items-center gap-5">
-        Save
-        <i class="pi pi-check icon-sm"></i>
-      </span>
-    </button>
-  </ng-template>
-</p-dialog>
