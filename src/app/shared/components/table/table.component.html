@@ -93,25 +93,27 @@
   </ng-template>
 
   <ng-template pTemplate="footer">
-    <button type="button"
-            class="btn-md brown-action-btn dialog-btn"
-            (click)="hideEditDialog()">
+    <div class="w-100 flex align-items-center justify-content-end">
+      <button type="button"
+              class="btn-md brown-action-btn dialog-btn"
+              (click)="hideEditDialog()">
       <span class="flex justify-content-center align-items-center gap-5">
         Cancel
         <i class="pi pi-times icon-sm"></i>
       </span>
-    </button>
+      </button>
 
-    <button type="submit"
-            class="btn-md skin-action-btn dialog-btn"
-            [disabled]="EditDialogForm.pristine"
-            [ngClass]="{'skin-action-btn-disabled': EditDialogForm.pristine}"
-            (click)="saveItem()">
+      <button type="submit"
+              class="btn-md skin-action-btn dialog-btn"
+              [disabled]="EditDialogForm.pristine"
+              [ngClass]="{'skin-action-btn-disabled': EditDialogForm.pristine}"
+              (click)="saveItem()">
       <span class="flex justify-content-center align-items-center gap-5">
         Save
         <i class="pi pi-check icon-sm"></i>
       </span>
-    </button>
+      </button>
+    </div>
   </ng-template>
 
 </p-dialog>
