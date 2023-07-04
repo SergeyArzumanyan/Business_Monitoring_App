@@ -203,6 +203,8 @@ table tr:last-child td:last-child {
     min-height: 130px;
     padding: 25px;
     background-color: $white-400;
+    border-radius: $borderRadius;
+    box-shadow: 0 0 1px 0 $gray-300;
     text-align: center;
 
     .message {
