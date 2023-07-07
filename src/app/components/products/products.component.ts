@@ -107,12 +107,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
   private getProducts(): void {
     this.pending = true;
 
-    this.Request.getProducts()
+    this.Request.GetItems<IProduct[]>('products')
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe({
         next: (products: IProduct[] | null) => {
           this.pending = false;
-          this.products = products ? this.Request.makeArray(products)  : [];
+          this.products = products ? this.Request.MakeArrayFromFirebaseResponse(products)  : [];
           this.productTableConfig.TableItems = this.products;
         },
         error: () => {

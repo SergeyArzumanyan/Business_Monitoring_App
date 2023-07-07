@@ -13,9 +13,3 @@ export interface IProductForm {
   Name: FormControl<string | null>;
   Price: FormControl<number | null>;
 }
-
-export interface IProductForSending {
-  ID: number | null;
-  Name: string | null;
-  Price: number | null;
-}

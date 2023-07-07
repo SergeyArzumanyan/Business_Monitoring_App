@@ -54,11 +54,11 @@ export class AddSweetComponent implements OnInit, OnDestroy {
   }
 
   private requestProducts(): void {
-    this.Request.getProducts()
+    this.Request.GetItems<IProduct[]>('products')
       .pipe(takeUntil(this.unsubscribe))
       .subscribe({
         next: (products: IProduct[] | null) => {
-          this.products = products ? this.Request.makeArray(products) : [];
+          this.products = products ? this.Request.MakeArrayFromFirebaseResponse(products) : [];
         },
         error: () => {
           this.toastService.showToast('error', 'Error', 'Something Went Wrong');
@@ -148,7 +148,7 @@ export class AddSweetComponent implements OnInit, OnDestroy {
               Products: this.generateProductsForSweet(this.sweetForm.value.Products),
               Image: this.sweetForm.value.Image
             }
-            this.Send.createSweet(sweet);
+            this.Send.CreateItem<ISweet>('sweets', 'Sweet', sweet);
           }
           this.sweetForm.reset();
           this.resetProducts();

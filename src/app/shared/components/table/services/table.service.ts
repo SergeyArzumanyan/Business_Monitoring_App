@@ -3,9 +3,10 @@ import { BehaviorSubject, take } from "rxjs";
 
 import { IFirebaseItemDeletion } from "@Core/interfaces";
 import {
+  RequestsService,
   DeleteService,
   EditService,
-  ToastService
+  ToastService,
 } from "@Core/services";
 
 import { ITableConfig } from "@Shared/components/table/interfaces";
@@ -23,6 +24,7 @@ export class TableService {
   public EditDialogForm: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
   constructor(
+    private Request: RequestsService,
     private Edition: EditService,
     private Deletion: DeleteService,
     private toastService: ToastService,
@@ -35,11 +37,11 @@ export class TableService {
       header: `Delete ${TableConfigs.ItemName} ?`,
       icon: 'pi pi-trash icon-big',
       accept: (): void => {
-        this.Deletion.deleteItem(TableConfigs.ItemApiName, 'ID', Item.ID)
+        this.Request.GetItemFirebaseKey(TableConfigs.ItemApiName, 'ID', Item.ID)
           .pipe(take(1))
           .subscribe({
             next: (action: IFirebaseItemDeletion[]): void => {
-              this.Deletion.removeItem(TableConfigs.ItemApiName, action[0].payload.key, TableConfigs.ItemName);
+              this.Deletion.RemoveItemByFirebaseKey(TableConfigs.ItemApiName, action[0].payload.key, TableConfigs.ItemName);
             },
             error: (): void => {
               this.toastService.showToast('error', 'Error', 'Something Went Wrong.');
@@ -60,10 +62,10 @@ export class TableService {
   }
 
   public EditItem(TableConfigs: ITableConfig<any>, Item: any, ItemNewValue: any): any {
-    this.Edition.editItem(`${TableConfigs.ItemApiName}`, 'ID', Item.ID)
+    this.Request.GetItemFirebaseKey(`${TableConfigs.ItemApiName}`, 'ID', Item.ID)
       .pipe(take(1))
       .subscribe((items: any): void => {
-        this.Edition.updateCurrentItem(`${TableConfigs.ItemApiName}`, ItemNewValue, items[0].key)
+        this.Edition.UpdateItemByFirebaseKey(`${TableConfigs.ItemApiName}`, ItemNewValue, items[0].key)
           .then((): boolean => {
             this.toastService.showToast('success', 'Done', `${TableConfigs.ItemName} Edited Successfully.`);
             return true;

@@ -3,7 +3,7 @@ import { FormGroup } from "@angular/forms";
 import { take } from "rxjs";
 
 import { IProduct } from "@Core/interfaces";
-import { EditService, ToastService } from "@Core/services";
+import { EditService, RequestsService, ToastService } from "@Core/services";
 
 @Component({
   selector: 'app-edit-product-dialog',
@@ -19,6 +19,7 @@ export class EditProductDialogComponent {
   @Output() HideEditDialog: EventEmitter<boolean> = new EventEmitter<boolean>(false);
 
   constructor(
+    private Request: RequestsService,
     private Edition: EditService,
     private toastService: ToastService,
   ) {}
@@ -28,10 +29,10 @@ export class EditProductDialogComponent {
   public SaveEditedProduct(): void {
     this.submitted = true;
     if (this.ProductForm.valid) {
-      this.Edition.editItem('products', 'ID', this.Product.ID)
+      this.Request.GetItemFirebaseKey('products', 'ID', this.Product.ID)
         .pipe(take(1))
         .subscribe((items: any) => {
-          this.Edition.updateCurrentItem('products', this.ProductForm.value, items[0].key)
+          this.Edition.UpdateItemByFirebaseKey('products', this.ProductForm.value, items[0].key)
             .then(() => {
               this.toastService.showToast('success', 'Done', 'Item Edited Successfully.');
             })

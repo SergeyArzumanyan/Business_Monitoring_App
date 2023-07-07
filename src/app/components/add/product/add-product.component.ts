@@ -38,8 +38,8 @@ export class AddProductComponent {
   public addProduct(): void {
       this.submitted = true;
       if (this.productForm.valid) {
-        this.productForm.controls.ID.setValue( +(new Date()) );
-        this.Send.createProduct(this.productForm.value);
+        this.productForm.controls.ID.setValue(+(new Date()));
+        this.Send.CreateItem<any>('products', 'Product', this.productForm.value);
         this.productForm.reset();
         this.submitted = false;
       }

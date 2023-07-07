@@ -3,11 +3,6 @@ import { Observable } from "rxjs";
 
 import { AngularFireDatabase, AngularFireObject } from "@angular/fire/compat/database";
 
-import {
-  ISweet,
-  IProduct
-} from "@Core/interfaces";
-
 @Injectable({
   providedIn: 'root'
 })
@@ -16,25 +11,26 @@ export class RequestsService {
 
   constructor(private db: AngularFireDatabase) {}
 
-  public getSweets(): Observable<ISweet[] | null> {
-    const starCountRef: AngularFireObject<ISweet[]> = this.db.object('/sweets');
+  public GetItemFirebaseKey(ItemsEndPoint: string, FirebaseKey: string, ItemValue: any): Observable<any> {
+    return this.db.list(`/${ItemsEndPoint}`,
+      FirebaseDBReference =>
+        FirebaseDBReference.orderByChild(FirebaseKey).equalTo(ItemValue))
+      .snapshotChanges();
+  }
+
+  public GetItemByObjectKey(ItemEndPoint: string, ItemKey: string, ItemValue: any): Observable<any> {
+    return this.db.list(`/${ItemEndPoint}`,
+      FirebaseDBReference =>
+        FirebaseDBReference.orderByChild(ItemKey).equalTo(ItemValue))
+      .valueChanges();
+  }
+
+  public GetItems<T>(ItemsEndPoint: string): Observable<T | null> {
+    const starCountRef: AngularFireObject<T | null> = this.db.object(`/${ItemsEndPoint}`);
     return starCountRef.valueChanges();
   }
 
-  public getSweet(ID: number | null): Observable<ISweet[]> {
-    return this.db.list<ISweet>('/sweets', ref => ref.orderByChild('ID').equalTo(ID)).valueChanges()
-  }
-
-  public getProducts(): Observable<IProduct[] | null> {
-    const starCountRef: AngularFireObject<IProduct[]> = this.db.object('/products');
-      return starCountRef.valueChanges();
-  }
-
-  public getProductsBasedOnSweet(ID: number | null): Observable<IProduct[]> {
-    return this.db.list<IProduct>('/products', ref => ref.orderByChild('ID').equalTo(ID)).valueChanges()
-  }
-
-  public makeArray(data: any): any[] {
+  public MakeArrayFromFirebaseResponse(data: any): any[] {
     return Array.from(Object.values(data));
   }
 }

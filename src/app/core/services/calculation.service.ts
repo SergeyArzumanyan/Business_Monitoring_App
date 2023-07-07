@@ -29,7 +29,7 @@ export class CalculationService {
     for (const productOfSweet of productsOfSweet) {
       const productQuantity: number = productOfSweet.Quantity;
 
-      this.Request.getProductsBasedOnSweet(productOfSweet.ProductID)
+      this.Request.GetItemByObjectKey('products', 'ID', productOfSweet.ProductID)
         .pipe(take(1))
         .subscribe({
           next: (product: IProduct[]) => {
@@ -52,10 +52,10 @@ export class CalculationService {
         sweet.TotalPrice = product[0].Price * productQuantity :
         sweet.TotalPrice += product[0].Price * productQuantity;
     } else {
-      this.Deletion.deleteItem('sweets', 'ID', sweet.ID)
+      this.Request.GetItemFirebaseKey('sweets', 'ID', sweet.ID)
         .pipe(take(1))
         .subscribe((action: IFirebaseItemDeletion[]) => {
-          this.Deletion.removeItem('sweets', action[0].payload.key, 'Sweet');
+          this.Deletion.RemoveItemByFirebaseKey('sweets', action[0].payload.key, 'Sweet');
         });
     }
   }

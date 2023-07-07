@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { HttpErrorResponse } from "@angular/common/http";
-import { Subject, Subscription, takeUntil } from "rxjs";
+import { Subject, Subscription, take, takeUntil } from "rxjs";
 
 import {
   ISweet,
@@ -25,7 +25,6 @@ import { ConfirmationService } from "primeng/api";
 export class SweetsComponent implements OnInit, OnDestroy {
 
   public sweets: ISweet[] = [];
-  private subscribeToSweetChanges: Subscription | null = null;
 
   public pending: boolean = false;
 
@@ -51,20 +50,19 @@ export class SweetsComponent implements OnInit, OnDestroy {
 
   private requestSweets(): void {
     this.pending = true;
-    this.subscribeToSweetChanges = this.Request.getSweets()
+    this.Request.GetItems<ISweet[]>('sweets')
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe({
         next: (sweets: ISweet[] | null) => {
           this.pending = false;
-          this.sweets = sweets ? this.Request.makeArray(sweets) : [];
+          this.sweets = sweets ? this.Request.MakeArrayFromFirebaseResponse(sweets) : [];
           this.getProductsBasedOnSweets(this.sweets);
         },
         error: () => {
           this.pending = false;
           this.toastService.showToast('error', 'Error', 'Failed To Get Sweets');
-
         }
-      })
+      });
   }
 
   private getProductsBasedOnSweets(sweets: ISweet[]): void {
@@ -73,8 +71,8 @@ export class SweetsComponent implements OnInit, OnDestroy {
     }
     for (const sweet of sweets) {
       for (const productOfSweet of sweet.Products!) {
-        this.Request.getProductsBasedOnSweet(productOfSweet.ProductID)
-          .pipe(takeUntil(this.unsubscribe$))
+        this.Request.GetItemByObjectKey('products', 'ID', productOfSweet.ProductID)
+          .pipe(take(1))
           .subscribe({
             next: (product: IProduct[]) => {
               this.pending = false;
@@ -95,10 +93,10 @@ export class SweetsComponent implements OnInit, OnDestroy {
       header: 'Delete Sweet ?',
       icon: 'pi pi-trash icon-big',
       accept: () => {
-        this.Deletion.deleteItem('sweets', 'ID', sweet.ID)
-          .pipe(takeUntil(this.unsubscribe$))
+        this.Request.GetItemFirebaseKey('sweets', 'ID', sweet.ID)
+          .pipe(take(1))
           .subscribe((action: IFirebaseItemDeletion[]) => {
-            this.Deletion.removeItem('sweets', action[0].payload.key, 'Sweet');
+            this.Deletion.RemoveItemByFirebaseKey('sweets', action[0].payload.key, 'Sweet');
           });
       }
     });

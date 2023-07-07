@@ -72,7 +72,7 @@ export class SweetComponent implements OnInit, OnDestroy {
       this.router.navigateByUrl('sweets');
       return;
     }
-    this.Request.getSweet(sweetID)
+    this.Request.GetItemByObjectKey('sweets', 'ID' ,sweetID)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe({
         next: (data: ISweet[]) => {
@@ -103,10 +103,10 @@ export class SweetComponent implements OnInit, OnDestroy {
       accept: () => {
         this.router.navigateByUrl('sweets')
           .then(() => {
-            this.Deletion.deleteItem('sweets', 'ID', sweet.ID)
+            this.Request.GetItemFirebaseKey('sweets', 'ID', sweet.ID)
               .pipe(take(1))
               .subscribe((action: IFirebaseItemDeletion[]) => {
-                this.Deletion.removeItem('sweets', action[0].payload.key, 'Sweet');
+                this.Deletion.RemoveItemByFirebaseKey('sweets', action[0].payload.key, 'Sweet');
               })
           })
           .catch(() => {
@@ -132,10 +132,10 @@ export class SweetComponent implements OnInit, OnDestroy {
 
     this.editSweetForm.value.Products = this.EditProductsForSweet();
 
-    this.Edition.editItem('sweets', 'ID', this.sweet.ID)
+    this.Request.GetItemFirebaseKey('sweets', 'ID', this.sweet.ID)
       .pipe(take(1))
       .subscribe((items: any) => {
-          this.Edition.updateCurrentItem('sweets', this.editSweetForm.value, items[0].key)
+        this.Edition.UpdateItemByFirebaseKey('sweets', this.editSweetForm.value, items[0].key)
           .then(() => {
             this.toastService.showToast('success', 'Done', 'Sweet Edited Successfully.');
             this.getProductsBasedOnSweet(this.editSweetForm.value.Products!);
