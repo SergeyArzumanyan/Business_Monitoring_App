@@ -1,16 +1,10 @@
 <div class="w-100 h-100 wrapper flex justify-content-center align-items-center">
   <div class="container flex col gap-15">
-
-    <app-table [showName]="true"
-               [showPrice]="true"
-               [TableItems]="products"
-               [TableName]="'Products'"
-               [TableActions]="true"
-               [ItemName]="'Product'"
-               [ItemApiName]="'products'"
+    <app-table [TableConfig]="productTableConfig"
+               [TableFilters]="ProductTableFilters"
+               [ContextMenuItems]="productTableContextMenuOptions"
                [EditDialogForm]="ProductForm"
                [Pending]="pending">
     </app-table>
-
   </div>
 </div>

@@ -35,7 +35,7 @@
         </div>
       </div>
 
-      <ng-container *ngIf="showName">
+      <ng-container *ngIf="TableFilters?.ShowName">
         <div class="w-100 filter-block flex col gap-10 justify-content-center align-items-center">
           <label class="filter-label" for="ProductNameFilter">Name</label>
           <input type="text"
@@ -46,7 +46,7 @@
         </div>
       </ng-container>
 
-      <ng-container *ngIf="showPrice">
+      <ng-container *ngIf="TableFilters?.ShowPrice">
         <div class="w-100 filter-block flex col gap-10 justify-content-center align-items-center">
           <label class="filter-label" for="ProductPriceFilter">Price</label>
           <p-inputNumber inputId="ProductPriceFilter"

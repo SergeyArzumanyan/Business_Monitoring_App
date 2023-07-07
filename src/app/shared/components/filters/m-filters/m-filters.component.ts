@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 
+import { ITableFilters } from "@Shared/components/filters/interfaces";
+
 @Component({
   selector: 'app-m-filters',
   templateUrl: './m-filters.component.html',
@@ -8,8 +10,7 @@ import { Component, Input } from '@angular/core';
 export class MFiltersComponent {
   public isFilterOverlayVisible: boolean = false;
 
-  @Input() showName: boolean = false;
-  @Input() showPrice: boolean = false;
+  @Input() TableFilters: ITableFilters | null = null;
 
   public toggleFilterOverlay(): void {
     this.isFilterOverlayVisible = !this.isFilterOverlayVisible;

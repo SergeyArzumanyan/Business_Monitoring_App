@@ -1,0 +1,40 @@
+@import "/src/app/core/global-css/GlobalCssConfigs";
+
+.context-menu-container {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  background-color: $white-300;
+  border-radius: $borderRadius;
+  z-index: 1200;
+  box-shadow: 0 0 1px 0 $gray-200;
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      font-size: $small;
+      padding: 10px 15px;
+      width: 130px;
+      transition: $animationTime;
+      cursor: pointer;
+      border-radius: $borderRadius;
+
+
+      &:hover {
+        background-color: $white-200;
+      }
+
+      &:active {
+        background-color: $white-100;
+      }
+
+      span {
+        pointer-events: none;
+      }
+    }
+  }
+}
+

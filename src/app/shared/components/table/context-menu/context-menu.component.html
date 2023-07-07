@@ -1,0 +1,10 @@
+<div #contextMenuContainer class="context-menu-container">
+  <ul class="w-100 h-100 flex col justify-content-center align-items-center">
+    <li *ngFor="let ContextMenuItem of ContextMenuItems" (click)="ContextMenuItem.Action(RowItem)">
+      <span class="flex justify-content-between align-items-center gap-10">
+        {{ ContextMenuItem.Label }}
+        <i [class]="'pi icon-sm ' + ContextMenuItem.IconClass"></i>
+      </span>
+    </li>
+  </ul>
+</div>

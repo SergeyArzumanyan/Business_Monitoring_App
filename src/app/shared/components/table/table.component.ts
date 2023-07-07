@@ -1,106 +1,102 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from "@angular/forms";
-import { take } from "rxjs";
+import { BehaviorSubject, Subject, takeUntil } from "rxjs";
 
-import { IFirebaseItemDeletion } from "@Core/interfaces";
 import {
-  DeleteService,
-  EditService,
-  ToastService,
-} from "@Core/services";
+  IContextMenuItem,
+  IContextMenuPosition,
+  ITableConfig,
+} from "@Shared/components/table/interfaces";
 
-import { ConfirmationService } from "primeng/api";
+import { TableService } from "@Shared/components/table/services";
+import { ITableFilters } from "@Shared/components/filters/interfaces";
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
-export class TableComponent {
+export class TableComponent implements OnInit, OnDestroy {
 
-  @Input() TableItems: any[] | null = [];
-  @Input() TableName: string = '';
-  @Input() TableActions: boolean = false;
-  @Input() ItemName: string = '';
+  @Input() TableConfig!: ITableConfig<any>;
+  @Input() TableFilters: ITableFilters | null = null;
 
-  public RowElement: any = null;
+  public TableRowItem: any;
+  public IsEditDialogVisible: boolean = false;
   @Input() EditDialogForm: FormGroup = new FormGroup({});
 
-  @Input() showName: boolean = false;
-  @Input() showPrice: boolean = false;
-
-  @Input() ItemApiName: string = '';
   @Input() Pending: boolean = false;
 
-  public EditDialog: boolean = false;
-  public DialogItem: any = null;
+  @Input() ContextMenuItems: IContextMenuItem[] = [];
+  public ShowContextMenu: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public ContextMenuPosition: IContextMenuPosition = { x: 0, y: 0 };
 
-  constructor(
-    private Deletion: DeleteService,
-    private Edition: EditService,
-    private toastService: ToastService,
-    private confirmationService: ConfirmationService,
-  ) {}
+  private unsubscribe$: Subject<void> = new Subject<void>();
 
-  public deleteItem(Item: any): void {
-    this.confirmationService.confirm({
-      message: `Are You Sure That You Want To Delete This ${this.ItemName}?`,
-      header: `Delete ${this.ItemName} ?`,
-      icon: 'pi pi-trash icon-big',
-      accept: () => {
-        this.Deletion.deleteItem(this.ItemApiName, 'ID', Item.ID)
-          .pipe(take(1))
-          .subscribe({
-            next: (action: IFirebaseItemDeletion[]) => {
-              this.Deletion.removeItem(this.ItemApiName, action[0].payload.key, this.ItemName);
-            },
-            error: () => {
-              this.toastService.showToast('error', 'Error', 'Something Went Wrong.');
-            }
-          })
-      }
+  constructor(private TableService: TableService) {}
+
+  ngOnInit(): void {
+    this.SubscribeToEditModeChanges();
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
+
+  private SubscribeToEditModeChanges(): void {
+    this.TableService.isEditDialogVisible
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe({
+        next: (EditDialogStatus: boolean) => {
+          this.IsEditDialogVisible = EditDialogStatus;
+        }
     });
   }
 
-  public hideEditDialog(): void {
-    this.EditDialog = false;
+  protected DeleteItem(Item: any): void {
+    this.TableService.DeleteItem(this.TableConfig, Item);
   }
 
-  public hideFromChildren(evn: any): void {
-    if (evn) {
-      this.hideEditDialog();
+  protected EnableEditing(Item: any): void {
+    this.TableService.EditDialogForm.next(this.EditDialogForm);
+    this.TableRowItem = Item;
+    this.TableService.PatchItemToDialogForm(Item);
+    this.TableService.EnableTableRowEdit(Item);
+  }
+
+  protected HideEditDialog(): void {
+    this.IsEditDialogVisible = false;
+    this.TableService.isEditDialogVisible.next(false);
+  }
+
+  protected HideDialogInEditDialog(hidedFromEditDialog: boolean): void {
+    if (hidedFromEditDialog) {
+      this.HideEditDialog();
     }
   }
 
-  public saveItem(): void {
-    this.Edition.editItem('products', 'ID', this.RowElement.ID)
-      .pipe(take(1))
-      .subscribe((items: any) => {
-        this.Edition.updateCurrentItem('products', this.EditDialogForm.value, items[0].key)
-          .then(() => {
-            this.toastService.showToast('success', 'Done', 'Item Edited Successfully.');
-          })
-          .catch(() => {
-            this.toastService.showToast('error', 'Error', 'Something Went Wrong.');
-          });
-      });
-    this.EditDialog = false;
+  protected SaveEditedItem(): void {
+    this.TableService.EditItem(this.TableConfig, this.TableRowItem, this.EditDialogForm.value);
+    this.IsEditDialogVisible = false;
     this.EditDialogForm.markAsPristine();
   }
 
-
-  public editItem(Item: any): void {
-    this.RowElement = Item;
-    this.EditDialogForm.patchValue(Item);
-    this.DialogItem = Item;
-    this.EditDialog = true;
-  }
-
-  public makeTooltip(value: any): string {
-    if (typeof(value) === 'string') {
+  protected MakeTooltip(value: any): string {
+    if ( typeof(value) === 'string' ) {
       return value;
     } else {
       return value.toString();
+    }
+  }
+
+  protected OpenContextMenu(evn: any, Item: any): void {
+    evn.preventDefault();
+    this.TableRowItem = Item;
+    this.ShowContextMenu.next(true);
+    this.ContextMenuPosition = {
+      x: evn.pageX,
+      y: evn.pageY
     }
   }
 }

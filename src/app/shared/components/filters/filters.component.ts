@@ -1,5 +1,7 @@
 import { Component, HostListener, Input } from '@angular/core';
 
+import { ITableFilters } from "@Shared/components/filters/interfaces";
+
 @Component({
   selector: 'app-filters',
   templateUrl: './filters.component.html',
@@ -13,6 +15,5 @@ export class FiltersComponent {
     this.isMobile = (window.innerWidth <= 1000);
   }
 
-  @Input() showName: boolean = false;
-  @Input() showPrice: boolean = false;
+  @Input() TableFilters: ITableFilters | null = null;
 }

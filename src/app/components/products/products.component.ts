@@ -1,5 +1,4 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Subject, takeUntil } from "rxjs";
 
@@ -10,9 +9,16 @@ import {
 } from "@Core/interfaces";
 import {
   RequestsService,
-  DeleteService,
   ToastService,
 } from "@Core/services";
+
+import {
+  IContextMenuItem,
+  ITableConfig,
+} from "@Shared/components/table/interfaces";
+import { ITableFilters } from "@Shared/components/filters/interfaces";
+
+import { TableService } from '@Shared/components/table/services'
 
 import { ConfirmationService } from "primeng/api";
 
@@ -23,13 +29,45 @@ import { ConfirmationService } from "primeng/api";
 })
 export class ProductsComponent implements OnInit, OnDestroy {
 
-  public isMobile = false;
+  public isMobile: boolean = false;
   @HostListener("window:resize", ["$event.target"])
   private onWindowResize(): void {
     this.isMobile = (window.innerWidth <= 900);
   }
 
   public products: IProduct[] | null = [];
+
+  public productTableConfig: ITableConfig<IProduct[]> = {
+    TableItems: [],
+    TableName: 'Products',
+    ItemName: 'Product',
+    TableActions: true,
+    ItemApiName: 'products'
+  };
+
+  public ProductTableFilters: ITableFilters = {
+    ShowName: true,
+    ShowPrice: true
+  };
+
+  public productTableContextMenuOptions: IContextMenuItem[] = [
+    {
+      Label: 'Edit',
+      IconClass: 'pi pi-pencil',
+      Action: (Item: IProduct): void =>  {
+        this.TableService.EditDialogForm.next(this.ProductForm);
+        this.TableService.EnableTableRowEdit(Item);
+      }
+    },
+    {
+      Label: 'Delete',
+      IconClass: 'pi pi-trash',
+      Action: (Item: IProduct): void => {
+        this.TableService.EditDialogForm.next(this.ProductForm);
+        this.TableService.DeleteItem(this.productTableConfig, Item)
+      }
+    }
+  ];
 
   public ProductForm: FormGroup<IProductForm> = new FormGroup<IProductForm>({
     ID: new FormControl<number | null>(null),
@@ -53,10 +91,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   constructor(
     private Request: RequestsService,
-    private confirmationService: ConfirmationService,
-    private router: Router,
-    private Deletion: DeleteService,
     private toastService: ToastService,
+    private TableService: TableService,
   ) {}
 
   ngOnInit(): void {
@@ -77,6 +113,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         next: (products: IProduct[] | null) => {
           this.pending = false;
           this.products = products ? this.Request.makeArray(products)  : [];
+          this.productTableConfig.TableItems = this.products;
         },
         error: () => {
           this.pending = false;

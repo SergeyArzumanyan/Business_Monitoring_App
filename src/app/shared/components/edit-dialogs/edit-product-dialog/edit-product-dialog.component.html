@@ -1,4 +1,4 @@
-    <form [formGroup]="ProductForm" (ngSubmit)="saveProduct()">
+    <form [formGroup]="ProductForm" (ngSubmit)="SaveEditedProduct()">
       <div class="w-100 flex col justify-content-center align-items-center gap-20">
         <div class="w-100 flex col gap-15">
           <label for="Name">Name</label>
@@ -15,7 +15,7 @@
                     }"
                  type="text"
                  formControlName="Name"
-                 (keydown.enter)="!ProductForm.pristine ? saveProduct() : ''"
+                 (keydown.enter)="!ProductForm.pristine ? SaveEditedProduct() : ''"
                  pInputText
                  id="Name"
                  autofocus />
@@ -44,7 +44,7 @@
         <div class="w-100 flex col gap-15">
           <label for="Price">Price</label>
           <p-inputNumber formControlName="Price"
-                         (keydown.enter)="!ProductForm.pristine ? saveProduct() : ''"
+                         (keydown.enter)="!ProductForm.pristine ? SaveEditedProduct() : ''"
                          inputId="Price"
                          id="Price"
                          [ngClass]="{

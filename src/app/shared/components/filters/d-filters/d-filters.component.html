@@ -9,7 +9,7 @@
 
   <div class="w-100 h-100 inputs-wrapper flex justify-content-end align-items-center gap-10">
 
-    <ng-container *ngIf="showName">
+    <ng-container *ngIf="TableFilters?.ShowName">
       <div class="filter-block flex justify-content-center align-items-center gap-10">
         <label class="filter-label" for="ProductNameFilter">Name</label>
           <input type="text"
@@ -20,7 +20,7 @@
       </div>
     </ng-container>
 
-    <ng-container *ngIf="showPrice">
+    <ng-container *ngIf="TableFilters?.ShowPrice">
       <div class="filter-block flex justify-content-center align-items-center gap-10">
         <label class="filter-label" for="ProductPriceFilter">Price</label>
         <p-inputNumber inputId="ProductPriceFilter"

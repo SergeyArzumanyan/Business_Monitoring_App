@@ -1,66 +1,73 @@
-<app-filters [showName]="showName"
-             [showPrice]="showPrice">
-</app-filters>
+<app-filters [TableFilters]="TableFilters"></app-filters>
 
-<h2 class="table-name text-center">{{ TableName | titlecase }}</h2>
+<h2 class="table-name text-center">{{ TableConfig.TableName | titlecase }}</h2>
 
 <div class="table-wrapper">
   <table>
     <thead>
-    <tr>
-      <ng-container *ngIf="TableItems && TableItems.length > 0 && !Pending">
+      <tr>
+        <ng-container *ngIf="TableConfig.TableItems && TableConfig.TableItems.length > 0 && !Pending">
 
-        <ng-container *ngFor="let ArrayObject of TableItems; let first = first">
-          <ng-container *ngIf="first">
-            <th *ngFor="let ObjectKeyValue of ArrayObject | keyvalue">
-              {{ ObjectKeyValue.key }}
-            </th>
+          <ng-container *ngFor="let ArrayObject of TableConfig.TableItems; let first = first">
+            <ng-container *ngIf="first">
+              <th *ngFor="let ObjectKeyValue of ArrayObject | keyvalue">
+                {{ ObjectKeyValue.key }}
+              </th>
+            </ng-container>
           </ng-container>
+
+          <ng-container *ngIf="TableConfig.TableActions">
+            <th colspan="3" class="table-actions">Actions</th>
+          </ng-container>
+
         </ng-container>
 
-        <ng-container *ngIf="TableActions">
-          <th colspan="2" class="table-actions">Actions</th>
-        </ng-container>
-
-      </ng-container>
-
-    </tr>
+      </tr>
     </thead>
     <tbody>
-    <ng-container *ngIf="TableItems && TableItems.length > 0 && !Pending">
-      <ng-container *ngFor="let ArrayObject of TableItems">
-        <tr>
+    <ng-container *ngIf="TableConfig.TableItems && TableConfig.TableItems.length > 0 && !Pending">
+      <ng-container *ngFor="let ArrayObject of TableConfig.TableItems">
+        <tr (contextmenu)="OpenContextMenu($event, ArrayObject)">
           <td *ngFor="let ObjectKeyValue of ArrayObject | keyvalue"
-              [pTooltip]="makeTooltip(ObjectKeyValue.value)"
+              [pTooltip]="MakeTooltip(ObjectKeyValue.value)"
               tooltipPosition="bottom"
               [showDelay]="300">
             {{ ObjectKeyValue.value }}
           </td>
 
-          <ng-container *ngIf="TableActions">
-            <td class="action-td skin-action-btn" (click)="editItem(ArrayObject)">
+          <ng-container *ngIf="TableConfig.TableActions">
+            <app-context-menu *ngIf="ShowContextMenu.getValue()"
+                              [RowItem]="TableRowItem"
+                              [ShowContextMenu]="ShowContextMenu"
+                              [ContextMenuItems]="ContextMenuItems"
+                              [ContextMenuPosition]="ContextMenuPosition">
+            </app-context-menu>
+            <td class="action-td skin-action-btn" (click)="EnableEditing(ArrayObject)">
               <i class="pi pi-pencil icon-sm"></i>
             </td>
-            <td class="action-td brown-action-btn" (click)="deleteItem(ArrayObject)">
+            <td class="action-td brown-action-btn" (click)="DeleteItem(ArrayObject)">
               <i class="pi pi-trash icon-sm"></i>
             </td>
           </ng-container>
+
         </tr>
       </ng-container>
     </ng-container>
     </tbody>
   </table>
 
-  <ng-container *ngIf="!TableItems?.length && !Pending">
+
+  <ng-container *ngIf="!TableConfig.TableItems?.length && !Pending">
     <div class="empty-message w-100 flex col gap-20">
       <div class="message">
-        There Are No {{ ItemName }}s Available
+        There Are No {{ TableConfig.ItemName }}s Available
       </div>
       <div class="link">
-        You Can Add Some <a [routerLink]="['/add/', ItemName.toLowerCase()]" class="classic-link">Here</a>.
+        You Can Add Some <a [routerLink]="['/add/', TableConfig.ItemName.toLowerCase()]" class="classic-link">Here</a>.
       </div>
     </div>
   </ng-container>
+
 
   <ng-container *ngIf="Pending">
     <div class="loading-wrapper w-100 flex gap-10 justify-content-center align-items-center">
@@ -71,23 +78,23 @@
 </div>
 
 
-<p-dialog [(visible)]="EditDialog"
+<p-dialog [(visible)]="IsEditDialogVisible"
           [dismissableMask]="true"
           [resizable]="false"
           [draggable]="false"
           [breakpoints]="{'1080px': '50vw','960px': '60vw', '640px': '85vw'}"
           [style]="{width: '450px'}"
-          header="Edit Item"
+          [header]="('Edit ' + TableConfig.ItemName) | titlecase"
           [modal]="true"
-          (onHide)="hideEditDialog()"
+          (onHide)="HideEditDialog()"
           styleClass="p-fluid">
 
   <ng-template pTemplate="content">
     <app-edit-product-dialog
-      *ngIf="EditDialog"
-      (hideEditDialog)="hideFromChildren($event)"
-      [ProductDialog]="EditDialog"
-      [Product]="RowElement"
+      *ngIf="IsEditDialogVisible"
+      (HideEditDialog)="HideDialogInEditDialog($event)"
+      [ProductDialog]="IsEditDialogVisible"
+      [Product]="TableRowItem"
       [ProductForm]="EditDialogForm">
     </app-edit-product-dialog>
   </ng-template>
@@ -96,22 +103,22 @@
     <div class="w-100 flex align-items-center justify-content-end">
       <button type="button"
               class="btn-md brown-action-btn dialog-btn"
-              (click)="hideEditDialog()">
-      <span class="flex justify-content-center align-items-center gap-5">
-        Cancel
-        <i class="pi pi-times icon-sm"></i>
-      </span>
+              (click)="HideEditDialog()">
+        <span class="flex justify-content-center align-items-center gap-5">
+          Cancel
+          <i class="pi pi-times icon-sm"></i>
+        </span>
       </button>
 
       <button type="submit"
               class="btn-md skin-action-btn dialog-btn"
               [disabled]="EditDialogForm.pristine"
               [ngClass]="{'skin-action-btn-disabled': EditDialogForm.pristine}"
-              (click)="saveItem()">
-      <span class="flex justify-content-center align-items-center gap-5">
-        Save
-        <i class="pi pi-check icon-sm"></i>
-      </span>
+              (click)="SaveEditedItem()">
+        <span class="flex justify-content-center align-items-center gap-5">
+          Save
+          <i class="pi pi-check icon-sm"></i>
+        </span>
       </button>
     </div>
   </ng-template>

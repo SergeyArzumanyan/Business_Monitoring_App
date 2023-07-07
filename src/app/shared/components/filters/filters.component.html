@@ -1,11 +1,9 @@
 <ng-container *ngIf="!isMobile; else mobileFilters">
-  <app-d-filters [showName]="showName"
-                 [showPrice]="showPrice">
+  <app-d-filters [TableFilters]="TableFilters">
   </app-d-filters>
 </ng-container>
 
 <ng-template #mobileFilters>
-  <app-m-filters [showName]="showName"
-                 [showPrice]="showPrice">
+  <app-m-filters [TableFilters]="TableFilters">
   </app-m-filters>
 </ng-template>

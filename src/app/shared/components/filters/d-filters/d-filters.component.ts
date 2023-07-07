@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
 
+import { ITableFilters } from "@Shared/components/filters/interfaces";
+
 @Component({
   selector: 'app-d-filters',
   templateUrl: './d-filters.component.html',
   styleUrls: ['./d-filters.component.scss']
 })
 export class DFiltersComponent {
-  @Input() showName: boolean = false;
-  @Input() showPrice: boolean = false;
-
+  @Input() TableFilters: ITableFilters | null = null;
 }

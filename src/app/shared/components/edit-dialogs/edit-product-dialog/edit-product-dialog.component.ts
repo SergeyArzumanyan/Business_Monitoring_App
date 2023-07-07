@@ -13,11 +13,10 @@ import { EditService, ToastService } from "@Core/services";
 export class EditProductDialogComponent {
 
   @Input() Product!: IProduct;
+
   @Input() ProductDialog: boolean = false;
-
   @Input() ProductForm: FormGroup = new FormGroup({});
-
-  @Output() hideEditDialog: EventEmitter<boolean> = new EventEmitter<boolean>(false);
+  @Output() HideEditDialog: EventEmitter<boolean> = new EventEmitter<boolean>(false);
 
   constructor(
     private Edition: EditService,
@@ -26,7 +25,7 @@ export class EditProductDialogComponent {
 
   public submitted: boolean = false;
 
-  public saveProduct(): void {
+  public SaveEditedProduct(): void {
     this.submitted = true;
     if (this.ProductForm.valid) {
       this.Edition.editItem('products', 'ID', this.Product.ID)
@@ -40,7 +39,7 @@ export class EditProductDialogComponent {
               this.toastService.showToast('error', 'Error', 'Something Went Wrong.');
             });
         });
-      this.hideEditDialog.emit(true);
+      this.HideEditDialog.emit(true);
       this.ProductForm.markAsPristine();
     }
   }
