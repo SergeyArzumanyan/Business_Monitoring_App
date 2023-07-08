@@ -15,7 +15,7 @@
 
 
 
-<div class="w-100 h-100 overlay-wrapper flex justify-content-center align-items-center"
+<div class="w-100 h-100 overlay-wrapper flex justify-content-start align-items-center"
      [ngClass]="{'visible-overlay': isFilterOverlayVisible}">
   <div class="overlay-shadow"
        [ngClass]="{'visible-shadow': isFilterOverlayVisible}"
@@ -23,7 +23,7 @@
   </div>
 
   <ng-container *ngIf="isFilterOverlayVisible">
-    <div class="w-100 h-100 filters-panel flex col gap-25">
+    <div class="h-100 filters-panel flex col gap-25">
 
       <div class="w-100 filter-actions-block flex justify-content-between align-items-center">
         <div class="h-100 cancel-icon-wrapper">
