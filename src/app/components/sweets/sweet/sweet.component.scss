@@ -328,6 +328,7 @@
             width: 100% !important;
 
             td, th {
+              max-width: 50px;
               font-size: $small;
               padding: 5px !important;
             }
