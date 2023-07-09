@@ -1,4 +1,4 @@
-<div class="w-100 header-wrapper flex justify-content-between">
+<div class="w-100 header-wrapper flex justify-content-between align-items-center">
 
   <div class="logo-wrapper" [routerLink]="['sweets']" tabindex="-1">
     <div class="header-logo">
@@ -7,25 +7,33 @@
   </div>
 
   <ng-container *ngIf="isAuthenticated.getValue() || isAlreadyAuthenticated">
-    <div class="header-links-container flex justify-content-between">
-      <li class="header-link" [routerLink]="['products']" routerLinkActive="active" tabindex="-1">
-        <div class="flex justify-content-center align-items-center gap-10">
-          Products
-          <i class="fa-solid fa-egg icon-md"></i>
-        </div>
-      </li>
-      <li class="header-link" [routerLink]="['sweets']" routerLinkActive="active" tabindex="-1">
-        <div class="flex justify-content-center align-items-center gap-10">
+    <div class="w-100 h-100 header-links-container flex justify-content-end align-items-center">
+
+      <li class="w-100 h-100 header-link" [routerLink]="['sweets']" routerLinkActive="active" tabindex="-1">
+        <div class="h-100 flex justify-content-center align-items-center gap-10">
           Sweets
           <i class="fa-solid fa-cake-candles icon-md"></i>
         </div>
       </li>
-      <li class="header-link" [routerLink]="['add']" routerLinkActive="active" tabindex="-1">
-        <div class="flex justify-content-center align-items-center gap-10">
+      <li class="w-100 h-100 header-link" [routerLink]="['products']" routerLinkActive="active" tabindex="-1">
+        <div class="h-100 flex justify-content-center align-items-center gap-10">
+          Products
+          <i class="fa-solid fa-egg icon-md"></i>
+        </div>
+      </li>
+      <li class="w-100 h-100 h-100 header-link" [routerLink]="['clients']" routerLinkActive="active" tabindex="-1">
+        <div class="h-100 flex justify-content-center align-items-center gap-10">
+          Clients
+          <i class="fa-solid fa-user icon-md"></i>
+        </div>
+      </li>
+      <li class="w-100 h-100 header-link" [routerLink]="['add']" routerLinkActive="active" tabindex="-1">
+        <div class="h-100 flex justify-content-center align-items-center gap-10">
           Add
           <i class="fa-solid fa-plus icon-md"></i>
         </div>
       </li>
+
     </div>
   </ng-container>
 </div>

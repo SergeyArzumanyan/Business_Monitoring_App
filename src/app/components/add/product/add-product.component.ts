@@ -5,7 +5,7 @@ import {
   Validators
 } from "@angular/forms";
 
-import { IProductForm } from "@Core/interfaces";
+import { IProduct, IProductForm } from "@Core/interfaces";
 import { SendingDataService } from "@Core/services";
 import { onlyPositiveNumbers } from "@Core/validators";
 
@@ -39,7 +39,7 @@ export class AddProductComponent {
       this.submitted = true;
       if (this.productForm.valid) {
         this.productForm.controls.ID.setValue(+(new Date()));
-        this.Send.CreateItem<any>('products', 'Product', this.productForm.value);
+        this.Send.CreateItem<IProduct>('products', 'Product', this.productForm.value);
         this.productForm.reset();
         this.submitted = false;
       }

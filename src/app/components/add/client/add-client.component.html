@@ -1,5 +1,5 @@
 <div class="form-wrapper flex justify-content-center align-items-center">
-  <form>
+  <form [formGroup]="clientForm" (ngSubmit)="addClient()">
     <div class="form-container flex col align-items-center gap-30">
 
       <div class="w-100 flex">
@@ -8,54 +8,126 @@
       </div>
 
       <div class="form-group flex col gap-15">
-        <label class="form-label" for="Name">Name</label>
+        <label class="form-label" for="Name">Name*</label>
         <input id="Name"
+               formControlName="Name"
                class="form-input p-inputtext-sm"
-               [ngClass]="{}"
+               [ngClass]="{
+               'ng-invalid ng-dirty':
+                    clientForm.get('Name')?.hasError('required') && submitted
+                    ||
+                    clientForm.get('Name')?.hasError('maxlength') && submitted
+                    ||
+                    clientForm.get('Name')?.hasError('minlength') && submitted
+                    ||
+                    clientForm.get('Name')?.hasError('onlyWhitespace') && submitted
+               }"
                type="text"
                pInputText
                placeholder="Enter client's name...">
 
-<!--        <small *ngIf="productForm.get('Name')?.hasError('required')  && submitted-->
-<!--                        || !productForm.value.Name?.trim() && submitted"-->
-<!--               class="p-error">-->
-<!--          Name is required.-->
-<!--        </small>-->
+        <small *ngIf="clientForm.get('Name')?.hasError('required')  && submitted"
+               class="p-error">
+          Name Is Required.
+        </small>
 
-<!--        <small *ngIf="productForm.get('Name')?.hasError('minlength')  && submitted"-->
-<!--               class="p-error">-->
-<!--          Name is too short.-->
-<!--        </small>-->
+        <small *ngIf="clientForm.get('Name')?.hasError('onlyWhitespace')  && submitted"
+               class="p-error">
+          Name Can't Be Empty
+        </small>
 
-<!--        <small *ngIf="productForm.get('Name')?.hasError('maxlength')  && submitted"-->
-<!--               class="p-error">-->
-<!--          Name is too long.-->
-<!--        </small>-->
+        <small *ngIf="clientForm.get('Name')?.hasError('minlength')  && submitted"
+               class="p-error">
+          Name Is Too Short.
+        </small>
+
+        <small *ngIf="clientForm.get('Name')?.hasError('maxlength')  && submitted"
+               class="p-error">
+          Name Is Too Long.
+        </small>
       </div>
 
       <div class="form-group flex col gap-15">
         <label class="form-label" for="Surname">Surname</label>
         <input id="Surname"
+               formControlName="Surname"
                class="form-input p-inputtext-sm"
-               [ngClass]="{}"
+               [ngClass]="{
+               'ng-invalid ng-dirty':
+                    clientForm.get('Surname')?.hasError('maxlength') && submitted
+                    ||
+                    clientForm.get('Surname')?.hasError('minlength') && submitted
+                    ||
+                    clientForm.get('Surname')?.hasError('onlyWhitespace') && submitted
+               }"
                type="text"
                pInputText
                placeholder="Enter client's surname...">
+
+        <small *ngIf="clientForm.get('Surname')?.hasError('onlyWhitespace')  && submitted"
+               class="p-error">
+          Surname Can't Be Empty
+        </small>
+
+        <small *ngIf="clientForm.get('Surname')?.hasError('minlength')  && submitted"
+               class="p-error">
+          Surname Is Too Short.
+        </small>
+
+        <small *ngIf="clientForm.get('Surname')?.hasError('maxlength')  && submitted"
+               class="p-error">
+          Surname Is Too Long.
+        </small>
       </div>
 
       <div class="form-group flex col gap-15">
-        <label for="PhoneNumber">PhoneNumber</label>
-        <p-inputMask mask="999-99-99-99-99" placeholder="+374 91 xx xx xx" id="PhoneNumber"></p-inputMask>
+        <label for="PhoneNumber">PhoneNumber*</label>
+        <p-inputMask mask="999-99-99-99-99"
+                     [ngClass]="{
+                     'ng-invalid ng-dirty':
+                        clientForm.get('PhoneNumber')?.hasError('required') && submitted
+                     }"
+                     placeholder="+374 91 xx xx xx"
+                     formControlName="PhoneNumber"
+                     id="PhoneNumber"></p-inputMask>
+
+        <small *ngIf="clientForm.get('PhoneNumber')?.hasError('required')  && submitted"
+               class="p-error">
+          PhoneNumber Is Required.
+        </small>
       </div>
 
       <div class="form-group flex col gap-15">
-        <label class="form-label" for="Address">Address</label>
+        <label class="form-label" for="Address">Address*</label>
         <input id="Address"
+               formControlName="Address"
                class="form-input p-inputtext-sm"
-               [ngClass]="{}"
+               [ngClass]="{
+               'ng-invalid ng-dirty':
+                    clientForm.get('Address')?.hasError('required') && submitted
+                    ||
+                    clientForm.get('Address')?.hasError('maxlength') && submitted
+                    ||
+                    clientForm.get('Address')?.hasError('onlyWhitespace') && submitted
+               }"
                type="text"
                pInputText
                placeholder="Enter client's address...">
+
+        <small *ngIf="clientForm.get('Address')?.hasError('required')  && submitted"
+               class="p-error">
+          Address Is Required.
+        </small>
+
+        <small *ngIf="clientForm.get('Address')?.hasError('onlyWhitespace')  && submitted"
+               class="p-error">
+          Address Can't Be Empty
+        </small>
+
+        <small *ngIf="clientForm.get('Address')?.hasError('maxlength')  && submitted"
+               class="p-error">
+          Address Is Too Long.
+        </small>
       </div>
 
     </div>

@@ -31,11 +31,13 @@
               </thead>
               <tbody>
               <tr *ngFor="let product of sweetProducts">
-                <td [pTooltip]="product.Name"
-                    [showDelay]="250"
-                    tooltipPosition="bottom">
-                  <div class="product-name">{{ product.Name }}</div>
-                </td>
+                <ng-container *ngIf="product.Name">
+                  <td [pTooltip]="product.Name"
+                      [showDelay]="250"
+                      tooltipPosition="bottom">
+                    <div class="product-name">{{ product.Name }}</div>
+                  </td>
+                </ng-container>
                 <td>
                   <div class="product-quantity">
                     {{ product.Quantity }}
@@ -151,10 +153,20 @@
                     <span class="product-scheme-item">TotalPrice</span>
                   </div>
                   <div class="product flex justify-content-center align-items-center gap-5" *ngFor="let product of sweetProducts">
-                    <div class="product-edit-mode-div text-center">{{ product.Name }}</div>
-                    <input type="number" class="product-input p-inputtext" [(ngModel)]="product.Quantity" (input)="this.editSweetForm.markAsDirty()">
-                    <div class="product-edit-mode-div-price text-center">{{ product.Price }} AMD</div>
-                    <div class="product-edit-mode-div-price text-center">{{ product.TotalPrice }} AMD</div>
+                    <div class="product-edit-mode-div text-center">
+                      {{ product.Name }}
+                    </div>
+                    <input type="number"
+                           class="product-input p-inputtext"
+                           [(ngModel)]="product.Quantity"
+                           (keydown.enter)="saveEditedSweet()"
+                           (input)="this.editSweetForm.markAsDirty()">
+                    <div class="product-edit-mode-div-price text-center">
+                      {{ product.Price }} AMD
+                    </div>
+                    <div class="product-edit-mode-div-price text-center">
+                      {{ product.TotalPrice }} AMD
+                    </div>
                   </div>
                 </div>
 

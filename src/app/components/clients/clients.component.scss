@@ -1,0 +1,41 @@
+@import 'src/app/core/global-css/GlobalCssConfigs';
+
+.wrapper {
+  padding: 50px 50px 100px 50px;
+
+  .container {
+    width: 80%;
+    padding: 50px;
+    margin: 0;
+    background-color: $white-300;
+    border-radius: $borderRadius;
+    box-shadow: 0 0 2px 0 $skin-100;
+    transition: $animationTime;
+  }
+}
+
+@media (max-width: 600px) {
+  .wrapper {
+    align-items: flex-start !important;
+    padding: 30px !important;
+
+    .container {
+      width: 100% !important;
+      padding: 25px 30px !important;
+    }
+  }
+}
+
+:host ::ng-deep .p-dialog-footer {
+  .dialog-btn {
+    width: 130px !important;
+    height: 40px !important;
+  }
+}
+
+:host ::ng-deep .p-progress-spinner,
+:host ::ng-deep .p-progress-spinner-svg {
+  width: 25px !important;
+  height: 25px !important;
+}
+

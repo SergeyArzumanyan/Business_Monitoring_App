@@ -30,6 +30,11 @@ const routes: Routes = [
     canLoad: [AuthGuard]
   },
   {
+    path: 'clients',
+    loadChildren: () => import('@Components/clients/clients.module').then(m => m.ClientsModule),
+    canLoad: [AuthGuard]
+  },
+  {
     path: "",
     redirectTo: "auth",
     pathMatch: "full",

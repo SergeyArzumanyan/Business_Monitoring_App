@@ -1,0 +1,10 @@
+<div class="w-100 h-100 wrapper flex justify-content-center align-items-center">
+  <div class="container flex col gap-15">
+    <app-table [TableConfig]="ClientTableConfig"
+               [TableFilters]="ClientTableFilters"
+               [ContextMenuItems]="ClientTableContextMenuOptions"
+               [EditDialogForm]="clientForm"
+               [Pending]="pending">
+    </app-table>
+  </div>
+</div>

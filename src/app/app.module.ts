@@ -1,35 +1,29 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { CommonModule, NgOptimizedImage } from "@angular/common";
+import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HttpClientModule } from "@angular/common/http";
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
+import { environment } from '../environments';
+
 import {
   HeaderComponent,
   LargeHeaderComponent,
   SmallHeaderComponent
 } from '@Components/header';
+
 import { AuthComponent } from "@Components/auth";
 
-import { environment } from '../environments';
 import { provideDatabase, getDatabase } from '@angular/fire/database';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFireDatabaseModule } from "@angular/fire/compat/database";
 
-import { PasswordModule } from "primeng/password";
-import { ButtonModule } from "primeng/button";
-import { ProgressSpinnerModule } from "primeng/progressspinner";
-import { InputNumberModule } from "primeng/inputnumber";
-import { ConfirmDialogModule } from "primeng/confirmdialog";
 import { ConfirmationService, MessageService } from "primeng/api";
-import { ToastModule } from 'primeng/toast';
-import { DialogModule } from "primeng/dialog";
-import { RippleModule } from "primeng/ripple";
-import { InputTextModule } from "primeng/inputtext";
+import { SharedModule } from "@Shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -51,16 +45,7 @@ import { InputTextModule } from "primeng/inputtext";
     AngularFireDatabaseModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideDatabase(() => getDatabase()),
-    PasswordModule,
-    ButtonModule,
-    NgOptimizedImage,
-    ProgressSpinnerModule,
-    InputNumberModule,
-    ConfirmDialogModule,
-    ToastModule,
-    DialogModule,
-    RippleModule,
-    InputTextModule,
+    SharedModule,
   ],
   providers: [
     ConfirmationService,
@@ -69,5 +54,4 @@ import { InputTextModule } from "primeng/inputtext";
   bootstrap: [AppComponent]
 })
 
-export class AppModule {
-}
+export class AppModule {}

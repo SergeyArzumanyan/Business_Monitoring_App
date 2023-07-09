@@ -47,7 +47,7 @@ export class CalculationService {
 
 //      For Sweets Page Calculations
   public calculateSweetPriceInSweets(sweet: ISweet, product: IProduct[], productQuantity: number): void {
-    if (product.length > 0) {
+    if (product.length > 0 && product[0].Price) {
       !sweet.TotalPrice ?
         sweet.TotalPrice = product[0].Price * productQuantity :
         sweet.TotalPrice += product[0].Price * productQuantity;
@@ -73,7 +73,9 @@ export class CalculationService {
 
   private calculateProductProperties(product: IProduct, quantity: number): void {
     product.Quantity = quantity;
-    product.TotalPrice = quantity * product.Price;
+    if (product.Price) {
+      product.TotalPrice = quantity * product.Price;
+    }
   }
 
   private calculateSweetPrice(sweet: ISweet, productTotalPrice: number): void {

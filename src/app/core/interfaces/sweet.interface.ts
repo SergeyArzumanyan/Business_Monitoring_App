@@ -23,6 +23,6 @@ export interface ISweetFormEditing {
 }
 
 export interface ISweetProduct {
-  ProductID: number;
+  ProductID: number | null;
   Quantity: number;
 }

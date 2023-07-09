@@ -1,9 +1,8 @@
-<div class="w-100 h-100 page-wrapper flex col">
-  <div class="header-wrapper">
+<div class="w-100 page-wrapper flex col">
+  <div class="w-100 header-wrapper">
 
-    <div class="header-titles flex justify-content-between">
-
-      <div class="logo-wrapper" [routerLink]="['sweets']" (click)="closeMenu()">
+    <div class="w-100 header-titles flex justify-content-between">
+      <div class="logo-wrapper" [routerLink]="['sweets']" (click)="closeMenu()" tabindex="-1">
         <div class="header-logo">
           <img ngSrc="/assets/Images/logo.jpg" alt="Logo" height="1080" width="1080">
         </div>
@@ -21,38 +20,60 @@
           </div>
         </div>
       </ng-container>
-
     </div>
 
     <ng-container *ngIf="isAuthenticated.getValue() || isAlreadyAuthenticated">
-      <div class="header-links-wrapper"
+      <div class="w-100 h-100 header-links-wrapper"
            [ngClass]="{'header-height': !menu}">
         <div class="header-links-container"
              [ngClass]="{'visibility': menu}">
-          <li class="header-link" [routerLink]="['sweets']" routerLinkActive="active" (click)="closeMenu()">
+
+          <li class="header-link"
+              [routerLink]="['sweets']"
+              routerLinkActive="active"
+              (click)="closeMenu()"
+              tabindex="-1">
             <div class="flex justify-content-center align-items-center gap-10">
               Sweets
               <i class="fa-solid fa-cake-candles icon-md"></i>
             </div>
           </li>
-          <li class="header-link" [routerLink]="['products']" routerLinkActive="active" (click)="closeMenu()">
+          <li class="header-link"
+              [routerLink]="['products']"
+              routerLinkActive="active"
+              (click)="closeMenu()"
+              tabindex="-1">
             <div class="flex justify-content-center align-items-center gap-10">
               Products
               <i class="fa-solid fa-egg icon-md"></i>
             </div>
           </li>
-          <li class="header-link bottom-line" [routerLink]="['add']" routerLinkActive="active" (click)="closeMenu()">
+          <li class="header-link"
+              [routerLink]="['clients']"
+              routerLinkActive="active"
+              (click)="closeMenu()"
+              tabindex="-1">
+            <div class="flex justify-content-center align-items-center gap-10">
+              Clients
+              <i class="fa-solid fa-user icon-md"></i>
+            </div>
+          </li>
+          <li class="header-link bottom-line"
+              [routerLink]="['add']"
+              routerLinkActive="active"
+              (click)="closeMenu()"
+              tabindex="-1">
             <div class="flex justify-content-center align-items-center gap-10">
               Add
               <i class="fa-solid fa-plus icon-md"></i>
             </div>
           </li>
+
         </div>
       </div>
     </ng-container>
 
   </div>
 
-   <div class="out-of-header" [ngClass]="{'visibility-background': menu}" (click)="closeMenu()"></div>
-
+   <div class="w-100 out-of-header" [ngClass]="{'visibility-background': menu}" (click)="closeMenu()"></div>
 </div>

@@ -145,6 +145,7 @@ table tr:last-child td:last-child {
 
 .p-inputnumber-input.p-component {
   font-size: $Xsmall !important;
+  height: 35px;
 }
 
 //    Input Styling End
@@ -238,10 +239,12 @@ table tr:last-child td:last-child {
 @media (max-width: 600px) {
   .table-wrapper {
     width: 100% !important;
+    overflow-y: auto;
 
     table {
       tr {
         td, th {
+          max-width: 130px !important;
           padding: 10px !important;
         }
       }

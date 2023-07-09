@@ -20,20 +20,12 @@ import { ITableFilters } from "@Shared/components/filters/interfaces";
 
 import { TableService } from '@Shared/components/table/services'
 
-import { ConfirmationService } from "primeng/api";
-
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit, OnDestroy {
-
-  public isMobile: boolean = false;
-  @HostListener("window:resize", ["$event.target"])
-  private onWindowResize(): void {
-    this.isMobile = (window.innerWidth <= 900);
-  }
 
   public products: IProduct[] | null = [];
 

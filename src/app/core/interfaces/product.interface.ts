@@ -1,9 +1,9 @@
 import { FormControl } from "@angular/forms";
 
-export interface  IProduct {
-  ID: number;
-  Name: string;
-  Price: number;
+export interface IProduct {
+  ID: number | null;
+  Name: string | null;
+  Price: number | null;
   Quantity: number;
   TotalPrice?: number;
 }
