@@ -37,11 +37,11 @@ export class TableService {
       header: `Delete ${TableConfigs.ItemName} ?`,
       icon: 'pi pi-trash icon-big',
       accept: (): void => {
-        this.Request.GetItemFirebaseKey(TableConfigs.ItemApiName, 'ID', Item.ID)
+        this.Request.GetItemFirebaseKey(TableConfigs.ItemEndPoint, 'ID', Item.ID)
           .pipe(take(1))
           .subscribe({
             next: (action: IFirebaseItemDeletion[]): void => {
-              this.Deletion.RemoveItemByFirebaseKey(TableConfigs.ItemApiName, action[0].payload.key, TableConfigs.ItemName);
+              this.Deletion.RemoveItemByFirebaseKey(TableConfigs.ItemEndPoint, action[0].payload.key, TableConfigs.ItemName);
             },
             error: (): void => {
               this.toastService.showToast('error', 'Error', 'Something Went Wrong.');
@@ -62,10 +62,10 @@ export class TableService {
   }
 
   public EditItem(TableConfigs: ITableConfig<any>, Item: any, ItemNewValue: any): any {
-    this.Request.GetItemFirebaseKey(`${TableConfigs.ItemApiName}`, 'ID', Item.ID)
+    this.Request.GetItemFirebaseKey(`${TableConfigs.ItemEndPoint}`, 'ID', Item.ID)
       .pipe(take(1))
       .subscribe((items: any): void => {
-        this.Edition.UpdateItemByFirebaseKey(`${TableConfigs.ItemApiName}`, ItemNewValue, items[0].key)
+        this.Edition.UpdateItemByFirebaseKey(`${TableConfigs.ItemEndPoint}`, ItemNewValue, items[0].key)
           .then((): boolean => {
             this.toastService.showToast('success', 'Done', `${TableConfigs.ItemName} Edited Successfully.`);
             return true;

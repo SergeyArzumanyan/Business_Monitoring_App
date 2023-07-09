@@ -8,8 +8,8 @@ import {
   FiltersComponent,
   DFiltersComponent,
   MFiltersComponent,
-  EditProductDialogComponent,
   ContextMenuComponent,
+  TableEditDialogComponent,
 } from '@Shared/components';
 
 import { PasswordModule } from "primeng/password";
@@ -30,12 +30,12 @@ import { InputMaskModule } from "primeng/inputmask";
 @NgModule({
   declarations: [
     DragDirective,
+    TableComponent,
     FiltersComponent,
     DFiltersComponent,
     MFiltersComponent,
-    TableComponent,
-    EditProductDialogComponent,
     ContextMenuComponent,
+    TableEditDialogComponent,
   ],
     imports: [
         CommonModule,
@@ -73,12 +73,12 @@ import { InputMaskModule } from "primeng/inputmask";
     TooltipModule,
     DragDirective,
     InputMaskModule,
+    TableComponent,
+    FiltersComponent,
     DFiltersComponent,
     MFiltersComponent,
-    FiltersComponent,
-    TableComponent,
-    EditProductDialogComponent,
     ContextMenuComponent,
+    TableEditDialogComponent,
   ]
 })
 export class SharedModule {}

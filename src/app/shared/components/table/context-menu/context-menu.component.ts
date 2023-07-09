@@ -21,11 +21,8 @@ export class ContextMenuComponent implements AfterViewInit {
   @ViewChild('contextMenuContainer', { static: false }) contextMenuContainer!: ElementRef;
 
   @HostListener('document:click', ['$event.target'])
-  onClick(targetElement: HTMLElement): void {
-    const clickedInside: HTMLElement = this.contextMenuContainer.nativeElement.contains(targetElement);
-    if (!clickedInside) {
+  onClick(): void {
       this.hideContextMenu(new Event('document:click'));
-    }
   }
 
   ngAfterViewInit(): void {

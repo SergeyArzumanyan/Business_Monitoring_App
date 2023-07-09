@@ -8,7 +8,7 @@ import { onlyWhiteSpaceValidator } from "@Core/validators";
 
 import { IContextMenuItem, ITableConfig } from "@Shared/components/table/interfaces";
 import { TableService } from '@Shared/components/table/services'
-import { ITableFilters } from "@Shared/components/filters/interfaces";
+import { ITableFilters } from "app/shared/components/table/filters/interfaces";
 
 @Component({
   selector: 'app-clients',
@@ -24,7 +24,7 @@ export class ClientsComponent implements OnInit, OnDestroy {
     TableName: 'Clients',
     ItemName: 'Client',
     TableActions: true,
-    ItemApiName: 'clients'
+    ItemEndPoint: 'clients'
   };
 
   public ClientTableFilters: ITableFilters = {

@@ -1,0 +1,62 @@
+<form [formGroup]="TableItemForm" (ngSubmit)="SaveEditedItem()">
+  <div class="w-100 flex col justify-content-center align-items-center gap-20">
+    <ng-container *ngFor="let control of TableItemForm.controls | keyvalue">
+      <div class="w-100 flex col gap-10" *ngIf="control.key !== 'ID'">
+        <label [for]="control.key">{{ control.key }}</label>
+        <ng-container *ngIf="checkControlValueType(control.value.value) === 'string'; else NumberInput">
+
+          <ng-container *ngIf="control.key === 'PhoneNumber'; else TextInput">
+            <p-inputMask mask="999-99-99-99-99"
+                         placeholder="+374 91 xx xx xx"
+                         [formControlName]="control.key"
+                         [id]="control.key">
+            </p-inputMask>
+          </ng-container>
+
+          <ng-template #TextInput>
+            <input class="p-inputtext-sm"
+                   [formControlName]="control.key"
+                   type="text"
+                   pInputText
+                   (keydown.enter)="!TableItemForm.pristine ? SaveEditedItem() : ''"
+                   [id]="control.key"/>
+          </ng-template>
+        </ng-container>
+
+        <ng-template #NumberInput>
+            <p-inputNumber class="p-inputtext-sm"
+                           [formControlName]="control.key"
+                           (keydown.enter)="!TableItemForm.pristine ? SaveEditedItem() : ''"
+                           [inputId]="control.key"
+                           [id]="control.key">
+            </p-inputNumber>
+          </ng-template>
+        <ng-container *ngIf="control?.value?.errors && FormIsSubmitted">
+          <ng-container *ngFor="let error of control.value.errors | keyvalue">
+            <small class="p-error">
+              <ng-container *ngIf="error.key === 'required'">
+                {{ control.key }} Is Required.
+              </ng-container>
+              <ng-container *ngIf="error.key === 'onlyWhitespace'">
+                {{ control.key }} Can't Be Empty.
+              </ng-container>
+              <ng-container *ngIf="error.key === 'maxlength'">
+                {{ control.key }} Is Too Long.
+              </ng-container>
+              <ng-container *ngIf="error.key === 'minlength'">
+                {{ control.key }} Is Too Short.
+              </ng-container>
+              <ng-container *ngIf="error.key === 'max'">
+                {{ control.key }} Is Too Large.
+              </ng-container>
+              <ng-container *ngIf="error.key === 'isNotPositive'">
+                {{ control.key }} Must Be Greater Than 0.
+              </ng-container>
+            </small>
+          </ng-container>
+        </ng-container>
+
+      </div>
+    </ng-container>
+  </div>
+</form>

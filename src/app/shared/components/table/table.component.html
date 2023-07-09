@@ -90,13 +90,16 @@
           styleClass="p-fluid">
 
   <ng-template pTemplate="content">
-    <app-edit-product-dialog
+    <app-table-edit-dialog
       *ngIf="IsEditDialogVisible"
       (HideEditDialog)="HideDialogInEditDialog($event)"
-      [ProductDialog]="IsEditDialogVisible"
-      [Product]="TableRowItem"
-      [ProductForm]="EditDialogForm">
-    </app-edit-product-dialog>
+      [IsDialogVisible]="IsEditDialogVisible"
+      [TableItemName]="TableConfig.ItemName"
+      [TableItemEndPoint]="TableConfig.ItemEndPoint"
+      [TableItem]="TableRowItem"
+      [TableItemForm]="EditDialogForm"
+      [FormIsSubmitted]="FormIsSubmitted">
+    </app-table-edit-dialog>
   </ng-template>
 
   <ng-template pTemplate="footer">

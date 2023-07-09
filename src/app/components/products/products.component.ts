@@ -16,7 +16,7 @@ import {
   IContextMenuItem,
   ITableConfig,
 } from "@Shared/components/table/interfaces";
-import { ITableFilters } from "@Shared/components/filters/interfaces";
+import { ITableFilters } from "app/shared/components/table/filters/interfaces";
 
 import { TableService } from '@Shared/components/table/services'
 
@@ -34,7 +34,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     TableName: 'Products',
     ItemName: 'Product',
     TableActions: true,
-    ItemApiName: 'products'
+    ItemEndPoint: 'products'
   };
 
   public ProductTableFilters: ITableFilters = {

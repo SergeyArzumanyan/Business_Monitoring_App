@@ -9,7 +9,7 @@ import {
 } from "@Shared/components/table/interfaces";
 
 import { TableService } from "@Shared/components/table/services";
-import { ITableFilters } from "@Shared/components/filters/interfaces";
+import { ITableFilters } from "app/shared/components/table/filters/interfaces";
 
 @Component({
   selector: 'app-table',
@@ -24,6 +24,7 @@ export class TableComponent implements OnInit, OnDestroy {
   public TableRowItem: any;
   public IsEditDialogVisible: boolean = false;
   @Input() EditDialogForm: FormGroup = new FormGroup({});
+  public FormIsSubmitted: boolean = false;
 
   @Input() Pending: boolean = false;
 
@@ -77,9 +78,13 @@ export class TableComponent implements OnInit, OnDestroy {
   }
 
   protected SaveEditedItem(): void {
-    this.TableService.EditItem(this.TableConfig, this.TableRowItem, this.EditDialogForm.value);
-    this.IsEditDialogVisible = false;
-    this.EditDialogForm.markAsPristine();
+    this.FormIsSubmitted = true;
+    if (this.EditDialogForm.valid) {
+      this.TableService.EditItem(this.TableConfig, this.TableRowItem, this.EditDialogForm.value);
+      this.IsEditDialogVisible = false;
+      this.EditDialogForm.markAsPristine();
+      this.FormIsSubmitted = false;
+    }
   }
 
   protected MakeTooltip(value: any): string {

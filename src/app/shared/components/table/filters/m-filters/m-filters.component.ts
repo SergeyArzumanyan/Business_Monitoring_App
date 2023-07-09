@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { ITableFilters } from "@Shared/components/filters/interfaces";
+import { ITableFilters } from "@Shared/components/table/filters/interfaces";
 
 @Component({
   selector: 'app-m-filters',
