@@ -47,6 +47,7 @@ export class TableEditDialogComponent {
         })
       this.HideEditDialog.next(true);
       this.FormIsSubmitted = false;
+      this.TableItemForm.markAsPristine();
     }
   }
 

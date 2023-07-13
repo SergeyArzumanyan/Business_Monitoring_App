@@ -1,4 +1,4 @@
-<app-filters [TableFilters]="TableFilters"></app-filters>
+<app-filters (SendFiltersToTableComponent)="ApplyFiltersToTable($event)" [TableFilters]="TableFilters"></app-filters>
 
 <h2 class="table-name text-center">{{ TableConfig.TableName | titlecase }}</h2>
 
@@ -10,7 +10,10 @@
 
           <ng-container *ngFor="let ArrayObject of TableConfig.TableItems; let first = first">
             <ng-container *ngIf="first">
-              <th *ngFor="let ObjectKeyValue of ArrayObject | keyvalue">
+              <th *ngFor="let ObjectKeyValue of ArrayObject | keyvalue"
+                  [pTooltip]="MakeTooltip(ObjectKeyValue.key)"
+                  tooltipPosition="bottom"
+                  [showDelay]="300">
                 {{ ObjectKeyValue.key }}
               </th>
             </ng-container>

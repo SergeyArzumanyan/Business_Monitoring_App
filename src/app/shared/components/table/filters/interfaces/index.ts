@@ -1,1 +1,1 @@
-export * from './tableFilters';
+export * from './tableFilters.interface';

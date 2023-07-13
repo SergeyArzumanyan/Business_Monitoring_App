@@ -1,1 +1,1 @@
-export * from './table-edit-dialog';
+export * from './table-edit-dialog.component';

@@ -9,7 +9,7 @@ import {
 } from "@Shared/components/table/interfaces";
 
 import { TableService } from "@Shared/components/table/services";
-import { ITableFilters } from "app/shared/components/table/filters/interfaces";
+import { ITableFilters, ITableFiltersObj } from "app/shared/components/table/filters/interfaces";
 
 @Component({
   selector: 'app-table',
@@ -21,6 +21,8 @@ export class TableComponent implements OnInit, OnDestroy {
   @Input() TableConfig!: ITableConfig<any>;
   @Input() TableFilters: ITableFilters | null = null;
 
+  public TableFiltersObj: ITableFiltersObj = {};
+  private NotFilteredTableItems: any = [];
   public TableRowItem: any;
   public IsEditDialogVisible: boolean = false;
   @Input() EditDialogForm: FormGroup = new FormGroup({});
@@ -52,7 +54,7 @@ export class TableComponent implements OnInit, OnDestroy {
         next: (EditDialogStatus: boolean) => {
           this.IsEditDialogVisible = EditDialogStatus;
         }
-    });
+      });
   }
 
   protected DeleteItem(Item: any): void {
@@ -103,5 +105,27 @@ export class TableComponent implements OnInit, OnDestroy {
       x: evn.pageX,
       y: evn.pageY
     }
+  }
+
+  public ApplyFiltersToTable(filters: ITableFiltersObj): void {
+    this.TableFiltersObj = filters;
+    if (!this.NotFilteredTableItems) {
+      this.NotFilteredTableItems = this.TableConfig.TableItems;
+    }
+
+    for (const filterKeyValue of Object.entries(this.TableFiltersObj)) {
+      if (filterKeyValue[1]) {
+        if (typeof filterKeyValue[1] === 'string') {
+          this.TableConfig.TableItems = this.NotFilteredTableItems.filter((TableItem: any) =>
+            TableItem[filterKeyValue[0]].toLowerCase().includes(filterKeyValue[1].trim().toLowerCase()));
+        } else if (typeof filterKeyValue[1] === 'number') {
+          this.TableConfig.TableItems = this.NotFilteredTableItems.filter((TableItem: any) =>
+            TableItem['Price'] === filterKeyValue[1]);
+        }
+      } else if (filterKeyValue[1] === '') {
+        this.TableConfig.TableItems = this.NotFilteredTableItems;
+      }
+    }
+
   }
 }

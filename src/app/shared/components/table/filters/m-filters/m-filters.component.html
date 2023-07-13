@@ -23,39 +23,57 @@
   </div>
 
   <ng-container *ngIf="isFilterOverlayVisible">
-    <div class="h-100 filters-panel flex col gap-25">
+    <div class="h-100 filters-panel flex col gap-30">
 
       <div class="w-100 filter-actions-block flex justify-content-between align-items-center">
         <div class="h-100 cancel-icon-wrapper">
             <i class="fa-solid fa-xmark icon-sm icon-pointer" (click)="toggleFilterOverlay()"></i>
         </div>
 
-        <div class="h-100 apply-btn-wrapper">
-          <button type="button" class="btn-sm skin-btn">Apply</button>
+        <div class="h-100 flex gap-5 apply-btn-wrapper">
+          <ng-container *ngIf="FiltersChangedState">
+            <button type="button"
+                    class="btn-sm brown-action-btn filter-clear-btn"
+                    (click)="resetFilters()">
+              Clear
+            </button>
+          </ng-container>
+          <button type="submit"
+                  class="btn-sm skin-btn"
+                  (click)="applyFilters()">
+            Apply
+          </button>
         </div>
       </div>
+    <form [formGroup]="FiltersForm">
+      <div class="w-100 flex col gap-25">
+        <ng-container *ngIf="TableFilters?.ShowName">
+          <div class="w-100 filter-block flex col gap-10 justify-content-center align-items-center">
+            <label class="filter-label" for="ProductNameFilter">Name</label>
+            <input type="text"
+                   formControlName="Name"
+                   (keydown.enter)="applyFilters()"
+                   class="filter-input p-inputtext-sm"
+                   id="ProductNameFilter"
+                   pInputText
+                   placeholder="Search By Name...">
+          </div>
+        </ng-container>
 
-      <ng-container *ngIf="TableFilters?.ShowName">
-        <div class="w-100 filter-block flex col gap-10 justify-content-center align-items-center">
-          <label class="filter-label" for="ProductNameFilter">Name</label>
-          <input type="text"
-                 class="filter-input p-inputtext-sm"
-                 id="ProductNameFilter"
-                 pInputText
-                 placeholder="Search By Name...">
-        </div>
-      </ng-container>
-
-      <ng-container *ngIf="TableFilters?.ShowPrice">
-        <div class="w-100 filter-block flex col gap-10 justify-content-center align-items-center">
-          <label class="filter-label" for="ProductPriceFilter">Price</label>
-          <p-inputNumber inputId="ProductPriceFilter"
-                         class="filter-input p-inputtext-sm"
-                         id="ProductPriceFilter"
-                         placeholder="Search By Price...">
-          </p-inputNumber>
-        </div>
-      </ng-container>
+        <ng-container *ngIf="TableFilters?.ShowPrice">
+          <div class="w-100 filter-block flex col gap-10 justify-content-center align-items-center">
+            <label class="filter-label" for="ProductPriceFilter">Price</label>
+            <p-inputNumber inputId="ProductPriceFilter"
+                           formControlName="Price"
+                           (keydown.enter)="applyFilters()"
+                           class="filter-input p-inputtext-sm"
+                           id="ProductPriceFilter"
+                           placeholder="Search By Price...">
+            </p-inputNumber>
+          </div>
+        </ng-container>
+      </div>
+    </form>
 
     </div>
   </ng-container>

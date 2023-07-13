@@ -1,9 +1,16 @@
 <ng-container *ngIf="!isMobile; else mobileFilters">
-  <app-d-filters [TableFilters]="TableFilters">
+  <app-d-filters
+    (FiltersChanged)="getFiltersFromChildComponent($event)"
+    [TableFilters]="TableFilters"
+    [FiltersForm]="TableFiltersForm"
+    [Submitted]="Submitted">
   </app-d-filters>
 </ng-container>
 
 <ng-template #mobileFilters>
-  <app-m-filters [TableFilters]="TableFilters">
+  <app-m-filters (FiltersChanged)="getFiltersFromChildComponent($event)"
+                 [TableFilters]="TableFilters"
+                 [FiltersForm]="TableFiltersForm"
+                 [Submitted]="Submitted">
   </app-m-filters>
 </ng-template>
