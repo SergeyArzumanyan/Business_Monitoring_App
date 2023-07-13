@@ -22,7 +22,7 @@
           <label class="filter-label" for="ProductNameFilter">Name</label>
           <input type="text"
                  formControlName="Name"
-                 (input)="applyFilters()"
+                 (keyup)="applyFilters()"
                  class="filter-input p-inputtext-sm"
                  [ngClass]="{'ng-invalid ng-dirty': FiltersForm.controls.Name?.invalid && Submitted}"
                  id="ProductNameFilter"
@@ -36,7 +36,7 @@
           <label class="filter-label" for="ProductPriceFilter">Price</label>
           <p-inputNumber inputId="ProductPriceFilter"
                          formControlName="Price"
-                         (input)="applyFilters()"
+                         (keyup)="applyFilters()"
                          class="filter-input p-inputtext-sm"
                          [ngClass]="{'ng-invalid ng-dirty': FiltersForm.controls.Price?.invalid && Submitted}"
                          id="ProductPriceFilter"
