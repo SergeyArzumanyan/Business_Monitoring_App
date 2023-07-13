@@ -109,7 +109,7 @@ export class TableComponent implements OnInit, OnDestroy {
 
   public ApplyFiltersToTable(filters: ITableFiltersObj): void {
     this.TableFiltersObj = filters;
-    if (!this.NotFilteredTableItems) {
+    if (this.NotFilteredTableItems.length === 0) {
       this.NotFilteredTableItems = this.TableConfig.TableItems;
     }
 
