@@ -6,6 +6,10 @@
   font-size: $Xsmall !important;
 }
 
+.d-filters-wrapper {
+  overflow-x: auto;
+}
+
 .filter-clear-btn {
   position: static !important;
 }

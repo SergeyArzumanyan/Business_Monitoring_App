@@ -1,6 +1,6 @@
 <div class="w-100 filters-wrapper flex gap-10 justify-content-between align-items-center">
 
-  <div class="w-100 h-100 filters-heading flex gap-5 justify-content-start align-items-center">
+  <div class="h-100 filters-heading flex gap-5 justify-content-start align-items-center">
     <span class="filters-header">
       Filters
     </span>
@@ -14,41 +14,68 @@
     </ng-container>
   </div>
 
-  <form [formGroup]="FiltersForm">
-    <div class="w-100 h-100 inputs-wrapper flex justify-content-end align-items-center gap-10">
+  <div class="d-filters-wrapper flex gap-5">
+    <form [formGroup]="FiltersForm">
+      <div class="w-100 h-100 inputs-wrapper flex justify-content-end align-items-center gap-10">
 
-      <ng-container *ngIf="TableFilters?.ShowName">
-        <div class="filter-block flex justify-content-center align-items-center gap-10">
-          <label class="filter-label" for="ProductNameFilter">Name</label>
-          <input type="text"
-                 formControlName="Name"
-                 (keyup)="applyFilters()"
-                 class="filter-input p-inputtext-sm"
-                 [ngClass]="{'ng-invalid ng-dirty': FiltersForm.controls.Name?.invalid && Submitted}"
-                 id="ProductNameFilter"
-                 pInputText
-                 placeholder="Search By Name...">
-        </div>
-      </ng-container>
+        <ng-container *ngIf="TableFilters?.ShowName">
+          <div class="filter-block flex justify-content-center align-items-center gap-10">
+            <label class="filter-label" for="NameFilter">Name</label>
+            <input type="text"
+                   formControlName="Name"
+                   (keyup)="applyFilters()"
+                   class="filter-input p-inputtext-sm"
+                   [ngClass]="{'ng-invalid ng-dirty': FiltersForm.controls.Name?.invalid && Submitted}"
+                   id="NameFilter"
+                   pInputText
+                   placeholder="Search By Name...">
+          </div>
+        </ng-container>
 
-      <ng-container *ngIf="TableFilters?.ShowPrice">
-        <div class="filter-block flex justify-content-center align-items-center gap-10">
-          <label class="filter-label" for="ProductPriceFilter">Price</label>
-          <p-inputNumber inputId="ProductPriceFilter"
-                         formControlName="Price"
-                         (keyup)="applyFilters()"
-                         class="filter-input p-inputtext-sm"
-                         [ngClass]="{'ng-invalid ng-dirty': FiltersForm.controls.Price?.invalid && Submitted}"
-                         id="ProductPriceFilter"
-                         placeholder="Search By Price...">
-          </p-inputNumber>
-        </div>
-      </ng-container>
+        <ng-container *ngIf="TableFilters?.ShowPrice">
+          <div class="filter-block flex justify-content-center align-items-center gap-10">
+            <label class="filter-label" for="PriceFilter">Price</label>
+            <p-inputNumber inputId="PriceFilter"
+                           formControlName="Price"
+                           (keyup)="applyFilters()"
+                           class="filter-input p-inputtext-sm"
+                           [ngClass]="{'ng-invalid ng-dirty': FiltersForm.controls.Price?.invalid && Submitted}"
+                           id="PriceFilter"
+                           placeholder="Search By Price...">
+            </p-inputNumber>
+          </div>
+        </ng-container>
 
-    </div>
-  </form>
+        <ng-container *ngIf="TableFilters?.ShowAddress">
+          <div class="filter-block flex justify-content-center align-items-center gap-10">
+            <label class="filter-label" for="AddressFilter">Address</label>
+            <input type="text"
+                   formControlName="Address"
+                   (keyup)="applyFilters()"
+                   class="filter-input p-inputtext-sm"
+                   [ngClass]="{'ng-invalid ng-dirty': FiltersForm.controls.Address?.invalid && Submitted}"
+                   id="AddressFilter"
+                   pInputText
+                   placeholder="Search By Address...">
+          </div>
+        </ng-container>
 
-  <div class="apply-wrapper">
+        <ng-container *ngIf="TableFilters?.ShowPhoneNumber">
+          <div class="filter-block flex justify-content-center align-items-center gap-10">
+            <label class="filter-label" for="PhoneNumberFilter">PhoneNumber</label>
+            <input type="text"
+                   formControlName="PhoneNumber"
+                   (keyup)="applyFilters()"
+                   class="filter-input p-inputtext-sm"
+                   [ngClass]="{'ng-invalid ng-dirty': FiltersForm.controls.PhoneNumber?.invalid && Submitted}"
+                   id="PhoneNumberFilter"
+                   pInputText
+                   placeholder="Search By PhoneNumber...">
+          </div>
+        </ng-container>
+
+      </div>
+    </form>
     <button type="submit" class="btn-xs skin-action-btn" (click)="applyFilters()">Apply</button>
   </div>
 

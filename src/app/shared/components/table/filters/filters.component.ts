@@ -24,6 +24,12 @@ export class FiltersComponent {
     ]),
     Price: new FormControl<number | null>(null, [
       onlyPositiveNumbers()
+    ]),
+    Address: new FormControl<string | null>(null, [
+      onlyWhiteSpaceValidator()
+    ]),
+    PhoneNumber: new FormControl<string | null>(null, [
+      onlyWhiteSpaceValidator()
     ])
   })
 

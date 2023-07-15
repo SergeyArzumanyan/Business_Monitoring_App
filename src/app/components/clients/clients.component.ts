@@ -28,7 +28,9 @@ export class ClientsComponent implements OnInit, OnDestroy {
   };
 
   public ClientTableFilters: ITableFilters = {
-    ShowName: true
+    ShowName: true,
+    ShowAddress: true,
+    ShowPhoneNumber: true,
   };
 
   public ClientTableContextMenuOptions: IContextMenuItem[] = [
