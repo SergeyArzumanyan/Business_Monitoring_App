@@ -39,9 +39,9 @@
             <p-multiSelect inputId="sweet-products"
                            id="sweet-products"
                            [ngClass]="{
-                        'ng-invalid ng-dirty':
-                        sweetForm.get('Price')?.hasError('required') && submitted
-                        }"
+                            'ng-invalid ng-dirty':
+                            sweetForm.get('Products')?.hasError('required') && submitted
+                            }"
                            [options]="products"
                            [(ngModel)]="selectedProducts"
                            (onChange)="calculateSweetPrice()"

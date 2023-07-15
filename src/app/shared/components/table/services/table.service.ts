@@ -19,6 +19,7 @@ import { ConfirmationService } from "primeng/api";
 
 export class TableService {
 
+  public InitialTableItems: any[] = [];
   public TableRowItem: any = null;
   public isEditDialogVisible: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public EditDialogForm: BehaviorSubject<any> = new BehaviorSubject<any>(null);
@@ -41,12 +42,15 @@ export class TableService {
           .pipe(take(1))
           .subscribe({
             next: (action: IFirebaseItemDeletion[]): void => {
-              this.Deletion.RemoveItemByFirebaseKey(TableConfigs.ItemEndPoint, action[0].payload.key, TableConfigs.ItemName);
+              this.Deletion.RemoveItemByFirebaseKey(TableConfigs.ItemEndPoint, action[0].payload.key, TableConfigs.ItemName)
+                .then((): void => {
+                  this.InitialTableItems = TableConfigs.TableItems;
+                });
             },
             error: (): void => {
               this.toastService.showToast('error', 'Error', 'Something Went Wrong.');
             }
-          })
+          });
       }
     });
   }
@@ -67,6 +71,7 @@ export class TableService {
       .subscribe((items: any): void => {
         this.Edition.UpdateItemByFirebaseKey(`${TableConfigs.ItemEndPoint}`, ItemNewValue, items[0].key)
           .then((): boolean => {
+            this.InitialTableItems =TableConfigs.TableItems;
             this.toastService.showToast('success', 'Done', `${TableConfigs.ItemName} Edited Successfully.`);
             return true;
           })

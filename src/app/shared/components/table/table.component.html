@@ -13,8 +13,18 @@
               <th *ngFor="let ObjectKeyValue of ArrayObject | keyvalue"
                   [pTooltip]="MakeTooltip(ObjectKeyValue.key)"
                   tooltipPosition="bottom"
-                  [showDelay]="300">
-                {{ ObjectKeyValue.key }}
+                  [showDelay]="300"
+                  (click)="SortTableField(ObjectKeyValue.key)">
+                <div class="th-content flex justify-content-center align-items-center gap-10">
+                  <span class="th-text">{{ ObjectKeyValue.key }}</span>
+                  <ng-container *ngIf="ObjectKeyValue.key === SortingColumName">
+                    <i class="th-icon icon-sm"
+                       [ngClass]="TableSortingService.ColumnSortState$.getValue() === 'asc'  ?
+                       'fa-solid fa-arrow-up' : TableSortingService.ColumnSortState$.getValue() === 'desc' ?
+                       'fa-solid fa-arrow-down' : '' ">
+                    </i>
+                  </ng-container>
+                </div>
               </th>
             </ng-container>
           </ng-container>

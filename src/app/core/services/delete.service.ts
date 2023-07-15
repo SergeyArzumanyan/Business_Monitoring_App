@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Router } from "@angular/router";
-import { Observable } from "rxjs";
 
 import { AngularFireDatabase } from "@angular/fire/compat/database";
 
@@ -18,8 +17,8 @@ export class DeleteService {
     private router: Router,
   ) {}
 
-  public RemoveItemByFirebaseKey(ItemsEndPoint: string, ItemFirebaseKey: string, ItemName: string): void {
-    this.db.object(`/${ItemsEndPoint}/${ItemFirebaseKey}`).remove()
+  public RemoveItemByFirebaseKey(ItemsEndPoint: string, ItemFirebaseKey: string, ItemName: string): Promise<any> {
+    return this.db.object(`/${ItemsEndPoint}/${ItemFirebaseKey}`).remove()
       .then(() => {
         if (!this.router.url.includes('sweets')) {
           this.toastService.showToast('success', 'Done', `${ItemName} Deleted Successfully.`);

@@ -170,16 +170,23 @@ table tr:last-child td:last-child {
       color: $black;
       transition: $animationTime;
       cursor: default;
-      max-width: 60px;
-      text-overflow: ellipsis;
-      overflow: hidden;
     }
 
     th {
+      min-width: 100px;
+      cursor: pointer;
       font-size: $medium;
       font-weight: 700;
       background-color: $table-background;
       color: $gray-100;
+
+      .th-content  {
+        pointer-events: none;
+      }
+    }
+
+    .table-actions {
+      cursor: default;
     }
 
     th:hover {
@@ -187,6 +194,9 @@ table tr:last-child td:last-child {
     }
 
     td {
+      max-width: 75px;
+      text-overflow: ellipsis;
+      overflow: hidden;
       font-size: $small;
       background-color: $white-400;
     }
@@ -239,13 +249,17 @@ table tr:last-child td:last-child {
 @media (max-width: 950px) {
   .table-wrapper {
     width: 100% !important;
-    overflow-y: auto;
+    overflow-x: auto !important;
 
     table {
       tr {
         td, th {
-          max-width: 130px !important;
+          min-width: 120px;
+          max-width: 150px !important;
           padding: 10px !important;
+        }
+        .action-td {
+          min-width: 60px !important;
         }
       }
     }

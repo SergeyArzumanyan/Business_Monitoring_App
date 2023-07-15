@@ -8,8 +8,8 @@ import {
   ITableConfig,
 } from "@Shared/components/table/interfaces";
 
-import { TableService } from "@Shared/components/table/services";
-import { ITableFilters, ITableFiltersObj } from "app/shared/components/table/filters/interfaces";
+import { TableService, TableSortingService } from "@Shared/components/table/services";
+import { ITableFilters, ITableFiltersObj } from "@Shared/components/table/filters/interfaces";
 
 @Component({
   selector: 'app-table',
@@ -22,8 +22,11 @@ export class TableComponent implements OnInit, OnDestroy {
   @Input() TableFilters: ITableFilters | null = null;
 
   public TableFiltersObj: ITableFiltersObj = {};
-  private NotFilteredTableItems: any = [];
   public TableRowItem: any;
+  public SortingColumName: string = '';
+  // private NotFilteredTableItems: any[] = [];
+  // private NotSortedTableItems: any[] = [];
+
   public IsEditDialogVisible: boolean = false;
   @Input() EditDialogForm: FormGroup = new FormGroup({});
   public FormIsSubmitted: boolean = false;
@@ -36,7 +39,10 @@ export class TableComponent implements OnInit, OnDestroy {
 
   private unsubscribe$: Subject<void> = new Subject<void>();
 
-  constructor(private TableService: TableService) {}
+  constructor(
+    public TableService: TableService,
+    public TableSortingService: TableSortingService,
+  ) {}
 
   ngOnInit(): void {
     this.SubscribeToEditModeChanges();
@@ -59,6 +65,7 @@ export class TableComponent implements OnInit, OnDestroy {
 
   protected DeleteItem(Item: any): void {
     this.TableService.DeleteItem(this.TableConfig, Item);
+    this.TableService.InitialTableItems = this.TableConfig.TableItems;
   }
 
   protected EnableEditing(Item: any): void {
@@ -83,6 +90,7 @@ export class TableComponent implements OnInit, OnDestroy {
     this.FormIsSubmitted = true;
     if (this.EditDialogForm.valid) {
       this.TableService.EditItem(this.TableConfig, this.TableRowItem, this.EditDialogForm.value);
+      this.TableService.InitialTableItems = this.TableConfig.TableItems;
       this.IsEditDialogVisible = false;
       this.EditDialogForm.markAsPristine();
       this.FormIsSubmitted = false;
@@ -109,23 +117,37 @@ export class TableComponent implements OnInit, OnDestroy {
 
   public ApplyFiltersToTable(filters: ITableFiltersObj): void {
     this.TableFiltersObj = filters;
-    if (this.NotFilteredTableItems.length === 0) {
-      this.NotFilteredTableItems = this.TableConfig.TableItems;
+    if (this.TableService.InitialTableItems.length === 0) {
+      this.TableService.InitialTableItems = this.TableConfig.TableItems;
     }
 
     for (const filterKeyValue of Object.entries(this.TableFiltersObj)) {
       if (filterKeyValue[1]) {
         if (typeof filterKeyValue[1] === 'string') {
-          this.TableConfig.TableItems = this.NotFilteredTableItems.filter((TableItem: any) =>
+          this.TableConfig.TableItems = this.TableService.InitialTableItems.filter((TableItem: any) =>
             TableItem[filterKeyValue[0]].toLowerCase().includes(filterKeyValue[1].trim().toLowerCase()));
         } else if (typeof filterKeyValue[1] === 'number') {
-          this.TableConfig.TableItems = this.NotFilteredTableItems.filter((TableItem: any) =>
+          this.TableConfig.TableItems = this.TableService.InitialTableItems.filter((TableItem: any) =>
             TableItem['Price'] === filterKeyValue[1]);
         }
       } else if (filterKeyValue[1] === '') {
-        this.TableConfig.TableItems = this.NotFilteredTableItems;
+        this.TableConfig.TableItems = this.TableService.InitialTableItems;
       }
     }
 
+  }
+
+  public SortTableField(key: any): void {
+    this.SortingColumName = key;
+
+    if (this.TableService.InitialTableItems.length === 0) {
+      this.TableService.InitialTableItems = Array.from(this.TableConfig.TableItems);
+    }
+
+    const sortedItems: any[] = this.TableSortingService.SortTableField(key, this.TableService.InitialTableItems);
+
+    sortedItems.length > 0 ?
+      this.TableConfig.TableItems = sortedItems :
+      this.TableConfig.TableItems = this.TableService.InitialTableItems;
   }
 }

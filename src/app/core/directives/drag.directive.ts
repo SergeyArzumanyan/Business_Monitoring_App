@@ -46,10 +46,8 @@ export class DragDirective {
       reader.readAsDataURL( file );
 
       if (
-        file.type === "image/jpeg"
-        ||
-        file.type === "image/png"
-        ||
+        file.type === "image/jpeg" ||
+        file.type === "image/png" ||
         file.type === "image/jpg"
       ) {
         reader.onload = () => {
