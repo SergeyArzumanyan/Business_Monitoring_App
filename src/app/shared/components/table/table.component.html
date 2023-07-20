@@ -45,7 +45,7 @@
               [pTooltip]="MakeTooltip(ObjectKeyValue.value)"
               tooltipPosition="bottom"
               [showDelay]="300">
-            {{ ObjectKeyValue.value }}
+            {{ ObjectKeyValue.value ? ObjectKeyValue.value : '-' }}
           </td>
 
           <ng-container *ngIf="TableConfig.TableActions">
@@ -91,55 +91,56 @@
 </div>
 
 
-<p-dialog [(visible)]="IsEditDialogVisible"
-          [dismissableMask]="true"
-          [resizable]="false"
-          [draggable]="false"
-          [breakpoints]="{'1080px': '50vw','960px': '60vw', '640px': '85vw'}"
-          [style]="{width: '450px'}"
-          [header]="('Edit ' + TableConfig.ItemName) | titlecase"
-          [modal]="true"
-          (onHide)="HideEditDialog()"
-          styleClass="p-fluid">
+<ng-container *ngIf="IsEditDialogVisible">
+  <p-dialog [(visible)]="IsEditDialogVisible"
+            [dismissableMask]="true"
+            [resizable]="false"
+            [draggable]="false"
+            [breakpoints]="{'1080px': '50vw','960px': '60vw', '640px': '85vw'}"
+            [style]="{width: '450px'}"
+            [header]="('Edit ' + TableConfig.ItemName) | titlecase"
+            [modal]="true"
+            (onHide)="HideEditDialog()"
+            styleClass="p-fluid">
 
-  <ng-template pTemplate="content">
-    <app-table-edit-dialog
-      *ngIf="IsEditDialogVisible"
-      (HideEditDialog)="HideDialogInEditDialog($event)"
-      [IsDialogVisible]="IsEditDialogVisible"
-      [TableItemName]="TableConfig.ItemName"
-      [TableItemEndPoint]="TableConfig.ItemEndPoint"
-      [TableItem]="TableRowItem"
-      [TableItemForm]="EditDialogForm"
-      [FormIsSubmitted]="FormIsSubmitted">
-    </app-table-edit-dialog>
-  </ng-template>
+    <ng-template pTemplate="content">
+      <app-table-edit-dialog
+        *ngIf="IsEditDialogVisible"
+        (HideEditDialog)="HideDialogInEditDialog($event)"
+        [IsDialogVisible]="IsEditDialogVisible"
+        [TableItemName]="TableConfig.ItemName"
+        [TableItemEndPoint]="TableConfig.ItemEndPoint"
+        [TableItem]="TableRowItem"
+        [TableItemForm]="EditDialogForm"
+        [FormIsSubmitted]="FormIsSubmitted">
+      </app-table-edit-dialog>
+    </ng-template>
 
-  <ng-template pTemplate="footer">
-    <div class="w-100 flex align-items-center justify-content-end">
-      <button type="button"
-              class="btn-md brown-action-btn dialog-btn"
-              (click)="HideEditDialog()">
+    <ng-template pTemplate="footer">
+      <div class="w-100 flex align-items-center justify-content-end">
+        <button type="button"
+                class="btn-md brown-action-btn dialog-btn"
+                (click)="HideEditDialog()">
         <span class="flex justify-content-center align-items-center gap-5">
           Cancel
           <i class="pi pi-times icon-sm"></i>
         </span>
-      </button>
+        </button>
 
-      <button type="submit"
-              class="btn-md skin-action-btn dialog-btn"
-              [disabled]="EditDialogForm.pristine"
-              [ngClass]="{'skin-action-btn-disabled': EditDialogForm.pristine}"
-              (click)="SaveEditedItem()">
+        <button type="submit"
+                class="btn-md skin-action-btn dialog-btn"
+                [disabled]="EditDialogForm.pristine"
+                [ngClass]="{'skin-action-btn-disabled': EditDialogForm.pristine}"
+                (click)="SaveEditedItem()">
         <span class="flex justify-content-center align-items-center gap-5">
           Save
           <i class="pi pi-check icon-sm"></i>
         </span>
-      </button>
-    </div>
-  </ng-template>
+        </button>
+      </div>
+    </ng-template>
 
-</p-dialog>
-
+  </p-dialog>
+</ng-container>
 
 <p-confirmDialog [breakpoints]="{'650px': '85vw'}" [dismissableMask]="true"></p-confirmDialog>

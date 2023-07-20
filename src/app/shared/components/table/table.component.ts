@@ -24,8 +24,6 @@ export class TableComponent implements OnInit, OnDestroy {
   public TableFiltersObj: ITableFiltersObj = {};
   public TableRowItem: any;
   public SortingColumName: string = '';
-  // private NotFilteredTableItems: any[] = [];
-  // private NotSortedTableItems: any[] = [];
 
   public IsEditDialogVisible: boolean = false;
   @Input() EditDialogForm: FormGroup = new FormGroup({});
@@ -51,6 +49,7 @@ export class TableComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+    this.TableService.InitialTableItems = [];
   }
 
   private SubscribeToEditModeChanges(): void {
