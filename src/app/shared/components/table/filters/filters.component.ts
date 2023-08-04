@@ -28,6 +28,9 @@ export class FiltersComponent {
     Address: new FormControl<string | null>(null, [
       onlyWhiteSpaceValidator()
     ]),
+    UsualAddress: new FormControl<string | null>(null, [
+      onlyWhiteSpaceValidator()
+    ]),
     PhoneNumber: new FormControl<string | null>(null, [
       onlyWhiteSpaceValidator()
     ])

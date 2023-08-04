@@ -29,7 +29,7 @@ export class ClientsComponent implements OnInit, OnDestroy {
 
   public ClientTableFilters: ITableFilters = {
     ShowName: true,
-    ShowAddress: true,
+    ShowUsualAddress: true,
     ShowPhoneNumber: true,
   };
 
@@ -68,12 +68,11 @@ export class ClientsComponent implements OnInit, OnDestroy {
     PhoneNumber: new FormControl<string | null>(null, [
       Validators.required,
     ]),
-    Address: new FormControl<string | null>(null,[
+    UsualAddress: new FormControl<string | null>(null,[
       Validators.required,
       onlyWhiteSpaceValidator(),
       Validators.maxLength(25)
     ]),
-    Orders: new FormControl<null>(null)
   });
 
   public pending: boolean = false;
@@ -104,7 +103,14 @@ export class ClientsComponent implements OnInit, OnDestroy {
         next: (clients: IClient[] | null) => {
           this.pending = false;
           this.clients = clients ? this.Request.MakeArrayFromFirebaseResponse(clients) : [];
-          this.ClientTableConfig.TableItems = this.clients;
+          // const tableClients = this.clients.map((client: any) => {
+          //   client.Orders = client.Orders?.Count;
+          // });
+
+          this.ClientTableConfig.TableItems = this.clients.map((client: any) => {
+            client.Orders = client.Orders?.Count;
+            return client;
+          });
         },
         error: () => {
           this.pending = false;

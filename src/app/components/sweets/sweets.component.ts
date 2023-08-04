@@ -70,8 +70,9 @@ export class SweetsComponent implements OnInit, OnDestroy {
       this.pending = true;
     }
     for (const sweet of sweets) {
+      sweet.TotalPrice = sweet.Profit!;
       for (const productOfSweet of sweet.Products!) {
-        this.Request.GetItemByObjectKey('products', 'ID', productOfSweet.ProductID)
+        this.Request.GetItemByObjectKey('products', 'ID', productOfSweet.ID)
           .pipe(take(1))
           .subscribe({
             next: (product: IProduct[]) => {

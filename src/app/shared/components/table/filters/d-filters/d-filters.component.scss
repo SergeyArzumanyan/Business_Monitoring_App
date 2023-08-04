@@ -1,15 +1,23 @@
 @import '/src/app/core/global-css/table';
 
-:host ::ng-deep .p-inputnumber-input.p-component {
-  width: 140px !important;
-  height: 35px !important;
-  font-size: $Xsmall !important;
+:host ::ng-deep {
+  .filter-block {
+    .p-inputnumber-input.p-component {
+      width: 140px !important;
+      height: 35px !important;
+      font-size: $Xsmall !important;
+    }
+  }
 }
 
 .d-filters-wrapper {
   overflow-x: auto;
   overflow-y: hidden;
   padding: 5px;
+}
+
+.filter-apply-btn {
+  font-size: $Xsmall !important;
 }
 
 .filter-clear-btn {

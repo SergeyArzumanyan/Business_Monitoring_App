@@ -1,17 +1,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Subject, takeUntil } from "rxjs";
 
 import {
   ISweet,
   IProduct,
   ISweetProduct,
-  ISweetFormAdding
+  ISweetFormAdding, IOrderSweetQuantityForm, ISweetQuantityForm, ISweetTotalPrices
 } from "@Core/interfaces";
 import {
   SendingDataService,
   RequestsService,
-  ToastService
+  ToastService, CalculationService
 } from "@Core/services";
 
 @Component({
@@ -21,28 +21,33 @@ import {
 })
 export class AddSweetComponent implements OnInit, OnDestroy {
 
-  public isEditMode: boolean = false;
-
-  public sweet: any = {};
-  public sweetTotalPrice: number = 0;
-  public submitted: boolean = false;
+  public sweet: Partial<ISweet> = {};
+  public sweetTotalPrices: ISweetTotalPrices = {
+    CurrentTotalPrice: 0,
+    Profit: 0
+  };
 
   public products: IProduct[] = [];
   public selectedProducts: any = [];
 
-  public sweetForm: FormGroup<ISweetFormAdding> = new FormGroup<ISweetFormAdding>({
+  public addSweetForm: FormGroup<ISweetFormAdding> = new FormGroup<ISweetFormAdding>({
+    ID: new FormControl(null),
     Name: new FormControl(null, [Validators.required, Validators.maxLength(25)]),
     Image: new FormControl(null, [Validators.required]),
-    Products: new FormControl([], [Validators.required]),
+    Products: this.fb.array([], Validators.required),
+    Profit: new FormControl(null, [Validators.required])
   })
 
   private unsubscribe: Subject<void> = new Subject<void>();
 
   constructor(
+    private fb: FormBuilder,
+    private calculationService: CalculationService,
     private Request: RequestsService,
     private Send: SendingDataService,
     private toastService: ToastService,
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.requestProducts();
@@ -66,50 +71,30 @@ export class AddSweetComponent implements OnInit, OnDestroy {
       });
   }
 
-  public onInputType(inputElement: any, index: number): void {
-    if (inputElement.value === '' && !inputElement.value) {
-      inputElement.value = ' ';
-    }
-    this.selectedProducts[index].Quantity = Number(inputElement.value);
-    this.selectedProducts[index].TotalPrice = Math.round(this.selectedProducts[index].Quantity * this.selectedProducts[index].Price);
-  }
-
-  public calculateSweetPrice(): void {
-    let arrSum: number = 0;
-    for (const product of this.selectedProducts) {
-      if (product.TotalPrice && product.TotalPrice !== 0) {
-        arrSum += product.TotalPrice;
-      }
-      this.sweetTotalPrice = arrSum;
-      // this.sweetForm.controls.CurrentPrice.setValue(this.sweetTotalPrice);
-    }
-  }
-
-  public onFileChange( event: any ) {
+  public onFileChange(event: any) {
     const reader = new FileReader();
 
-    if ( event.target.files && event.target.files.length ) {
-      const [ file ] = event.target.files;
-      reader.readAsDataURL( file );
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
 
       reader.onload = () => {
-        this.sweetForm.controls.Image.setValue( reader.result as string );
+        this.addSweetForm.controls.Image.setValue(reader.result as string);
       };
 
     }
   }
-  public imageDropped( Image: any ): void {
-    this.sweetForm.controls.Image.setValue( Image );
+
+  public imageDropped(Image: any): void {
+    this.addSweetForm.controls.Image.setValue(Image);
   }
 
   public imageClear(sweet: any): void {
     sweet.Image = null
-    this.sweetForm.patchValue( sweet );
-  }
-  private resetProducts(): void {
-    this.sweetForm.value.Products = [];
-    this.sweetForm.controls.Products.setValue([]);
-    this.sweetTotalPrice = 0;
+    this.addSweetForm.controls.Image.setValue(null);
+    this.addSweetForm.controls.Image.markAsTouched();
+    console.log(this.addSweetForm.controls.Image);
+    this.addSweetForm.patchValue(sweet);
   }
 
   private generateProductsForSweet(selectedProducts: IProduct[]): ISweetProduct[] {
@@ -118,7 +103,8 @@ export class AddSweetComponent implements OnInit, OnDestroy {
     if (selectedProducts) {
       for (const product of selectedProducts) {
         const transformedProduct: ISweetProduct = {
-          ProductID: product.ID,
+          ID: product.ID,
+          Name: product.Name,
           Quantity: product.Quantity
         }
 
@@ -129,32 +115,86 @@ export class AddSweetComponent implements OnInit, OnDestroy {
     return productsToSend;
   }
 
-  public addSweet(): void {
-
+  public onAdd(): void {
     setTimeout(() => {
       window.scroll({
         top: 0,
         left: 0,
         behavior: "smooth"
       })
-      this.sweetForm.value.Image = this.sweetForm.controls.Image.value;
-      this.submitted = true;
+      this.addSweetForm.value.Image = this.addSweetForm.controls.Image.value;
+      this.addSweetForm.controls.ID.setValue(+(new Date()));
 
-      if (this.sweetForm.valid) {
-          if (this.sweetForm.value.Name &&  this.sweetForm.value.Products) {
-            const sweet: ISweet = {
-              ID: +(new Date()),
-              Name: this.sweetForm.value.Name,
-              Products: this.generateProductsForSweet(this.sweetForm.value.Products),
-              Image: this.sweetForm.value.Image
-            }
-            this.Send.CreateItem<ISweet>('sweets', 'Sweet', sweet);
-          }
-          this.sweetForm.reset();
-          this.resetProducts();
-          this.submitted = false;
-        }
+      if (this.addSweetForm.valid) {
+        this.Send.CreateItem<ISweet>('sweets', 'Sweet', this.addSweetForm.value)
+        this.addSweetForm.controls.Products.clear();
+        this.addSweetForm.reset();
+        this.selectedProducts = [];
+        this.sweetTotalPrices.CurrentTotalPrice = 0;
+        this.sweetTotalPrices.Profit = 0;
+      } else {
+        this.addSweetForm.markAllAsTouched();
+      }
     }, 500);
 
+  }
+
+  public createItem(evn: any): void {
+    const items: FormArray = this.addSweetForm.controls['Products'] as FormArray;
+
+    if (evn.itemValue) {
+      const idx = items.controls.findIndex((item: AbstractControl) =>
+        item.value.ID === evn.itemValue.ID);
+      if (idx === -1) {
+        items.push(this.createFormGroup(evn.itemValue))
+      } else {
+        items.removeAt(idx);
+      }
+    } else {
+      items.clear();
+    }
+
+    this.calculateSweetTotalPrice();
+  }
+
+  public createFormGroup(itemValue: any): FormGroup {
+    return new FormGroup<ISweetQuantityForm>({
+      ID: new FormControl(itemValue.ID),
+      Name: new FormControl(itemValue.Name),
+      Quantity: new FormControl(1, Validators.required)
+    });
+  }
+
+  public productsAsFormArray(): FormArray {
+    return this.addSweetForm.controls['Products'] as FormArray;
+  }
+
+  public getFormGroup(i: number): FormGroup {
+    return this.productsAsFormArray().controls[i] as FormGroup;
+  }
+
+  public removeFormGroup(i: number): void {
+    const items: FormArray = this.productsAsFormArray();
+    items.removeAt(i);
+
+    const oldSelected: string[] = [...this.selectedProducts];
+    oldSelected.splice(i, 1);
+    this.selectedProducts = oldSelected;
+
+    this.calculateSweetTotalPrice();
+  }
+
+  public sweetSelectionChangedWithInput(evn: any): void {
+    if (evn.hasOwnProperty('value')) {
+      this.calculateSweetTotalPrice();
+    } else if (evn.key && (evn.key.match(/[0-9]/) || evn.key === 'Backspace' || evn.key === 'Delete')) {
+      this.calculateSweetTotalPrice();
+    }
+  }
+
+  private calculateSweetTotalPrice(): void {
+    setTimeout(() => {
+      this.calculationService.CalculateSweetTotalPrice(this.addSweetForm.value, this.sweetTotalPrices);
+    }, 500)
   }
 }

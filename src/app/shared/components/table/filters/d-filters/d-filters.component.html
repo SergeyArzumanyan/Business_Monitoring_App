@@ -14,7 +14,7 @@
     </ng-container>
   </div>
 
-  <div class="d-filters-wrapper flex gap-5">
+  <div class="d-filters-wrapper flex gap-5 align-items-center">
     <form [formGroup]="FiltersForm">
       <div class="w-100 h-100 inputs-wrapper flex justify-content-end align-items-center gap-10">
 
@@ -25,7 +25,7 @@
                    formControlName="Name"
                    (keyup)="applyFilters()"
                    class="filter-input p-inputtext-sm"
-                   [ngClass]="{'ng-invalid ng-dirty': FiltersForm.controls.Name?.invalid && Submitted}"
+                   [ngClass]="{'ng-invalid ng-dirty': FiltersForm.controls.Name?.invalid }"
                    id="NameFilter"
                    pInputText
                    placeholder="Search By Name...">
@@ -39,7 +39,7 @@
                            formControlName="Price"
                            (keyup)="applyFilters()"
                            class="filter-input p-inputtext-sm"
-                           [ngClass]="{'ng-invalid ng-dirty': FiltersForm.controls.Price?.invalid && Submitted}"
+                           [ngClass]="{'ng-invalid ng-dirty': FiltersForm.controls.Price?.invalid }"
                            id="PriceFilter"
                            placeholder="Search By Price...">
             </p-inputNumber>
@@ -53,10 +53,24 @@
                    formControlName="Address"
                    (keyup)="applyFilters()"
                    class="filter-input p-inputtext-sm"
-                   [ngClass]="{'ng-invalid ng-dirty': FiltersForm.controls.Address?.invalid && Submitted}"
+                   [ngClass]="{'ng-invalid ng-dirty': FiltersForm.controls.Address?.invalid }"
                    id="AddressFilter"
                    pInputText
                    placeholder="Search By Address...">
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="TableFilters?.ShowUsualAddress">
+          <div class="filter-block flex justify-content-center align-items-center gap-10">
+            <label class="filter-label" for="UsualAddressFilter">Usual Address</label>
+            <input type="text"
+                   formControlName="UsualAddress"
+                   (keyup)="applyFilters()"
+                   class="filter-input p-inputtext-sm"
+                   [ngClass]="{'ng-invalid ng-dirty': FiltersForm.controls.UsualAddress?.invalid }"
+                   id="UsualAddressFilter"
+                   pInputText
+                   placeholder="Search By Usual Address...">
           </div>
         </ng-container>
 
@@ -67,7 +81,7 @@
                    formControlName="PhoneNumber"
                    (keyup)="applyFilters()"
                    class="filter-input p-inputtext-sm"
-                   [ngClass]="{'ng-invalid ng-dirty': FiltersForm.controls.PhoneNumber?.invalid && Submitted}"
+                   [ngClass]="{'ng-invalid ng-dirty': FiltersForm.controls.PhoneNumber?.invalid }"
                    id="PhoneNumberFilter"
                    pInputText
                    placeholder="Search By PhoneNumber...">
@@ -76,7 +90,11 @@
 
       </div>
     </form>
-    <button type="submit" class="btn-xs skin-action-btn" (click)="applyFilters()">Apply</button>
+    <button type="submit"
+            class="filter-apply-btn btn-xs skin-action-btn"
+            (click)="applyFilters()">
+      Apply
+    </button>
   </div>
 
 </div>

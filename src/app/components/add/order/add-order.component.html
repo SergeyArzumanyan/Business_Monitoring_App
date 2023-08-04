@@ -1,68 +1,146 @@
 <div class="form-wrapper flex justify-content-center align-items-center">
-  <form>
-    <div class="form-container flex col align-items-center gap-30">
+  <form [formGroup]="addOrderForm" (ngSubmit)="onAdd()">
+    <div class="form-container flex col align-items-center gap-10">
 
       <div class="w-100 flex">
-        <button class="rounded-btn skin-btn" type="button" [routerLink]="['add']"><i class="pi pi-arrow-left"></i></button>
+        <button class="rounded-btn skin-btn" type="button" [routerLink]="['add']">
+          <i class="pi pi-arrow-left"></i>
+        </button>
         <h3 class="form-header">Add Order</h3>
       </div>
 
-      <div class="form-group flex col gap-15">
-        <label class="form-label" for="Clients">Client</label>
+      <div class="form-group flex col gap-10">
+        <label class="form-label" for="Clients">Client *</label>
         <div class="multiselect-container">
           <p-multiSelect inputId="Clients"
                          id="Clients"
-                         [ngClass]="{}"
+                         (onChange)="setClientValue($event)"
+                         [options]="clients"
+                         [(ngModel)]="selectedClient"
+                         [ngModelOptions]="{standalone: true}"
+                         [selectionLimit]="1"
+                         [ngClass]="{'ng-invalid ng-dirty': addOrderForm.controls.Client.invalid &&
+                         addOrderForm.controls.Client.touched}"
                          optionLabel="Name"
                          placeholder="Which client is taking order ?">
           </p-multiSelect>
         </div>
+
+        <div class="p-error-wrapper">
+          <small *ngIf="addOrderForm.controls.Client.touched &&
+                  addOrderForm.controls.Client.hasError('required')"
+                 class="p-error">
+            Client is required.
+          </small>
+        </div>
       </div>
 
-      <div class="form-group flex col gap-15">
-        <label class="form-label" for="Sweets">Sweet</label>
+      <div class="form-group flex col gap-10">
+        <label class="form-label" for="Sweets">Sweet *</label>
         <div class="multiselect-container">
           <p-multiSelect inputId="Sweets"
                          id="Sweets"
-                         [ngClass]="{}"
+                         [(ngModel)]="selectedSweets"
+                         [ngModelOptions]="{standalone: true}"
+                         [options]="sweets"
+                         [showToggleAll]="false"
+                         (onChange)="createItem($event)"
+                         [ngClass]="{'ng-invalid ng-dirty': addOrderForm.controls.Sweets.invalid &&
+                         addOrderForm.controls.Sweets.touched}"
                          optionLabel="Name"
                          placeholder="What is client Ordering ?">
           </p-multiSelect>
         </div>
+
+        <ng-container formArrayName="Sweets" *ngIf="sweetsAsFormArray().controls.length > 0">
+          <div class="form-group flex col gap-10"
+               *ngFor="let group of sweetsAsFormArray().controls; let i = index"
+               [formGroupName]="i">
+            <div class="w-100 flex justify-content-between align-items-center">
+              <label for="Quantity">{{ getFormGroup(i).controls['Name'].value }} Quantity *</label>
+              <button type="button"
+                      class="btn-xs skin-action-btn"
+                      (click)="removeFormGroup(i)">
+                <i class="fa-solid fa-trash icon-md"></i>
+              </button>
+            </div>
+            <p-inputNumber [showButtons]="true"
+                           buttonLayout="horizontal"
+                           id="Quantity"
+                           formControlName="Quantity"
+                           (onInput)="orderSelectionChangedWithInput($event)"
+                           [step]="0.25"
+                           [min]="0.5"
+                           [ngClass]="{'ng-invalid ng-dirty': getFormGroup(i).controls['Quantity'].invalid}"
+                           incrementButtonIcon="pi pi-plus"
+                           decrementButtonIcon="pi pi-minus"
+                           inputId="Quantity">
+            </p-inputNumber>
+          </div>
+        </ng-container>
+
+        <div class="p-error-wrapper">
+          <small *ngIf="addOrderForm.controls.Sweets.touched &&
+                  addOrderForm.controls.Sweets.hasError('required')"
+                 class="p-error">
+            At Least 1 Sweet Must Be Selected.
+          </small>
+        </div>
       </div>
 
-
-      <div class="form-group flex col gap-15">
-        <label for="Quantity">Quantity</label>
-        <p-inputNumber [showButtons]="true"
-                       buttonLayout="horizontal"
-                       id="Quantity"
-                       [step]="1"
-                       [min]="0.5"
-                       incrementButtonIcon="pi pi-plus"
-                       decrementButtonIcon="pi pi-minus"
-                       inputId="Quantity">
-        </p-inputNumber>
-      </div>
-
-      <div class="form-group flex col gap-15">
-        <label for="Address">Address</label>
+      <div class="form-group flex col gap-10">
+        <label for="Address">Address *</label>
         <input type="text"
+               id="Address"
+               formControlName="Address"
                class="form-input p-inputtext-sm"
+               [ngClass]="{'ng-invalid ng-dirty': addOrderForm.controls.Address.invalid &&
+               addOrderForm.controls.Address.touched}"
                pInputText
-               placeholder="Where is client ordering ?"
-               id="Address">
+               placeholder="Where is client ordering ?">
+
+        <div class="p-error-wrapper">
+          <small *ngIf="addOrderForm.controls.Address.touched &&
+                  addOrderForm.controls.Address.hasError('required')"
+                 class="p-error">
+            Address is required.
+          </small>
+        </div>
       </div>
 
-      <div class="form-group flex col gap-15">
-        <label for="DeliveryPrice">Delivery Price</label>
+      <div class="form-group flex col gap-10">
+        <label for="DeliveryPrice">Delivery Price *</label>
         <p-inputNumber id="DeliveryPrice"
+                       formControlName="DeliveryPrice"
+                       (keyup)="orderSelectionChangedWithInput($event)"
+                       [ngClass]="{'ng-invalid ng-dirty': addOrderForm.controls.DeliveryPrice.invalid &&
+                       addOrderForm.controls.DeliveryPrice.touched}"
                        placeholder="Enter the price for delivery"
                        inputId="DeliveryPrice">
         </p-inputNumber>
+
+        <div class="p-error-wrapper">
+          <small *ngIf="addOrderForm.controls.DeliveryPrice.touched &&
+                    addOrderForm.controls.DeliveryPrice.hasError('required')"
+                 class="p-error">
+            Delivery Price is required.
+          </small>
+        </div>
+      </div>
+
+      <div class="order-total-price-wrapper w-100 flex justify-content-between align-items-center">
+        <span class="item-total-price-text">
+          Total Price:
+        </span>
+
+        <span class="item-total-price-wrapper">
+          {{ addOrderForm.value.TotalPrices?.OrderTotalPrice ?
+          addOrderForm.value.TotalPrices?.OrderTotalPrice : 0 }} AMD
+        </span>
       </div>
 
     </div>
+
     <button type="submit" class="btn-md skin-btn form-btn">
       <span class="flex justify-content-center align-items-center gap-5">
         Add

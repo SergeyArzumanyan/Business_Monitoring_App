@@ -12,41 +12,42 @@ import { SendingDataService } from "@Core/services";
 })
 export class AddClientComponent {
 
-  public clientForm: FormGroup<IClientForm> = new FormGroup<IClientForm>({
-    ID: new FormControl<number | null>(null),
-    Name: new FormControl<string | null>(null, [
+  public addClientForm: FormGroup<IClientForm> = new FormGroup<IClientForm>({
+    ID: new FormControl(null),
+    Name: new FormControl(null, [
       Validators.required,
       Validators.minLength(2),
       Validators.maxLength(20),
       onlyWhiteSpaceValidator()
     ]),
-    Surname: new FormControl<string | null>(null, [
+    Surname: new FormControl(null, [
       Validators.minLength(2),
       Validators.maxLength(20),
       onlyWhiteSpaceValidator()
     ]),
-    PhoneNumber: new FormControl<string | null>(null, [
+    PhoneNumber: new FormControl(null, [
       Validators.required,
     ]),
-    Address: new FormControl<string | null>(null,[
+    UsualAddress: new FormControl(null,[
       Validators.required,
       onlyWhiteSpaceValidator(),
       Validators.maxLength(25)
     ]),
-    Orders: new FormControl<null>(null)
+    Orders: new FormControl({
+      Entities: [],
+      Count: 0
+    })
   });
-
-  public submitted: boolean = false;
 
   constructor(private Send: SendingDataService) {}
 
-  public addClient(): void {
-    this.submitted = true;
-    if (this.clientForm.valid) {
-      this.clientForm.controls.ID.setValue(+(new Date()));
-      this.Send.CreateItem<IClient>('clients', 'Client', this.clientForm.value);
-      this.clientForm.reset();
-      this.submitted = false;
+  public onAdd(): void {
+    if (this.addClientForm.valid) {
+      this.addClientForm.controls.ID.setValue(+(new Date()));
+      this.Send.CreateItem<IClient>('clients', 'Client', this.addClientForm.value);
+      this.addClientForm.reset();
+    } else {
+      this.addClientForm.markAllAsTouched();
     }
   }
 

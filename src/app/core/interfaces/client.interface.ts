@@ -1,12 +1,13 @@
 import { FormControl } from "@angular/forms";
+import { IOrder } from "@Core/interfaces/order.interface";
 
 export interface IClient {
   ID: number | null;
   Name: string | null;
   Surname?: string | null;
   PhoneNumber: string | null;
-  Address: string | null;
-  Orders: any[] | null;
+  UsualAddress: string | null;
+  Orders: IClientOrders | null;
 }
 
 export interface IClientForm {
@@ -14,6 +15,11 @@ export interface IClientForm {
   Name: FormControl<string | null>;
   Surname?: FormControl<string | null>;
   PhoneNumber: FormControl<string | null>;
-  Address: FormControl<string | null>;
-  Orders: FormControl<null>;
+  UsualAddress: FormControl<string | null>;
+  Orders?: FormControl<IClientOrders | null>;
+}
+
+export interface IClientOrders {
+  Entities: Partial<IOrder>[] | null;
+  Count: number | null;
 }

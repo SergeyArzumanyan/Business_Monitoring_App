@@ -4,6 +4,7 @@ $medium: 16px;
 $big: 20px;
 $large: 24px;
 $larger: 28px;
+$max: 40px;
 
 $thin: 200;
 $normal: 400;
@@ -25,6 +26,18 @@ $bold: 700;
 
 .icon-big {
   font-size: $big !important;
+}
+
+.icon-large {
+  font-size: $large !important;
+}
+
+.icon-larger {
+  font-size: $larger !important;
+}
+
+.icon-max {
+  font-size: $max !important;
 }
 
 .icon-pointer {

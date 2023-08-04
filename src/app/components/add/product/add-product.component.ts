@@ -16,16 +16,14 @@ import { onlyPositiveNumbers } from "@Core/validators";
 })
 export class AddProductComponent {
 
-  public submitted: boolean = false;
-
-  public productForm: FormGroup<IProductForm> = new FormGroup<IProductForm>({
-    ID: new FormControl<number | null>(null),
-    Name: new FormControl<string | null>(null, [
+  public addProductForm: FormGroup<IProductForm> = new FormGroup<IProductForm>({
+    ID: new FormControl(null),
+    Name: new FormControl(null, [
       Validators.required,
       Validators.maxLength(20),
       Validators.minLength(2)
     ]),
-    Price: new FormControl<number | null>(null, [
+    Price: new FormControl(null, [
       Validators.required,
       Validators.max(500000),
       onlyPositiveNumbers()
@@ -35,13 +33,13 @@ export class AddProductComponent {
 
   constructor(private Send: SendingDataService) {}
 
-  public addProduct(): void {
-      this.submitted = true;
-      if (this.productForm.valid) {
-        this.productForm.controls.ID.setValue(+(new Date()));
-        this.Send.CreateItem<IProduct>('products', 'Product', this.productForm.value);
-        this.productForm.reset();
-        this.submitted = false;
+  public onAdd(): void {
+      if (this.addProductForm.valid) {
+        this.addProductForm.controls.ID.setValue(+(new Date()));
+        this.Send.CreateItem<IProduct>('products', 'Product', this.addProductForm.value);
+        this.addProductForm.reset();
+      } else {
+        this.addProductForm.markAllAsTouched();
       }
   }
 

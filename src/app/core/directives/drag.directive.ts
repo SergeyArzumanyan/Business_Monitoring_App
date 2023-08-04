@@ -10,9 +10,8 @@ export class DragDirective {
 
   @Output() file: EventEmitter<any> = new EventEmitter();
 
-  @HostBinding( "style.background" ) private background: string = "#c2c2c2 !important";
-  @HostBinding( "style.border" ) private border: string = "2px dotted #f3f3f3 !important";
-  @HostBinding( "style.transition" ) private transition: string = "0.2s !important";
+  @HostBinding( "style.border" ) private border: string = "4px dotted darkgray";
+  @HostBinding( "style.transition" ) private transition: string = "border 0.2s";
 
   constructor(private toastService: ToastService) {}
 
@@ -20,24 +19,21 @@ export class DragDirective {
   public onDragOver( event: DragEvent ): void {
     event.preventDefault();
     event.stopPropagation();
-    this.background = "#b0b0b0 !important";
-    this.border = "2px dotted #ffffff !important";
+    this.border = "4px dotted #1f1d1d";
   }
 
   @HostListener( "dragleave", [ "$event" ] )
   public onDragLeave( event: DragEvent ): void {
     event.preventDefault();
     event.stopPropagation();
-    this.background = "#c2c2c2 !important";
-    this.border = "2px dotted #f3f3f3 !important";
+    this.border = "4px dotted darkgray";
   }
 
   @HostListener( "drop", [ "$event" ] )
   public onDrop( event: DragEvent ): void {
     event.preventDefault();
     event.stopPropagation();
-    this.background = "#c2c2c2 !important";
-    this.border = "2px dotted #f3f3f3 !important";
+    this.border = "4px dotted darkgray";
 
     const reader = new FileReader();
 
@@ -51,7 +47,7 @@ export class DragDirective {
         file.type === "image/jpg"
       ) {
         reader.onload = () => {
-          if (file.size > 6000000) {
+          if (file.size > 600_00_00) {
             this.toastService.showToast('error', 'Error', 'File Size Is Too Large, Please Choose Another One');
             return;
           }

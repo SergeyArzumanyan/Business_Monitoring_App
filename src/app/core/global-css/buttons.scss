@@ -16,8 +16,8 @@ $animationTime: 0.2s;
 
 .btn-xs {
   @include btn-basic;
-  min-width: 75px;
-  width: 75px;
+  min-width: 50px;
+  width: 50px;
   height: 30px;
   font-size: $small;
 }

@@ -86,6 +86,19 @@
           </div>
         </ng-container>
 
+        <ng-container *ngIf="TableFilters?.ShowUsualAddress">
+          <div class="w-100 filter-block flex col gap-10 justify-content-center align-items-center">
+            <label class="filter-label" for="UsualAddressMobileFilter">Usual Address</label>
+            <input type="text"
+                   formControlName="UsualAddress"
+                   (keydown.enter)="applyFilters()"
+                   class="filter-input p-inputtext-sm"
+                   id="UsualAddressMobileFilter"
+                   pInputText
+                   placeholder="Search By Usual Address...">
+          </div>
+        </ng-container>
+
         <ng-container *ngIf="TableFilters?.ShowPhoneNumber">
           <div class="w-100 filter-block flex col gap-10 justify-content-center align-items-center">
             <label class="filter-label" for="AddressMobileFilter">PhoneNumber</label>

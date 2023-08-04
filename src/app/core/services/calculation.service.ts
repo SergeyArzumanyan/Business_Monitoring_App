@@ -5,7 +5,7 @@ import {
   ISweet,
   ISweetProduct,
   IProduct,
-  IFirebaseItemDeletion,
+  IFirebaseItemDeletion, IOrder, ISweetTotalPrices, IProductForm, ISweetFormAdding,
 } from "@Core/interfaces";
 
 import {
@@ -29,7 +29,7 @@ export class CalculationService {
     for (const productOfSweet of productsOfSweet) {
       const productQuantity: number = productOfSweet.Quantity;
 
-      this.Request.GetItemByObjectKey('products', 'ID', productOfSweet.ProductID)
+      this.Request.GetItemByObjectKey('products', 'ID', productOfSweet.ID)
         .pipe(take(1))
         .subscribe({
           next: (product: IProduct[]) => {
@@ -41,7 +41,7 @@ export class CalculationService {
           error: () => {
             this.toastService.showToast('error', 'Error', 'Something went wrong.');
           }
-        })
+        });
     }
   }
 
@@ -80,8 +80,51 @@ export class CalculationService {
 
   private calculateSweetPrice(sweet: ISweet, productTotalPrice: number): void {
     !sweet.TotalPrice ?
-      sweet.TotalPrice = productTotalPrice :
+      sweet.TotalPrice = productTotalPrice + (sweet.Profit ? sweet.Profit : 0) :
       sweet.TotalPrice += productTotalPrice!;
   }
 
+  public getProduct(ID: number) {
+    return this.Request.GetItemByObjectKey('products', 'ID', ID).pipe(take(1));
+  }
+
+  public async CalculateOrderPrice(Order: Partial<IOrder>) {
+    Order.TotalPrices!.OrderTotalPrice = 0;
+    Order.TotalPrices!.OrderTotalPrice += Order.DeliveryPrice!;
+
+    for (const Sweet of Order.Sweets!) {
+      Order.TotalPrices!.SweetsTotalPrice = 0;
+
+      for (const Product of Sweet.Products) {
+        const product = await this.getProduct(Product.ID!).toPromise();
+        const productPrice: number = product[0].Price * Product.Quantity;
+
+        Order.TotalPrices!.SweetsTotalPrice += productPrice;
+
+        if (Sweet.Products.indexOf(Product) === Sweet.Products.length - 1) {
+          const sweetPrice: number = Order.TotalPrices!.SweetsTotalPrice * Sweet.Quantity;
+          Order.TotalPrices!.OrderTotalPrice += sweetPrice;
+        }
+      }
+    }
+
+    Order.TotalPrices!.SweetsTotalPrice = Order.TotalPrices!.OrderTotalPrice - Order.DeliveryPrice!;
+
+    return Order;
+  }
+
+  public async CalculateSweetTotalPrice(ProductsForm: any, SweetTotalPrices: ISweetTotalPrices) {
+    SweetTotalPrices.Profit = 0;
+    SweetTotalPrices.CurrentTotalPrice = 0;
+    SweetTotalPrices.Profit += ProductsForm.Profit;
+    SweetTotalPrices.CurrentTotalPrice += SweetTotalPrices.Profit;
+
+    for (const Product of ProductsForm.Products) {
+      const product = await this.getProduct(Product.ID!).toPromise();
+
+      const productPrice: number = product[0].Price * Product.Quantity;
+
+      SweetTotalPrices.CurrentTotalPrice += productPrice;
+    }
+  }
 }

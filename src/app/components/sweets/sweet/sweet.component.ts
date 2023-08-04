@@ -196,7 +196,8 @@ export class SweetComponent implements OnInit, OnDestroy {
     if (this.sweetProducts) {
       for (const product of this.sweetProducts) {
         const mutatedProduct: ISweetProduct = {
-          ProductID: product.ID,
+          ID: product.ID,
+          Name: product.Name,
           Quantity: product.Quantity
         }
         EditedProductsForSending.push(mutatedProduct);
