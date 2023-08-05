@@ -5,17 +5,19 @@ import { Subject, takeUntil } from "rxjs";
 import {
   ISweet,
   IProduct,
-  ISweetProduct,
-  ISweetFormAdding, IOrderSweetQuantityForm, ISweetQuantityForm, ISweetTotalPrices
+  ISweetFormAdding,
+  ISweetQuantityForm,
+  ISweetTotalPrices,
 } from "@Core/interfaces";
 import {
   SendingDataService,
   RequestsService,
   ToastService, CalculationService
 } from "@Core/services";
+import { onlyPositiveNumbers } from "@Core/validators";
 
 @Component({
-  selector: 'app-sweet',
+  selector: 'app-add-sweet',
   templateUrl: './add-sweet.component.html',
   styleUrls: ['./add-sweet.component.scss']
 })
@@ -35,10 +37,13 @@ export class AddSweetComponent implements OnInit, OnDestroy {
     Name: new FormControl(null, [Validators.required, Validators.maxLength(25)]),
     Image: new FormControl(null, [Validators.required]),
     Products: this.fb.array([], Validators.required),
-    Profit: new FormControl(null, [Validators.required])
+    Profit: new FormControl(null, [
+      Validators.required,
+      onlyPositiveNumbers()
+    ])
   })
 
-  private unsubscribe: Subject<void> = new Subject<void>();
+  private unsubscribe$: Subject<void> = new Subject<void>();
 
   constructor(
     private fb: FormBuilder,
@@ -54,13 +59,13 @@ export class AddSweetComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.unsubscribe.next();
-    this.unsubscribe.complete();
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   private requestProducts(): void {
     this.Request.GetItems<IProduct[]>('products')
-      .pipe(takeUntil(this.unsubscribe))
+      .pipe(takeUntil(this.unsubscribe$))
       .subscribe({
         next: (products: IProduct[] | null) => {
           this.products = products ? this.Request.MakeArrayFromFirebaseResponse(products) : [];
@@ -93,26 +98,7 @@ export class AddSweetComponent implements OnInit, OnDestroy {
     sweet.Image = null
     this.addSweetForm.controls.Image.setValue(null);
     this.addSweetForm.controls.Image.markAsTouched();
-    console.log(this.addSweetForm.controls.Image);
     this.addSweetForm.patchValue(sweet);
-  }
-
-  private generateProductsForSweet(selectedProducts: IProduct[]): ISweetProduct[] {
-    const productsToSend: ISweetProduct[] = [];
-
-    if (selectedProducts) {
-      for (const product of selectedProducts) {
-        const transformedProduct: ISweetProduct = {
-          ID: product.ID,
-          Name: product.Name,
-          Quantity: product.Quantity
-        }
-
-        productsToSend.push(transformedProduct);
-      }
-    }
-
-    return productsToSend;
   }
 
   public onAdd(): void {

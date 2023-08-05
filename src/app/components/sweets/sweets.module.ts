@@ -7,6 +7,7 @@ import {
   SweetComponent,
   SweetsComponent
 } from "@Components/sweets";
+import { EditSweetComponent } from '@Components/sweets/sweet';
 
 import { SharedModule } from "@Shared/shared.module";
 
@@ -14,7 +15,8 @@ import { SharedModule } from "@Shared/shared.module";
 @NgModule({
   declarations: [
     SweetsComponent,
-    SweetComponent
+    SweetComponent,
+    EditSweetComponent,
   ],
   imports: [
     CommonModule,

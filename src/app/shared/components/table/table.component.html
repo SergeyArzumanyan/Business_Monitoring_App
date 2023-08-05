@@ -1,8 +1,10 @@
-<app-filters (SendFiltersToTableComponent)="ApplyFiltersToTable($event)" [TableFilters]="TableFilters"></app-filters>
+<ng-container *ngIf="ShowTableFilters">
+  <app-filters (SendFiltersToTableComponent)="ApplyFiltersToTable($event)" [TableFilters]="TableFilters"></app-filters>
+</ng-container>
 
 <h2 class="table-name text-center">{{ TableConfig.TableName | titlecase }}</h2>
 
-<div class="table-wrapper">
+<div class="table-wrapper" [ngClass]="{'limited-table-height': IsTableHeightLimited}">
   <table>
     <thead>
       <tr>

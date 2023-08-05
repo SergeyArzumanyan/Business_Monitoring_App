@@ -1,6 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from "@angular/forms";
-import { BehaviorSubject, Subject, takeUntil } from "rxjs";
+import { BehaviorSubject, filter, Subject, takeUntil } from "rxjs";
+import { NavigationStart, Router } from "@angular/router";
 
 import {
   IContextMenuItem,
@@ -19,6 +20,9 @@ import { ITableFilters, ITableFiltersObj } from "@Shared/components/table/filter
 export class TableComponent implements OnInit, OnDestroy {
 
   @Input() TableConfig!: ITableConfig<any>;
+  @Input() IsTableHeightLimited: boolean = false;
+
+  @Input() ShowTableFilters: boolean = true;
   @Input() TableFilters: ITableFilters | null = null;
 
   public TableFiltersObj: ITableFiltersObj = {};
@@ -40,10 +44,12 @@ export class TableComponent implements OnInit, OnDestroy {
   constructor(
     public TableService: TableService,
     public TableSortingService: TableSortingService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
     this.SubscribeToEditModeChanges();
+    this.subscribeToRouteChanges();
   }
 
   ngOnDestroy(): void {
@@ -60,6 +66,18 @@ export class TableComponent implements OnInit, OnDestroy {
           this.IsEditDialogVisible = EditDialogStatus;
         }
       });
+  }
+
+  private subscribeToRouteChanges(): void {
+    this.router.events
+      .pipe(
+        filter((event): boolean => event instanceof NavigationStart),
+      ).subscribe({
+      next: () => {
+        this.IsEditDialogVisible = false;
+        this.TableService.isEditDialogVisible.next(false);
+      }
+    });
   }
 
   protected DeleteItem(Item: any): void {
@@ -97,7 +115,7 @@ export class TableComponent implements OnInit, OnDestroy {
   }
 
   protected MakeTooltip(value: any): string {
-    if ( typeof(value) === 'string' ) {
+    if (typeof (value) === 'string') {
       return value;
     } else {
       return value.toString();

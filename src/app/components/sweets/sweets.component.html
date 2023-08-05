@@ -1,12 +1,12 @@
 <ng-container *ngIf="pending">
-  <div class="loading-wrapper flex gap-15 justify-content-center align-items-center" style="height: 100%;">
+  <div class="h-100 loading-wrapper flex gap-15 justify-content-center align-items-center">
     <span class="loading-text">Please Wait</span>
     <p-progressSpinner class="p-progress-path"></p-progressSpinner>
   </div>
 </ng-container>
 
 <ng-container *ngIf="!pending && sweets.length === 0">
-  <div class="flex justify-content-center align-items-center" style="height: 100%;">
+  <div class="h-100 flex justify-content-center align-items-center">
     <div class="empty-message flex col gap-20">
       <div class="message">
         There Are No Sweets Available

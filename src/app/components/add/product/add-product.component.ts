@@ -10,7 +10,7 @@ import { SendingDataService } from "@Core/services";
 import { onlyPositiveNumbers } from "@Core/validators";
 
 @Component({
-  selector: 'app-product',
+  selector: 'app-add-product',
   templateUrl: './add-product.component.html',
   styleUrls: ['./add-product.component.scss']
 })

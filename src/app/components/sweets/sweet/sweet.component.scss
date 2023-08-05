@@ -1,387 +1,40 @@
 @import "/src/app/core/global-css/GlobalCssConfigs";
 
 .wrapper {
-  width: 100%;
-  height: 100%;
-  padding: 35px;
+  padding: 50px 50px 100px 50px;
 
   .container {
-    width: 85%;
-    height: 100%;
-    padding: 20px;
+    width: 80%;
+    padding: 0;
+    margin: 0;
     background-color: $white-300;
     border-radius: $borderRadius;
     box-shadow: 0 0 2px 0 $skin-100;
-    position: relative;
-    transition: $animationTime;
+    transition: width $animationTime;
 
-    .inner-container {
-      padding: 30px;
-
-      .sweet-info, .sweet-products {
-        width: 100%;
-      }
-
-      .sweet-info {
-        .img-wrapper, .img-wrapper img {
-          object-fit: cover;
-          width: 400px;
-          height: 300px;
-          border-radius: 10px;
-        }
-
-        .sweet-name {
-          max-width: 400px;
-          padding-bottom: 5px;
-          color: $gray-100;
-          border-bottom: 1px solid $gray-300;
-          font-size: $large;
-        }
-
-        .sweet-price {
-          text-align: left;
-          color: $black;
-          font-size: $medium;
-        }
-      }
-
-
-      .sweet-products {
-        height: 100%;
-
-        .products-header {
-          display: block;
-          width: 85%;
-          margin: 10px auto;
-          text-align: center;
-          padding-bottom: 5px;
-          color: $gray-100;
-          border-bottom: 1px solid $gray-300;
-        }
-
-        table {
-          width: 100%;
-          border-collapse: collapse;
-
-          td, th {
-            text-align: center;
-            padding: 8px;
-            color: $black;
-            transition: $animationTime;
-            cursor: default;
-          }
-
-          th {
-            font-size: $medium;
-            font-weight: 700;
-            background-color: $table-background;
-            color: $gray-100;
-
-            &:hover {
-              background-color: $white-200;
-            }
-          }
-
-          td {
-            font-size: $small;
-            background-color: $white-400;
-
-            &:hover {
-              background-color: $white-300;
-            }
-          }
-
-          .product-name, .product-quantity {
-            color: $black;
-          }
-        }
-      }
-    }
-
-
-    .action-buttons {
-      position: absolute;
-      bottom: 40px;
-      right: 40px;
-    }
-  }
-
-
-  .edit-block-wrapper {
-    .inner-container {
-
-      .form-group {
-        width: 250px;
-      }
-
-      .sweet-info {
-        .form-group {
-          .img-dropzone {
-            font-size: 16px;
-            width: 100%;
-            height: 100px;
-            display: table;
-            background-color: transparent !important;
-            border: 2px dashed #aaa;
-            margin: 25px auto;
-            border-radius: 1rem;
-
-            .drag-message {
-              color: $gray-100;
-              text-align: center;
-              font-size: $small;
-              cursor: default;
-              user-select: none;
-            }
-          }
-
-          .img-preview {
-            width: 100%;
-
-            .img-container {
-              display: block;
-              width: 100%;
-              height: 200px;
-              position: relative;
-              margin: 0 auto;
-
-              .img-cancel {
-                top: 8px;
-                right: 10px;
-                text-align: center;
-                color: $white-300;
-              }
-
-              .selected-sweet-image {
-                display: block;
-                width: 100%;
-                height: 200px;
-                border-radius: 10px;
-                margin: 0 auto;
-                object-fit: cover;
-              }
-            }
-          }
-        }
-      }
-
-      .sweet-products {
-        .products-wrapper {
-          width: 75%;
-          border-radius: 4px;
-          padding: 0;
-          margin: 0 auto;
-
-          .product-scheme {
-            background-color: $table-background;
-            border-radius: 4px;
-
-            .product-scheme-item {
-              flex: 1;
-              text-align: center;
-              margin: 0;
-              padding: 8px;
-              font-size: $medium;
-              font-weight: 700;
-              color: $gray-100;
-              transition: $animationTime;
-
-              &:hover {
-                background-color: $white-200;
-              }
-            }
-          }
-
-          .product {
-            width: 100% !important;
-            height: 50px;
-
-            .product-input {
-              display: block;
-              width: 100%;
-              margin: 5px 2px;
-              padding: 8px;
-              font-size: $medium;
-              flex: 1;
-            }
-
-            @mixin product-edit-mode-div {
-              background-color: $white-400;
-              color: $gray-200;
-              font-size: $small;
-              flex: 1;
-              border-radius: 5px;
-              cursor: default;
-            }
-
-            .product-edit-mode-div, .product-edit-mode-div-price {
-              @include product-edit-mode-div;
-              padding: 10px;
-            }
-          }
-        }
+    .image-part {
+      img {
+        max-height: 500px;
+        object-fit: cover;
+        border-radius: $borderRadius;
       }
     }
   }
 }
 
-@media (max-width: 1100px) {
-  .container {
-    width: 100% !important;
-    padding: 40px 40px 90px 40px;
-
-    .inner-container {
-      flex-direction: column;
-      gap: 10px;
-
-      .sweet-info {
-        align-items: center;
-
-        .img-wrapper {
-          width: 100%;
-          height: 250px;
-
-          img {
-            display: block;
-            width: 50%;
-            height: 250px;
-            margin: 0 auto;
-          }
-        }
-
-        .sweet-name {
-          max-width: 100%;
-        }
-
-        .sweet-price {
-          text-align: center !important
-        }
-      }
-
-      .sweet-products {
-        .products-table-wrapper {
-          width: 75%;
-          margin: 0 auto;
-        }
-      }
-    }
-
-    .action-buttons {
-      position: initial !important;
-      width: 100%;
-      right: 0 !important;
-      margin: 15px auto;
-      justify-content: center;
-    }
-  }
-}
-
-
-@media (max-width: 650px) {
+@media (max-width: 900px) {
   .wrapper {
-    flex-direction: column;
+    padding: 30px !important;
 
     .container {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 20px 10px 35px 10px !important;
+      width: 100% !important;
+      flex-direction: column !important;
 
-      .inner-container {
-        padding: 30px !important;
-
-        .sweet-info {
-          .img-wrapper {
-            width: 100% !important;
-            height: 200px !important;
-
-            img {
-              width: 100% !important;
-              height: 200px !important;
-            }
-          }
-
-          .sweet-name {
-            font-size: $medium;
-          }
-
-          .sweet-price {
-            text-align: center !important;
-            font-size: $small;
-          }
-
-          .form-group {
-            label {
-              width: 50px;
-            }
-
-            .img-dropzone {
-              .drag-message {
-                font-size: 14px;
-              }
-            }
-          }
-        }
-
-        .sweet-products {
-          .products-table-wrapper {
-            width: 100% !important;
-
-            td, th {
-              max-width: 50px;
-              font-size: $small;
-              padding: 5px !important;
-            }
-
-            tr {
-              .product-name {
-                max-width: 75px !important;
-                overflow: hidden;
-                text-overflow: ellipsis;
-              }
-            }
-          }
-
-          .products-wrapper {
-            width: 100% !important;
-
-            .product-scheme-item, .product-input {
-              font-size: 14px !important;
-            }
-            .product {
-              .product-edit-mode-div-price {
-                padding: 3px !important;
-              }
-            }
-          }
-        }
+      .table-part {
+        padding: 10px !important;
       }
     }
   }
-
-  .form-group label {
-    font-size: 14px !important;
-  }
-
-  .form-group input, :host ::ng-deep .p-inputnumber.p-component {
-    height: 35px !important;
-  }
-}
-
-:host ::ng-deep .p-inputnumber.p-component {
-  width: 100%;
-}
-
-:host ::ng-deep .pi.pi-arrow-left {
-  font-size: 12px;
-}
-
-.sweet-input {
-  max-width: 180px !important;
-}
-
-:host ::ng-deep .p-inputnumber-input  {
-  max-width: 180px !important;
 }
 
 //    Loading Start
@@ -413,3 +66,10 @@
 }
 
 //    Loading End
+
+:host ::ng-deep .p-dialog-footer {
+  .dialog-btn {
+    width: 130px !important;
+    height: 40px !important;
+  }
+}

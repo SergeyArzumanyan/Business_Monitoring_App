@@ -104,7 +104,13 @@
           <small *ngIf="addSweetForm.controls.Profit.touched &&
                   addSweetForm.controls.Profit.hasError('required')"
                  class="p-error">
-            Profit is required.
+            Profit Is Required.
+          </small>
+
+          <small *ngIf="addSweetForm.controls.Profit.touched &&
+                  addSweetForm.controls.Profit.hasError('isNotPositive')"
+                 class="p-error">
+            Profit Must Be Greater Than 0.
           </small>
         </div>
       </div>
@@ -130,14 +136,16 @@
                accept="image/png,image/jpg,image/jpeg"
                (change)="onFileChange($event)"/>
 
-        <div class="img-preview">
-          <div class="img-container" *ngIf="(addSweetForm.controls.Image.value) || (sweet.Image)">
-            <div class="rounded-btn gray-btn img-cancel" (click)="imageClear(sweet)"><i
-              class="pi pi-times img-cancel"></i></div>
-            <img [src]="(addSweetForm.controls.Image.value) || (sweet.Image)"
-                 class="selected-sweet-image" [alt]="sweet.Name">
+        <ng-container *ngIf="addSweetForm.controls.Image.value">
+          <div class="img-preview">
+            <div class="img-container" *ngIf="addSweetForm.controls.Image.value">
+              <div class="rounded-btn gray-btn img-cancel" (click)="imageClear(sweet)"><i
+                class="pi pi-times img-cancel"></i></div>
+              <img [src]="(addSweetForm.controls.Image.value) || (sweet.Image)"
+                   class="selected-sweet-image" [alt]="sweet.Name">
+            </div>
           </div>
-        </div>
+        </ng-container>
 
         <div class="p-error-wrapper">
           <small *ngIf="addSweetForm.controls.Image.touched &&

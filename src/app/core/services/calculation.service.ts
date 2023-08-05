@@ -5,9 +5,10 @@ import {
   ISweet,
   ISweetProduct,
   IProduct,
-  IFirebaseItemDeletion, IOrder, ISweetTotalPrices, IProductForm, ISweetFormAdding,
+  IFirebaseItemDeletion,
+  IOrder,
+  ISweetTotalPrices,
 } from "@Core/interfaces";
-
 import {
   RequestsService,
   DeleteService,
@@ -25,7 +26,7 @@ export class CalculationService {
     private toastService: ToastService,
   ) {}
 
-  public calcTotalSweetPrice(sweet: ISweet, productsOfSweet: ISweetProduct[], sweetProducts: IProduct[]): void {
+  public calcTotalSweetPrice(sweet: ISweet, productsOfSweet: ISweetProduct[]): void {
     for (const productOfSweet of productsOfSweet) {
       const productQuantity: number = productOfSweet.Quantity;
 
@@ -34,12 +35,10 @@ export class CalculationService {
         .subscribe({
           next: (product: IProduct[]) => {
             this.calculateProductProperties(product[0], productQuantity)
-            sweetProducts.push(product[0]);
-
             this.calculateSweetPrice(sweet, product[0].TotalPrice!);
           },
           error: () => {
-            this.toastService.showToast('error', 'Error', 'Something went wrong.');
+            this.toastService.showToast('error', 'Error', 'Failed To Do Some Calculations.');
           }
         });
     }
@@ -57,17 +56,6 @@ export class CalculationService {
         .subscribe((action: IFirebaseItemDeletion[]) => {
           this.Deletion.RemoveItemByFirebaseKey('sweets', action[0].payload.key, 'Sweet');
         });
-    }
-  }
-
-  //    For Sweet Inner Page Calculation
-  public calculateSweetPriceAfterEdit(sweet: ISweet, sweetProducts: IProduct[] | null): void {
-    sweet.TotalPrice = 0;
-
-    for (const product of sweetProducts!) {
-      !sweet.TotalPrice ?
-        sweet.TotalPrice = product.TotalPrice :
-        sweet.TotalPrice += product.TotalPrice!;
     }
   }
 

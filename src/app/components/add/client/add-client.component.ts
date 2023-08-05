@@ -6,7 +6,7 @@ import { onlyWhiteSpaceValidator } from "@Core/validators";
 import { SendingDataService } from "@Core/services";
 
 @Component({
-  selector: 'app-client',
+  selector: 'app-add-client',
   templateUrl: './add-client.component.html',
   styleUrls: ['./add-client.component.scss']
 })

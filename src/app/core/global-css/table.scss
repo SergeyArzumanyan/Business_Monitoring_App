@@ -1,7 +1,11 @@
-@import '/src/app/core/global-css/flex';
+@import '/src/app/core/global-css/layout';
 @import '/src/app/core/global-css/fonts';
 @import '/src/app/core/global-css/buttons';
 @import '/src/app/core/global-css/colors';
+
+::-webkit-scrollbar {
+  width: 5px;
+}
 
 //    Rounding Table Borders Start
 
@@ -155,6 +159,12 @@ table tr:last-child td:last-child {
 
 
 //  -----------------    Table Section Start  -----------------
+
+.limited-table-height {
+  width: 85% !important;
+  overflow: auto !important;
+  max-height: 250px;
+}
 
 .table-wrapper {
   width: 75%;

@@ -24,7 +24,7 @@ import {
 } from "@Core/interfaces";
 
 @Component({
-  selector: 'app-order',
+  selector: 'app-add-order',
   templateUrl: './add-order.component.html',
   styleUrls: ['./add-order.component.scss']
 })
