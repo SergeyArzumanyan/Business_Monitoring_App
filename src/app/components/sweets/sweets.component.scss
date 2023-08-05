@@ -8,7 +8,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 50px;
-    transition: $animationTime;
+    transition: width $animationTime, height $animationTime;
 
     .sweet-card {
       display: block;
@@ -26,7 +26,7 @@
         position: relative;
         border-radius: $borderRadius $borderRadius 0 0;
         background-color: $black;
-        transition: $animationTime;
+        transition: width $animationTime, height $animationTime, background-color $animationTime;
         cursor: pointer !important;
 
         .image-more {

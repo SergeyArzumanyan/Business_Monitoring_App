@@ -19,7 +19,7 @@ $containerPadding: 40px;
     border-radius: $borderRadius $borderRadius 0 0;
     margin: 0 auto;
     padding: $containerPadding;
-    transition: $animationTime;
+    transition: width $animationTime, height $animationTime;
 
     .w-100.flex {
       .form-header {

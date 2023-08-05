@@ -11,7 +11,7 @@ $animationTime: 0.2s;
   outline: none;
   border-radius: $borderRadius;
   cursor: pointer;
-  transition: $animationTime;
+  transition: background-color $animationTime, color $animationTime, border $animationTime;
 }
 
 .btn-xs {

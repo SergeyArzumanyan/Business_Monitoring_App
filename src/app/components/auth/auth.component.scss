@@ -10,7 +10,7 @@
     border-radius: 12px;
     border: 2px solid $skin-300;
     gap: 40px;
-    transition: $animationTime;
+    transition: width $animationTime, height $animationTime;
 
     .auth-header {
       text-align: center;
