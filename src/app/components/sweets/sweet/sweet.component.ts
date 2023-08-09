@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Subject, takeUntil } from "rxjs";
 
 import {
@@ -45,7 +45,7 @@ export class SweetComponent implements OnInit, OnDestroy {
 
   public editSweetForm: FormGroup<Partial<ISweetFormAdding>> = new FormGroup<Partial<ISweetFormAdding>>({
     ID: new FormControl(null),
-    Name: new FormControl(null, [Validators.required]),
+    Name: new FormControl(null, [Validators.required, Validators.maxLength(20)]),
     Profit: new FormControl(null, [Validators.required, onlyPositiveNumbers()]),
     Image: new FormControl(null, [Validators.required]),
     Products: this.fb.array([], [Validators.required])
@@ -59,6 +59,7 @@ export class SweetComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private calculationService: CalculationService,
     private route: ActivatedRoute,
+    private router: Router,
     private toastService: ToastService,
   ) {}
 
@@ -75,6 +76,12 @@ export class SweetComponent implements OnInit, OnDestroy {
   public getSweetByID(): void {
     this.pending = true;
     const sweetID = Number(this.route.snapshot.paramMap.get('sweet-id'));
+
+    if (isNaN(sweetID)) {
+      this.router.navigateByUrl('sweets');
+      return;
+    }
+
     this.editSweetForm.controls.ID?.setValue(sweetID);
 
     this.Request.GetItemByObjectKey('sweets', 'ID', sweetID)

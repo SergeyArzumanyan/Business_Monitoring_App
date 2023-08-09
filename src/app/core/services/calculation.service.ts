@@ -91,6 +91,7 @@ export class CalculationService {
 
         if (Sweet.Products.indexOf(Product) === Sweet.Products.length - 1) {
           const sweetPrice: number = Order.TotalPrices!.SweetsTotalPrice * Sweet.Quantity;
+          Sweet.PriceWhenOrdered = sweetPrice;
           Order.TotalPrices!.OrderTotalPrice += sweetPrice;
         }
       }

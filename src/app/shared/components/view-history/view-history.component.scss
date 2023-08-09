@@ -1,0 +1,185 @@
+@import "/src/app/core/global-css/GlobalCssConfigs";
+
+.wrapper {
+  padding: 50px 50px 100px 50px;
+
+  .container {
+    width: 80%;
+    padding: 25px 50px 40px;
+    margin: 0;
+    background-color: $white-300;
+    border-radius: $borderRadius;
+    box-shadow: 0 0 2px 0 $skin-100;
+    transition: width $animationTime, height $animationTime;
+  }
+}
+
+:host ::ng-deep .p-multiselect.p-component {
+  min-width: 200px !important;
+}
+
+@media (max-width: 600px) {
+  .wrapper {
+    align-items: flex-start !important;
+    padding: 30px !important;
+
+    .container {
+      width: 100% !important;
+      padding: 25px 30px !important;
+    }
+  }
+
+  .period-client-selects-wrapper {
+    .p-element.p-inputwrapper {
+      width: 100% !important;
+    }
+  }
+}
+
+.period-card {
+  background-color: $white-200;
+  min-height: 75px;
+  border-radius: $borderRadius;
+  box-shadow: 6px 5px 2px 2px $white-100;
+
+  .date-wrapper {
+    .date-day {
+      padding-bottom: 5px;
+      border-bottom: 2px solid $skin-100;
+      border-radius: 2px;
+    }
+  }
+
+  .order-info-wrapper {
+    .client-info-wrapper {
+      .client-info {
+        span {
+          font-size: $medium !important;
+        }
+      }
+
+      .order-delivery-wrapper {
+        span {
+          font-size: $medium !important;
+        }
+      }
+
+      .order-total-price-info {
+        span {
+          font-size: $medium;
+        }
+      }
+    }
+
+    .sweet-info-wrapper {
+      max-height: 150px;
+      overflow-y: auto;
+
+      .order-sweet {
+        span {
+          font-size: $medium;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .wrapper {
+    .container {
+      .period-client-selects-wrapper {
+        flex-direction: column !important;
+      }
+    }
+  }
+  .period-card {
+    .date-wrapper {
+      span {
+        font-size: $small !important;
+      }
+    }
+
+    .order-info-wrapper {
+      .client-info-wrapper {
+        .client-info {
+          .client-name {
+            max-width: 75px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+
+          span {
+            font-size: $small !important;
+          }
+        }
+
+        .order-delivery-wrapper {
+          .delivery-price {
+            flex-direction: column !important;
+          }
+
+          span {
+            font-size: $small !important;
+          }
+        }
+
+        .order-total-price-info {
+          .order-total-price-wrapper {
+            justify-content: center !important;
+            flex-direction: column !important;
+          }
+
+          span {
+            font-size: $small !important;
+          }
+        }
+      }
+
+      .sweet-info-wrapper {
+        span {
+          font-size: $small !important;
+        }
+
+        .order-sweet {
+          .sweet-name {
+            max-width: 120px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+
+          .sweet-price-wrapper {
+            flex-direction: column !important;
+          }
+
+          span {
+            font-size: $small !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+//    History Container Messages Block Start
+
+.messages-wrapper {
+  min-height: 130px;
+  padding: 10px;
+  background-color: $table-loading;
+  border-radius: $borderRadius;
+
+  .message-text {
+    font-size: $medium;
+  }
+}
+
+:host ::ng-deep .p-progress-spinner,
+:host ::ng-deep .p-progress-spinner-svg {
+  width: 25px !important;
+  height: 25px !important;
+}
+
+//    History Container Messages Block End

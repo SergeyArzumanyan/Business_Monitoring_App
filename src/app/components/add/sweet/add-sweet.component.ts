@@ -34,7 +34,7 @@ export class AddSweetComponent implements OnInit, OnDestroy {
 
   public addSweetForm: FormGroup<ISweetFormAdding> = new FormGroup<ISweetFormAdding>({
     ID: new FormControl(null),
-    Name: new FormControl(null, [Validators.required, Validators.maxLength(25)]),
+    Name: new FormControl(null, [Validators.required, Validators.maxLength(20)]),
     Image: new FormControl(null, [Validators.required]),
     Products: this.fb.array([], Validators.required),
     Profit: new FormControl(null, [

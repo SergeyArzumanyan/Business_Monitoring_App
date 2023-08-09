@@ -19,6 +19,12 @@ import { ITableFilters, ITableFiltersObj } from "@Shared/components/table/filter
 })
 export class TableComponent implements OnInit, OnDestroy {
 
+  // #TODO Should Delete This Part After Backend Refactor
+
+  public isClientsTable: boolean = false;
+
+  //
+
   @Input() TableConfig!: ITableConfig<any>;
   @Input() IsTableHeightLimited: boolean = false;
 
@@ -50,6 +56,13 @@ export class TableComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.SubscribeToEditModeChanges();
     this.subscribeToRouteChanges();
+
+  //
+    if (this.router.url.includes('clients')) {
+      this.isClientsTable = true;
+    }
+
+  //
   }
 
   ngOnDestroy(): void {

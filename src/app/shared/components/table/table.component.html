@@ -43,12 +43,24 @@
     <ng-container *ngIf="TableConfig.TableItems && TableConfig.TableItems.length > 0 && !Pending">
       <ng-container *ngFor="let ArrayObject of TableConfig.TableItems">
         <tr (contextmenu)="OpenContextMenu($event, ArrayObject)">
-          <td *ngFor="let ObjectKeyValue of ArrayObject | keyvalue"
-              [pTooltip]="MakeTooltip(ObjectKeyValue.value)"
-              tooltipPosition="bottom"
-              [showDelay]="300">
-            {{ ObjectKeyValue.value ? ObjectKeyValue.value : '-' }}
-          </td>
+          <ng-container *ngFor="let ObjectKeyValue of ArrayObject | keyvalue">
+            <ng-container *ngIf="ObjectKeyValue.key !== 'ID'">
+              <td [pTooltip]="MakeTooltip(ObjectKeyValue.value)"
+                  tooltipPosition="bottom"
+                  [showDelay]="300">
+                {{ ObjectKeyValue.value ? ObjectKeyValue.value : '-' }}
+              </td>
+            </ng-container>
+            <ng-container *ngIf="ObjectKeyValue.key === 'ID';">
+              <td [pTooltip]="MakeTooltip(ObjectKeyValue.value)"
+                  tooltipPosition="bottom"
+                  [showDelay]="300"
+                  [ngClass]="{'tdLink': isClientsTable}"
+                  [routerLink]="isClientsTable ? ObjectKeyValue.value?.toString() : null">
+                {{ ObjectKeyValue.value ? ObjectKeyValue.value : '-' }}
+              </td>
+            </ng-container>
+          </ng-container>
 
           <ng-container *ngIf="TableConfig.TableActions">
             <app-context-menu *ngIf="ShowContextMenu.getValue()"

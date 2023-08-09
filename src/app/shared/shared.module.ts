@@ -10,6 +10,7 @@ import {
   MFiltersComponent,
   ContextMenuComponent,
   TableEditDialogComponent,
+  ViewHistoryComponent,
 } from '@Shared/components';
 
 import { PasswordModule } from "primeng/password";
@@ -36,6 +37,7 @@ import { InputMaskModule } from "primeng/inputmask";
     MFiltersComponent,
     ContextMenuComponent,
     TableEditDialogComponent,
+    ViewHistoryComponent,
   ],
     imports: [
         CommonModule,
@@ -79,6 +81,7 @@ import { InputMaskModule } from "primeng/inputmask";
     MFiltersComponent,
     ContextMenuComponent,
     TableEditDialogComponent,
+    ViewHistoryComponent,
   ]
 })
 export class SharedModule {}

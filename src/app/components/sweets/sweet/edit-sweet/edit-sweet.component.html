@@ -31,6 +31,7 @@
       <div class="multiselect-container">
         <p-multiSelect inputId="sweet-products"
                        id="sweet-products"
+                       [autofocusFilter]="false"
                        [ngClass]="{'ng-invalid ng-dirty': editSweetForm.controls['Products'].invalid &&
                        editSweetForm.controls['Products'].touched}"
                        [options]="products"

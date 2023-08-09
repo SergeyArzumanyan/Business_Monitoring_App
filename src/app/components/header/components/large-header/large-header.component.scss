@@ -28,7 +28,7 @@
       user-select: none;
       text-align: center;
       cursor: pointer;
-      transition: 0.15s;
+      transition: background-color 0.15s;
 
       &:hover {
         background-color: $white-200;

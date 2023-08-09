@@ -58,6 +58,16 @@
               <i class="fa-solid fa-user icon-md"></i>
             </div>
           </li>
+          <li class="header-link"
+              [routerLink]="['orders']"
+              routerLinkActive="active"
+              (click)="closeMenu()"
+              tabindex="-1">
+            <div class="flex justify-content-center align-items-center gap-10">
+              Orders
+              <i class="fa-solid fa-truck icon-md"></i>
+            </div>
+          </li>
           <li class="header-link bottom-line"
               [routerLink]="['add']"
               routerLinkActive="active"

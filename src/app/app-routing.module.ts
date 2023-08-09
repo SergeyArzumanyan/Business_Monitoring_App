@@ -25,13 +25,18 @@ const routes: Routes = [
     canLoad: [AuthGuard]
   },
   {
-    path: 'add',
-    loadChildren: () => import('@Components/add/add.module').then(m => m.AddModule),
+    path: 'clients',
+    loadChildren: () => import('@Components/clients/clients.module').then(m => m.ClientsModule),
     canLoad: [AuthGuard]
   },
   {
-    path: 'clients',
-    loadChildren: () => import('@Components/clients/clients.module').then(m => m.ClientsModule),
+    path: 'orders',
+    loadChildren: () => import('@Components/history/orders.module').then(m => m.OrdersModule),
+    canLoad: [AuthGuard]
+  },
+  {
+    path: 'add',
+    loadChildren: () => import('@Components/add/add.module').then(m => m.AddModule),
     canLoad: [AuthGuard]
   },
   {

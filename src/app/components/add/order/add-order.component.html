@@ -14,11 +14,12 @@
         <div class="multiselect-container">
           <p-multiSelect inputId="Clients"
                          id="Clients"
+                         [autofocusFilter]="false"
                          (onChange)="setClientValue($event)"
                          [options]="clients"
                          [(ngModel)]="selectedClient"
                          [ngModelOptions]="{standalone: true}"
-                         [selectionLimit]="1"
+                         [showToggleAll]="false"
                          [ngClass]="{'ng-invalid ng-dirty': addOrderForm.controls.Client.invalid &&
                          addOrderForm.controls.Client.touched}"
                          optionLabel="Name"
@@ -40,6 +41,7 @@
         <div class="multiselect-container">
           <p-multiSelect inputId="Sweets"
                          id="Sweets"
+                         [autofocusFilter]="false"
                          [(ngModel)]="selectedSweets"
                          [ngModelOptions]="{standalone: true}"
                          [options]="sweets"

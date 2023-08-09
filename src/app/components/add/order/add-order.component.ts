@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormArray,
@@ -7,7 +7,7 @@ import {
   FormGroup,
   Validators,
 } from "@angular/forms";
-import { take, zip } from "rxjs";
+import { Subject, takeUntil, zip } from "rxjs";
 
 import {
   CalculationService, EditService,
@@ -28,17 +28,19 @@ import {
   templateUrl: './add-order.component.html',
   styleUrls: ['./add-order.component.scss']
 })
-export class AddOrderComponent implements OnInit {
+export class AddOrderComponent implements OnInit, OnDestroy {
 
   public addOrderForm: FormGroup<IAddOrderForm> = new FormGroup<IAddOrderForm>({
     Client: new FormControl(null, Validators.required),
+    ClientID: new FormControl(null),
     Sweets: this.formBuilder.array([], Validators.required),
     Address: new FormControl(null, Validators.required),
     DeliveryPrice: new FormControl(null, Validators.required),
     TotalPrices: new FormControl({
       OrderTotalPrice: 0,
       SweetsTotalPrice: 0,
-    })
+    }),
+    OrderDate: new FormControl(null)
   });
 
   public submitted: boolean = false;
@@ -48,6 +50,8 @@ export class AddOrderComponent implements OnInit {
   public sweets: IOrderSweet[] = [];
   public selectedSweets: string[] = [];
   public selectedClient: IClient[] = [];
+
+  public unsubscribe$: Subject<void> = new Subject<void>();
 
   constructor(
     private Request: RequestsService,
@@ -63,12 +67,17 @@ export class AddOrderComponent implements OnInit {
     this.getNecessaryItems();
   }
 
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
+
   private getNecessaryItems(): void {
     zip([
       this.Request.GetItems<IClient[]>('clients'),
       this.Request.GetItems<ISweet[]>('sweets')
     ])
-      .pipe(take(1))
+      .pipe(takeUntil(this.unsubscribe$))
       .subscribe({
         next: (res: [IClient[] | null, ISweet[] | null]) => {
           this.clients = res[0] ? this.Request.MakeArrayFromFirebaseResponse(res[0]) : [];
@@ -82,7 +91,9 @@ export class AddOrderComponent implements OnInit {
 
   public setClientValue(evn: any): void {
     if (evn.value[0] && evn.value[0]['Name']) {
-      this.addOrderForm.controls['Client'].setValue(evn.value[0]['Name']);
+      this.selectedClient = [evn.value[evn.value.length - 1]];
+      this.addOrderForm.controls['Client'].setValue(this.selectedClient[0].Name);
+      this.addOrderForm.controls['ClientID'].setValue(this.selectedClient[0].ID)
     } else {
       this.addOrderForm.controls['Client'].setValue(null);
     }
@@ -144,6 +155,7 @@ export class AddOrderComponent implements OnInit {
       this.submitted = true;
 
       if (this.addOrderForm.valid) {
+        this.addOrderForm.controls.OrderDate.setValue(+(new Date()));
         this.Send.CreateItem<IOrder>('orders', 'Order', this.addOrderForm.value);
         this.attachOrderToClient();
         this.addOrderForm.controls.Sweets.clear();

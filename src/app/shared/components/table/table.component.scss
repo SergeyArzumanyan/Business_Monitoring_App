@@ -1,1 +1,10 @@
 @import 'src/app/core/global-css/GlobalCssConfigs';
+
+//  #TODO Should Delete This Part After Backend Refactor
+
+.tdLink {
+  color: $blue-300 !important;
+  text-decoration: underline !important;
+  cursor: pointer !important;
+}
+

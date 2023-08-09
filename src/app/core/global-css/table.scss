@@ -243,6 +243,7 @@ table tr:last-child td:last-child {
     min-height: 130px;
     padding: 10px;
     background-color: $table-loading;
+    border-radius: $borderRadius;
   }
 }
 

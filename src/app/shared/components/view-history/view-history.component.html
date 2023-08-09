@@ -1,0 +1,134 @@
+<div class="w-100 h-100 wrapper flex justify-content-center align-items-start">
+  <div class="container flex col gap-20">
+    <h2 class="text-center">
+      Orders History
+    </h2>
+
+    <div class="w-100 period-client-selects-wrapper flex gap-10 justify-content-start align-items-center">
+      <p-multiSelect inputId="Periods"
+                     id="Periods"
+                     [autofocusFilter]="false"
+                     [(ngModel)]="selectedPeriod"
+                     [ngModelOptions]="{standalone: true}"
+                     [options]="periods"
+                     [showToggleAll]="false"
+                     (onChange)="setPeriod($event)"
+                     optionLabel="Name"
+                     placeholder="Select Period">
+      </p-multiSelect>
+
+      <ng-container *ngIf="!clientId">
+        <p-multiSelect inputId="Clients"
+                       id="Clients"
+                       [autofocusFilter]="false"
+                       [(ngModel)]="selectedClient"
+                       [ngModelOptions]="{standalone: true}"
+                       [options]="clients"
+                       [showToggleAll]="false"
+                       (onChange)="setClient($event)"
+                       optionLabel="Name"
+                       placeholder="Select Client">
+        </p-multiSelect>
+      </ng-container>
+    </div>
+
+    <ng-container *ngIf="pending">
+      <div class="messages-wrapper w-100 flex gap-10 justify-content-center align-items-center">
+        <span class="message-text">Please Wait</span>
+        <p-progressSpinner class="p-progress-path"></p-progressSpinner>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="!pending && selectedPeriod.length && orders.length">
+      <div class="w-100 p-15 period-card flex col gap-25" *ngFor="let order of orders">
+        <div class="w-100 h-100 date-wrapper flex justify-content-between">
+        <span class="date-day">
+          {{ order.OrderDate | date : 'EEEE MMMM d' }}
+        </span>
+
+          <span class="date-time">
+          {{ order.OrderDate | date : 'HH:mm:ss a' }}
+        </span>
+        </div>
+
+        <div class="w-100 order-info-wrapper flex justify-content-between">
+          <div class="h-100 client-info-wrapper flex col gap-10">
+            <div class="client-info flex gap-10">
+            <span class="client">
+              Client:
+            </span>
+              <span class="client-name" [pTooltip]="order.Client!">
+              {{ order.Client }}
+            </span>
+            </div>
+
+            <div class="order-delivery-wrapper flex gap-5">
+            <span class="delivery">
+              Delivery:
+            </span>
+              <span class="delivery-price flex gap-5 justify-content-center align-items-center">
+              <span class="price">
+                {{ order.DeliveryPrice }}
+              </span>
+              <span class="price-currency">
+                AMD
+              </span>
+            </span>
+            </div>
+
+            <div class="order-total-price-info flex gap-5 justify-content-end align-items-center">
+            <span class="total-price">
+              Total Price:
+            </span>
+
+              <span class="order-total-price-wrapper flex gap-5">
+              <span class="order-price">
+                {{ order.TotalPrices!.OrderTotalPrice }}
+              </span>
+              <span class="price-currency">
+                AMD
+              </span>
+            </span>
+            </div>
+          </div>
+
+          <div class="sweet-info-wrapper flex col gap-10 p-10">
+            <span class="text-right">
+              Sweets
+            </span>
+
+            <div class="order-sweet flex gap-15 justify-content-end align-items-center"
+                 *ngFor="let sweet of order.Sweets">
+            <span class="sweet-name" [pTooltip]="sweet.Name">
+              {{ sweet.Name }}
+            </span>
+
+              <span class="sweet-price-wrapper flex gap-5 justify-content-center align-items-center">
+              <span class="sweet-price">
+                {{ sweet.PriceWhenOrdered }}
+              </span>
+              <span class="price-currency">
+                AMD
+              </span>
+            </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="!pending && selectedPeriod.length && !orders.length">
+      <div class="messages-wrapper w-100 flex gap-15 justify-content-center align-items-center">
+        <i class="fa-solid fa-face-frown icon-larger"></i>
+        <span class="message-text">History Is Empty</span>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="!pending && !selectedPeriod.length">
+      <div class="messages-wrapper w-100 flex gap-15 justify-content-center align-items-center">
+        <i class="fa-solid fa-circle-exclamation icon-larger"></i>
+        <span class="message-text">Please Select Period</span>
+      </div>
+    </ng-container>
+  </div>
+</div>

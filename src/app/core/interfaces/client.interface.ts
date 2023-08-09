@@ -1,5 +1,6 @@
 import { FormControl } from "@angular/forms";
-import { IOrder } from "@Core/interfaces/order.interface";
+
+import { IOrder } from "@Core/interfaces";
 
 export interface IClient {
   ID: number | null;
