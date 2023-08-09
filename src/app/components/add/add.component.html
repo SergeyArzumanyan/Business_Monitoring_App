@@ -2,7 +2,7 @@
   <div class="container flex col justify-content-center align-items-center">
     <h1 class="add-header">Add Items</h1>
 
-    <div class="links flex justify-content-start align-items-center">
+    <div class="w-100 h-100 links flex flex-wrap justify-content-center align-items-center">
       <button class="btn-md link-btn skin-btn" [routerLink]="['sweet']">
         <span class="flex justify-content-center align-items-center gap-10">
           Sweet
@@ -28,6 +28,13 @@
         <span class="flex justify-content-center align-items-center gap-10">
           Order
           <i class="fa-solid fa-truck icon-md"></i>
+        </span>
+      </button>
+
+      <button class="btn-md link-btn skin-btn" [routerLink]="['consumption']">
+        <span class="flex justify-content-center align-items-center gap-10">
+          Consumption
+          <i class="fa-solid fa-sack-dollar icon-md"></i>
         </span>
       </button>
     </div>

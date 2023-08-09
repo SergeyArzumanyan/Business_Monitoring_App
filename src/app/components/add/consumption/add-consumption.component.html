@@ -1,0 +1,83 @@
+<div class="form-wrapper flex justify-content-center">
+  <form [formGroup]="addConsumptionForm" (ngSubmit)="onAdd()">
+    <div class="form-container flex col align-items-center gap-20">
+
+      <div class="w-100 flex">
+        <button class="rounded-btn skin-btn" type="button" [routerLink]="['add']"><i class="pi pi-arrow-left"></i></button>
+        <h3 class="form-header">Consumption</h3>
+      </div>
+
+      <div class="form-group flex col gap-10">
+        <label class="form-label" for="consumption-name">Name *</label>
+        <input formControlName="Name"
+               id="consumption-name"
+               class="form-input p-inputtext-sm"
+               [ngClass]="{'ng-invalid ng-dirty': addConsumptionForm.controls.Name.touched &&
+               (addConsumptionForm.controls.Name.invalid || !addConsumptionForm.value.Name?.trim())}"
+               type="text"
+               pInputText
+               placeholder="What You Have Bought ?">
+
+        <div class="p-error-wrapper">
+          <small *ngIf="addConsumptionForm.controls.Name.touched &&
+                  (addConsumptionForm.controls.Name.hasError('required') || !addConsumptionForm.value.Name?.trim())"
+                 class="p-error">
+            Name is required.
+          </small>
+
+          <small *ngIf="addConsumptionForm.controls.Name.touched &&
+                  addConsumptionForm.controls.Name.hasError('minlength')"
+                 class="p-error">
+            Name is too short.
+          </small>
+
+          <small *ngIf="addConsumptionForm.controls.Name.touched &&
+                    addConsumptionForm.controls.Name.hasError('maxlength')"
+                 class="p-error">
+            Name is too long.
+          </small>
+        </div>
+      </div>
+
+      <div class="form-group flex col gap-10">
+        <label class="form-label" for="consumption-price">Price *</label>
+        <p-inputNumber formControlName="Price"
+                       [ngClass]="{'ng-invalid ng-dirty': addConsumptionForm.controls.Price.touched &&
+                       addConsumptionForm.controls.Price.invalid}"
+                       inputId="consumption-price"
+                       id="consumption-price"
+                       placeholder="How Much Was That ?">
+        </p-inputNumber>
+
+        <div class="p-error-wrapper">
+          <small *ngIf="addConsumptionForm.controls.Price.touched &&
+                    addConsumptionForm.controls.Price.hasError('required')"
+                 class="p-error">
+            Price is required.
+          </small>
+
+          <small *ngIf="addConsumptionForm.controls.Price.touched &&
+                    addConsumptionForm.controls.Price.hasError('isNotPositive')"
+                 class="p-error">
+            Price must be greater than 0.
+          </small>
+
+          <small *ngIf="addConsumptionForm.controls.Price.touched &&
+                    addConsumptionForm.controls.Price.hasError('max')"
+                 class="p-error">
+            Price is too large.
+          </small>
+        </div>
+
+      </div>
+
+    </div>
+
+    <button type="submit" class="btn-md skin-btn form-btn">
+      <span class="flex justify-content-center align-items-center gap-5">
+        Add
+        <i class="fa-solid fa-square-plus icon-md"></i>
+      </span>
+    </button>
+  </form>
+</div>
