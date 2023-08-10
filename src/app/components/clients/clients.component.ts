@@ -103,9 +103,6 @@ export class ClientsComponent implements OnInit, OnDestroy {
         next: (clients: IClient[] | null) => {
           this.pending = false;
           this.clients = clients ? this.Request.MakeArrayFromFirebaseResponse(clients) : [];
-          // const tableClients = this.clients.map((client: any) => {
-          //   client.Orders = client.Orders?.Count;
-          // });
 
           this.ClientTableConfig.TableItems = this.clients.map((client: any) => {
             client.Orders = client.Orders?.Count;

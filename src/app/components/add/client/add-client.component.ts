@@ -20,7 +20,7 @@ export class AddClientComponent {
       Validators.maxLength(20),
       onlyWhiteSpaceValidator()
     ]),
-    Surname: new FormControl(null, [
+    Surname: new FormControl('', [
       Validators.minLength(2),
       Validators.maxLength(20),
       onlyWhiteSpaceValidator()
