@@ -29,10 +29,6 @@ export class ViewHistoryComponent implements OnInit, OnDestroy {
   public selectedClient: IClient[] = [];
   public selectedPeriod: IPeriod[] = [];
 
-  public IsInOrdersPage: boolean = false;
-  public IsInConsumptionsPage: boolean = false;
-  public IsInProfitPage: boolean = false;
-
   public unsubscribe$: Subject<void> = new Subject<void>();
 
   constructor(
@@ -73,20 +69,20 @@ export class ViewHistoryComponent implements OnInit, OnDestroy {
 
   private CheckForOrdersPage(): void {
     if (this.router.url.includes('orders')) {
-      this.IsInOrdersPage = true;
+      this.historyService.IsInOrdersPage.next(true);
       this.getClients();
     }
   }
 
   private CheckForConsumptionsPage(): void {
     if (this.router.url.includes('consumptions')) {
-      this.IsInConsumptionsPage = true;
+      this.historyService.IsInConsumptionsPage.next(true);
     }
   }
 
   private CheckForProfitPage(): void {
     if (this.router.url.includes('profit')) {
-      this.IsInProfitPage = true;
+      this.historyService.IsInProfitPage.next(true);
     }
   }
 

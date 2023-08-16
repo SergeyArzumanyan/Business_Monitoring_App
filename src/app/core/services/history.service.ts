@@ -41,14 +41,24 @@ export class HistoryService {
     }
   ];
 
+  public IsInOrdersPage: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public IsInConsumptionsPage: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public IsInProfitPage: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   constructor(private calculationsService: CalculationService) {
   }
 
   public ResetHistoryParams(): void {
     this.HistoryItems.next([]);
     this.FilteredHistoryItems.next([]);
+
     this.SelectedPeriod.next('Today');
     this.SelectedClientID.next(null);
+
+    this.IsInOrdersPage.next(false);
+    this.IsInConsumptionsPage.next(false);
+    this.IsInProfitPage.next(false);
+
     this.HistoryItemsTotalProfit.next(0);
     this.HistoryItemsTotalConsumptions.next(0);
   }
@@ -169,8 +179,10 @@ export class HistoryService {
       this.SelectedClientID.getValue()
     ));
 
-    this.setTotalProfit();
-
-    this.setTotalConsumptions();
+    if (this.IsInProfitPage.getValue()) {
+      this.setTotalProfit();
+    } else if (this.IsInConsumptionsPage.getValue()) {
+      this.setTotalConsumptions();
+    }
   }
 }

@@ -5,7 +5,7 @@
     </h2>
 
     <div class="w-100 history-topbar-wrapper flex gap-10 justify-content-start align-items-center"
-         [ngClass]="{'justify-content-between': IsInProfitPage || IsInConsumptionsPage }">
+         [ngClass]="{'justify-content-between': historyService.IsInProfitPage.getValue() || historyService.IsInConsumptionsPage.getValue() }">
       <div class="w-100 period-client-selects-wrapper flex gap-10">
         <p-multiSelect inputId="Periods"
                        id="Periods"
@@ -19,7 +19,7 @@
                        placeholder="Select Period">
         </p-multiSelect>
 
-        <ng-container *ngIf="!RouteClientID && IsInOrdersPage">
+        <ng-container *ngIf="!RouteClientID && historyService.IsInOrdersPage.getValue()">
           <p-multiSelect inputId="Clients"
                          id="Clients"
                          [autofocusFilter]="false"
@@ -34,7 +34,7 @@
         </ng-container>
       </div>
 
-      <ng-container *ngIf="!IsInProfitPage && !IsInConsumptionsPage">
+      <ng-container *ngIf="!historyService.IsInProfitPage.getValue() && !historyService.IsInConsumptionsPage.getValue()">
         <div class="total-orders-count flex gap-5">
           <span class="total-count">
             Total Count:
@@ -45,7 +45,7 @@
         </div>
       </ng-container>
 
-      <ng-container *ngIf="IsInProfitPage">
+      <ng-container *ngIf="historyService.IsInProfitPage.getValue()">
         <div class="total-profit-wrapper flex gap-10">
           <span class="profit">
             Total Profit:
@@ -61,7 +61,7 @@
         </div>
       </ng-container>
 
-      <ng-container *ngIf="IsInConsumptionsPage">
+      <ng-container *ngIf="historyService.IsInConsumptionsPage.getValue()">
         <div class="total-consumption-wrapper flex gap-10">
           <span class="profit">
             Total Consumptions:
@@ -99,7 +99,7 @@
         </span>
         </div>
 
-        <ng-container *ngIf="IsInOrdersPage || RouteClientID">
+        <ng-container *ngIf="historyService.IsInOrdersPage.getValue() || RouteClientID">
           <div class="w-100 order-info-wrapper flex justify-content-between">
             <div class="h-100 client-info-wrapper flex col gap-10">
               <div class="client-info flex gap-10">
@@ -165,7 +165,7 @@
           </div>
         </ng-container>
 
-        <ng-container *ngIf="IsInConsumptionsPage">
+        <ng-container *ngIf="historyService.IsInConsumptionsPage.getValue()">
           <div class="w-100 flex justify-content-between align-items-center">
             <span>
               You
@@ -188,7 +188,7 @@
         </ng-container>
 
 
-        <ng-container *ngIf="IsInProfitPage">
+        <ng-container *ngIf="historyService.IsInProfitPage.getValue()">
           <div class="w-100 order-info-wrapper flex justify-content-between">
             <div class="h-100 client-info-wrapper flex col gap-10">
               <div class="client-info flex gap-10">
@@ -229,7 +229,7 @@
 
                 <span class="sweet-price-wrapper flex gap-5 justify-content-center align-items-center">
                   <span class="sweet-price">
-                    {{ sweet.PriceWhenOrdered }}
+                    {{ sweet.Profit }}
                   </span>
                   <span class="price-currency">
                     AMD

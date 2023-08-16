@@ -82,9 +82,13 @@ export class CalculationService {
     Order.TotalPrices!.OrderTotalPrice += Order.DeliveryPrice!;
     OrderProfit.setValue(0);
 
+    let orderProfit: number = 0;
+
     for (const Sweet of Order.Sweets!) {
       Order.TotalPrices!.SweetsTotalPrice = Sweet.Profit;
-      OrderProfit.setValue(Sweet.Profit);
+      orderProfit ?
+        orderProfit += Sweet.Profit * Sweet.Quantity :
+        orderProfit = Sweet.Profit * Sweet.Quantity;
 
       for (const Product of Sweet.Products) {
         const product = await this.getProduct(Product.ID!).toPromise();
@@ -94,7 +98,7 @@ export class CalculationService {
 
         if (Sweet.Products.indexOf(Product) === Sweet.Products.length - 1) {
           const sweetPrice: number = Order.TotalPrices!.SweetsTotalPrice * Sweet.Quantity;
-          OrderProfit.setValue(OrderProfit.value * Sweet.Quantity);
+          OrderProfit.setValue(orderProfit);
           Sweet.PriceWhenOrdered = sweetPrice;
           Order.TotalPrices!.OrderTotalPrice += sweetPrice;
         }
@@ -125,7 +129,9 @@ export class CalculationService {
     let total: number = 0;
 
     for (const order of orders) {
-      total += order.Profit!;
+      for (const sweet of order.Sweets!) {
+        total += sweet.Profit!;
+      }
     }
 
     return total;
