@@ -6,6 +6,8 @@ import { ClientsComponent } from './clients.component';
 
 import { SharedModule } from "@Shared/shared.module";
 
+import { HistoryService } from "@Core/services";
+
 
 @NgModule({
   declarations: [
@@ -15,6 +17,9 @@ import { SharedModule } from "@Shared/shared.module";
     CommonModule,
     ClientsRoutingModule,
     SharedModule
+  ],
+  providers: [
+    HistoryService
   ]
 })
 export class ClientsModule { }

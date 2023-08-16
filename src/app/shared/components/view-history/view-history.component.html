@@ -1,130 +1,255 @@
 <div class="w-100 h-100 wrapper flex justify-content-center align-items-start">
   <div class="container flex col gap-20">
     <h2 class="text-center">
-      Orders History
+      {{ HistoryItemName }}s History
     </h2>
 
-    <div class="w-100 period-client-selects-wrapper flex gap-10 justify-content-start align-items-center">
-      <p-multiSelect inputId="Periods"
-                     id="Periods"
-                     [autofocusFilter]="false"
-                     [(ngModel)]="selectedPeriod"
-                     [ngModelOptions]="{standalone: true}"
-                     [options]="periods"
-                     [showToggleAll]="false"
-                     (onChange)="setPeriod($event)"
-                     optionLabel="Name"
-                     placeholder="Select Period">
-      </p-multiSelect>
-
-      <ng-container *ngIf="!clientId">
-        <p-multiSelect inputId="Clients"
-                       id="Clients"
+    <div class="w-100 history-topbar-wrapper flex gap-10 justify-content-start align-items-center"
+         [ngClass]="{'justify-content-between': IsInProfitPage || IsInConsumptionsPage }">
+      <div class="w-100 period-client-selects-wrapper flex gap-10">
+        <p-multiSelect inputId="Periods"
+                       id="Periods"
                        [autofocusFilter]="false"
-                       [(ngModel)]="selectedClient"
+                       [(ngModel)]="selectedPeriod"
                        [ngModelOptions]="{standalone: true}"
-                       [options]="clients"
+                       [options]="historyService.HistoryPeriods"
                        [showToggleAll]="false"
-                       (onChange)="setClient($event)"
+                       (onChange)="setPeriod($event)"
                        optionLabel="Name"
-                       placeholder="Select Client">
+                       placeholder="Select Period">
         </p-multiSelect>
+
+        <ng-container *ngIf="!RouteClientID && IsInOrdersPage">
+          <p-multiSelect inputId="Clients"
+                         id="Clients"
+                         [autofocusFilter]="false"
+                         [(ngModel)]="selectedClient"
+                         [ngModelOptions]="{standalone: true}"
+                         [options]="clients"
+                         [showToggleAll]="false"
+                         (onChange)="setClient($event)"
+                         optionLabel="Name"
+                         placeholder="Select Client">
+          </p-multiSelect>
+        </ng-container>
+      </div>
+
+      <ng-container *ngIf="!IsInProfitPage && !IsInConsumptionsPage">
+        <div class="total-orders-count flex gap-5">
+          <span class="total-count">
+            Total Count:
+          </span>
+          <span class="total-count">
+            {{ historyService.FilteredHistoryItems.getValue().length }}
+          </span>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="IsInProfitPage">
+        <div class="total-profit-wrapper flex gap-10">
+          <span class="profit">
+            Total Profit:
+          </span>
+          <div class="profit-info-wrapper flex gap-5">
+            <span class="total-profit">
+              {{ historyService.HistoryItemsTotalProfit.getValue() }}
+            </span>
+            <span class="total-profit-currency">
+              AMD
+            </span>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="IsInConsumptionsPage">
+        <div class="total-consumption-wrapper flex gap-10">
+          <span class="profit">
+            Total Consumptions:
+          </span>
+          <div class="consumption-info-wrapper flex gap-5">
+            <span class="total-consumption">
+              {{ historyService.HistoryItemsTotalConsumptions.getValue() }}
+            </span>
+            <span class="total-consumption-currency">
+              AMD
+            </span>
+          </div>
+        </div>
       </ng-container>
     </div>
 
-    <ng-container *ngIf="pending">
+    <ng-container *ngIf="Pending">
       <div class="messages-wrapper w-100 flex gap-10 justify-content-center align-items-center">
         <span class="message-text">Please Wait</span>
         <p-progressSpinner class="p-progress-path"></p-progressSpinner>
       </div>
     </ng-container>
 
-    <ng-container *ngIf="!pending && selectedPeriod.length && orders.length">
-      <div class="w-100 p-15 period-card flex col gap-25" *ngFor="let order of orders">
+    <ng-container *ngIf="!Pending && selectedPeriod.length && historyService.FilteredHistoryItems.getValue().length">
+      <div class="w-100 p-15 period-card flex col gap-25"
+           *ngFor="let HistoryItem of historyService.FilteredHistoryItems | async">
+
         <div class="w-100 h-100 date-wrapper flex justify-content-between">
         <span class="date-day">
-          {{ order.OrderDate | date : 'EEEE MMMM d' }}
+          {{ HistoryItem.DateOfPurchase | date : 'EEEE MMMM d' }}
         </span>
 
           <span class="date-time">
-          {{ order.OrderDate | date : 'HH:mm:ss a' }}
+          {{ HistoryItem.DateOfPurchase | date : 'HH:mm:ss a' }}
         </span>
         </div>
 
-        <div class="w-100 order-info-wrapper flex justify-content-between">
-          <div class="h-100 client-info-wrapper flex col gap-10">
-            <div class="client-info flex gap-10">
-            <span class="client">
-              Client:
-            </span>
-              <span class="client-name" [pTooltip]="order.Client!">
-              {{ order.Client }}
-            </span>
+        <ng-container *ngIf="IsInOrdersPage || RouteClientID">
+          <div class="w-100 order-info-wrapper flex justify-content-between">
+            <div class="h-100 client-info-wrapper flex col gap-10">
+              <div class="client-info flex gap-10">
+                <span class="client">
+                  Client:
+                </span>
+                <span class="client-name" [pTooltip]="HistoryItem.Client!">
+                  {{ HistoryItem.Client }}
+                </span>
+              </div>
+
+              <div class="order-delivery-wrapper flex gap-5">
+                <span class="delivery">
+                  Delivery:
+                </span>
+                <span class="delivery-price flex gap-5 justify-content-center align-items-center">
+                  <span class="price">
+                    {{ HistoryItem.DeliveryPrice }}
+                  </span>
+                  <span class="price-currency">
+                    AMD
+                  </span>
+                </span>
+              </div>
+
+              <div class="order-total-price-info flex gap-5 justify-content-end align-items-center">
+                <span class="total-price">
+                  Total Price:
+                </span>
+
+                <span class="order-total-price-wrapper flex gap-5">
+                  <span class="order-price">
+                    {{ HistoryItem.TotalPrices!.OrderTotalPrice }}
+                  </span>
+                  <span class="price-currency">
+                    AMD
+                  </span>
+                </span>
+              </div>
             </div>
 
-            <div class="order-delivery-wrapper flex gap-5">
-            <span class="delivery">
-              Delivery:
-            </span>
-              <span class="delivery-price flex gap-5 justify-content-center align-items-center">
-              <span class="price">
-                {{ order.DeliveryPrice }}
-              </span>
-              <span class="price-currency">
-                AMD
-              </span>
-            </span>
-            </div>
+            <div class="sweet-info-wrapper flex col gap-10 p-10">
+                <span class="text-right">
+                  Sweets
+                </span>
 
-            <div class="order-total-price-info flex gap-5 justify-content-end align-items-center">
-            <span class="total-price">
-              Total Price:
-            </span>
+              <div class="order-sweet flex gap-15 justify-content-end align-items-center"
+                   *ngFor="let sweet of HistoryItem.Sweets">
+                <span class="sweet-name" [pTooltip]="sweet.Name">
+                  {{ sweet.Name }}
+                </span>
 
-              <span class="order-total-price-wrapper flex gap-5">
-              <span class="order-price">
-                {{ order.TotalPrices!.OrderTotalPrice }}
-              </span>
-              <span class="price-currency">
-                AMD
-              </span>
-            </span>
+                <span class="sweet-price-wrapper flex gap-5 justify-content-center align-items-center">
+                  <span class="sweet-price">
+                    {{ sweet.PriceWhenOrdered }}
+                  </span>
+                  <span class="price-currency">
+                    AMD
+                  </span>
+                </span>
+              </div>
             </div>
           </div>
+        </ng-container>
 
-          <div class="sweet-info-wrapper flex col gap-10 p-10">
-            <span class="text-right">
-              Sweets
+        <ng-container *ngIf="IsInConsumptionsPage">
+          <div class="w-100 flex justify-content-between align-items-center">
+            <span>
+              You
             </span>
 
-            <div class="order-sweet flex gap-15 justify-content-end align-items-center"
-                 *ngFor="let sweet of order.Sweets">
-            <span class="sweet-name" [pTooltip]="sweet.Name">
-              {{ sweet.Name }}
-            </span>
-
-              <span class="sweet-price-wrapper flex gap-5 justify-content-center align-items-center">
-              <span class="sweet-price">
-                {{ sweet.PriceWhenOrdered }}
+            <div class="flex gap-10">
+              <span class="consumption-item-name">
+                {{ HistoryItem.Name }}
               </span>
-              <span class="price-currency">
-                AMD
+
+
+              <span class="consumption-item-price flex gap-5">
+                {{ HistoryItem.Price }}
+                <span class="consumption-item-currency">
+                  AMD
+                </span>
               </span>
-            </span>
             </div>
           </div>
-        </div>
+        </ng-container>
+
+
+        <ng-container *ngIf="IsInProfitPage">
+          <div class="w-100 order-info-wrapper flex justify-content-between">
+            <div class="h-100 client-info-wrapper flex col gap-10">
+              <div class="client-info flex gap-10">
+                <span class="client">
+                  Client:
+                </span>
+                <span class="client-name" [pTooltip]="HistoryItem.Client!">
+                  {{ HistoryItem.Client }}
+                </span>
+              </div>
+
+              <div class="order-total-price-info flex gap-5 justify-content-end align-items-center">
+                <span class="total-price">
+                  Profit:
+                </span>
+
+                <span class="order-total-price-wrapper flex gap-5">
+                  <span class="order-price">
+                    {{ HistoryItem.Profit }}
+                  </span>
+                  <span class="price-currency">
+                    AMD
+                  </span>
+                </span>
+              </div>
+            </div>
+
+            <div class="sweet-profit-info-wrapper flex col gap-10 p-10">
+                <span class="text-right">
+                  Sweets (Total Price)
+                </span>
+
+              <div class="order-sweet flex gap-15 justify-content-end align-items-center"
+                   *ngFor="let sweet of HistoryItem.Sweets">
+                <span class="sweet-name" [pTooltip]="sweet.Name">
+                  {{ sweet.Name }}
+                </span>
+
+                <span class="sweet-price-wrapper flex gap-5 justify-content-center align-items-center">
+                  <span class="sweet-price">
+                    {{ sweet.PriceWhenOrdered }}
+                  </span>
+                  <span class="price-currency">
+                    AMD
+                  </span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </ng-container>
       </div>
     </ng-container>
 
-    <ng-container *ngIf="!pending && selectedPeriod.length && !orders.length">
+    <ng-container *ngIf="!Pending && selectedPeriod.length && !historyService.FilteredHistoryItems.getValue().length">
       <div class="messages-wrapper w-100 flex gap-15 justify-content-center align-items-center">
         <i class="fa-solid fa-face-frown icon-larger"></i>
         <span class="message-text">History Is Empty</span>
       </div>
     </ng-container>
 
-    <ng-container *ngIf="!pending && !selectedPeriod.length">
+    <ng-container *ngIf="!Pending && !selectedPeriod.length">
       <div class="messages-wrapper w-100 flex gap-15 justify-content-center align-items-center">
         <i class="fa-solid fa-circle-exclamation icon-larger"></i>
         <span class="message-text">Please Select Period</span>

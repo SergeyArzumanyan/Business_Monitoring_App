@@ -34,7 +34,7 @@
               (click)="closeMenu()"
               tabindex="-1">
             <div class="flex justify-content-center align-items-center gap-10">
-              Sweets
+              <span class="text-center">Sweets</span>
               <i class="fa-solid fa-cake-candles icon-md"></i>
             </div>
           </li>
@@ -44,7 +44,7 @@
               (click)="closeMenu()"
               tabindex="-1">
             <div class="flex justify-content-center align-items-center gap-10">
-              Products
+              <span class="text-center">Products</span>
               <i class="fa-solid fa-egg icon-md"></i>
             </div>
           </li>
@@ -54,18 +54,38 @@
               (click)="closeMenu()"
               tabindex="-1">
             <div class="flex justify-content-center align-items-center gap-10">
-              Clients
+              <span class="text-center">Clients</span>
               <i class="fa-solid fa-user icon-md"></i>
             </div>
           </li>
           <li class="header-link"
-              [routerLink]="['orders']"
+              [routerLink]="['history/orders']"
               routerLinkActive="active"
               (click)="closeMenu()"
               tabindex="-1">
             <div class="flex justify-content-center align-items-center gap-10">
-              Orders
+              <span class="text-center">Orders</span>
               <i class="fa-solid fa-truck icon-md"></i>
+            </div>
+          </li>
+          <li class="header-link"
+              [routerLink]="['history/consumptions']"
+              routerLinkActive="active"
+              (click)="closeMenu()"
+              tabindex="-1">
+            <div class="flex justify-content-center align-items-center gap-10">
+              <span class="text-center">Consumptions</span>
+              <i class="fa-solid fa-sack-dollar icon-md"></i>
+            </div>
+          </li>
+          <li class="header-link"
+              [routerLink]="['history/profit']"
+              routerLinkActive="active"
+              (click)="closeMenu()"
+              tabindex="-1">
+            <div class="flex justify-content-center align-items-center gap-10">
+              <span class="text-center">Profit</span>
+              <i class="fa-solid fa-chart-line icon-md"></i>
             </div>
           </li>
           <li class="header-link bottom-line"
@@ -74,7 +94,7 @@
               (click)="closeMenu()"
               tabindex="-1">
             <div class="flex justify-content-center align-items-center gap-10">
-              Add
+              <span class="text-center">Add</span>
               <i class="fa-solid fa-plus icon-md"></i>
             </div>
           </li>

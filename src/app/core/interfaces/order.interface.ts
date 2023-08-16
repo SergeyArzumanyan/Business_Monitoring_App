@@ -1,4 +1,4 @@
-import { FormArray, FormControl } from "@angular/forms";
+import { Form, FormArray, FormControl } from "@angular/forms";
 
 import { ISweetProduct } from "@Core/interfaces";
 
@@ -9,7 +9,8 @@ export interface IOrder {
   Address: string | null;
   DeliveryPrice: number | null;
   TotalPrices: IOrderTotalPrices | null;
-  OrderDate: number | null;
+  DateOfPurchase: number | null;
+  Profit: number | null;
 }
 
 export interface IAddOrderForm {
@@ -19,7 +20,8 @@ export interface IAddOrderForm {
   Address: FormControl<string | null>;
   DeliveryPrice: FormControl<number | null>;
   TotalPrices: FormControl<IOrderTotalPrices | null>;
-  OrderDate: FormControl<number | null>;
+  DateOfPurchase: FormControl<number | null>;
+  Profit: FormControl<number | null>;
 }
 
 export interface IOrderSweetQuantityForm {
@@ -27,6 +29,7 @@ export interface IOrderSweetQuantityForm {
   Name: FormControl<string | null>;
   Products: FormControl<ISweetProduct[] | null>;
   Quantity: FormControl<number | null>;
+  Profit: FormControl<number | null>;
 }
 
 export interface IOrderSweet {
@@ -35,6 +38,7 @@ export interface IOrderSweet {
   Products: ISweetProduct[];
   Quantity: number;
   PriceWhenOrdered: number;
+  Profit: number;
 }
 
 export interface IOrderTotalPrices {

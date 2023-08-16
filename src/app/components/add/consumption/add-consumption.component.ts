@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { IConsumption, IConsumptionForm } from "@Core/interfaces/consumption.interface";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { IProduct } from "@Core/interfaces";
 import { SendingDataService } from "@Core/services";
 import { onlyPositiveNumbers } from "@Core/validators";
+
+import { IConsumption, IConsumptionForm } from "@Core/interfaces/";
 
 @Component({
   selector: 'app-add-consumption',

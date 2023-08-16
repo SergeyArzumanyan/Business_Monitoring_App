@@ -40,7 +40,8 @@ export class AddOrderComponent implements OnInit, OnDestroy {
       OrderTotalPrice: 0,
       SweetsTotalPrice: 0,
     }),
-    OrderDate: new FormControl(null)
+    DateOfPurchase: new FormControl(null),
+    Profit: new FormControl(0)
   });
 
   public submitted: boolean = false;
@@ -93,7 +94,8 @@ export class AddOrderComponent implements OnInit, OnDestroy {
     if (evn.value[0] && evn.value[0]['Name']) {
       this.selectedClient = [evn.value[evn.value.length - 1]];
       this.addOrderForm.controls['Client'].setValue(this.selectedClient[0].Name);
-      this.addOrderForm.controls['ClientID'].setValue(this.selectedClient[0].ID)
+      this.addOrderForm.controls['ClientID'].setValue(this.selectedClient[0].ID);
+      this.addOrderForm.controls.Address.setValue(this.selectedClient[0].UsualAddress);
     } else {
       this.addOrderForm.controls['Client'].setValue(null);
     }
@@ -122,7 +124,8 @@ export class AddOrderComponent implements OnInit, OnDestroy {
       ID: new FormControl(itemValue.ID),
       Name: new FormControl(itemValue.Name),
       Products: new FormControl(itemValue.Products),
-      Quantity: new FormControl(1, Validators.required)
+      Quantity: new FormControl(1, Validators.required),
+      Profit: new FormControl(itemValue.Profit)
     });
   }
 
@@ -155,7 +158,8 @@ export class AddOrderComponent implements OnInit, OnDestroy {
       this.submitted = true;
 
       if (this.addOrderForm.valid) {
-        this.addOrderForm.controls.OrderDate.setValue(+(new Date()));
+        this.addOrderForm.controls.DateOfPurchase.setValue(+(new Date()));
+
         this.Send.CreateItem<IOrder>('orders', 'Order', this.addOrderForm.value);
         this.attachOrderToClient();
         this.addOrderForm.controls.Sweets.clear();
@@ -198,7 +202,10 @@ export class AddOrderComponent implements OnInit, OnDestroy {
 
   private calculateOrderPrice(): void {
     setTimeout(() => {
-      this.calculationService.CalculateOrderPrice(this.addOrderForm.value);
+      this.calculationService.CalculateOrderPrice(
+        this.addOrderForm.value,
+        this.addOrderForm.controls.Profit
+      );
     }, 500);
   }
 

@@ -7,13 +7,14 @@ import {
   IProduct,
   IFirebaseItemDeletion,
   IOrder,
-  ISweetTotalPrices,
+  ISweetTotalPrices, IConsumption,
 } from "@Core/interfaces";
 import {
   RequestsService,
   DeleteService,
   ToastService,
 } from "@Core/services";
+import { AbstractControl } from "@angular/forms";
 
 @Injectable({
   providedIn: 'root'
@@ -76,12 +77,14 @@ export class CalculationService {
     return this.Request.GetItemByObjectKey('products', 'ID', ID).pipe(take(1));
   }
 
-  public async CalculateOrderPrice(Order: Partial<IOrder>) {
+  public async CalculateOrderPrice(Order: Partial<IOrder>, OrderProfit: AbstractControl) {
     Order.TotalPrices!.OrderTotalPrice = 0;
     Order.TotalPrices!.OrderTotalPrice += Order.DeliveryPrice!;
+    OrderProfit.setValue(0);
 
     for (const Sweet of Order.Sweets!) {
-      Order.TotalPrices!.SweetsTotalPrice = 0;
+      Order.TotalPrices!.SweetsTotalPrice = Sweet.Profit;
+      OrderProfit.setValue(Sweet.Profit);
 
       for (const Product of Sweet.Products) {
         const product = await this.getProduct(Product.ID!).toPromise();
@@ -91,6 +94,7 @@ export class CalculationService {
 
         if (Sweet.Products.indexOf(Product) === Sweet.Products.length - 1) {
           const sweetPrice: number = Order.TotalPrices!.SweetsTotalPrice * Sweet.Quantity;
+          OrderProfit.setValue(OrderProfit.value * Sweet.Quantity);
           Sweet.PriceWhenOrdered = sweetPrice;
           Order.TotalPrices!.OrderTotalPrice += sweetPrice;
         }
@@ -115,5 +119,25 @@ export class CalculationService {
 
       SweetTotalPrices.CurrentTotalPrice += productPrice;
     }
+  }
+
+  public CalculateOrdersTotalProfit(orders: IOrder[]): number {
+    let total: number = 0;
+
+    for (const order of orders) {
+      total += order.Profit!;
+    }
+
+    return total;
+  }
+
+  public CalculateOrdersTotalConsumptions(consumptions: IConsumption[]): number {
+    let total: number = 0;
+
+    for (const consumption of consumptions) {
+      total += consumption.Price!;
+    }
+
+    return total;
   }
 }

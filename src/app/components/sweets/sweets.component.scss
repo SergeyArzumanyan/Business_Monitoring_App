@@ -26,7 +26,7 @@
         position: relative;
         border-radius: $borderRadius $borderRadius 0 0;
         background-color: $black;
-        transition: width $animationTime, height $animationTime, background-color $animationTime;
+        transition: $animationTime;
         cursor: pointer !important;
 
         .image-more {

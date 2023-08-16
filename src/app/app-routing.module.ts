@@ -30,8 +30,8 @@ const routes: Routes = [
     canLoad: [AuthGuard]
   },
   {
-    path: 'orders',
-    loadChildren: () => import('@Components/history/orders.module').then(m => m.OrdersModule),
+    path: 'history',
+    loadChildren: () => import('@Components//history/history.module').then(m => m.HistoryModule),
     canLoad: [AuthGuard]
   },
   {

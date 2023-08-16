@@ -11,6 +11,14 @@
     border-radius: $borderRadius;
     box-shadow: 0 0 2px 0 $skin-100;
     transition: width $animationTime, height $animationTime;
+
+    .history-topbar-wrapper {
+      .total-orders-count,
+      .total-profit-wrapper,
+      .total-consumption-wrapper {
+        text-wrap: nowrap;
+      }
+    }
   }
 }
 
@@ -29,9 +37,18 @@
     }
   }
 
-  .period-client-selects-wrapper {
-    .p-element.p-inputwrapper {
-      width: 100% !important;
+  .history-topbar-wrapper {
+    .period-client-selects-wrapper {
+      .p-element.p-inputwrapper {
+        width: 100% !important;
+      }
+    }
+
+    .total-orders-count,
+    .total-profit-wrapper,
+    .total-consumption-wrapper {
+      text-wrap: nowrap;
+      font-size: $small !important;
     }
   }
 }
@@ -71,7 +88,7 @@
       }
     }
 
-    .sweet-info-wrapper {
+    .sweet-info-wrapper, .sweet-profit-info-wrapper {
       max-height: 150px;
       overflow-y: auto;
 
@@ -81,13 +98,17 @@
         }
       }
     }
+
+    .sweet-profit-info-wrapper {
+      max-height: 70px;
+    }
   }
 }
 
 @media (max-width: 900px) {
   .wrapper {
     .container {
-      .period-client-selects-wrapper {
+      .period-client-selects-wrapper, .history-topbar-wrapper {
         flex-direction: column !important;
       }
     }

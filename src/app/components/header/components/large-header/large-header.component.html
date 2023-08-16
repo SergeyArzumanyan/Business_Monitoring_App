@@ -1,4 +1,4 @@
-<div class="w-100 header-wrapper flex justify-content-between align-items-center">
+<div class="w-100 header-wrapper flex gap-50 justify-content-between align-items-center">
 
   <div class="logo-wrapper" [routerLink]="['sweets']" tabindex="-1">
     <div class="header-logo">
@@ -11,31 +11,57 @@
 
       <li class="w-100 h-100 header-link" [routerLink]="['sweets']" routerLinkActive="active" tabindex="-1">
         <div class="h-100 flex justify-content-center align-items-center gap-10">
-          Sweets
+          <span class="text-center">
+            Sweets
+          </span>
           <i class="fa-solid fa-cake-candles icon-md"></i>
         </div>
       </li>
       <li class="w-100 h-100 header-link" [routerLink]="['products']" routerLinkActive="active" tabindex="-1">
         <div class="h-100 flex justify-content-center align-items-center gap-10">
-          Products
+          <span class="text-center">
+            Products
+          </span>
           <i class="fa-solid fa-egg icon-md"></i>
         </div>
       </li>
       <li class="w-100 h-100 h-100 header-link" [routerLink]="['clients']" routerLinkActive="active" tabindex="-1">
         <div class="h-100 flex justify-content-center align-items-center gap-10">
-          Clients
+          <span class="text-center">
+            Clients
+          </span>
           <i class="fa-solid fa-user icon-md"></i>
         </div>
       </li>
-      <li class="w-100 h-100 h-100 header-link" [routerLink]="['orders']" routerLinkActive="active" tabindex="-1">
+      <li class="w-100 h-100 h-100 header-link" [routerLink]="['history/orders']" routerLinkActive="active" tabindex="-1">
         <div class="h-100 flex justify-content-center align-items-center gap-10">
-          Orders
+          <span class="text-center">
+            Orders
+          </span>
           <i class="fa-solid fa-truck icon-md"></i>
+        </div>
+      </li>
+      <li class="w-100 h-100 header-link" [routerLink]="['history/consumptions']" routerLinkActive="active" tabindex="-1">
+        <div class="h-100 flex justify-content-center align-items-center gap-10">
+          <span class="text-center">
+            Consumptions
+          </span>
+          <i class="fa-solid fa-sack-dollar icon-md"></i>
+        </div>
+      </li>
+      <li class="w-100 h-100 header-link" [routerLink]="['history/profit']" routerLinkActive="active" tabindex="-1">
+        <div class="h-100 flex justify-content-center align-items-center gap-10">
+          <span class="text-center">
+            Profit
+          </span>
+          <i class="fa-solid fa-chart-line icon-md"></i>
         </div>
       </li>
       <li class="w-100 h-100 header-link" [routerLink]="['add']" routerLinkActive="active" tabindex="-1">
         <div class="h-100 flex justify-content-center align-items-center gap-10">
-          Add
+          <span class="text-center">
+            Add
+          </span>
           <i class="fa-solid fa-plus icon-md"></i>
         </div>
       </li>
