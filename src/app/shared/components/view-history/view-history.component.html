@@ -1,7 +1,7 @@
 <div class="w-100 h-100 wrapper flex justify-content-center align-items-start">
   <div class="container flex col gap-20">
     <h2 class="text-center">
-      {{ HistoryItemName }}s History
+      {{ 'HistoryHeading'| translate: {key: HistoryItemName | translate} }}
     </h2>
 
     <div class="w-100 history-topbar-wrapper flex gap-10 justify-content-start align-items-center"
@@ -16,7 +16,7 @@
                        [showToggleAll]="false"
                        (onChange)="setPeriod($event)"
                        optionLabel="Name"
-                       placeholder="Select Period">
+                       [placeholder]="translateService.instant('SelectPeriod')">
         </p-multiSelect>
 
         <ng-container *ngIf="!RouteClientID && historyService.IsInOrdersPage.getValue()">
@@ -29,7 +29,7 @@
                          [showToggleAll]="false"
                          (onChange)="setClient($event)"
                          optionLabel="Name"
-                         placeholder="Select Client">
+                         [placeholder]="translateService.instant('SelectClient')">
           </p-multiSelect>
         </ng-container>
       </div>
@@ -37,7 +37,7 @@
       <ng-container *ngIf="!historyService.IsInProfitPage.getValue() && !historyService.IsInConsumptionsPage.getValue()">
         <div class="total-orders-count flex gap-5">
           <span class="total-count">
-            Total Count:
+            {{ 'TotalCount' | translate }}:
           </span>
           <span class="total-count">
             {{ historyService.FilteredHistoryItems.getValue().length }}
@@ -48,7 +48,7 @@
       <ng-container *ngIf="historyService.IsInProfitPage.getValue()">
         <div class="total-profit-wrapper flex gap-10">
           <span class="profit">
-            Total Profit:
+            {{ 'TotalProfit' | translate }}:
           </span>
           <div class="profit-info-wrapper flex gap-5">
             <span class="total-profit">
@@ -64,7 +64,7 @@
       <ng-container *ngIf="historyService.IsInConsumptionsPage.getValue()">
         <div class="total-consumption-wrapper flex gap-10">
           <span class="profit">
-            Total Consumptions:
+            {{ 'TotalConsumptions' | translate }}:
           </span>
           <div class="consumption-info-wrapper flex gap-5">
             <span class="total-consumption">
@@ -80,7 +80,7 @@
 
     <ng-container *ngIf="Pending">
       <div class="messages-wrapper w-100 flex gap-10 justify-content-center align-items-center">
-        <span class="message-text">Please Wait</span>
+        <span class="message-text">{{ 'PleaseWait' | translate }}</span>
         <p-progressSpinner class="p-progress-path"></p-progressSpinner>
       </div>
     </ng-container>
@@ -104,7 +104,7 @@
             <div class="h-100 client-info-wrapper flex col gap-10">
               <div class="client-info flex gap-10">
                 <span class="client">
-                  Client:
+                  {{ 'Client' | translate }}:
                 </span>
                 <span class="client-name" [pTooltip]="HistoryItem.Client!">
                   {{ HistoryItem.Client }}
@@ -113,7 +113,7 @@
 
               <div class="order-delivery-wrapper flex gap-5">
                 <span class="delivery">
-                  Delivery:
+                  {{ 'Delivery' | translate }}:
                 </span>
                 <span class="delivery-price flex gap-5 justify-content-center align-items-center">
                   <span class="price">
@@ -127,7 +127,7 @@
 
               <div class="order-total-price-info flex gap-5 justify-content-end align-items-center">
                 <span class="total-price">
-                  Total Price:
+                  {{ 'TotalPrice' | translate }}:
                 </span>
 
                 <span class="order-total-price-wrapper flex gap-5">
@@ -143,7 +143,7 @@
 
             <div class="sweet-info-wrapper flex col gap-10 p-10">
                 <span class="text-right">
-                  Sweets
+                  {{ 'Sweets' | translate }}
                 </span>
 
               <div class="order-sweet flex gap-15 justify-content-end align-items-center"
@@ -168,7 +168,7 @@
         <ng-container *ngIf="historyService.IsInConsumptionsPage.getValue()">
           <div class="w-100 flex justify-content-between align-items-center">
             <span>
-              You
+              {{ 'You' | translate }}
             </span>
 
             <div class="flex gap-10">
@@ -193,7 +193,7 @@
             <div class="h-100 client-info-wrapper flex col gap-10">
               <div class="client-info flex gap-10">
                 <span class="client">
-                  Client:
+                  {{ 'Client' | translate }}:
                 </span>
                 <span class="client-name" [pTooltip]="HistoryItem.Client!">
                   {{ HistoryItem.Client }}
@@ -202,7 +202,7 @@
 
               <div class="order-total-price-info flex gap-5 justify-content-end align-items-center">
                 <span class="total-price">
-                  Profit:
+                  {{ 'Profit' | translate }}:
                 </span>
 
                 <span class="order-total-price-wrapper flex gap-5">
@@ -218,7 +218,7 @@
 
             <div class="sweet-profit-info-wrapper flex col gap-10 p-10">
                 <span class="text-right">
-                  Sweets (Total Price)
+                  {{ 'Sweets' | translate }} ({{ 'TotalPrice' | translate }})
                 </span>
 
               <div class="order-sweet flex gap-15 justify-content-end align-items-center"
@@ -245,14 +245,14 @@
     <ng-container *ngIf="!Pending && selectedPeriod.length && !historyService.FilteredHistoryItems.getValue().length">
       <div class="messages-wrapper w-100 flex gap-15 justify-content-center align-items-center">
         <i class="fa-solid fa-face-frown icon-larger"></i>
-        <span class="message-text">History Is Empty</span>
+        <span class="message-text">{{ 'EmptyHistoryMessage' | translate }}</span>
       </div>
     </ng-container>
 
     <ng-container *ngIf="!Pending && !selectedPeriod.length">
       <div class="messages-wrapper w-100 flex gap-15 justify-content-center align-items-center">
         <i class="fa-solid fa-circle-exclamation icon-larger"></i>
-        <span class="message-text">Please Select Period</span>
+        <span class="message-text">{{ 'PleaseSelectPeriod' | translate }}</span>
       </div>
     </ng-container>
   </div>

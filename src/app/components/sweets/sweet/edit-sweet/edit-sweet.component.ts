@@ -14,6 +14,7 @@ import {
   ISweetQuantityForm,
   ISweetTotalPrices
 } from "@Core/interfaces";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: 'app-edit-sweet',
@@ -41,6 +42,7 @@ export class EditSweetComponent implements OnInit {
     private Request: RequestsService,
     private calculationService: CalculationService,
     private toastService: ToastService,
+    public translateService: TranslateService
   ) {}
 
   ngOnInit(): void {

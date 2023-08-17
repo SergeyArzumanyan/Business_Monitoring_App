@@ -8,7 +8,7 @@
       </div>
 
       <div class="form-group flex col gap-10">
-        <label class="form-label" for="Name">Name *</label>
+        <label class="form-label" for="Name">{{ 'Name' | translate }} *</label>
         <input id="Name"
                formControlName="Name"
                class="form-input p-inputtext-sm"
@@ -17,37 +17,37 @@
                addClientForm.controls.Name.touched}"
                type="text"
                pInputText
-               placeholder="Enter client's name">
+               [placeholder]="translateService.instant('ClientNamePlaceholder')">
 
         <div class="p-error-wrapper">
           <small *ngIf="addClientForm.controls.Name.touched &&
                   addClientForm.controls.Name.hasError('required')"
                  class="p-error">
-            Name Is Required.
+            {{ 'FieldRequiredError' | translate }}
           </small>
 
           <small *ngIf="addClientForm.controls.Name.touched &&
                   addClientForm.controls.Name.hasError('onlyWhitespace')"
                  class="p-error">
-            Name Can't Be Empty
+            {{ 'FieldIsEmptyError' | translate }}
           </small>
 
           <small *ngIf="addClientForm.controls.Name.touched &&
                   addClientForm.controls.Name.hasError('minlength')"
                  class="p-error">
-            Name Is Too Short.
+            {{ 'ShortFieldError' | translate }}
           </small>
 
           <small *ngIf="addClientForm.controls.Name.touched &&
                   addClientForm.controls.Name.hasError('maxlength')"
                  class="p-error">
-            Name Is Too Long.
+            {{ 'LongFieldError' | translate }}
           </small>
         </div>
       </div>
 
       <div class="form-group flex col gap-10">
-        <label class="form-label" for="Surname">Surname</label>
+        <label class="form-label" for="Surname">{{ 'Surname' | translate }}</label>
         <input id="Surname"
                formControlName="Surname"
                class="form-input p-inputtext-sm"
@@ -55,35 +55,35 @@
                addClientForm.controls.Surname?.touched}"
                type="text"
                pInputText
-               placeholder="Enter client's surname">
+               [placeholder]="translateService.instant('ClientSurnamePlaceholder')">
 
         <div class="p-error-wrapper">
           <small *ngIf="addClientForm.controls.Surname?.touched &&
                   addClientForm.controls.Surname?.hasError('onlyWhitespace')"
                  class="p-error">
-            Surname Can't Be Empty
+            {{ 'FieldIsEmptyError' | translate }}
           </small>
 
           <small *ngIf="addClientForm.controls.Surname?.touched &&
                   addClientForm.controls.Surname?.hasError('minlength')"
                  class="p-error">
-            Surname Is Too Short.
+            {{ 'ShortFieldError' | translate }}
           </small>
 
           <small *ngIf="addClientForm.controls.Surname?.touched &&
                   addClientForm.controls.Surname?.hasError('maxlength')"
                  class="p-error">
-            Surname Is Too Long.
+            {{ 'LongFieldError' | translate }}
           </small>
         </div>
       </div>
 
       <div class="form-group flex col gap-10">
-        <label for="PhoneNumber">PhoneNumber *</label>
+        <label for="PhoneNumber">{{ 'PhoneNumber' | translate }} *</label>
         <p-inputMask mask="999-99-99-99-99"
                      [ngClass]="{'ng-invalid ng-dirty': addClientForm.controls.PhoneNumber.invalid &&
                      addClientForm.controls.PhoneNumber.touched}"
-                     placeholder="+374 91 xx xx xx"
+                     [placeholder]="translateService.instant('ClientPhoneNumberPlaceholder')"
                      formControlName="PhoneNumber"
                      id="PhoneNumber"></p-inputMask>
 
@@ -91,38 +91,38 @@
           <small *ngIf="addClientForm.controls.PhoneNumber.touched &&
                     addClientForm.controls.PhoneNumber.hasError('required')"
                  class="p-error">
-            PhoneNumber Is Required.
+            {{ 'FieldRequiredError' | translate }}
           </small>
         </div>
       </div>
 
       <div class="form-group flex col gap-10">
-        <label class="form-label" for="UsualAddress">Usual Address *</label>
+        <label class="form-label" for="UsualAddress">{{ 'UsualAddress' | translate }} *</label>
         <input id="UsualAddress"
                formControlName="UsualAddress"
                class="form-input p-inputtext-sm"
                [ngClass]="{'ng-invalid ng-dirty': addClientForm.controls.UsualAddress.invalid && addClientForm.controls.UsualAddress.touched}"
                type="text"
                pInputText
-               placeholder="Enter client's address">
+               [placeholder]="translateService.instant('ClientUsualAddressPlaceholder')">
 
         <div class="p-error-wrapper">
           <small *ngIf="addClientForm.controls.UsualAddress.touched &&
                     addClientForm.controls.UsualAddress.hasError('required')"
                  class="p-error">
-            UsualAddress Is Required.
+            {{ 'FieldRequiredError' | translate }}
           </small>
 
           <small *ngIf="addClientForm.controls.UsualAddress.touched &&
                     addClientForm.controls.UsualAddress.hasError('onlyWhitespace')"
                  class="p-error">
-            UsualAddress Can't Be Empty
+            {{ 'FieldIsEmptyError' | translate }}
           </small>
 
           <small *ngIf="addClientForm.controls.UsualAddress.touched &&
                     addClientForm.controls.UsualAddress.hasError('maxlength')"
                  class="p-error">
-            Address Is Too Long.
+            {{ 'LongFieldError' | translate }}
           </small>
         </div>
       </div>
@@ -131,7 +131,7 @@
 
     <button type="submit" class="btn-md skin-btn form-btn">
       <span class="flex justify-content-center align-items-center gap-5">
-        Add
+        {{ 'Add' | translate }}
         <i class="fa-solid fa-square-plus icon-md"></i>
       </span>
     </button>

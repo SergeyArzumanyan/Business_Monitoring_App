@@ -2,7 +2,7 @@
   <div class="w-100 flex col justify-content-center align-items-center gap-20">
     <ng-container *ngFor="let control of TableItemForm.controls | keyvalue">
       <div class="w-100 flex col gap-10" *ngIf="control.key !== 'ID'">
-        <label [for]="control.key">{{ control.key }}</label>
+        <label [for]="control.key">{{ control.key | translate }}</label>
         <ng-container *ngIf="checkControlValueType(control.value.value) === 'string'; else NumberInput">
 
           <ng-container *ngIf="control.key === 'PhoneNumber'; else TextInput">
@@ -35,22 +35,22 @@
           <ng-container *ngFor="let error of control.value.errors | keyvalue">
             <small class="p-error">
               <ng-container *ngIf="error.key === 'required'">
-                {{ control.key }} Is Required.
+                {{ 'FieldRequiredError' | translate  }}
               </ng-container>
               <ng-container *ngIf="error.key === 'onlyWhitespace'">
-                {{ control.key }} Can't Be Empty.
+                {{ 'FieldIsEmptyError' | translate  }}
               </ng-container>
               <ng-container *ngIf="error.key === 'maxlength'">
-                {{ control.key }} Is Too Long.
+                {{ 'LongFieldError' | translate  }}
               </ng-container>
               <ng-container *ngIf="error.key === 'minlength'">
-                {{ control.key }} Is Too Short.
+                {{ 'ShortFieldError' | translate  }}
               </ng-container>
               <ng-container *ngIf="error.key === 'max'">
-                {{ control.key }} Is Too Large.
+                {{ 'FieldTooLargeError' | translate  }}
               </ng-container>
               <ng-container *ngIf="error.key === 'isNotPositive'">
-                {{ control.key }} Must Be Greater Than 0.
+                {{ 'NegativeFieldError' | translate  }}
               </ng-container>
             </small>
           </ng-container>

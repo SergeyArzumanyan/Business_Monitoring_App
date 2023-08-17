@@ -10,6 +10,7 @@ import {
 import { EditSweetComponent } from '@Components/sweets/sweet';
 
 import { SharedModule } from "@Shared/shared.module";
+import { TranslateModule } from "@ngx-translate/core";
 
 
 @NgModule({
@@ -18,13 +19,14 @@ import { SharedModule } from "@Shared/shared.module";
     SweetComponent,
     EditSweetComponent,
   ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    SweetsRoutingModule,
-    SharedModule,
-  ]
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        SweetsRoutingModule,
+        SharedModule,
+        TranslateModule,
+    ]
 })
 export class SweetsModule {
 }

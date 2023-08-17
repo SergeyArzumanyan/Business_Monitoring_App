@@ -11,6 +11,7 @@ import {
 
 import { TableService, TableSortingService } from "@Shared/components/table/services";
 import { ITableFilters, ITableFiltersObj } from "@Shared/components/table/filters/interfaces";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: 'app-table',
@@ -51,6 +52,7 @@ export class TableComponent implements OnInit, OnDestroy {
     public TableService: TableService,
     public TableSortingService: TableSortingService,
     private router: Router,
+    public translateService: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -127,11 +129,11 @@ export class TableComponent implements OnInit, OnDestroy {
     }
   }
 
-  protected MakeTooltip(value: any): string {
+  protected MakeText(value: any): string {
     if (typeof (value) === 'string') {
       return value;
     } else {
-      return value.toString();
+      return this.translateService.instant(`${value.toString()}`);
     }
   }
 

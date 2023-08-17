@@ -2,7 +2,7 @@
   <app-filters (SendFiltersToTableComponent)="ApplyFiltersToTable($event)" [TableFilters]="TableFilters"></app-filters>
 </ng-container>
 
-<h2 class="table-name text-center">{{ TableConfig.TableName | titlecase }}</h2>
+<h2 class="table-name text-center">{{ TableConfig.TableName | translate | titlecase }}</h2>
 
 <div class="table-wrapper" [ngClass]="{'limited-table-height': IsTableHeightLimited}">
   <table>
@@ -13,12 +13,12 @@
           <ng-container *ngFor="let ArrayObject of TableConfig.TableItems; let first = first">
             <ng-container *ngIf="first">
               <th *ngFor="let ObjectKeyValue of ArrayObject | keyvalue"
-                  [pTooltip]="MakeTooltip(ObjectKeyValue.key)"
+                  [pTooltip]="MakeText(ObjectKeyValue.key)"
                   tooltipPosition="bottom"
                   [showDelay]="300"
                   (click)="SortTableField(ObjectKeyValue.key)">
                 <div class="th-content flex justify-content-center align-items-center gap-10">
-                  <span class="th-text">{{ ObjectKeyValue.key }}</span>
+                  <span class="th-text">{{ MakeText(ObjectKeyValue.key) | translate }}</span>
                   <ng-container *ngIf="ObjectKeyValue.key === SortingColumName">
                     <i class="th-icon icon-sm"
                        [ngClass]="TableSortingService.ColumnSortState$.getValue() === 'asc'  ?
@@ -32,7 +32,7 @@
           </ng-container>
 
           <ng-container *ngIf="TableConfig.TableActions">
-            <th colspan="3" class="table-actions">Actions</th>
+            <th colspan="3" class="table-actions">{{ 'Actions' | translate }}</th>
           </ng-container>
 
         </ng-container>
@@ -45,14 +45,14 @@
         <tr (contextmenu)="OpenContextMenu($event, ArrayObject)">
           <ng-container *ngFor="let ObjectKeyValue of ArrayObject | keyvalue">
             <ng-container *ngIf="ObjectKeyValue.key !== 'ID'">
-              <td [pTooltip]="MakeTooltip(ObjectKeyValue.value)"
+              <td [pTooltip]="MakeText(ObjectKeyValue.value)"
                   tooltipPosition="bottom"
                   [showDelay]="300">
                 {{ ObjectKeyValue.value ? ObjectKeyValue.value : '-' }}
               </td>
             </ng-container>
             <ng-container *ngIf="ObjectKeyValue.key === 'ID';">
-              <td [pTooltip]="MakeTooltip(ObjectKeyValue.value)"
+              <td [pTooltip]="MakeText(ObjectKeyValue.value)"
                   tooltipPosition="bottom"
                   [showDelay]="300"
                   [ngClass]="{'tdLink': isClientsTable}"
@@ -87,10 +87,13 @@
   <ng-container *ngIf="!TableConfig.TableItems?.length && !Pending">
     <div class="empty-message w-100 flex col gap-20">
       <div class="message">
-        There Are No {{ TableConfig.ItemName }}s Available
+        {{ 'EmptyTableMessage' | translate: { key: TableConfig.ItemName | translate | lowercase } }}
       </div>
       <div class="link">
-        You Can Add Some <a [routerLink]="['/add/', TableConfig.ItemName.toLowerCase()]" class="classic-link">Here</a>.
+        {{ 'YouCanAddMessage' | translate }}
+        <a [routerLink]="['/add/', TableConfig.ItemName.toLowerCase()]" class="classic-link">
+          {{ 'Here' | translate }}
+        </a>
       </div>
     </div>
   </ng-container>
@@ -98,7 +101,7 @@
 
   <ng-container *ngIf="Pending">
     <div class="loading-wrapper w-100 flex gap-10 justify-content-center align-items-center">
-      <span class="loading-text">Please Wait</span>
+      <span class="loading-text">{{ 'PleaseWait' | translate }}</span>
       <p-progressSpinner class="p-progress-path"></p-progressSpinner>
     </div>
   </ng-container>
@@ -136,7 +139,7 @@
                 class="btn-md brown-action-btn dialog-btn"
                 (click)="HideEditDialog()">
         <span class="flex justify-content-center align-items-center gap-5">
-          Cancel
+          {{ 'Cancel' | translate }}
           <i class="pi pi-times icon-sm"></i>
         </span>
         </button>
@@ -147,7 +150,7 @@
                 [ngClass]="{'skin-action-btn-disabled': EditDialogForm.pristine}"
                 (click)="SaveEditedItem()">
         <span class="flex justify-content-center align-items-center gap-5">
-          Save
+          {{ 'Save' | translate }}
           <i class="pi pi-check icon-sm"></i>
         </span>
         </button>

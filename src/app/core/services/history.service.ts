@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { IPeriod } from "@Core/interfaces";
 import { BehaviorSubject } from "rxjs";
 import { CalculationService } from "@Core/services/calculation.service";
+import { TranslateService } from "@ngx-translate/core";
 
 @Injectable()
 export class HistoryService {
@@ -13,31 +14,31 @@ export class HistoryService {
   public HistoryItemsTotalProfit: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public HistoryItemsTotalConsumptions: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
-  public SelectedPeriod: BehaviorSubject<string> = new BehaviorSubject<string>('Today');
+  public SelectedPeriod: BehaviorSubject<string> = new BehaviorSubject<string>(this.translateService.instant('Today'));
 
   public SelectedClientID: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(null);
 
   public HistoryPeriods: IPeriod[] = [
     {
-      Name: 'Today',
+      Name: this.translateService.instant('Today'),
     },
     {
-      Name: 'Yesterday',
+      Name: this.translateService.instant('Yesterday'),
     },
     {
-      Name: 'This Week',
+      Name: this.translateService.instant('ThisWeek'),
     },
     {
-      Name: 'This Month',
+      Name: this.translateService.instant('ThisMonth'),
     },
     {
-      Name: 'Last 3 Months',
+      Name: this.translateService.instant('Last3Months'),
     },
     {
-      Name: 'Last 6 Months',
+      Name: this.translateService.instant('Last6Months'),
     },
     {
-      Name: 'This Year',
+      Name: this.translateService.instant('ThisYear'),
     }
   ];
 
@@ -45,14 +46,17 @@ export class HistoryService {
   public IsInConsumptionsPage: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public IsInProfitPage: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor(private calculationsService: CalculationService) {
+  constructor(
+    public translateService: TranslateService,
+    private calculationsService: CalculationService
+  ) {
   }
 
   public ResetHistoryParams(): void {
     this.HistoryItems.next([]);
     this.FilteredHistoryItems.next([]);
 
-    this.SelectedPeriod.next('Today');
+    this.SelectedPeriod.next(this.translateService.instant('Today'));
     this.SelectedClientID.next(null);
 
     this.IsInOrdersPage.next(false);
@@ -135,19 +139,19 @@ export class HistoryService {
 
   public filterBasedOnPeriod(selectedPeriod: string, historyItems: any[], clientId?: number | null): any[] {
     switch (selectedPeriod) {
-      case 'Today':
+      case this.translateService.instant('Today'):
         return clientId ? this.filterForClient(clientId, this.filterForToday(historyItems)) : this.filterForToday(historyItems);
-      case 'Yesterday':
+      case this.translateService.instant('Yesterday'):
         return clientId ? this.filterForClient(clientId, this.filterForYesterday(historyItems)) : this.filterForYesterday(historyItems);
-      case 'This Week':
+      case this.translateService.instant('ThisWeek'):
         return clientId ? this.filterForClient(clientId, this.filterForOneWeek(historyItems)) : this.filterForOneWeek(historyItems);
-      case 'This Month':
+      case this.translateService.instant('ThisMonth'):
         return clientId ? this.filterForClient(clientId, this.filterForOneMonth(historyItems)) : this.filterForOneMonth(historyItems);
-      case 'Last 3 Months':
+      case this.translateService.instant('Last3Months'):
         return clientId ? this.filterForClient(clientId, this.filterForThreeMonths(historyItems)) : this.filterForThreeMonths(historyItems);
-      case 'Last 6 Months':
+      case this.translateService.instant('Last6Months'):
         return clientId ? this.filterForClient(clientId, this.filterForSixMonths(historyItems)) : this.filterForSixMonths(historyItems);
-      case 'This Year':
+      case this.translateService.instant('ThisYear'):
         return clientId ? this.filterForClient(clientId, this.filterForOneYear(historyItems)) : this.filterForOneYear(historyItems);
       default:
         return clientId ? this.filterForClient(clientId, this.filterForToday(historyItems)) : this.filterForToday(historyItems);

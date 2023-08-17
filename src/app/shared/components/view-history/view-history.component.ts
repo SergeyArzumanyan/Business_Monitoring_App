@@ -12,6 +12,7 @@ import {
   IClient,
   IOrder,
 } from "@Core/interfaces";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: 'app-view-history',
@@ -37,6 +38,7 @@ export class ViewHistoryComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private toastService: ToastService,
+    public translateService: TranslateService
   ) {
     this.CheckForClientID();
     this.CheckForOrdersPage();

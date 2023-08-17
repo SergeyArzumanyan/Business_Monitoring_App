@@ -7,6 +7,7 @@ import {
   ITableFiltersForm,
   ITableFiltersObj,
 } from "@Shared/components/table/filters/interfaces";
+import { TranslateService } from "@ngx-translate/core";
 
 
 @Component({
@@ -24,7 +25,7 @@ export class DFiltersComponent implements AfterViewInit, OnDestroy {
 
   private unsubscribe$: Subject<void> = new Subject<void>();
 
-  constructor() {}
+  constructor(public translateService: TranslateService) {}
 
   ngAfterViewInit(): void {
     this.subscribeToFormChanges();

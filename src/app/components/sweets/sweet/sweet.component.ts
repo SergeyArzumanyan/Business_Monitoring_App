@@ -18,6 +18,7 @@ import {
 } from "@Core/interfaces";
 import { ITableConfig } from "@Shared/components/table/interfaces";
 import { onlyPositiveNumbers } from "@Core/validators";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: 'app-sweet',
@@ -61,6 +62,7 @@ export class SweetComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private toastService: ToastService,
+    public translateService: TranslateService
   ) {}
 
 

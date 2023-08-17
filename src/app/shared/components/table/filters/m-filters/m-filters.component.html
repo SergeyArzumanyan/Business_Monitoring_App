@@ -2,7 +2,7 @@
 
   <div class="w-100 h-100 filters-heading flex gap-5 justify-content-start align-items-center">
     <span class="filters-header">
-      Filters
+      {{ 'Filters' | translate }}
     </span>
     <i class="fa-solid fa-filter icon-md"></i>
   </div>
@@ -35,13 +35,13 @@
             <button type="button"
                     class="btn-sm brown-action-btn filter-clear-btn"
                     (click)="resetFilters()">
-              Clear
+              {{ 'Clear' | translate }}
             </button>
           </ng-container>
           <button type="submit"
                   class="btn-sm skin-btn"
                   (click)="applyFilters()">
-            Apply
+            {{ 'Apply' | translate }}
           </button>
         </div>
       </div>
@@ -49,66 +49,66 @@
       <div class="w-100 flex col gap-25">
         <ng-container *ngIf="TableFilters?.ShowName">
           <div class="w-100 filter-block flex col gap-10 justify-content-center align-items-center">
-            <label class="filter-label" for="NameMobileFilter">Name</label>
+            <label class="filter-label" for="NameMobileFilter">{{ 'Name' | translate }}</label>
             <input type="text"
                    formControlName="Name"
                    (keydown.enter)="applyFilters()"
                    class="filter-input p-inputtext-sm"
                    id="NameMobileFilter"
                    pInputText
-                   placeholder="Search By Name...">
+                   [placeholder]="translateService.instant('NameFilterPlaceholder')">
           </div>
         </ng-container>
 
         <ng-container *ngIf="TableFilters?.ShowPrice">
           <div class="w-100 filter-block flex col gap-10 justify-content-center align-items-center">
-            <label class="filter-label" for="PriceMobileFilter">Price</label>
+            <label class="filter-label" for="PriceMobileFilter">{{ 'Price' | translate }}</label>
             <p-inputNumber inputId="PriceMobileFilter"
                            formControlName="Price"
                            (keydown.enter)="applyFilters()"
                            class="filter-input p-inputtext-sm"
                            id="PriceMobileFilter"
-                           placeholder="Search By Price...">
+                           [placeholder]="translateService.instant('PriceFilterPlaceholder')">
             </p-inputNumber>
           </div>
         </ng-container>
 
         <ng-container *ngIf="TableFilters?.ShowAddress">
           <div class="w-100 filter-block flex col gap-10 justify-content-center align-items-center">
-            <label class="filter-label" for="AddressMobileFilter">Address</label>
+            <label class="filter-label" for="AddressMobileFilter">{{ 'Address' | translate }}</label>
             <input type="text"
                    formControlName="Address"
                    (keydown.enter)="applyFilters()"
                    class="filter-input p-inputtext-sm"
                    id="AddressMobileFilter"
                    pInputText
-                   placeholder="Search By Address...">
+                   [placeholder]="translateService.instant('AddressFilterPlaceholder')">
           </div>
         </ng-container>
 
         <ng-container *ngIf="TableFilters?.ShowUsualAddress">
           <div class="w-100 filter-block flex col gap-10 justify-content-center align-items-center">
-            <label class="filter-label" for="UsualAddressMobileFilter">Usual Address</label>
+            <label class="filter-label" for="UsualAddressMobileFilter">{{ 'UsualAddress' | translate }}</label>
             <input type="text"
                    formControlName="UsualAddress"
                    (keydown.enter)="applyFilters()"
                    class="filter-input p-inputtext-sm"
                    id="UsualAddressMobileFilter"
                    pInputText
-                   placeholder="Search By Usual Address...">
+                   [placeholder]="translateService.instant('UsualAddressFilterPlaceholder')">
           </div>
         </ng-container>
 
         <ng-container *ngIf="TableFilters?.ShowPhoneNumber">
           <div class="w-100 filter-block flex col gap-10 justify-content-center align-items-center">
-            <label class="filter-label" for="AddressMobileFilter">PhoneNumber</label>
+            <label class="filter-label" for="AddressMobileFilter">{{ 'PhoneNumber' | translate }}</label>
             <input type="text"
                    formControlName="PhoneNumber"
                    (keydown.enter)="applyFilters()"
                    class="filter-input p-inputtext-sm"
                    id="PhoneNumberMobileFilter"
                    pInputText
-                   placeholder="Search By PhoneNumber...">
+                   [placeholder]="translateService.instant('PhoneNumberFilterPlaceholder')">
           </div>
         </ng-container>
       </div>

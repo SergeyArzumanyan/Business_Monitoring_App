@@ -1,6 +1,6 @@
 <ng-container *ngIf="pending">
   <div class="h-100 loading-wrapper flex gap-15 justify-content-center align-items-center">
-    <span class="loading-text">Please Wait</span>
+    <span class="loading-text">{{ 'PleaseWait' | translate }}</span>
     <p-progressSpinner class="p-progress-path"></p-progressSpinner>
   </div>
 </ng-container>
@@ -9,10 +9,13 @@
   <div class="h-100 flex justify-content-center align-items-center">
     <div class="empty-message flex col gap-20">
       <div class="message">
-        There Are No Sweets Available
+        {{ 'NoSweetsMessage' | translate }}
       </div>
       <div class="link">
-        You Can Add Some <a [routerLink]="['/add/sweet']" class="classic-link">Here</a>.
+        {{ 'YouCanAddMessage'  | translate }}
+        <a [routerLink]="['/add/sweet']" class="classic-link">
+        {{ 'Here' | translate }}
+      </a>
       </div>
     </div>
   </div>
@@ -25,7 +28,7 @@
       <div class="sweet-card" *ngFor="let sweet of sweets">
         <div class="sweet-image-wrapper flex justify-content-center align-items-center">
           <div class="image-more flex justify-content-center align-items-center">
-            <span>View More</span>
+            <span>{{ 'ViewMore' | translate }}</span>
             <i class="pi pi-angle-right icon-md"></i>
           </div>
           <img
@@ -41,13 +44,13 @@
         <div class="sweet-card-buttons flex justify-content-center align-items-center">
           <button class="sweet-btn edit-sweet-btn btn-md skin-action-btn" [routerLink]="[sweet.ID]">
               <span class="flex justify-content-center align-items-center">
-                More
+                {{ 'More' | translate }}
                 <i class="pi pi-angle-right icon-md"></i>
               </span>
           </button>
           <button class="sweet-btn delete-sweet-btn btn-md brown-action-btn" (click)="deleteSweet(sweet)">
               <span class="flex justify-content-center align-items-center gap-5">
-                Delete
+                {{ 'Delete' | translate }}
               <i class="pi pi-trash icon-sm"></i>
               </span>
           </button>

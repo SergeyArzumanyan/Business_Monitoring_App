@@ -4,6 +4,7 @@ import { SendingDataService } from "@Core/services";
 import { onlyPositiveNumbers } from "@Core/validators";
 
 import { IConsumption, IConsumptionForm } from "@Core/interfaces/";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: 'app-add-consumption',
@@ -27,7 +28,10 @@ export class AddConsumptionComponent {
     ])
   });
 
-  constructor(private Send: SendingDataService) {}
+  constructor(
+    private Send: SendingDataService,
+    public translateService: TranslateService
+    ) {}
 
   public onAdd(): void {
     if (this.addConsumptionForm.valid) {

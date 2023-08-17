@@ -1,39 +1,41 @@
 <div class="w-100 h-100 wrapper">
   <div class="container flex col justify-content-center align-items-center">
-    <h1 class="add-header">Add Items</h1>
+    <h1 class="add-header">
+      {{ 'AddItems' | translate }}
+    </h1>
 
     <div class="w-100 h-100 links flex flex-wrap justify-content-center align-items-center">
       <button class="btn-md link-btn skin-btn" [routerLink]="['sweet']">
         <span class="flex justify-content-center align-items-center gap-10">
-          Sweet
+          {{ 'Sweet' | translate }}
           <i class="fa-solid fa-cake-candles icon-md"></i>
         </span>
       </button>
 
       <button class="btn-md link-btn skin-btn" [routerLink]="['product']">
         <span class="flex justify-content-center align-items-center gap-10">
-          Product
+          {{ 'Product' | translate }}
           <i class="fa-solid fa-egg icon-md"></i>
         </span>
       </button>
 
       <button class="btn-md link-btn skin-btn" [routerLink]="['client']">
         <span class="flex justify-content-center align-items-center gap-10">
-          Client
+          {{ 'Client' | translate }}
           <i class="fa-solid fa-user icon-md"></i>
         </span>
       </button>
 
       <button class="btn-md link-btn skin-btn" [routerLink]="['order']">
         <span class="flex justify-content-center align-items-center gap-10">
-          Order
+          {{ 'Order' | translate }}
           <i class="fa-solid fa-truck icon-md"></i>
         </span>
       </button>
 
       <button class="btn-md link-btn skin-btn" [routerLink]="['consumption']">
         <span class="flex justify-content-center align-items-center gap-10">
-          Consumption
+          {{ 'Consumption' | translate }}
           <i class="fa-solid fa-sack-dollar icon-md"></i>
         </span>
       </button>

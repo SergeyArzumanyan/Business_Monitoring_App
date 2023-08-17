@@ -12,6 +12,7 @@ import {
 import { ITableConfig } from "@Shared/components/table/interfaces";
 
 import { ConfirmationService } from "primeng/api";
+import { TranslateService } from "@ngx-translate/core";
 
 @Injectable({
   providedIn: 'root'
@@ -30,12 +31,15 @@ export class TableService {
     private Deletion: DeleteService,
     private toastService: ToastService,
     private confirmationService: ConfirmationService,
+    public translateService: TranslateService,
   ) {}
 
   public DeleteItem(TableConfigs: ITableConfig<any>, Item: any): void {
     this.confirmationService.confirm({
-      message: `Are You Sure That You Want To Delete This ${TableConfigs.ItemName}?`,
-      header: `Delete ${TableConfigs.ItemName} ?`,
+      message: this.translateService.instant('DeleteItemMessage',
+        {key: this.translateService.instant(TableConfigs.ItemName), id: Item.ID}),
+      header: this.translateService.instant('DeleteItem',
+        {key: this.translateService.instant(TableConfigs.ItemName)}),
       icon: 'pi pi-trash icon-big',
       accept: (): void => {
         this.Request.GetItemFirebaseKey(TableConfigs.ItemEndPoint, 'ID', Item.ID)

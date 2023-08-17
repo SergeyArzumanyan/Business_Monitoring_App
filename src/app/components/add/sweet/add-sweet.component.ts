@@ -15,6 +15,7 @@ import {
   ToastService, CalculationService
 } from "@Core/services";
 import { onlyPositiveNumbers } from "@Core/validators";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: 'app-add-sweet',
@@ -51,6 +52,7 @@ export class AddSweetComponent implements OnInit, OnDestroy {
     private Request: RequestsService,
     private Send: SendingDataService,
     private toastService: ToastService,
+    public translateService: TranslateService
   ) {
   }
 

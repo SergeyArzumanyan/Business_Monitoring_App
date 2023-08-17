@@ -2,7 +2,7 @@
   <div class="w-100 flex col justify-content-center align-items-center gap-20">
     <div class="w-100 flex col gap-10 justify-content-center">
 
-      <label class="form-label" for="product-name">Name *</label>
+      <label class="form-label" for="product-name">{{ 'Name' | translate }} *</label>
       <input formControlName="Name"
              id="product-name"
              class="form-input"
@@ -10,24 +10,24 @@
              editSweetForm.controls['Name'].touched}"
              type="text"
              pInputText
-             placeholder="Enter Sweet's Name">
+             [placeholder]="translateService.instant('SweetNamePlaceholder')">
 
       <div class="p-error-wrapper">
         <small *ngIf="editSweetForm.controls['Name'].touched &&
                   editSweetForm.controls['Name'].hasError('required')"
                class="p-error">
-          Name Is Required.
+          {{ 'FieldRequiredError' | translate }}
         </small>
         <small *ngIf="editSweetForm.controls['Name'].touched &&
                   editSweetForm.controls['Name'].hasError('maxlength')"
                class="p-error">
-          Name Is Too Long.
+          {{ 'LongFieldError' | translate }}
         </small>
       </div>
     </div>
 
     <div class="w-100 flex col gap-10 justify-content-center">
-      <label class="form-label" for="sweet-products">Products *</label>
+      <label class="form-label" for="sweet-products">{{ 'Products' | translate  }} *</label>
       <div class="multiselect-container">
         <p-multiSelect inputId="sweet-products"
                        id="sweet-products"
@@ -40,7 +40,7 @@
                        [ngModelOptions]="{standalone: true}"
                        (onChange)="createItem($event)"
                        optionLabel="Name"
-                       placeholder="Select Sweet's Products">
+                       [placeholder]="translateService.instant('SweetProductsPlaceholder')">
         </p-multiSelect>
       </div>
 
@@ -50,7 +50,7 @@
              [formGroupName]="i">
           <div class="w-100 flex justify-content-between align-items-center">
             <label for="Quantity">
-              {{ getFormGroup(i).controls['Name'].value }} Quantity *</label>
+              {{ getFormGroup(i).controls['Name'].value }} {{ 'Quantity'  | translate }} *</label>
             <button type="button"
                     class="btn-xs skin-action-btn"
                     (click)="removeFormGroup(i)">
@@ -77,19 +77,19 @@
         <small *ngIf="editSweetForm.controls['Products'].touched &&
                   editSweetForm.controls['Products'].hasError('required')"
                class="p-error">
-          Products Is Required.
+          {{ 'FieldRequiredError' | translate }}
         </small>
       </div>
     </div>
 
     <div class="w-100 flex col gap-10 justify-content-center">
-      <label for="Profit">Profit *</label>
+      <label for="Profit">{{ 'Profit' | translate }} *</label>
       <p-inputNumber id="Profit"
                      formControlName="Profit"
                      (keyup)="sweetSelectionChangedWithInput($event)"
                      [ngClass]="{'ng-invalid ng-dirty': editSweetForm.controls['Profit'].touched &&
                        editSweetForm.controls['Profit'].invalid}"
-                     placeholder="Enter Profit For Sweet"
+                     [placeholder]="translateService.instant('SweetProfitPlaceholder')"
                      inputId="Profit">
       </p-inputNumber>
 
@@ -97,19 +97,19 @@
         <small *ngIf="editSweetForm.controls['Profit'].touched &&
                   editSweetForm.controls['Profit'].hasError('required')"
                class="p-error">
-          Profit Is Required.
+          {{ 'FieldRequiredError' | translate }}
         </small>
 
         <small *ngIf="editSweetForm.controls['Profit'].touched &&
                   editSweetForm.controls['Profit'].hasError('isNotPositive')"
                class="p-error">
-          Profit Must Be Greater Than 0.
+          {{ 'NegativeFieldError'  | translate }}
         </small>
       </div>
     </div>
 
     <div class="form-group w-100 flex col gap-10 justify-content-center">
-      <span class="image-label">Image *</span>
+      <span class="image-label">{{ 'Image' | translate }} *</span>
       <div class="img-dropzone"
            [ngClass]="{'img-invalid': editSweetForm.controls['Image'].invalid && editSweetForm.controls['Image'].touched}"
            imgDrag
@@ -118,7 +118,7 @@
         <div class="drag-message flex col gap-10 justify-content-center align-items-center">
           <i class="pi pi-image icon-max"></i>
           <span class="flex gap-5 align-items-center">
-                Drag Your Image Here Or Browse
+                {{ 'DragYourImagesMessage'  | translate }}
               </span>
         </div>
       </div>
@@ -144,7 +144,7 @@
         <small *ngIf="editSweetForm.controls['Image'].touched &&
                   editSweetForm.controls['Image'].hasError('required')"
                class="p-error">
-          Image Is Required.
+          {{ 'FieldRequiredError' | translate }}
         </small>
       </div>
 

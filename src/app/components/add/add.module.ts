@@ -14,6 +14,7 @@ import {
 } from "@Components/add";
 
 import { SharedModule } from "@Shared/shared.module";
+import { TranslateModule } from "@ngx-translate/core";
 
 
 @NgModule({
@@ -25,12 +26,13 @@ import { SharedModule } from "@Shared/shared.module";
     AddOrderComponent,
     AddConsumptionComponent,
   ],
-    imports: [
-        CommonModule,
-        AddRoutingModule,
-        ReactiveFormsModule,
-        SharedModule,
-        FormsModule,
-    ]
+  imports: [
+    CommonModule,
+    AddRoutingModule,
+    ReactiveFormsModule,
+    SharedModule,
+    FormsModule,
+    TranslateModule,
+  ]
 })
 export class AddModule { }

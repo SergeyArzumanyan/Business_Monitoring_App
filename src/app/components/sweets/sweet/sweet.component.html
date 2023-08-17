@@ -1,6 +1,6 @@
 <ng-container *ngIf="pending">
   <div class="w-100 h-100 loading-wrapper flex gap-15 justify-content-center align-items-center">
-    <span class="loading-text">Please Wait</span>
+    <span class="loading-text">{{ 'PleaseWait' | translate }}</span>
     <p-progressSpinner class="p-progress-path"></p-progressSpinner>
   </div>
 </ng-container>
@@ -16,7 +16,7 @@
       <div class="w-100 h-100 info-part flex col">
         <div class="w-100 h-100 p-30 table-part flex col">
           <span class="text-center">
-            Price {{ sweet.TotalPrice }} AMD (Profit {{ sweet.Profit }} AMD)
+            {{ 'Price' | translate }} {{ sweet.TotalPrice }} AMD ({{ 'Profit' | translate }} {{ sweet.Profit }} AMD)
           </span>
           <div class="sweet-products-table">
             <app-table [ShowTableFilters]="false"
@@ -30,13 +30,13 @@
           <button type="button"
                   class="btn-md brown-action-btn"
                   [routerLink]="['/sweets']">
-            Back
+            {{ 'Back' | translate }}
           </button>
           <button type="button"
                   class="btn-md skin-action-btn"
                   (click)="enableEditing()">
               <span class="flex gap-5 justify-content-center align-items-center">
-                Edit
+                {{ 'Edit' | translate }}
                 <i class="pi pi-pencil icon-sm"></i>
               </span>
           </button>
@@ -73,7 +73,7 @@
       <div class="p-10 flex col gap-10">
         <div class="item-total-price-wrapper w-100 flex justify-content-between align-items-center">
           <span class="item-total-price-text">
-            Total Price:
+            {{ 'TotalPrice' | translate }}:
           </span>
 
           <span class="item-total-price">
@@ -86,7 +86,7 @@
                   class="btn-md brown-action-btn dialog-btn"
                   (click)="disableEditing()">
             <span class="flex justify-content-center align-items-center gap-5">
-              Cancel
+              {{ 'Cancel' | translate }}
               <i class="pi pi-times icon-sm"></i>
             </span>
           </button>
@@ -97,7 +97,7 @@
                   [ngClass]="{'skin-action-btn-disabled': editSweetForm.pristine}"
                   (click)="onEdit()">
             <span class="flex justify-content-center align-items-center gap-5">
-              Save
+              {{ 'Save' | translate }}
               <i class="pi pi-check icon-sm"></i>
             </span>
           </button>

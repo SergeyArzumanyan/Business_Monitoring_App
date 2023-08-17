@@ -1,18 +1,17 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject} from "rxjs";
 
-import {MenuItem} from "primeng/api";
+import { MenuItem } from "primeng/api";
+import { TranslateService } from "@ngx-translate/core";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LanguageService {
 
-  public selectedLanguage$: BehaviorSubject<string> = new BehaviorSubject<string>('En');
-
   public languagesList: MenuItem[] = [
     {
-      label: this.selectedLanguage$.getValue(),
+      label: localStorage.getItem('lang') ? localStorage.getItem('lang')! : 'En',
+      icon: 'fa-solid fa-earth-americas icon-md',
       command: (e) => e.originalEvent.stopPropagation(),
       items: [
         {
@@ -28,23 +27,26 @@ export class LanguageService {
   ]
 
 
-  constructor() {
+  constructor(private translateService: TranslateService) {
     this.CheckCurrentLanguage();
   }
 
   private CheckCurrentLanguage(): void {
     if (localStorage.getItem('lang')) {
-      this.selectedLanguage$.next(localStorage.getItem('lang')!);
+      this.translateService.use(localStorage.getItem('lang')!);
     } else {
-      this.selectedLanguage$.next('En');
+      this.languagesList[0]['label'] = 'En'
       localStorage.setItem('lang', 'En');
+      this.translateService.use('En');
     }
   }
+
 
   private SetSelectedLanguage(e: any): any {
     e.originalEvent.stopPropagation();
     this.languagesList[0]['label'] = e.item.label;
-    this.selectedLanguage$.next(e.item.label);
     localStorage.setItem('lang', e.item.label)
+    this.translateService.use(e.item.label);
+    location.reload();
   }
 }

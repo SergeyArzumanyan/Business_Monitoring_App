@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { IClient, IClientForm } from "@Core/interfaces";
 import { onlyWhiteSpaceValidator } from "@Core/validators";
 import { SendingDataService } from "@Core/services";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: 'app-add-client',
@@ -39,7 +40,10 @@ export class AddClientComponent {
     })
   });
 
-  constructor(private Send: SendingDataService) {}
+  constructor(
+    private Send: SendingDataService,
+    public translateService: TranslateService
+    ) {}
 
   public onAdd(): void {
     if (this.addClientForm.valid) {

@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { HttpErrorResponse } from "@angular/common/http";
-import { Subject, Subscription, take, takeUntil } from "rxjs";
+import { Subject, take, takeUntil } from "rxjs";
 
 import {
   ISweet,
@@ -16,6 +16,7 @@ import {
 } from "@Core/services";
 
 import { ConfirmationService } from "primeng/api";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: 'app-sweets',
@@ -37,6 +38,7 @@ export class SweetsComponent implements OnInit, OnDestroy {
     private confirmationService: ConfirmationService,
     private toastService: ToastService,
     private calculationService: CalculationService,
+    public translateService: TranslateService
   ) {}
 
   ngOnInit(): void {

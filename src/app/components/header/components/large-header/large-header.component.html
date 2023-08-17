@@ -12,7 +12,7 @@
       <li class="w-100 h-100 header-link" [routerLink]="['sweets']" routerLinkActive="active" tabindex="-1">
         <div class="h-100 flex justify-content-center align-items-center gap-10">
           <span class="text-center">
-            Sweets
+            {{ 'Sweets' | translate }}
           </span>
           <i class="fa-solid fa-cake-candles icon-md"></i>
         </div>
@@ -20,7 +20,7 @@
       <li class="w-100 h-100 header-link" [routerLink]="['products']" routerLinkActive="active" tabindex="-1">
         <div class="h-100 flex justify-content-center align-items-center gap-10">
           <span class="text-center">
-            Products
+            {{ 'Products' | translate }}
           </span>
           <i class="fa-solid fa-egg icon-md"></i>
         </div>
@@ -28,7 +28,7 @@
       <li class="w-100 h-100 h-100 header-link" [routerLink]="['clients']" routerLinkActive="active" tabindex="-1">
         <div class="h-100 flex justify-content-center align-items-center gap-10">
           <span class="text-center">
-            Clients
+            {{ 'Clients' | translate }}
           </span>
           <i class="fa-solid fa-user icon-md"></i>
         </div>
@@ -36,7 +36,7 @@
       <li class="w-100 h-100 h-100 header-link" [routerLink]="['history/orders']" routerLinkActive="active" tabindex="-1">
         <div class="h-100 flex justify-content-center align-items-center gap-10">
           <span class="text-center">
-            Orders
+            {{ 'Orders' | translate }}
           </span>
           <i class="fa-solid fa-truck icon-md"></i>
         </div>
@@ -44,7 +44,7 @@
       <li class="w-100 h-100 header-link" [routerLink]="['history/consumptions']" routerLinkActive="active" tabindex="-1">
         <div class="h-100 flex justify-content-center align-items-center gap-10">
           <span class="text-center">
-            Consumptions
+            {{ 'Consumptions' | translate }}
           </span>
           <i class="fa-solid fa-sack-dollar icon-md"></i>
         </div>
@@ -52,7 +52,7 @@
       <li class="w-100 h-100 header-link" [routerLink]="['history/profit']" routerLinkActive="active" tabindex="-1">
         <div class="h-100 flex justify-content-center align-items-center gap-10">
           <span class="text-center">
-            Profit
+            {{ 'Profit' | translate }}
           </span>
           <i class="fa-solid fa-chart-line icon-md"></i>
         </div>
@@ -60,13 +60,13 @@
       <li class="w-100 h-100 header-link" [routerLink]="['add']" routerLinkActive="active" tabindex="-1">
         <div class="h-100 flex justify-content-center align-items-center gap-10">
           <span class="text-center">
-            Add
+            {{ 'Add' | translate }}
           </span>
           <i class="fa-solid fa-plus icon-md"></i>
         </div>
       </li>
 
-      <div class="h-100 languages-wrapper flex justify-content-center align-items-center gap-10">
+      <div class="h-100 languages-wrapper flex justify-content-center align-items-center">
         <p-panelMenu [model]="languageService.languagesList"></p-panelMenu>
       </div>
 

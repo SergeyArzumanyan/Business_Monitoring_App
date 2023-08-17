@@ -28,6 +28,7 @@ import { TooltipModule } from "primeng/tooltip";
 import { DragDirective } from "@Core/directives";
 import { InputMaskModule } from "primeng/inputmask";
 import {PanelMenuModule} from "primeng/panelmenu";
+import { TranslateModule } from "@ngx-translate/core";
 
 @NgModule({
   declarations: [
@@ -40,27 +41,28 @@ import {PanelMenuModule} from "primeng/panelmenu";
     TableEditDialogComponent,
     ViewHistoryComponent,
   ],
-    imports: [
-        CommonModule,
-        PasswordModule,
-        ButtonModule,
-        NgOptimizedImage,
-        ProgressSpinnerModule,
-        InputNumberModule,
-        ConfirmDialogModule,
-        ToastModule,
-        DialogModule,
-        RippleModule,
-        InputTextModule,
-        MultiSelectModule,
-        KeyFilterModule,
-        TooltipModule,
-        InputMaskModule,
-        RouterLink,
-        FormsModule,
-        ReactiveFormsModule,
-        PanelMenuModule,
-    ],
+  imports: [
+    CommonModule,
+    PasswordModule,
+    ButtonModule,
+    NgOptimizedImage,
+    ProgressSpinnerModule,
+    InputNumberModule,
+    ConfirmDialogModule,
+    ToastModule,
+    DialogModule,
+    RippleModule,
+    InputTextModule,
+    MultiSelectModule,
+    KeyFilterModule,
+    TooltipModule,
+    InputMaskModule,
+    RouterLink,
+    FormsModule,
+    ReactiveFormsModule,
+    PanelMenuModule,
+    TranslateModule,
+  ],
   exports: [
     PasswordModule,
     ButtonModule,

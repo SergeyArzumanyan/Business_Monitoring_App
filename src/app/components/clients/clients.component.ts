@@ -9,6 +9,7 @@ import { onlyWhiteSpaceValidator } from "@Core/validators";
 import { IContextMenuItem, ITableConfig } from "@Shared/components/table/interfaces";
 import { TableService } from '@Shared/components/table/services'
 import { ITableFilters } from "app/shared/components/table/filters/interfaces";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: 'app-clients',
@@ -35,7 +36,7 @@ export class ClientsComponent implements OnInit, OnDestroy {
 
   public ClientTableContextMenuOptions: IContextMenuItem[] = [
     {
-      Label: 'Edit',
+      Label: this.translateService.instant('Edit'),
       IconClass: 'pi pi-pencil',
       Action: (Item: IClient): void =>  {
         this.TableService.EditDialogForm.next(this.clientForm);
@@ -43,7 +44,7 @@ export class ClientsComponent implements OnInit, OnDestroy {
       }
     },
     {
-      Label: 'Delete',
+      Label: this.translateService.instant('Delete'),
       IconClass: 'pi pi-trash',
       Action: (Item: IClient): void => {
         this.TableService.EditDialogForm.next(this.clientForm);
@@ -83,6 +84,7 @@ export class ClientsComponent implements OnInit, OnDestroy {
     private Request: RequestsService,
     private toastService: ToastService,
     private TableService: TableService,
+    public translateService: TranslateService
   ) {}
 
   ngOnInit(): void {

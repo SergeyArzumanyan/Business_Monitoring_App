@@ -8,6 +8,7 @@ import {
 import { IProduct, IProductForm } from "@Core/interfaces";
 import { SendingDataService } from "@Core/services";
 import { onlyPositiveNumbers } from "@Core/validators";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: 'app-add-product',
@@ -31,7 +32,10 @@ export class AddProductComponent {
   });
 
 
-  constructor(private Send: SendingDataService) {}
+  constructor(
+    private Send: SendingDataService,
+    public translateService: TranslateService
+    ) {}
 
   public onAdd(): void {
       if (this.addProductForm.valid) {

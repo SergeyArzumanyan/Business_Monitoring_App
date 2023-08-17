@@ -22,6 +22,7 @@ import {
   IOrderSweetQuantityForm,
   IOrder,
 } from "@Core/interfaces";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: 'app-add-order',
@@ -61,6 +62,7 @@ export class AddOrderComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private calculationService: CalculationService,
     private toastService: ToastService,
+    public translateService: TranslateService
   ) {
   }
 
