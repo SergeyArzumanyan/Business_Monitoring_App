@@ -8,7 +8,7 @@ import { AuthService } from "@Core/services";
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  public isMobile: boolean = (window.innerWidth <= 1000);
+  public isMobile: boolean = (window.innerWidth <= 1200);
   public isAuthenticated: BehaviorSubject<boolean> = this.authService.authenticated;
   public isAlreadyAuthenticated: boolean = !!sessionStorage.getItem('isAuthenticated');
 

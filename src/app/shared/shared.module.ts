@@ -27,6 +27,7 @@ import { KeyFilterModule } from "primeng/keyfilter";
 import { TooltipModule } from "primeng/tooltip";
 import { DragDirective } from "@Core/directives";
 import { InputMaskModule } from "primeng/inputmask";
+import {PanelMenuModule} from "primeng/panelmenu";
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { InputMaskModule } from "primeng/inputmask";
         RouterLink,
         FormsModule,
         ReactiveFormsModule,
+        PanelMenuModule,
     ],
   exports: [
     PasswordModule,
@@ -82,6 +84,7 @@ import { InputMaskModule } from "primeng/inputmask";
     ContextMenuComponent,
     TableEditDialogComponent,
     ViewHistoryComponent,
+    PanelMenuModule,
   ]
 })
 export class SharedModule {}

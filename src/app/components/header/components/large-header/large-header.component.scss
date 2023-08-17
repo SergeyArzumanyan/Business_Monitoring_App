@@ -17,12 +17,13 @@
   }
 
   .header-links-container {
+    max-width: max-content;
     list-style: none;
     margin: 0;
     padding: 0;
 
     .header-link {
-      padding: 10px 20px;
+      padding: 10px 30px;
       font-size: $medium;
       user-select: none;
       text-align: center;
@@ -43,3 +44,53 @@
 .active {
   border-bottom: 4px solid $skin-100;
 }
+
+//  Languages Block Start
+
+.languages-wrapper {
+  .p-element {
+    height: 100%;
+  }
+}
+
+:host ::ng-deep .p-element .p-panelmenu.p-component {
+  height: 100%;
+
+  .p-panelmenu-panel {
+    height: 100%;
+
+    .p-component.p-panelmenu-header {
+      height: 100%;
+
+      .p-panelmenu-header-link {
+        font-size: $medium;
+        border: none;
+        border-radius: initial;
+        padding: 10px 30px;
+        color: $black;
+        height: 100%;
+        background-color: $white-400;
+
+        &:hover {
+          background-color: $white-200;
+        }
+
+        &:focus {
+          box-shadow: none;
+        }
+      }
+    }
+  }
+}
+
+:host ::ng-deep .p-panelmenu-icon {
+  font-size: $small;
+}
+
+:host ::ng-deep .p-menuitem .p-menuitem-link {
+  &:focus {
+    box-shadow: none !important;
+  }
+}
+
+//  Languages Block End

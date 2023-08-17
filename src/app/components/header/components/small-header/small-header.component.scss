@@ -152,3 +152,40 @@
 .active {
   background-color: $skin-200 !important;
 }
+
+//  Languages Block Start
+
+.languages-wrapper .p-element {
+  width: 100%;
+}
+
+:host ::ng-deep .p-panelmenu-header .p-panelmenu-header-link {
+  justify-content: center;
+  align-items: center;
+  background-color: $white-400;
+  border: none;
+
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+:host ::ng-deep .p-panelmenu-panel,
+:host ::ng-deep .p-panelmenu-content {
+  margin: 0;
+}
+
+:host ::ng-deep .p-panelmenu .p-panelmenu-content {
+  border: none;
+}
+
+:host ::ng-deep .p-element.p-menuitem .p-menuitem-link {
+  justify-content: center;
+  align-items: center;
+
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+//  Languages Block End

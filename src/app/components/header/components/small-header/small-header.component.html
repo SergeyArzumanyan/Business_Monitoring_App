@@ -28,6 +28,10 @@
         <div class="header-links-container"
              [ngClass]="{'visibility': menu}">
 
+          <div class="w-100 languages-wrapper flex justify-content-center align-items-center gap-10">
+            <p-panelMenu [model]="languageService.languagesList"></p-panelMenu>
+          </div>
+
           <li class="header-link"
               [routerLink]="['sweets']"
               routerLinkActive="active"

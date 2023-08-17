@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
 
 import { BehaviorSubject } from "rxjs";
-import { AuthService } from "@Core/services";
+
+import { AuthService, LanguageService } from "@Core/services";
 
 @Component({
   selector: 'app-large-header',
@@ -13,6 +14,8 @@ export class LargeHeaderComponent {
 
   public isAuthenticated: BehaviorSubject<boolean> = this.authService.authenticated;
 
-  constructor(private authService: AuthService) {}
-
+  constructor(
+    private authService: AuthService,
+    public languageService: LanguageService,
+  ) {}
 }

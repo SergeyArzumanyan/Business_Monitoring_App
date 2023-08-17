@@ -6,3 +6,4 @@ export * from './sending-data.service';
 export * from './toast.service';
 export * from './calculation.service';
 export * from './history.service';
+export * from './language.service';
