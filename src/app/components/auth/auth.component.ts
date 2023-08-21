@@ -5,6 +5,7 @@ import {
   AuthService,
   ToastService
 } from "@Core/services";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: 'app-auth',
@@ -20,7 +21,8 @@ export class AuthComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private toastService: ToastService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public translateService: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -33,7 +35,11 @@ export class AuthComponent implements OnInit {
     if (this.passwordInput.trim()) {
       !this.authService.checkPassword(this.passwordInput) ? this.passwordIsInvalid = true : this.passwordIsInvalid = false;
     } else {
-      this.toastService.showToast('error', 'Error', 'Input Is Empty');
+      this.toastService.showToast(
+        'error',
+        this.translateService.instant('Error'),
+        this.translateService.instant('InputIsEmpty')
+      );
     }
   }
 }

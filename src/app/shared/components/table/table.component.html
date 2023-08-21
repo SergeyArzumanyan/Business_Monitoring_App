@@ -72,7 +72,7 @@
             <td class="action-td skin-action-btn" (click)="EnableEditing(ArrayObject)">
               <i class="pi pi-pencil icon-sm"></i>
             </td>
-            <td class="action-td brown-action-btn" (click)="DeleteItem(ArrayObject)">
+            <td class="action-td brown-action-btn" (click)="DeleteItemConfirm(ArrayObject)">
               <i class="pi pi-trash icon-sm"></i>
             </td>
           </ng-container>
@@ -115,7 +115,7 @@
             [draggable]="false"
             [breakpoints]="{'1080px': '50vw','960px': '60vw', '640px': '85vw'}"
             [style]="{width: '450px'}"
-            [header]="('Edit ' + TableConfig.ItemName) | titlecase"
+            [header]="('EditItem' | translate: {key: TableConfig.ItemName | translate}) | titlecase"
             [modal]="true"
             (onHide)="HideEditDialog()"
             styleClass="p-fluid">
@@ -160,4 +160,22 @@
   </p-dialog>
 </ng-container>
 
-<p-confirmDialog [breakpoints]="{'650px': '85vw'}" [dismissableMask]="true"></p-confirmDialog>
+<p-confirmDialog #cd
+                 [dismissableMask]="true"
+                 [breakpoints]="{'650px': '85vw'}"
+>
+  <ng-template pTemplate="footer">
+    <button type="button"
+            pButton
+            icon="pi pi-times"
+            class="skin-action-btn"
+            [label]="translateService.instant('No')"
+            (click)="cd.reject()"></button>
+    <button type="button"
+            pButton
+            icon="pi pi-check"
+            class="brown-action-btn"
+            [label]="translateService.instant('Yes')"
+            (click)="cd.accept()"></button>
+  </ng-template>
+</p-confirmDialog>

@@ -12,6 +12,7 @@ import {
 import { TableService, TableSortingService } from "@Shared/components/table/services";
 import { ITableFilters, ITableFiltersObj } from "@Shared/components/table/filters/interfaces";
 import { TranslateService } from "@ngx-translate/core";
+import { ConfirmationService } from "primeng/api";
 
 @Component({
   selector: 'app-table',
@@ -52,6 +53,7 @@ export class TableComponent implements OnInit, OnDestroy {
     public TableService: TableService,
     public TableSortingService: TableSortingService,
     private router: Router,
+    private confirmationService: ConfirmationService,
     public translateService: TranslateService
   ) {}
 
@@ -181,5 +183,18 @@ export class TableComponent implements OnInit, OnDestroy {
     sortedItems.length > 0 ?
       this.TableConfig.TableItems = sortedItems :
       this.TableConfig.TableItems = this.TableService.InitialTableItems;
+  }
+
+  public DeleteItemConfirm(Item: any): void {
+      this.confirmationService.confirm({
+        message: this.translateService.instant('DeleteItemMessage',
+          {key: this.translateService.instant(this.TableConfig.ItemName), id: Item.ID}),
+        header: this.translateService.instant('DeleteItem',
+          {key: this.translateService.instant(this.TableConfig.ItemName)}),
+        icon: 'pi pi-trash icon-big',
+        accept: () => {
+          this.DeleteItem(Item);
+        },
+      });
   }
 }

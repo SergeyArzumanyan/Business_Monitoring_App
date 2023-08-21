@@ -7,6 +7,7 @@ import {
   RequestsService,
   ToastService
 } from "@Core/services";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: 'app-consumptions',
@@ -23,6 +24,7 @@ export class ConsumptionsComponent implements OnDestroy {
     private Request: RequestsService,
     private historyService: HistoryService,
     private toastService: ToastService,
+    public translateService: TranslateService
   ) {
     this.getConsumptions();
   }
@@ -54,7 +56,12 @@ export class ConsumptionsComponent implements OnDestroy {
         },
         error: () => {
           this.pending = false;
-          this.toastService.showToast('error', 'Error', 'Failed To Get Consumptions History.');
+          this.toastService.showToast(
+            'error',
+            this.translateService.instant('Error'),
+            this.translateService.instant('FailedToLoadItemsHistory',
+              {key: this.translateService.instant('Consumptions')})
+          );
         }
       })
   }

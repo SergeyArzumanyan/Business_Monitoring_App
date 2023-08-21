@@ -14,6 +14,7 @@ import {
   AuthService,
   ToastService
 } from "@Core/services";
+import { TranslateService } from "@ngx-translate/core";
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,8 @@ export class AuthGuard implements CanLoad, CanActivate {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private toastService: ToastService
+    private toastService: ToastService,
+    public translateService: TranslateService
   ) {}
 
   canLoad(
@@ -35,7 +37,11 @@ export class AuthGuard implements CanLoad, CanActivate {
     if (this.authService.authenticated.getValue() || sessionStorage.getItem('isAuthenticated')) {
       return true;
     } else {
-      this.toastService.showToast('error', 'Error', 'Access Denied');
+      this.toastService.showToast(
+        'error',
+        this.translateService.instant('Error'),
+        this.translateService.instant('AccessDenied')
+      );
       this.router.navigateByUrl('auth');
       return false;
     }
@@ -50,7 +56,11 @@ export class AuthGuard implements CanLoad, CanActivate {
     if (this.authService.authenticated.getValue() || sessionStorage.getItem('isAuthenticated')) {
       return true;
     } else {
-      this.toastService.showToast('error', 'Error', 'Access Denied');
+      this.toastService.showToast(
+        'error',
+        this.translateService.instant('Error'),
+        this.translateService.instant('AccessDenied')
+      );
       this.router.navigateByUrl('auth');
       return false;
     }

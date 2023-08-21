@@ -1,11 +1,11 @@
 <div class="w-100 h-100 wrapper flex justify-content-center align-items-center">
   <div class="container flex col justify-content-center align-items-center">
-    <span class="auth-header">Enter The Password</span>
+    <span class="auth-header">{{ 'EnterThePassword' | translate  }}</span>
     <div class="flex col gap-15">
       <p-password class="auth-input"
                   [toggleMask]="true"
                   [feedback]="false"
-                  placeholder="Enter the password.."
+                  [placeholder]="translateService.instant('EnterThePassword')"
                   (keydown.enter)="proceed()"
                   [ngClass]="{
                 'ng-invalid ng-dirty': passwordIsInvalid
@@ -14,7 +14,7 @@
       </p-password>
 
       <small class="p-error text-center" *ngIf="passwordIsInvalid">
-        Password is incorrect.
+        {{ 'IncorrectPassword' | translate }}
       </small>
     </div>
 
@@ -22,7 +22,7 @@
             (click)="proceed()"
             (keydown.enter)="proceed()">
       <span class="flex justify-content-center align-items-center gap-10">
-        Proceed
+        {{ 'Proceed' | translate }}
         <i class="fa-solid fa-arrow-right-long icon-sm"></i>
       </span>
     </button>

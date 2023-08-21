@@ -87,7 +87,11 @@ export class AddOrderComponent implements OnInit, OnDestroy {
           this.sweets = res[1] ? this.Request.MakeArrayFromFirebaseResponse(res[1]) : [];
         },
         error: () => {
-          this.toastService.showToast('error', 'Error', 'Failed To Get Necessary Data');
+          this.toastService.showToast(
+            'error',
+            this.translateService.instant('Error'),
+            this.translateService.instant('FailedToGetNecessaryData')
+          );
         }
       });
   }

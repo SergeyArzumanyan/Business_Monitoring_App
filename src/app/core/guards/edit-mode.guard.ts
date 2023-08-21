@@ -3,12 +3,16 @@ import { CanDeactivate } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { ConfirmationService } from "primeng/api";
+import { TranslateService } from "@ngx-translate/core";
 
 @Injectable({
   providedIn: 'root'
 })
 export class EditModeGuard implements CanDeactivate<any> {
-  constructor(private confirmationService: ConfirmationService) {}
+  constructor(
+    private confirmationService: ConfirmationService,
+    public translateService: TranslateService
+  ) {}
 
   canDeactivate(component: any): Observable<boolean> | Promise<boolean> | boolean {
     if (component.isEditMode || component.isFormDirty) {
@@ -22,8 +26,8 @@ export class EditModeGuard implements CanDeactivate<any> {
 
     return new Observable<boolean>((observer): void => {
       this.confirmationService.confirm({
-        message: 'Are you sure you want to discard your changes ?',
-        header: 'Discard Changes ?',
+        message: this.translateService.instant('DiscardChangesConfirm'),
+        header: this.translateService.instant('DiscardChangesMessage'),
         icon: 'fa-solid fa-circle-exclamation icon-big',
         accept: (): void => {
           observer.next(true); // Allow deactivation

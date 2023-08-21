@@ -1,7 +1,12 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Subject, takeUntil } from "rxjs";
 
-import { CalculationService, HistoryService, RequestsService, ToastService } from "@Core/services";
+import {
+  HistoryService,
+  RequestsService,
+  ToastService
+} from "@Core/services";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: 'app-profit',
@@ -20,6 +25,7 @@ export class ProfitComponent implements OnDestroy {
     private Request: RequestsService,
     private historyService: HistoryService,
     private toastService: ToastService,
+    public translateService: TranslateService
   ) {
     this.getOrdersToCalculateProfit();
   }
@@ -45,7 +51,12 @@ export class ProfitComponent implements OnDestroy {
           this.historyService.setTotalProfit();
         },
         error: () => {
-          this.toastService.showToast('error', 'Error', 'Failed To Get Orders.');
+          this.toastService.showToast(
+            'error',
+            this.translateService.instant('Error'),
+            this.translateService.instant('FailedToLoadItemsHistory',
+              {key: this.translateService.instant('Profit')})
+          );
           this.pending = false;
         }
       });

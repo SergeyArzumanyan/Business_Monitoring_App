@@ -7,6 +7,7 @@ import {
   ToastService
 } from "@Core/services";
 import { IOrder } from "@Core/interfaces";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: 'app-orders',
@@ -25,6 +26,7 @@ export class OrdersComponent implements OnDestroy {
     private Request: RequestsService,
     private historyService: HistoryService,
     private toastService: ToastService,
+    public translateService: TranslateService
   ) {
     this.getAllOrders();
   }
@@ -55,7 +57,12 @@ export class OrdersComponent implements OnDestroy {
           this.pending = false;
         },
         error: () => {
-          this.toastService.showToast('error', 'Error', 'Failed To Load Orders History');
+          this.toastService.showToast(
+            'error',
+            this.translateService.instant('Error'),
+            this.translateService.instant('FailedToLoadItemsHistory',
+              {key: this.translateService.instant('Orders')})
+          );
           this.pending = false;
         }
       });

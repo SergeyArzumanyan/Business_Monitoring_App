@@ -73,7 +73,12 @@ export class AddSweetComponent implements OnInit, OnDestroy {
           this.products = products ? this.Request.MakeArrayFromFirebaseResponse(products) : [];
         },
         error: () => {
-          this.toastService.showToast('error', 'Error', 'Something Went Wrong');
+          this.toastService.showToast(
+            'error',
+            this.translateService.instant('Error'),
+            this.translateService.instant('FailedToGetItems',
+              {key: this.translateService.instant('Product')})
+          );
         }
       });
   }

@@ -113,7 +113,12 @@ export class ClientsComponent implements OnInit, OnDestroy {
         },
         error: () => {
           this.pending = false;
-          this.toastService.showToast('error', 'Error', 'Failed To Get Products');
+          this.toastService.showToast(
+            'error',
+            this.translateService.instant('Error'),
+            this.translateService.instant('FailedToGetItems',
+              {key: this.translateService.instant('Clients')})
+          );
         }
       })
   }

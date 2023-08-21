@@ -1,4 +1,4 @@
-import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Subject, takeUntil } from "rxjs";
 
@@ -19,6 +19,7 @@ import {
 import { ITableFilters } from "app/shared/components/table/filters/interfaces";
 
 import { TableService } from '@Shared/components/table/services'
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: 'app-products',
@@ -85,6 +86,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     private Request: RequestsService,
     private toastService: ToastService,
     private TableService: TableService,
+    public translateService: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -109,7 +111,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
         },
         error: () => {
           this.pending = false;
-          this.toastService.showToast('error', 'Error', 'Failed To Get Products');
+          this.toastService.showToast(
+            'error',
+            this.translateService.instant('Error'),
+            this.translateService.instant('FailedToGetItems',
+              {key: this.translateService.instant('Product')})
+          );
         }
       })
   }

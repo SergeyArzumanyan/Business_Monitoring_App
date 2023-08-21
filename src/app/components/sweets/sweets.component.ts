@@ -62,7 +62,12 @@ export class SweetsComponent implements OnInit, OnDestroy {
         },
         error: () => {
           this.pending = false;
-          this.toastService.showToast('error', 'Error', 'Failed To Get Sweets');
+          this.toastService.showToast(
+            'error',
+            this.translateService.instant('Error'),
+            this.translateService.instant('FailedToGetItems',
+              {key: this.translateService.instant('Sweets')})
+          );
         }
       });
   }
@@ -81,9 +86,14 @@ export class SweetsComponent implements OnInit, OnDestroy {
               this.pending = false;
               this.calculationService.calculateSweetPriceInSweets(sweet, product, productOfSweet.Quantity);
             },
-            error: (err: HttpErrorResponse) => {
+            error: () => {
               this.pending = false;
-              this.toastService.showToast('error', 'Error', err.message);
+              this.toastService.showToast(
+                'error',
+                this.translateService.instant('Error'),
+                this.translateService.instant('FailedToGetItems',
+                  {key: this.translateService.instant('Products')})
+                );
             }
           })
       }
@@ -91,17 +101,23 @@ export class SweetsComponent implements OnInit, OnDestroy {
   }
 
   public deleteSweet(sweet: ISweet): void {
+    this.Request.GetItemFirebaseKey('sweets', 'ID', sweet.ID)
+      .pipe(take(1))
+      .subscribe((action: IFirebaseItemDeletion[]) => {
+        this.Deletion.RemoveItemByFirebaseKey('sweets', action[0].payload.key, 'Sweet');
+      });
+  }
+
+  public DeleteItemConfirm(sweet: ISweet): void {
     this.confirmationService.confirm({
-      message: 'Are you sure that you want to delete this sweet?',
-      header: 'Delete Sweet ?',
+      message: this.translateService.instant('DeleteItemMessage',
+        {key: this.translateService.instant(sweet.Name!), id: sweet.ID}),
+      header: this.translateService.instant('DeleteItem',
+        {key: this.translateService.instant(sweet.Name!)}),
       icon: 'pi pi-trash icon-big',
       accept: () => {
-        this.Request.GetItemFirebaseKey('sweets', 'ID', sweet.ID)
-          .pipe(take(1))
-          .subscribe((action: IFirebaseItemDeletion[]) => {
-            this.Deletion.RemoveItemByFirebaseKey('sweets', action[0].payload.key, 'Sweet');
-          });
-      }
+        this.deleteSweet(sweet);
+      },
     });
   }
 }

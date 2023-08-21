@@ -15,6 +15,7 @@ import {
   ToastService,
 } from "@Core/services";
 import { AbstractControl } from "@angular/forms";
+import { TranslateService } from "@ngx-translate/core";
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,7 @@ export class CalculationService {
     private Request: RequestsService,
     private Deletion: DeleteService,
     private toastService: ToastService,
+    public translateService: TranslateService
   ) {}
 
   public calcTotalSweetPrice(sweet: ISweet, productsOfSweet: ISweetProduct[]): void {
@@ -39,7 +41,11 @@ export class CalculationService {
             this.calculateSweetPrice(sweet, product[0].TotalPrice!);
           },
           error: () => {
-            this.toastService.showToast('error', 'Error', 'Failed To Do Some Calculations.');
+            this.toastService.showToast(
+              'error',
+              'Error',
+              this.translateService.instant('FailedToCalculate')
+            );
           }
         });
     }

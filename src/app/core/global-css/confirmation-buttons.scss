@@ -2,20 +2,21 @@
 
 //    No Button Start
 
-:host ::ng-deep .p-element.p-ripple.p-confirm-dialog-reject.p-button.p-component {
+:host ::ng-deep .p-element.skin-action-btn.p-button.p-component {
   background-color: $skin-action-btn-300 !important;
   color: $black;
   border: none;
 }
-:host ::ng-deep .p-element.p-ripple.p-confirm-dialog-reject.p-button.p-component:hover {
+:host ::ng-deep .p-element.skin-action-btn.p-button.p-component:hover {
   background-color: $skin-action-btn-200 !important;
 }
 
-:host ::ng-deep .p-element.p-ripple.p-confirm-dialog-reject.p-button.p-component:active {
+:host ::ng-deep .p-element.skin-action-btn.p-button.p-component:active {
   background-color: $skin-action-btn-100 !important;
 }
 
-:host ::ng-deep .p-element.p-ripple.p-confirm-dialog-reject.p-button.p-component:focus:focus-visible, :host ::ng-deep .p-element.p-ripple.p-confirm-dialog-reject.p-button.p-component:focus {
+:host ::ng-deep .p-element.skin-action-btn.p-button.p-component:focus:focus-visible,
+:host ::ng-deep .p-element.skin-action-btn.p-button.p-component.p-component:focus {
   box-shadow: 0 0 0 4px $brown-300 !important;
 }
 
@@ -24,21 +25,22 @@
 
 //    Yes Button Start
 
-:host ::ng-deep .p-element.p-ripple.p-confirm-dialog-accept.p-button.p-component {
+:host ::ng-deep .p-element.brown-action-btn.p-button.p-component {
   background-color: $brown-300 !important;
   color: $white-300 !important;
   border: none;
 }
 
-:host ::ng-deep .p-element.p-ripple.p-confirm-dialog-accept.p-button.p-component:hover {
+:host ::ng-deep .p-element.brown-action-btn.p-button.p-component:hover {
   background-color: $brown-200 !important;
 }
 
-:host ::ng-deep .p-element.p-ripple.p-confirm-dialog-accept.p-button.p-component:active {
+:host ::ng-deep .p-element.brown-action-btn.p-button.p-component:active {
   background-color: $brown-100 !important;
 }
 
-:host ::ng-deep .p-element.p-ripple.p-confirm-dialog-accept.p-button.p-component:focus:focus-visible, :host ::ng-deep .p-element.p-ripple.p-confirm-dialog-accept.p-button.p-component:focus {
+:host ::ng-deep .p-element.brown-action-btn.p-button.p-component:focus:focus-visible,
+:host ::ng-deep .p-element.brown-action-btn.p-button.p-component:focus {
   box-shadow: 0 0 0 4px $skin-100 !important;
 }
 

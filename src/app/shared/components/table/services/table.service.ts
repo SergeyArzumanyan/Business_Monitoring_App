@@ -35,28 +35,24 @@ export class TableService {
   ) {}
 
   public DeleteItem(TableConfigs: ITableConfig<any>, Item: any): void {
-    this.confirmationService.confirm({
-      message: this.translateService.instant('DeleteItemMessage',
-        {key: this.translateService.instant(TableConfigs.ItemName), id: Item.ID}),
-      header: this.translateService.instant('DeleteItem',
-        {key: this.translateService.instant(TableConfigs.ItemName)}),
-      icon: 'pi pi-trash icon-big',
-      accept: (): void => {
-        this.Request.GetItemFirebaseKey(TableConfigs.ItemEndPoint, 'ID', Item.ID)
-          .pipe(take(1))
-          .subscribe({
-            next: (action: IFirebaseItemDeletion[]): void => {
-              this.Deletion.RemoveItemByFirebaseKey(TableConfigs.ItemEndPoint, action[0].payload.key, TableConfigs.ItemName)
-                .then((): void => {
-                  this.InitialTableItems = TableConfigs.TableItems;
-                });
-            },
-            error: (): void => {
-              this.toastService.showToast('error', 'Error', 'Something Went Wrong.');
-            }
-          });
-      }
-    });
+    this.Request.GetItemFirebaseKey(TableConfigs.ItemEndPoint, 'ID', Item.ID)
+      .pipe(take(1))
+      .subscribe({
+        next: (action: IFirebaseItemDeletion[]): void => {
+          this.Deletion.RemoveItemByFirebaseKey(TableConfigs.ItemEndPoint, action[0].payload.key, TableConfigs.ItemName)
+            .then((): void => {
+              this.InitialTableItems = TableConfigs.TableItems;
+            });
+        },
+        error: (): void => {
+          this.toastService.showToast(
+            'error',
+            this.translateService.instant('Error'),
+            this.translateService.instant('FailedToDeleteItem',
+              {key: this.translateService.instant(TableConfigs.ItemName)})
+          );
+        }
+      });
   }
 
   public EnableTableRowEdit(Item: any): void {
@@ -76,11 +72,21 @@ export class TableService {
         this.Edition.UpdateItemByFirebaseKey(`${TableConfigs.ItemEndPoint}`, ItemNewValue, items[0].key)
           .then((): boolean => {
             this.InitialTableItems =TableConfigs.TableItems;
-            this.toastService.showToast('success', 'Done', `${TableConfigs.ItemName} Edited Successfully.`);
+            this.toastService.showToast(
+              'success',
+              this.translateService.instant('Done'),
+              this.translateService.instant('FailedToEditItem',
+                {key: this.translateService.instant(TableConfigs.ItemName)})
+            );
             return true;
           })
           .catch((): boolean => {
-            this.toastService.showToast('error', 'Error', 'Something Went Wrong.');
+            this.toastService.showToast(
+              'error',
+              this.translateService.instant('Error'),
+              this.translateService.instant('FailedToEditItem',
+                {key: this.translateService.instant(TableConfigs.ItemName)})
+            );
             return false;
           });
       });

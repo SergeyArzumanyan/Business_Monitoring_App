@@ -3,13 +3,18 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTr
 import { Observable } from 'rxjs';
 
 import { ToastService } from "@Core/services";
+import { TranslateService } from "@ngx-translate/core";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthRouteGuard implements CanActivate {
 
-  constructor(private router: Router, private toastService: ToastService) {}
+  constructor(
+    private router: Router,
+    private toastService: ToastService,
+    public translateService: TranslateService
+  ) {}
 
   canActivate(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -20,7 +25,11 @@ export class AuthRouteGuard implements CanActivate {
     if (!sessionStorage.getItem('isAuthenticated')) {
       return true;
     } else {
-      this.toastService.showToast('error', 'Error', 'Already Authenticated');
+      this.toastService.showToast(
+        'error',
+        this.translateService.instant('Error'),
+        this.translateService.instant('AlreadyAuthenticated')
+      );
       this.router.navigateByUrl('sweets');
       return false;
     }
