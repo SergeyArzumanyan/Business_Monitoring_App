@@ -132,7 +132,6 @@ export class CalculationService {
   }
 
   public CalculateTotal(items: any[], totalKey: string, subTotalKey?: string): number {
-    console.log(items);
     if (items.length === 0) {
       return 0;
     }
