@@ -1,4 +1,8 @@
 {
+  "projects": {
+    "default": "truffle-sweets",
+    "truffle-sweets-prod": "truffle-sweets-prod"
+  },
   "targets": {
     "truffle-sweets": {
       "hosting": {
@@ -6,9 +10,13 @@
           "truffle-sweets"
         ]
       }
+    },
+    "truffle-sweets-prod": {
+      "hosting": {
+        "truffle-sweets": [
+          "truffle-sweets-prod"
+        ]
+      }
     }
-  },
-  "projects": {
-    "default": "truffle-sweets"
   }
 }
