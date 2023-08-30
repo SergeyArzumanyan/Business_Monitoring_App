@@ -109,5 +109,8 @@
   "DiscardChangesConfirm": "Are you sure you want to discard your changes ?",
   "DiscardChangesMessage": "Discard changes ?",
   "AlreadyAuthenticated": "Already authenticated",
-  "InputIsEmpty": "Input is empty"
+  "InputIsEmpty": "Input is empty",
+  "EachProfit": "Each Profit",
+  "EachPrice": "Each Price",
+  "Total": "Total"
 }

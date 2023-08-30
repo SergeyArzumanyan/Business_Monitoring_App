@@ -54,6 +54,8 @@ export class OrdersComponent implements OnDestroy {
               )
           );
 
+          this.historyService.RefreshHistoryTotals();
+
           this.pending = false;
         },
         error: () => {

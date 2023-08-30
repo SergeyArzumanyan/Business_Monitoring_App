@@ -108,5 +108,8 @@
   "DiscardChangesConfirm": "Իսկապե՞ս ուզում եք չեղարկել ձեր փոփոխությունները",
   "DiscardChangesMessage": "Հրաժարվե՞լ փոփոխություններից",
   "AlreadyAuthenticated": "Արդեն իսկ վավերացված է",
-  "InputIsEmpty": "դաշտը դատարկ է"
+  "InputIsEmpty": "դաշտը դատարկ է",
+  "EachProfit": "Յուրաքանչյուրի եկամուտը",
+  "EachPrice": "Յուրաքանչյուրի գինը",
+  "Total": "Ընդհանուր"
 }

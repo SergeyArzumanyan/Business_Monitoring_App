@@ -130,6 +130,8 @@ export class ViewHistoryComponent implements OnInit, OnDestroy {
               )
           );
 
+          this.historyService.RefreshHistoryTotals();
+
           this.Pending = false;
         },
         error: () => {
@@ -143,14 +145,16 @@ export class ViewHistoryComponent implements OnInit, OnDestroy {
     this.selectedPeriod = e.value.length ? [e.value[e.value.length - 1]] : [];
 
     this.historyService.SelectedPeriod.next(
-      this.selectedPeriod[0]?.Name ? this.selectedPeriod[0].Name : 'Today'
+      this.selectedPeriod[0]?.Name ? this.selectedPeriod[0].Name : ''
     );
 
     this.historyService.RefreshHistoryItems();
+    this.historyService.RefreshHistoryTotals();
+
     if (!e.value[0]) {
       this.historyService.FilteredHistoryItems.next([]);
       this.historyService.HistoryItemsTotalProfit.next(0);
-      this.historyService.HistoryItemsTotalConsumptions.next(0);
+      this.historyService.HistoryItemsTotalConsumptions$.next(0);
     }
   }
 

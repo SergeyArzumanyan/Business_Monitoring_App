@@ -43,6 +43,14 @@
             {{ historyService.FilteredHistoryItems.getValue().length }}
           </span>
         </div>
+        <div class="total-orders-count flex gap-5">
+          <span class="total-count">
+            {{ 'Total' | translate }}:
+          </span>
+          <span class="total-count">
+            {{ historyService.HistoryItemsTotal$.getValue() }}
+          </span>
+        </div>
       </ng-container>
 
       <ng-container *ngIf="historyService.IsInProfitPage.getValue()">
@@ -68,7 +76,7 @@
           </span>
           <div class="consumption-info-wrapper flex gap-5">
             <span class="total-consumption">
-              {{ historyService.HistoryItemsTotalConsumptions.getValue() }}
+              {{ historyService.HistoryItemsTotalConsumptions$.getValue() }}
             </span>
             <span class="total-consumption-currency">
               AMD
@@ -78,45 +86,54 @@
       </ng-container>
     </div>
 
-    <ng-container *ngIf="Pending">
-      <div class="messages-wrapper w-100 flex gap-10 justify-content-center align-items-center">
-        <span class="message-text">{{ 'PleaseWait' | translate }}</span>
-        <p-progressSpinner class="p-progress-path"></p-progressSpinner>
-      </div>
-    </ng-container>
-
     <ng-container *ngIf="!Pending && selectedPeriod.length && historyService.FilteredHistoryItems.getValue().length">
       <div class="w-100 p-15 period-card flex col gap-25"
            *ngFor="let HistoryItem of historyService.FilteredHistoryItems | async">
 
         <div class="w-100 h-100 date-wrapper flex justify-content-between">
-        <span class="date-day">
-          {{ HistoryItem.DateOfPurchase | date : 'EEEE MMMM d' }}
-        </span>
+          <span class="date-day">
+            {{ HistoryItem.DateOfPurchase | date : 'EEEE MMMM d' }}
+          </span>
 
           <span class="date-time">
-          {{ HistoryItem.DateOfPurchase | date : 'HH:mm:ss a' }}
-        </span>
+            {{ HistoryItem.DateOfPurchase | date : 'HH:mm:ss a' }}
+          </span>
         </div>
 
         <ng-container *ngIf="historyService.IsInOrdersPage.getValue() || RouteClientID">
-          <div class="w-100 order-info-wrapper flex justify-content-between">
-            <div class="h-100 client-info-wrapper flex col gap-10">
-              <div class="client-info flex gap-10">
+          <div class="w-100 order-info-wrapper flex col gap-15 justify-content-between">
+            <div class="h-100 card-info-section flex col gap-15">
+              <div class="w-100 client-info flex gap-10 justify-content-between align-items-center">
                 <span class="client">
-                  {{ 'Client' | translate }}:
+                  {{ 'Client' | translate }}
                 </span>
                 <span class="client-name" [pTooltip]="HistoryItem.Client!">
                   {{ HistoryItem.Client }}
                 </span>
               </div>
 
-              <div class="order-delivery-wrapper flex gap-5">
-                <span class="delivery">
-                  {{ 'Delivery' | translate }}:
+              <div class="w-100 order-total-price-info flex gap-5 justify-content-between align-items-center">
+                <span class="total-price">
+                  {{ 'TotalPrice' | translate }}
                 </span>
-                <span class="delivery-price flex gap-5 justify-content-center align-items-center">
-                  <span class="price">
+
+                <span class="order-total-price-wrapper flex gap-5">
+                  <span class="order-price">
+                    {{ HistoryItem.TotalPrices.OrderTotalPrice }}
+                  </span>
+                  <span class="price-currency">
+                    AMD
+                  </span>
+                </span>
+              </div>
+
+              <div class="w-100 order-total-price-info flex gap-5 justify-content-between align-items-center">
+                <span class="total-price">
+                  {{ 'DeliveryPrice' | translate }}
+                </span>
+
+                <span class="order-total-price-wrapper flex gap-5">
+                  <span class="order-price">
                     {{ HistoryItem.DeliveryPrice }}
                   </span>
                   <span class="price-currency">
@@ -124,55 +141,44 @@
                   </span>
                 </span>
               </div>
-
-              <div class="order-total-price-info flex gap-5 justify-content-end align-items-center">
-                <span class="total-price">
-                  {{ 'TotalPrice' | translate }}:
-                </span>
-
-                <span class="order-total-price-wrapper flex gap-5">
-                  <span class="order-price">
-                    {{ HistoryItem.TotalPrices!.OrderTotalPrice }}
-                  </span>
-                  <span class="price-currency">
-                    AMD
-                  </span>
-                </span>
-              </div>
             </div>
 
-            <div class="sweet-info-wrapper flex col gap-10 p-10">
-                <span class="text-right">
-                  {{ 'Sweets' | translate }}
+            <div class="item-profit-info-wrapper flex col gap-15 p-10">
+                <span class="order-items-sub-header text-center">
+                  {{ 'Sweets' | translate }} ({{ 'EachPrice' | translate }})
                 </span>
 
-              <div class="order-sweet flex gap-15 justify-content-end align-items-center"
-                   *ngFor="let sweet of HistoryItem.Sweets">
-                <span class="sweet-name" [pTooltip]="sweet.Name">
-                  {{ sweet.Name }}
-                </span>
+              <div class="order-items-wrapper flex col gap-15 justify-content-center align-items-center">
+                <div class="w-100 order-sweet flex gap-15 justify-content-between align-items-center"
+                     *ngFor="let sweet of HistoryItem.Sweets">
+                  <span class="item-name" [pTooltip]="sweet.Name">
+                    (x{{ sweet.Quantity }}) {{ sweet.Name }}
+                  </span>
 
-                <span class="sweet-price-wrapper flex gap-5 justify-content-center align-items-center">
-                  <span class="sweet-price">
-                    {{ sweet.PriceWhenOrdered }}
+                  <span class="order-price-wrapper flex gap-5 justify-content-center align-items-center">
+                    <span class="item-price">
+                      {{ sweet.PriceWhenOrdered * sweet.Quantity }}
+                    </span>
+                    <span class="price-currency">
+                      AMD
+                    </span>
                   </span>
-                  <span class="price-currency">
-                    AMD
-                  </span>
-                </span>
+                </div>
               </div>
             </div>
           </div>
         </ng-container>
 
         <ng-container *ngIf="historyService.IsInConsumptionsPage.getValue()">
-          <div class="w-100 flex justify-content-between align-items-center">
+          <div class="w-100 card-consumption-info flex justify-content-between align-items-center">
             <span>
               {{ 'You' | translate }}
             </span>
 
-            <div class="flex gap-10">
-              <span class="consumption-item-name">
+            <div class="flex item-consumption-info gap-10">
+              <span class="consumption-item-name"
+                    [pTooltip]="HistoryItem.Name"
+              >
                 {{ HistoryItem.Name }}
               </span>
 
@@ -187,22 +193,21 @@
           </div>
         </ng-container>
 
-
         <ng-container *ngIf="historyService.IsInProfitPage.getValue()">
-          <div class="w-100 order-info-wrapper flex justify-content-between">
-            <div class="h-100 client-info-wrapper flex col gap-10">
-              <div class="client-info flex gap-10">
+          <div class="w-100 order-info-wrapper flex col gap-15 justify-content-between">
+            <div class="h-100 card-info-section flex col gap-15">
+              <div class="w-100 client-info flex gap-10 justify-content-between align-items-center">
                 <span class="client">
-                  {{ 'Client' | translate }}:
+                  {{ 'Client' | translate }}
                 </span>
                 <span class="client-name" [pTooltip]="HistoryItem.Client!">
                   {{ HistoryItem.Client }}
                 </span>
               </div>
 
-              <div class="order-total-price-info flex gap-5 justify-content-end align-items-center">
+              <div class="w-100 order-total-price-info flex gap-5 justify-content-between align-items-center">
                 <span class="total-price">
-                  {{ 'Profit' | translate }}:
+                  {{ 'TotalProfit' | translate }}
                 </span>
 
                 <span class="order-total-price-wrapper flex gap-5">
@@ -216,29 +221,38 @@
               </div>
             </div>
 
-            <div class="sweet-profit-info-wrapper flex col gap-10 p-10">
-                <span class="text-right">
-                  {{ 'Sweets' | translate }} ({{ 'TotalPrice' | translate }})
+            <div class="item-profit-info-wrapper flex col gap-15 p-10">
+                <span class="order-items-sub-header text-center">
+                  {{ 'Sweets' | translate }} ({{ 'EachProfit' | translate }})
                 </span>
 
-              <div class="order-sweet flex gap-15 justify-content-end align-items-center"
-                   *ngFor="let sweet of HistoryItem.Sweets">
-                <span class="sweet-name" [pTooltip]="sweet.Name">
-                  {{ sweet.Name }}
-                </span>
+              <div class="order-items-wrapper flex col gap-15 justify-content-center align-items-center">
+                <div class="w-100 order-sweet flex gap-15 justify-content-between align-items-center"
+                     *ngFor="let sweet of HistoryItem.Sweets">
+                  <span class="item-name" [pTooltip]="sweet.Name">
+                    (x{{ sweet.Quantity }}) {{ sweet.Name }}
+                  </span>
 
-                <span class="sweet-price-wrapper flex gap-5 justify-content-center align-items-center">
-                  <span class="sweet-price">
-                    {{ sweet.Profit }}
+                  <span class="order-price-wrapper flex gap-5 justify-content-center align-items-center">
+                    <span class="item-price">
+                      {{ sweet.Profit * sweet.Quantity }}
+                    </span>
+                    <span class="price-currency">
+                      AMD
+                    </span>
                   </span>
-                  <span class="price-currency">
-                    AMD
-                  </span>
-                </span>
+                </div>
               </div>
             </div>
           </div>
         </ng-container>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="Pending">
+      <div class="messages-wrapper w-100 flex gap-10 justify-content-center align-items-center">
+        <span class="message-text">{{ 'PleaseWait' | translate }}</span>
+        <p-progressSpinner class="p-progress-path"></p-progressSpinner>
       </div>
     </ng-container>
 

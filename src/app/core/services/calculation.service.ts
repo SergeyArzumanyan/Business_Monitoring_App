@@ -131,23 +131,20 @@ export class CalculationService {
     }
   }
 
-  public CalculateOrdersTotalProfit(orders: IOrder[]): number {
-    let total: number = 0;
-
-    for (const order of orders) {
-      for (const sweet of order.Sweets!) {
-        total += sweet.Profit!;
-      }
+  public CalculateTotal(items: any[], totalKey: string, subTotalKey?: string): number {
+    console.log(items);
+    if (items.length === 0) {
+      return 0;
     }
 
-    return total;
-  }
+    let total: number =  0;
 
-  public CalculateOrdersTotalConsumptions(consumptions: IConsumption[]): number {
-    let total: number = 0;
-
-    for (const consumption of consumptions) {
-      total += consumption.Price!;
+    for (const item of items) {
+      if (!subTotalKey) {
+        total += item[totalKey];
+      } else {
+        total += item[totalKey][subTotalKey];
+      }
     }
 
     return total;

@@ -11,8 +11,9 @@ export class HistoryService {
   public HistoryItems: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   public FilteredHistoryItems: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
 
+  public HistoryItemsTotal$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public HistoryItemsTotalProfit: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-  public HistoryItemsTotalConsumptions: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  public HistoryItemsTotalConsumptions$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
   public SelectedPeriod: BehaviorSubject<string> = new BehaviorSubject<string>(this.translateService.instant('Today'));
 
@@ -63,8 +64,9 @@ export class HistoryService {
     this.IsInConsumptionsPage.next(false);
     this.IsInProfitPage.next(false);
 
+    this.HistoryItemsTotal$.next(0);
     this.HistoryItemsTotalProfit.next(0);
-    this.HistoryItemsTotalConsumptions.next(0);
+    this.HistoryItemsTotalConsumptions$.next(0);
   }
 
   private filterForToday(historyItems: any[]): any[] {
@@ -154,7 +156,7 @@ export class HistoryService {
       case this.translateService.instant('ThisYear'):
         return clientId ? this.filterForClient(clientId, this.filterForOneYear(historyItems)) : this.filterForOneYear(historyItems);
       default:
-        return clientId ? this.filterForClient(clientId, this.filterForToday(historyItems)) : this.filterForToday(historyItems);
+        return [];
     }
   }
 
@@ -162,17 +164,16 @@ export class HistoryService {
     return historyItems.filter(historyItem => Number(historyItem.ClientID) === Number(clientId));
   }
 
-  public setTotalProfit(): void {
-    this.HistoryItemsTotalProfit.next(
-      this.calculationsService
-        .CalculateOrdersTotalProfit(this.FilteredHistoryItems.getValue())
-    );
-  }
+  public setTotal(obs$: BehaviorSubject<number>, totalKey: string, subTotalKey?: string): void {
+    if (subTotalKey) {
+      obs$.next(
+        this.calculationsService.CalculateTotal(this.FilteredHistoryItems.getValue(), totalKey, subTotalKey)
+      );
+      return;
+    }
 
-  public setTotalConsumptions(): void {
-    this.HistoryItemsTotalConsumptions.next(
-      this.calculationsService
-        .CalculateOrdersTotalConsumptions(this.FilteredHistoryItems.getValue())
+    obs$.next(
+      this.calculationsService.CalculateTotal(this.FilteredHistoryItems.getValue(), totalKey)
     );
   }
 
@@ -183,10 +184,26 @@ export class HistoryService {
       this.SelectedClientID.getValue()
     ));
 
-    if (this.IsInProfitPage.getValue()) {
-      this.setTotalProfit();
+    this.RefreshHistoryTotals();
+  }
+
+  public RefreshHistoryTotals(): void {
+    if (!this.IsInProfitPage.getValue() && !this.IsInConsumptionsPage.getValue()) {
+      this.setTotal(
+        this.HistoryItemsTotal$,
+        'TotalPrices',
+        'OrderTotalPrice'
+      );
+    } else if (this.IsInProfitPage.getValue()) {
+      this.setTotal(
+        this.HistoryItemsTotalProfit,
+        'Profit'
+      );
     } else if (this.IsInConsumptionsPage.getValue()) {
-      this.setTotalConsumptions();
+      this.setTotal(
+        this.HistoryItemsTotalConsumptions$,
+        'Price'
+      );
     }
   }
 }

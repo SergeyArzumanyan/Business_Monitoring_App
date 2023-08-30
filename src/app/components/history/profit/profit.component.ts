@@ -48,7 +48,7 @@ export class ProfitComponent implements OnDestroy {
             )
           );
 
-          this.historyService.setTotalProfit();
+          this.historyService.RefreshHistoryTotals();
         },
         error: () => {
           this.toastService.showToast(

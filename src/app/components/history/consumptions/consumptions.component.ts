@@ -52,7 +52,10 @@ export class ConsumptionsComponent implements OnDestroy {
             )
           );
 
-          this.historyService.setTotalConsumptions();
+          this.historyService.setTotal(
+            this.historyService.HistoryItemsTotalConsumptions$,
+            'Price'
+          );
         },
         error: () => {
           this.pending = false;

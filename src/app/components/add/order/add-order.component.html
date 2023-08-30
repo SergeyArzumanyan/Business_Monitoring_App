@@ -72,7 +72,7 @@
                            formControlName="Quantity"
                            (onInput)="orderSelectionChangedWithInput($event)"
                            [step]="0.25"
-                           [min]="0.5"
+                           [min]="0.25"
                            [ngClass]="{'ng-invalid ng-dirty': getFormGroup(i).controls['Quantity'].invalid}"
                            incrementButtonIcon="pi pi-plus"
                            decrementButtonIcon="pi pi-minus"

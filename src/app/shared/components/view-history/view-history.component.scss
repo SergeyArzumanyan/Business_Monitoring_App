@@ -26,6 +26,109 @@
   min-width: 200px !important;
 }
 
+.period-card {
+  background-color: $white-200;
+  min-height: 75px;
+  border-radius: $borderRadius;
+  box-shadow: 6px 5px 2px 2px $white-100;
+
+  .date-wrapper .date-day {
+    padding-bottom: 5px;
+    border-bottom: 2px solid $skin-100;
+    border-radius: 2px;
+  }
+
+  .order-info-wrapper {
+    .client-info-wrapper .client-info span {
+      font-size: $medium;
+    }
+
+    .client-info-wrapper .order-delivery-wrapper span {
+      font-size: $medium;
+    }
+
+    .client-info-wrapper .order-total-price-info span {
+      font-size: $medium;
+    }
+
+    .item-profit-info-wrapper .order-items-sub-header {
+      padding-bottom: 4px;
+      border-bottom: 2px solid $skin-100;
+    }
+
+    .item-profit-info-wrapper .order-items-wrapper {
+        max-height: 150px;
+        overflow-y: auto;
+    }
+
+    .item-profit-info-wrapper .order-sweets .order-item span {
+        user-select: none;
+        font-size: $medium;
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .wrapper .container .history-topbar-wrapper,
+  .wrapper .container .period-client-selects-wrapper {
+    flex-direction: column;
+  }
+
+  .history-topbar-wrapper .total-orders-count,
+  .history-topbar-wrapper .total-consumption-wrapper {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .date-wrapper span {
+    font-size: $small;
+  }
+
+  .card-info-section .client-info span {
+    user-select: none;
+    font-size: $small;
+  }
+
+  .card-info-section .order-total-price-info span {
+    font-size: $small;
+  }
+
+  .order-info-wrapper .item-profit-info-wrapper span {
+    user-select: none;
+    font-size: $small !important;
+  }
+
+  .order-items-wrapper {
+    .order-item .item-name {
+      text-wrap: nowrap;
+      max-width: 120px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .order-item span {
+      font-size: $small !important;
+    }
+
+    .item-price-wrapper .item-price {
+      text-wrap: nowrap;
+    }
+  }
+
+  .card-consumption-info span,
+  .card-consumption-info .item-consumption-info span {
+    font-size: $small !important;
+    text-wrap: nowrap;
+  }
+
+  .card-consumption-info .item-consumption-info .consumption-item-name {
+    user-select: none;
+    max-width: 100px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}
+
 @media (max-width: 600px) {
   .wrapper {
     align-items: flex-start !important;
@@ -49,136 +152,6 @@
     .total-consumption-wrapper {
       text-wrap: nowrap;
       font-size: $small !important;
-    }
-  }
-}
-
-.period-card {
-  background-color: $white-200;
-  min-height: 75px;
-  border-radius: $borderRadius;
-  box-shadow: 6px 5px 2px 2px $white-100;
-
-  .date-wrapper {
-    .date-day {
-      padding-bottom: 5px;
-      border-bottom: 2px solid $skin-100;
-      border-radius: 2px;
-    }
-  }
-
-  .order-info-wrapper {
-    .client-info-wrapper {
-      .client-info {
-        span {
-          font-size: $medium !important;
-        }
-      }
-
-      .order-delivery-wrapper {
-        span {
-          font-size: $medium !important;
-        }
-      }
-
-      .order-total-price-info {
-        span {
-          font-size: $medium;
-        }
-      }
-    }
-
-    .sweet-info-wrapper, .sweet-profit-info-wrapper {
-      max-height: 150px;
-      overflow-y: auto;
-
-      .order-sweet {
-        span {
-          font-size: $medium;
-        }
-      }
-    }
-
-    .sweet-profit-info-wrapper {
-      max-height: 70px;
-    }
-  }
-}
-
-@media (max-width: 900px) {
-  .wrapper {
-    .container {
-      .period-client-selects-wrapper, .history-topbar-wrapper {
-        flex-direction: column !important;
-      }
-    }
-  }
-  .period-card {
-    .date-wrapper {
-      span {
-        font-size: $small !important;
-      }
-    }
-
-    .order-info-wrapper {
-      .client-info-wrapper {
-        .client-info {
-          .client-name {
-            max-width: 75px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-          }
-
-          span {
-            font-size: $small !important;
-          }
-        }
-
-        .order-delivery-wrapper {
-          .delivery-price {
-            flex-direction: column !important;
-          }
-
-          span {
-            font-size: $small !important;
-          }
-        }
-
-        .order-total-price-info {
-          .order-total-price-wrapper {
-            justify-content: center !important;
-            flex-direction: column !important;
-          }
-
-          span {
-            font-size: $small !important;
-          }
-        }
-      }
-
-      .sweet-info-wrapper {
-        span {
-          font-size: $small !important;
-        }
-
-        .order-sweet {
-          .sweet-name {
-            max-width: 120px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-          }
-
-          .sweet-price-wrapper {
-            flex-direction: column !important;
-          }
-
-          span {
-            font-size: $small !important;
-          }
-        }
-      }
     }
   }
 }
