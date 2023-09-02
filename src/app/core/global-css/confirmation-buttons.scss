@@ -2,22 +2,22 @@
 
 //    No Button Start
 
-:host ::ng-deep .p-element.skin-action-btn.p-button.p-component {
-  background-color: $skin-action-btn-300 !important;
+:host ::ng-deep .p-element.primary-action-btn.p-button.p-component {
+  background-color: $primary-action-btn-300 !important;
   color: $black;
   border: none;
 }
-:host ::ng-deep .p-element.skin-action-btn.p-button.p-component:hover {
-  background-color: $skin-action-btn-200 !important;
+:host ::ng-deep .p-element.primary-action-btn.p-button.p-component:hover {
+  background-color: $primary-action-btn-200 !important;
 }
 
-:host ::ng-deep .p-element.skin-action-btn.p-button.p-component:active {
-  background-color: $skin-action-btn-100 !important;
+:host ::ng-deep .p-element.primary-action-btn.p-button.p-component:active {
+  background-color: $primary-action-btn-100 !important;
 }
 
-:host ::ng-deep .p-element.skin-action-btn.p-button.p-component:focus:focus-visible,
-:host ::ng-deep .p-element.skin-action-btn.p-button.p-component.p-component:focus {
-  box-shadow: 0 0 0 4px $brown-300 !important;
+:host ::ng-deep .p-element.primary-action-btn.p-button.p-component:focus:focus-visible,
+:host ::ng-deep .p-element.primary-action-btn.p-button.p-component.p-component:focus {
+  box-shadow: 0 0 0 4px $secondary-300 !important;
 }
 
 //    No Button End
@@ -25,23 +25,23 @@
 
 //    Yes Button Start
 
-:host ::ng-deep .p-element.brown-action-btn.p-button.p-component {
-  background-color: $brown-300 !important;
+:host ::ng-deep .p-element.secondary-action-btn.p-button.p-component {
+  background-color: $secondary-300 !important;
   color: $white-300 !important;
   border: none;
 }
 
-:host ::ng-deep .p-element.brown-action-btn.p-button.p-component:hover {
-  background-color: $brown-200 !important;
+:host ::ng-deep .p-element.secondary-action-btn.p-button.p-component:hover {
+  background-color: $secondary-200 !important;
 }
 
-:host ::ng-deep .p-element.brown-action-btn.p-button.p-component:active {
-  background-color: $brown-100 !important;
+:host ::ng-deep .p-element.secondary-action-btn.p-button.p-component:active {
+  background-color: $secondary-100 !important;
 }
 
-:host ::ng-deep .p-element.brown-action-btn.p-button.p-component:focus:focus-visible,
-:host ::ng-deep .p-element.brown-action-btn.p-button.p-component:focus {
-  box-shadow: 0 0 0 4px $skin-100 !important;
+:host ::ng-deep .p-element.secondary-action-btn.p-button.p-component:focus:focus-visible,
+:host ::ng-deep .p-element.secondary-action-btn.p-button.p-component:focus {
+  box-shadow: 0 0 0 4px $primary-100 !important;
 }
 
 //    Yes Button End

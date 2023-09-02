@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 
 import { IClient, IClientForm } from "@Core/interfaces";
 import { onlyWhiteSpaceValidator } from "@Core/validators";
-import { SendingDataService } from "@Core/services";
+import { SendingDataService, TitleService } from "@Core/services";
 import { TranslateService } from "@ngx-translate/core";
 
 @Component({
@@ -42,8 +42,11 @@ export class AddClientComponent {
 
   constructor(
     private Send: SendingDataService,
+    private titleService: TitleService,
     public translateService: TranslateService
-    ) {}
+    ) {
+    this.titleService.setTitle(this.translateService.instant('Add'), this.translateService.instant('Client'));
+  }
 
   public onAdd(): void {
     if (this.addClientForm.valid) {

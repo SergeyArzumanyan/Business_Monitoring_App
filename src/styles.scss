@@ -26,16 +26,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background-color: $skin-action-btn-300;
+  background-color: $primary-action-btn-300;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: $skin-action-btn-200;
+  background-color: $primary-action-btn-200;
   cursor: pointer;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: $skin-action-btn-disabled;
+  background-color: $primary-action-btn-disabled;
 }
 
 
@@ -89,12 +89,12 @@ input::-webkit-inner-spin-button {
   //    InputText Start
 
 .p-inputtext:hover, .p-multiselect.p-component:hover {
-  border: 1px solid $skin-100 !important;
+  border: 1px solid $primary-100 !important;
 }
 
 .p-inputtext:focus, .p-multiselect:not(.p-disabled).p-focus {
-  border: 1px solid $skin-100 !important;
-  box-shadow: 0 0 0 3px $skin-300 !important;
+  border: 1px solid $primary-100 !important;
+  box-shadow: 0 0 0 3px $primary-300 !important;
 }
 
   //    InputText End
@@ -103,21 +103,21 @@ input::-webkit-inner-spin-button {
   //    Checkbox Start
 
 .p-checkbox-box:hover {
-  border-color: $skin-100 !important;
+  border-color: $primary-100 !important;
 }
 
 .p-checkbox:not(p-checkbox-disabled) .p-checkbox-box.p-focus {
-  border: 1px solid $skin-100 !important;
-  box-shadow: 0 0 0 3px $skin-300 !important;
+  border: 1px solid $primary-100 !important;
+  box-shadow: 0 0 0 3px $primary-300 !important;
 }
 
 .p-checkbox-box.p-highlight {
-  background-color: $skin-100 !important;
-  border: 1px solid $brown-300 !important;
+  background-color: $primary-100 !important;
+  border: 1px solid $secondary-300 !important;
 }
 
 .p-checkbox-icon {
-  color: $brown-100 !important;
+  color: $secondary-100 !important;
 }
 
   //    Checkbox End
@@ -137,7 +137,7 @@ input::-webkit-inner-spin-button {
 }
 
 .p-multiselect-close:focus {
-  box-shadow: 0 0 0 3px $skin-300 !important;
+  box-shadow: 0 0 0 3px $primary-300 !important;
 }
 
 .p-multiselect-empty-message {
@@ -152,11 +152,11 @@ input::-webkit-inner-spin-button {
 }
 
 .p-multiselect-item.p-highlight span {
-  color: $brown-100 !important;
+  color: $secondary-100 !important;
 }
 
 .p-multiselect-item:focus {
-  box-shadow: 0 0 0 3px $skin-300 !important;
+  box-shadow: 0 0 0 3px $primary-300 !important;
 
 }
 
@@ -174,7 +174,7 @@ input::-webkit-inner-spin-button {
   //    InputNumber Start
 
 .p-component.p-inputnumber-button {
-  background-color: $brown-300 !important;
+  background-color: $secondary-300 !important;
   border: none;
 }
 

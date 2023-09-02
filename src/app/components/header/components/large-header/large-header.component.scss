@@ -7,7 +7,7 @@
   position: fixed;
   top: 0;
   opacity: 0.8;
-  border-bottom: 1px solid $skin-100;
+  border-bottom: 1px solid $primary-100;
   z-index: 2;
 
   .header-logo , .header-logo > img {
@@ -23,7 +23,7 @@
     padding: 0;
 
     .header-link {
-      padding: 10px 30px;
+      padding: 10px 20px;
       font-size: $medium;
       user-select: none;
       text-align: center;
@@ -42,7 +42,7 @@
 }
 
 .active {
-  border-bottom: 4px solid $skin-100;
+  border-bottom: 4px solid $primary-100;
 }
 
 //  Languages Block Start

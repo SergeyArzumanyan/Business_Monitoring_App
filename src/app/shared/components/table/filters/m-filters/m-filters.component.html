@@ -33,13 +33,13 @@
         <div class="h-100 flex gap-5 apply-btn-wrapper">
           <ng-container *ngIf="FiltersChangedState">
             <button type="button"
-                    class="btn-sm brown-action-btn filter-clear-btn"
+                    class="btn-sm secondary-action-btn filter-clear-btn"
                     (click)="resetFilters()">
               {{ 'Clear' | translate }}
             </button>
           </ng-container>
           <button type="submit"
-                  class="btn-sm skin-btn"
+                  class="btn-sm primary-btn"
                   (click)="applyFilters()">
             {{ 'Apply' | translate }}
           </button>

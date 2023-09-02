@@ -3,12 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 
 import {
   AddComponent,
-  AddProductComponent,
-  AddSweetComponent,
+  AddSecondaryItemComponent,
+  AddPrimaryItemComponent,
   AddClientComponent,
   AddOrderComponent,
   AddConsumptionComponent,
 } from "@Components/add";
+import { Configs } from "@Core/configs";
 
 const routes: Routes = [
   {
@@ -16,12 +17,12 @@ const routes: Routes = [
     component: AddComponent
   },
   {
-    path: 'sweet',
-    component: AddSweetComponent
+    path: Configs.PrimaryItemAddRoute,
+    component: AddPrimaryItemComponent
   },
   {
-    path: 'product',
-    component: AddProductComponent
+    path: Configs.SecondaryItemAddRoute,
+    component: AddSecondaryItemComponent
   },
   {
     path: 'client',

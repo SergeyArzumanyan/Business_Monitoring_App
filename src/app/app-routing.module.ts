@@ -7,6 +7,7 @@ import {
   AuthGuard,
   AuthRouteGuard
 } from "@Core/guards";
+import { Configs } from "@Core/configs";
 
 const routes: Routes = [
   {
@@ -15,14 +16,14 @@ const routes: Routes = [
     canActivate: [AuthRouteGuard]
   },
   {
-    path: "products",
-    loadChildren: () => import("@Components/products/products.module").then(m => m.ProductsModule),
-    canActivate: [AuthGuard]
+    path: Configs.PrimaryItemRoute,
+    loadChildren: () => import('@Components/primary-item/primary-item.module').then(m => m.PrimaryItemModule),
+    canLoad: [AuthGuard]
   },
   {
-    path: 'sweets',
-    loadChildren: () => import('@Components/sweets/sweets.module').then(m => m.SweetsModule),
-    canLoad: [AuthGuard]
+    path: Configs.SecondaryItemRoute,
+    loadChildren: () => import("@Components/secondary-item/secondary-item.module").then(m => m.SecondaryItemModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'clients',
@@ -41,12 +42,12 @@ const routes: Routes = [
   },
   {
     path: "",
-    redirectTo: "auth",
+    redirectTo: Configs.PrimaryItemRoute,
     pathMatch: "full",
   },
   {
     path: "**",
-    redirectTo: "sweets",
+    redirectTo: Configs.PrimaryItemRoute,
     pathMatch: "full"
   }
 ];

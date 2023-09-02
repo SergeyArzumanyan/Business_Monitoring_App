@@ -1,28 +1,28 @@
 <div class="w-100 header-wrapper flex justify-content-between align-items-center">
 
-  <div class="logo-wrapper" [routerLink]="['sweets']" tabindex="-1">
+  <div class="logo-wrapper" [routerLink]="[Configs.PrimaryItemRoute]" tabindex="-1">
     <div class="header-logo">
-      <img ngSrc="/assets/Images/logo.jpg" alt="Logo" height="1080" width="1080">
+      <img [ngSrc]="Configs.BrandLogoPath" alt="Logo" height="65" width="64">
     </div>
   </div>
 
   <ng-container *ngIf="isAuthenticated.getValue() || isAlreadyAuthenticated">
     <div class="w-100 h-100 header-links-container flex justify-content-end align-items-center">
 
-      <li class="w-100 h-100 header-link" [routerLink]="['sweets']" routerLinkActive="active" tabindex="-1">
+      <li class="w-100 h-100 header-link" [routerLink]="[Configs.PrimaryItemRoute]" routerLinkActive="active" tabindex="-1">
         <div class="h-100 flex justify-content-center align-items-center gap-10">
           <span class="text-center">
-            {{ 'Sweets' | translate }}
+            {{ 'PrimaryItems' | translate }}
           </span>
-          <i class="fa-solid fa-cake-candles icon-md"></i>
+          <i [class]="'icon-md ' + Configs.PrimaryItemIcon"></i>
         </div>
       </li>
-      <li class="w-100 h-100 header-link" [routerLink]="['products']" routerLinkActive="active" tabindex="-1">
+      <li class="w-100 h-100 header-link" [routerLink]="[Configs.SecondaryItemRoute]" routerLinkActive="active" tabindex="-1">
         <div class="h-100 flex justify-content-center align-items-center gap-10">
           <span class="text-center">
-            {{ 'Products' | translate }}
+            {{ 'SecondaryItems' | translate }}
           </span>
-          <i class="fa-solid fa-egg icon-md"></i>
+          <i [class]="'icon-md ' + Configs.SecondaryItemIcon"></i>
         </div>
       </li>
       <li class="w-100 h-100 h-100 header-link" [routerLink]="['clients']" routerLinkActive="active" tabindex="-1">
@@ -30,7 +30,7 @@
           <span class="text-center">
             {{ 'Clients' | translate }}
           </span>
-          <i class="fa-solid fa-user icon-md"></i>
+          <i [class]="'icon-md ' + Configs.ClientsIcon"></i>
         </div>
       </li>
       <li class="w-100 h-100 h-100 header-link" [routerLink]="['history/orders']" routerLinkActive="active" tabindex="-1">
@@ -38,7 +38,7 @@
           <span class="text-center">
             {{ 'Orders' | translate }}
           </span>
-          <i class="fa-solid fa-truck icon-md"></i>
+          <i [class]="'icon-md ' + Configs.OrdersIcon"></i>
         </div>
       </li>
       <li class="w-100 h-100 header-link" [routerLink]="['history/consumptions']" routerLinkActive="active" tabindex="-1">
@@ -46,7 +46,7 @@
           <span class="text-center">
             {{ 'Consumptions' | translate }}
           </span>
-          <i class="fa-solid fa-sack-dollar icon-md"></i>
+          <i [class]="'icon-md ' + Configs.ConsumptionsIcon"></i>
         </div>
       </li>
       <li class="w-100 h-100 header-link" [routerLink]="['history/profit']" routerLinkActive="active" tabindex="-1">
@@ -54,7 +54,7 @@
           <span class="text-center">
             {{ 'Profit' | translate }}
           </span>
-          <i class="fa-solid fa-chart-line icon-md"></i>
+          <i [class]="'icon-md ' + Configs.ProfitIcon"></i>
         </div>
       </li>
       <li class="w-100 h-100 header-link" [routerLink]="['add']" routerLinkActive="active" tabindex="-1">
@@ -62,7 +62,7 @@
           <span class="text-center">
             {{ 'Add' | translate }}
           </span>
-          <i class="fa-solid fa-plus icon-md"></i>
+          <i [class]="'icon-md ' + Configs.AddIcon"></i>
         </div>
       </li>
 

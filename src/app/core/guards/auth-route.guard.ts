@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 
 import { ToastService } from "@Core/services";
 import { TranslateService } from "@ngx-translate/core";
+import { Configs } from "@Core/configs";
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,7 @@ export class AuthRouteGuard implements CanActivate {
         this.translateService.instant('Error'),
         this.translateService.instant('AlreadyAuthenticated')
       );
-      this.router.navigateByUrl('sweets');
+      this.router.navigateByUrl(Configs.PrimaryItemRoute);
       return false;
     }
   }

@@ -6,8 +6,8 @@ import { AddRoutingModule } from "@Components/add/add-routing.module";
 
 import {
   AddComponent,
-  AddSweetComponent,
-  AddProductComponent,
+  AddPrimaryItemComponent,
+  AddSecondaryItemComponent,
   AddClientComponent,
   AddOrderComponent,
   AddConsumptionComponent,
@@ -19,8 +19,8 @@ import { TranslateModule } from "@ngx-translate/core";
 
 @NgModule({
   declarations: [
-    AddProductComponent,
-    AddSweetComponent,
+    AddSecondaryItemComponent,
+    AddPrimaryItemComponent,
     AddComponent,
     AddClientComponent,
     AddOrderComponent,

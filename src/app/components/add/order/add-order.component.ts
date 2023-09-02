@@ -10,19 +10,23 @@ import {
 import { Subject, takeUntil, zip } from "rxjs";
 
 import {
-  CalculationService, EditService,
-  RequestsService, SendingDataService,
+  CalculationService,
+  EditService,
+  RequestsService,
+  SendingDataService,
+  TitleService,
   ToastService,
 } from "@Core/services";
 import {
   IClient,
-  ISweet,
+  IPrimaryItem,
   IAddOrderForm,
-  IOrderSweet,
-  IOrderSweetQuantityForm,
+  IOrderPrimaryItem,
+  IOrderPrimaryItemQuantityForm,
   IOrder,
 } from "@Core/interfaces";
 import { TranslateService } from "@ngx-translate/core";
+import { Configs } from "@Core/configs";
 
 @Component({
   selector: 'app-add-order',
@@ -34,12 +38,12 @@ export class AddOrderComponent implements OnInit, OnDestroy {
   public addOrderForm: FormGroup<IAddOrderForm> = new FormGroup<IAddOrderForm>({
     Client: new FormControl(null, Validators.required),
     ClientID: new FormControl(null),
-    Sweets: this.formBuilder.array([], Validators.required),
+    PrimaryItems: this.formBuilder.array([], Validators.required),
     Address: new FormControl(null, Validators.required),
     DeliveryPrice: new FormControl(null, Validators.required),
     TotalPrices: new FormControl({
       OrderTotalPrice: 0,
-      SweetsTotalPrice: 0,
+      PrimaryItemsTotalPrice: 0,
     }),
     DateOfPurchase: new FormControl(null),
     Profit: new FormControl(0)
@@ -49,8 +53,8 @@ export class AddOrderComponent implements OnInit, OnDestroy {
 
   public clients: IClient[] = [];
 
-  public sweets: IOrderSweet[] = [];
-  public selectedSweets: string[] = [];
+  public primaryItems: IOrderPrimaryItem[] = [];
+  public selectedPrimaryItems: string[] = [];
   public selectedClient: IClient[] = [];
 
   public unsubscribe$: Subject<void> = new Subject<void>();
@@ -62,8 +66,10 @@ export class AddOrderComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private calculationService: CalculationService,
     private toastService: ToastService,
+    private titleService: TitleService,
     public translateService: TranslateService
   ) {
+    this.titleService.setTitle(this.translateService.instant('Add'), this.translateService.instant('Order'));
   }
 
   ngOnInit(): void {
@@ -78,13 +84,13 @@ export class AddOrderComponent implements OnInit, OnDestroy {
   private getNecessaryItems(): void {
     zip([
       this.Request.GetItems<IClient[]>('clients'),
-      this.Request.GetItems<ISweet[]>('sweets')
+      this.Request.GetItems<IPrimaryItem[]>(Configs.PrimaryItemEndPoint)
     ])
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe({
-        next: (res: [IClient[] | null, ISweet[] | null]) => {
+        next: (res: [IClient[] | null, IPrimaryItem[] | null]) => {
           this.clients = res[0] ? this.Request.MakeArrayFromFirebaseResponse(res[0]) : [];
-          this.sweets = res[1] ? this.Request.MakeArrayFromFirebaseResponse(res[1]) : [];
+          this.primaryItems = res[1] ? this.Request.MakeArrayFromFirebaseResponse(res[1]) : [];
         },
         error: () => {
           this.toastService.showToast(
@@ -108,48 +114,48 @@ export class AddOrderComponent implements OnInit, OnDestroy {
   }
 
   public createItem(evn: any): void {
-    const sweets: FormArray = this.addOrderForm.controls['Sweets'] as FormArray;
+    const primaryItems: FormArray = this.addOrderForm.controls['PrimaryItems'] as FormArray;
 
     if (evn.itemValue) {
-      const idx = sweets.controls.findIndex((sweet: AbstractControl) =>
-        sweet.value.ID === evn.itemValue.ID);
+      const idx = primaryItems.controls.findIndex((primaryItem: AbstractControl) =>
+        primaryItem.value.ID === evn.itemValue.ID);
       if (idx === -1) {
-        sweets.push(this.createFormGroup(evn.itemValue))
+        primaryItems.push(this.createFormGroup(evn.itemValue))
       } else {
-        sweets.removeAt(idx);
+        primaryItems.removeAt(idx);
       }
     } else {
-      sweets.clear();
+      primaryItems.clear();
     }
 
     this.calculateOrderPrice();
   }
 
   public createFormGroup(itemValue: any): FormGroup {
-    return new FormGroup<IOrderSweetQuantityForm>({
+    return new FormGroup<IOrderPrimaryItemQuantityForm>({
       ID: new FormControl(itemValue.ID),
       Name: new FormControl(itemValue.Name),
-      Products: new FormControl(itemValue.Products),
+      SecondaryItems: new FormControl(itemValue.SecondaryItems),
       Quantity: new FormControl(1, Validators.required),
       Profit: new FormControl(itemValue.Profit)
     });
   }
 
-  public sweetsAsFormArray(): FormArray {
-    return this.addOrderForm.controls['Sweets'] as FormArray;
+  public PrimaryItemsAsFormArray(): FormArray {
+    return this.addOrderForm.controls['PrimaryItems'] as FormArray;
   }
 
   public getFormGroup(i: number): FormGroup {
-    return this.sweetsAsFormArray().controls[i] as FormGroup;
+    return this.PrimaryItemsAsFormArray().controls[i] as FormGroup;
   }
 
   public removeFormGroup(i: number): void {
-    const items: FormArray = this.sweetsAsFormArray();
+    const items: FormArray = this.PrimaryItemsAsFormArray();
     items.removeAt(i);
 
-    const oldSelected: string[] = [...this.selectedSweets];
+    const oldSelected: string[] = [...this.selectedPrimaryItems];
     oldSelected.splice(i, 1);
-    this.selectedSweets = oldSelected;
+    this.selectedPrimaryItems = oldSelected;
 
     this.calculateOrderPrice();
   }
@@ -168,9 +174,9 @@ export class AddOrderComponent implements OnInit, OnDestroy {
 
         this.Send.CreateItem<IOrder>('orders', 'Order', this.addOrderForm.value);
         this.attachOrderToClient();
-        this.addOrderForm.controls.Sweets.clear();
+        this.addOrderForm.controls.PrimaryItems.clear();
         this.addOrderForm.reset();
-        this.selectedSweets = [];
+        this.selectedPrimaryItems = [];
         this.selectedClient = [];
         this.resetOrderTotalPrice();
         this.submitted = false;
@@ -218,7 +224,7 @@ export class AddOrderComponent implements OnInit, OnDestroy {
   private resetOrderTotalPrice(): void {
     this.addOrderForm.controls.TotalPrices.setValue({
       OrderTotalPrice: 0,
-      SweetsTotalPrice: 0
+      PrimaryItemsTotalPrice: 0
     });
   }
 }

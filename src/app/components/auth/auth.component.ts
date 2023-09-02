@@ -6,6 +6,7 @@ import {
   ToastService
 } from "@Core/services";
 import { TranslateService } from "@ngx-translate/core";
+import { Configs } from "@Core/configs";
 
 @Component({
   selector: 'app-auth',
@@ -27,7 +28,7 @@ export class AuthComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.route.snapshot.queryParamMap.get('link-pass')) {
-      this.authService.checkPassword('Truffle2023');
+      this.authService.checkPassword(Configs.AppPassword);
     }
   }
 

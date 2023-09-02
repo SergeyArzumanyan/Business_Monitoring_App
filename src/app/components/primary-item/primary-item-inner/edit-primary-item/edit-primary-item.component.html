@@ -1,0 +1,153 @@
+<form [formGroup]="editPrimaryItemForm">
+  <div class="w-100 flex col justify-content-center align-items-center gap-20">
+    <div class="w-100 flex col gap-10 justify-content-center">
+
+      <label class="form-label" for="secondary-item-name">{{ 'Name' | translate }} *</label>
+      <input formControlName="Name"
+             id="secondary-item-name"
+             class="form-input"
+             [ngClass]="{'ng-invalid ng-dirty': editPrimaryItemForm.controls['Name'].invalid &&
+             editPrimaryItemForm.controls['Name'].touched}"
+             type="text"
+             pInputText
+             [placeholder]="translateService.instant('PrimaryItemNamePlaceholder')">
+
+      <div class="p-error-wrapper">
+        <small *ngIf="editPrimaryItemForm.controls['Name'].touched &&
+                  editPrimaryItemForm.controls['Name'].hasError('required')"
+               class="p-error">
+          {{ 'FieldRequiredError' | translate }}
+        </small>
+        <small *ngIf="editPrimaryItemForm.controls['Name'].touched &&
+                  editPrimaryItemForm.controls['Name'].hasError('maxlength')"
+               class="p-error">
+          {{ 'LongFieldError' | translate }}
+        </small>
+      </div>
+    </div>
+
+    <div class="w-100 flex col gap-10 justify-content-center">
+      <label class="form-label" for="primary-item-parts">{{ 'SecondaryItems' | translate  }} *</label>
+      <div class="multiselect-container">
+        <p-multiSelect inputId="primary-item-parts"
+                       id="primary-item-parts"
+                       [autofocusFilter]="false"
+                       [ngClass]="{'ng-invalid ng-dirty': editPrimaryItemForm.controls['SecondaryItems'].invalid &&
+                       editPrimaryItemForm.controls['SecondaryItems'].touched}"
+                       [options]="secondaryItems"
+                       [showToggleAll]="false"
+                       [(ngModel)]="primaryItemParts"
+                       [ngModelOptions]="{standalone: true}"
+                       (onChange)="createItem($event)"
+                       optionLabel="Name"
+                       [placeholder]="translateService.instant('PrimaryItemSecondaryItemsPlaceholder')">
+        </p-multiSelect>
+      </div>
+
+      <ng-container formArrayName="SecondaryItems" *ngIf="secondaryItemsAsFormArray().controls.length > 0">
+        <div class="w-100 flex col gap-10 justify-content-center"
+             *ngFor="let group of secondaryItemsAsFormArray().controls; let i = index"
+             [formGroupName]="i">
+          <div class="w-100 flex justify-content-between align-items-center">
+            <label for="Quantity">
+              {{ getFormGroup(i).controls['Name'].value }} {{ 'Quantity'  | translate }} *</label>
+            <button type="button"
+                    class="btn-xs primary-action-btn"
+                    (click)="removeFormGroup(i)">
+              <i class="fa-solid fa-trash icon-md"></i>
+            </button>
+          </div>
+          <p-inputNumber [showButtons]="true"
+                         buttonLayout="horizontal"
+                         id="Quantity"
+                         formControlName="Quantity"
+                         (onInput)="primaryItemSelectionChangedWithInput($event)"
+                         [step]="0.25"
+                         [min]="0.5"
+                         [ngClass]="{'ng-invalid ng-dirty': getFormGroup(i).controls['Quantity'].touched &&
+                         getFormGroup(i).controls['Quantity'].invalid}"
+                         incrementButtonIcon="pi pi-plus"
+                         decrementButtonIcon="pi pi-minus"
+                         inputId="Quantity">
+          </p-inputNumber>
+        </div>
+      </ng-container>
+
+      <div class="p-error-wrapper">
+        <small *ngIf="editPrimaryItemForm.controls['SecondaryItems'].touched &&
+                  editPrimaryItemForm.controls['SecondaryItems'].hasError('required')"
+               class="p-error">
+          {{ 'FieldRequiredError' | translate }}
+        </small>
+      </div>
+    </div>
+
+    <div class="w-100 flex col gap-10 justify-content-center">
+      <label for="Profit">{{ 'Profit' | translate }} *</label>
+      <p-inputNumber id="Profit"
+                     formControlName="Profit"
+                     (keyup)="primaryItemSelectionChangedWithInput($event)"
+                     [ngClass]="{'ng-invalid ng-dirty': editPrimaryItemForm.controls['Profit'].touched &&
+                       editPrimaryItemForm.controls['Profit'].invalid}"
+                     [placeholder]="translateService.instant('PrimaryItemProfitPlaceholder')"
+                     inputId="Profit">
+      </p-inputNumber>
+
+      <div class="p-error-wrapper">
+        <small *ngIf="editPrimaryItemForm.controls['Profit'].touched &&
+                  editPrimaryItemForm.controls['Profit'].hasError('required')"
+               class="p-error">
+          {{ 'FieldRequiredError' | translate }}
+        </small>
+
+        <small *ngIf="editPrimaryItemForm.controls['Profit'].touched &&
+                  editPrimaryItemForm.controls['Profit'].hasError('isNotPositive')"
+               class="p-error">
+          {{ 'NegativeFieldError'  | translate }}
+        </small>
+      </div>
+    </div>
+
+    <div class="form-group w-100 flex col gap-10 justify-content-center">
+      <span class="image-label">{{ 'Image' | translate }} *</span>
+      <div class="img-dropzone"
+           [ngClass]="{'img-invalid': editPrimaryItemForm.controls['Image'].invalid && editPrimaryItemForm.controls['Image'].touched}"
+           imgDrag
+           (click)="imgInput.click()"
+           (file)="imageDropped($event)">
+        <div class="drag-message flex col gap-10 justify-content-center align-items-center">
+          <i class="pi pi-image icon-max"></i>
+          <span class="flex gap-5 align-items-center">
+                {{ 'DragYourImagesMessage'  | translate }}
+              </span>
+        </div>
+      </div>
+
+      <input style="display: none;"
+             #imgInput
+             type="file"
+             accept="image/png,image/jpg,image/jpeg"
+             (change)="onFileChange($event)"/>
+
+      <ng-container *ngIf="editPrimaryItemForm.controls['Image'].value">
+        <div class="img-preview">
+          <div class="img-container" *ngIf="(editPrimaryItemForm.controls['Image'].value) || (primaryItem.Image)">
+            <div class="rounded-btn gray-btn img-cancel" (click)="imageClear()"><i
+              class="pi pi-times img-cancel"></i></div>
+            <img [src]="editPrimaryItemForm.controls['Image'].value"
+                 class="selected-sweet-image" [alt]="primaryItem.Name">
+          </div>
+        </div>
+      </ng-container>
+
+      <div class="p-error-wrapper">
+        <small *ngIf="editPrimaryItemForm.controls['Image'].touched &&
+                  editPrimaryItemForm.controls['Image'].hasError('required')"
+               class="p-error">
+          {{ 'FieldRequiredError' | translate }}
+        </small>
+      </div>
+
+    </div>
+  </div>
+</form>

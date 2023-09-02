@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { SendingDataService } from "@Core/services";
+import { SendingDataService, TitleService } from "@Core/services";
 import { onlyPositiveNumbers } from "@Core/validators";
 
 import { IConsumption, IConsumptionForm } from "@Core/interfaces/";
@@ -30,8 +30,11 @@ export class AddConsumptionComponent {
 
   constructor(
     private Send: SendingDataService,
+    private titleService: TitleService,
     public translateService: TranslateService
-    ) {}
+    ) {
+    this.titleService.setTitle(this.translateService.instant('Add'), this.translateService.instant('Consumption'));
+  }
 
   public onAdd(): void {
     if (this.addConsumptionForm.valid) {

@@ -15,8 +15,8 @@ $containerPadding: 40px 40px 20px 40px;
   .form-container {
     width: 400px;
     background-color: $white-300;
-    box-shadow: 0 0 2px 0 $skin-100;
-    border-radius: $borderRadius $borderRadius 0 0;
+    box-shadow: 0 0 2px 0 $primary-100;
+    border-radius: $buttonBorderRadius $buttonBorderRadius 0 0;
     margin: 0 auto;
     padding: $containerPadding;
     transition: width $animationTime, height $animationTime;
@@ -53,8 +53,8 @@ $containerPadding: 40px 40px 20px 40px;
           width: 75px;
           margin: 0;
           padding: 5px;
-          box-shadow: -4px -1px 0 5px $skin-300;
-          border-radius: $borderRadius;
+          box-shadow: -4px -1px 0 5px $primary-300;
+          border-radius: $buttonBorderRadius;
 
           .product-name {
             word-break: break-word;
@@ -107,7 +107,7 @@ $containerPadding: 40px 40px 20px 40px;
       }
 
       .img-dropzone.img-invalid {
-        border-color: $red-error !important;
+        border-color: $error !important;
       }
 
       .img-dropzone {
@@ -162,7 +162,7 @@ $containerPadding: 40px 40px 20px 40px;
   .form-btn {
     height: 50px !important;
     width: 101% !important;
-    border-radius: 0 0 $borderRadius $borderRadius;
+    border-radius: 0 0 $buttonBorderRadius $buttonBorderRadius;
     transform: translateX(-0.5%);
   }
 }

@@ -4,6 +4,7 @@ import { BehaviorSubject } from "rxjs";
 
 import { ToastService } from "@Core/services";
 import { TranslateService } from "@ngx-translate/core";
+import { Configs } from "@Core/configs";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ import { TranslateService } from "@ngx-translate/core";
 export class AuthService {
 
   public authenticated: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  public password: string = "Truffle2023";
+  public password: string = Configs.AppPassword;
 
   constructor(
     private router: Router,
@@ -23,7 +24,7 @@ export class AuthService {
     if (inputedPassword === this.password) {
       this.authenticated.next(true);
       sessionStorage.setItem('isAuthenticated', 'true');
-      this.router.navigateByUrl('sweets');
+      this.router.navigateByUrl(Configs.PrimaryItemRoute);
       this.toastService.showToast(
         'success',
         this.translateService.instant('Done'),

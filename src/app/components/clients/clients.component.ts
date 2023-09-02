@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Subject, takeUntil } from "rxjs";
 
-import { RequestsService, ToastService } from "@Core/services";
+import { RequestsService, TitleService, ToastService } from "@Core/services";
 import { IClient, IClientForm } from "@Core/interfaces";
 import { onlyWhiteSpaceValidator } from "@Core/validators";
 
@@ -10,6 +10,7 @@ import { IContextMenuItem, ITableConfig } from "@Shared/components/table/interfa
 import { TableService } from '@Shared/components/table/services'
 import { ITableFilters } from "app/shared/components/table/filters/interfaces";
 import { TranslateService } from "@ngx-translate/core";
+import { Configs } from "@Core/configs";
 
 @Component({
   selector: 'app-clients',
@@ -84,8 +85,11 @@ export class ClientsComponent implements OnInit, OnDestroy {
     private Request: RequestsService,
     private toastService: ToastService,
     private TableService: TableService,
+    private titleService: TitleService,
     public translateService: TranslateService
-  ) {}
+  ) {
+    this.titleService.setTitle(Configs.AppMainTitle, this.translateService.instant('Clients'));
+  }
 
   ngOnInit(): void {
     this.getClients();

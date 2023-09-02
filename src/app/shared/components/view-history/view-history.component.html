@@ -45,7 +45,7 @@
         </div>
         <div class="total-orders-count flex gap-5">
           <span class="total-count">
-            {{ 'Total' | translate }}:
+            {{ 'TotalWithoutDelivery' | translate }}:
           </span>
           <span class="total-count">
             {{ historyService.HistoryItemsTotal$.getValue() }}
@@ -129,6 +129,21 @@
 
               <div class="w-100 order-total-price-info flex gap-5 justify-content-between align-items-center">
                 <span class="total-price">
+                  {{ 'TotalWithDelivery' | translate }}
+                </span>
+
+                <span class="order-total-price-wrapper flex gap-5">
+                  <span class="order-price">
+                    {{ HistoryItem.TotalPrices.OrderTotalPrice + HistoryItem.DeliveryPrice }}
+                  </span>
+                  <span class="price-currency">
+                    AMD
+                  </span>
+                </span>
+              </div>
+
+              <div class="w-100 order-total-price-info flex gap-5 justify-content-between align-items-center">
+                <span class="total-price">
                   {{ 'DeliveryPrice' | translate }}
                 </span>
 
@@ -145,19 +160,19 @@
 
             <div class="item-profit-info-wrapper flex col gap-15 p-10">
                 <span class="order-items-sub-header text-center">
-                  {{ 'Sweets' | translate }} ({{ 'EachPrice' | translate }})
+                  {{ 'PrimaryItems' | translate }} ({{ 'EachPrice' | translate }})
                 </span>
 
               <div class="order-items-wrapper flex col gap-15 justify-content-center align-items-center">
                 <div class="w-100 order-sweet flex gap-15 justify-content-between align-items-center"
-                     *ngFor="let sweet of HistoryItem.Sweets">
-                  <span class="item-name" [pTooltip]="sweet.Name">
-                    (x{{ sweet.Quantity }}) {{ sweet.Name }}
+                     *ngFor="let primaryItem of HistoryItem.PrimaryItems">
+                  <span class="item-name" [pTooltip]="primaryItem.Name">
+                    (x{{ primaryItem.Quantity }}) {{ primaryItem.Name }}
                   </span>
 
                   <span class="order-price-wrapper flex gap-5 justify-content-center align-items-center">
                     <span class="item-price">
-                      {{ sweet.PriceWhenOrdered * sweet.Quantity }}
+                      {{ primaryItem.PriceWhenOrdered }}
                     </span>
                     <span class="price-currency">
                       AMD
@@ -223,19 +238,19 @@
 
             <div class="item-profit-info-wrapper flex col gap-15 p-10">
                 <span class="order-items-sub-header text-center">
-                  {{ 'Sweets' | translate }} ({{ 'EachProfit' | translate }})
+                  {{ 'PrimaryItems' | translate }} ({{ 'EachProfit' | translate }})
                 </span>
 
               <div class="order-items-wrapper flex col gap-15 justify-content-center align-items-center">
                 <div class="w-100 order-sweet flex gap-15 justify-content-between align-items-center"
-                     *ngFor="let sweet of HistoryItem.Sweets">
-                  <span class="item-name" [pTooltip]="sweet.Name">
-                    (x{{ sweet.Quantity }}) {{ sweet.Name }}
+                     *ngFor="let primaryItem of HistoryItem.PrimaryItems">
+                  <span class="item-name" [pTooltip]="primaryItem.Name">
+                    (x{{ primaryItem.Quantity }}) {{ primaryItem.Name }}
                   </span>
 
                   <span class="order-price-wrapper flex gap-5 justify-content-center align-items-center">
                     <span class="item-price">
-                      {{ sweet.Profit * sweet.Quantity }}
+                      {{ primaryItem.Profit * primaryItem.Quantity }}
                     </span>
                     <span class="price-currency">
                       AMD

@@ -4,9 +4,11 @@ import { Subject, takeUntil } from "rxjs";
 import {
   HistoryService,
   RequestsService,
+  TitleService,
   ToastService
 } from "@Core/services";
 import { TranslateService } from "@ngx-translate/core";
+import { Configs } from "@Core/configs";
 
 @Component({
   selector: 'app-profit',
@@ -25,9 +27,11 @@ export class ProfitComponent implements OnDestroy {
     private Request: RequestsService,
     private historyService: HistoryService,
     private toastService: ToastService,
+    private titleService: TitleService,
     public translateService: TranslateService
   ) {
     this.getOrdersToCalculateProfit();
+    this.titleService.setTitle(Configs.AppMainTitle, this.translateService.instant('Profit'));
   }
 
   public getOrdersToCalculateProfit(): void {

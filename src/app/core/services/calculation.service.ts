@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { take } from "rxjs";
 
 import {
-  ISweet,
-  ISweetProduct,
-  IProduct,
+  IPrimaryItem,
+  IPrimaryItemPart,
+  IPrimaryItemTotalPrices,
+  ISecondaryItem,
   IFirebaseItemDeletion,
   IOrder,
-  ISweetTotalPrices, IConsumption,
 } from "@Core/interfaces";
 import {
   RequestsService,
@@ -16,6 +16,7 @@ import {
 } from "@Core/services";
 import { AbstractControl } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
+import { Configs } from "@Core/configs";
 
 @Injectable({
   providedIn: 'root'
@@ -29,16 +30,19 @@ export class CalculationService {
     public translateService: TranslateService
   ) {}
 
-  public calcTotalSweetPrice(sweet: ISweet, productsOfSweet: ISweetProduct[]): void {
-    for (const productOfSweet of productsOfSweet) {
-      const productQuantity: number = productOfSweet.Quantity;
+  public CalcPrimaryItemTotalPrice(
+    primaryItem: IPrimaryItem,
+    primaryItemParts: IPrimaryItemPart[]
+  ): void {
+    for (const primaryItemPart of primaryItemParts) {
+      const primaryItemPartQuantity: number = primaryItemPart.Quantity;
 
-      this.Request.GetItemByObjectKey('products', 'ID', productOfSweet.ID)
+      this.Request.GetItemByObjectKey(Configs.SecondaryItemEndPoint, 'ID', primaryItemPart.ID)
         .pipe(take(1))
         .subscribe({
-          next: (product: IProduct[]) => {
-            this.calculateProductProperties(product[0], productQuantity)
-            this.calculateSweetPrice(sweet, product[0].TotalPrice!);
+          next: (primaryItemPartRes: ISecondaryItem[]) => {
+            this.CalculatePrimaryItemPartProperties(primaryItemPartRes[0], primaryItemPartQuantity)
+            this.CalculatePrimaryItemPrice(primaryItem, primaryItemPartRes[0].TotalPrice!);
           },
           error: () => {
             this.toastService.showToast(
@@ -51,83 +55,102 @@ export class CalculationService {
     }
   }
 
-//      For Sweets Page Calculations
-  public calculateSweetPriceInSweets(sweet: ISweet, product: IProduct[], productQuantity: number): void {
-    if (product.length > 0 && product[0].Price) {
-      !sweet.TotalPrice ?
-        sweet.TotalPrice = product[0].Price * productQuantity :
-        sweet.TotalPrice += product[0].Price * productQuantity;
+//      For PrimaryItem Page Calculations
+  public CalculatePrimaryItemPriceInPrimaryPage(
+    primaryItem: IPrimaryItem,
+    primaryItemPart: ISecondaryItem[],
+    primaryItemPartQuantity: number
+  ): void {
+    if (primaryItemPart.length > 0 && primaryItemPart[0].Price) {
+      !primaryItem.TotalPrice ?
+        primaryItem.TotalPrice = primaryItemPart[0].Price * primaryItemPartQuantity :
+        primaryItem.TotalPrice += primaryItemPart[0].Price * primaryItemPartQuantity;
     } else {
-      this.Request.GetItemFirebaseKey('sweets', 'ID', sweet.ID)
+      this.Request.GetItemFirebaseKey(Configs.PrimaryItemEndPoint, 'ID', primaryItem.ID)
         .pipe(take(1))
         .subscribe((action: IFirebaseItemDeletion[]) => {
-          this.Deletion.RemoveItemByFirebaseKey('sweets', action[0].payload.key, 'Sweet');
+          this.Deletion.RemoveItemByFirebaseKey(
+            Configs.PrimaryItemEndPoint,
+            action[0].payload.key,
+            'PrimaryItem'
+          );
         });
     }
   }
 
-  private calculateProductProperties(product: IProduct, quantity: number): void {
-    product.Quantity = quantity;
-    if (product.Price) {
-      product.TotalPrice = quantity * product.Price;
+  private CalculatePrimaryItemPartProperties(
+    secondaryItem: ISecondaryItem,
+    quantity: number
+  ): void {
+    secondaryItem.Quantity = quantity;
+    if (secondaryItem.Price) {
+      secondaryItem.TotalPrice = quantity * secondaryItem.Price;
     }
   }
 
-  private calculateSweetPrice(sweet: ISweet, productTotalPrice: number): void {
-    !sweet.TotalPrice ?
-      sweet.TotalPrice = productTotalPrice + (sweet.Profit ? sweet.Profit : 0) :
-      sweet.TotalPrice += productTotalPrice!;
+  private CalculatePrimaryItemPrice(
+    primaryItem: IPrimaryItem,
+    secondaryItemTotalPrice: number
+  ): void {
+    !primaryItem.TotalPrice ?
+      primaryItem.TotalPrice = secondaryItemTotalPrice + (primaryItem.Profit ? primaryItem.Profit : 0) :
+      primaryItem.TotalPrice += secondaryItemTotalPrice!;
   }
 
-  public getProduct(ID: number) {
-    return this.Request.GetItemByObjectKey('products', 'ID', ID).pipe(take(1));
+  public getSecondaryItemByID(ID: number) {
+    return this.Request.GetItemByObjectKey(Configs.SecondaryItemEndPoint, 'ID', ID).pipe(take(1));
   }
 
-  public async CalculateOrderPrice(Order: Partial<IOrder>, OrderProfit: AbstractControl) {
+  public async CalculateOrderPrice(
+    Order: Partial<IOrder>,
+    OrderProfit: AbstractControl
+  ): Promise<Partial<IOrder>> {
     Order.TotalPrices!.OrderTotalPrice = 0;
-    Order.TotalPrices!.OrderTotalPrice += Order.DeliveryPrice!;
     OrderProfit.setValue(0);
 
     let orderProfit: number = 0;
 
-    for (const Sweet of Order.Sweets!) {
-      Order.TotalPrices!.SweetsTotalPrice = Sweet.Profit;
+    for (const primaryItem of Order.PrimaryItems!) {
+      Order.TotalPrices!.PrimaryItemsTotalPrice = primaryItem.Profit;
       orderProfit ?
-        orderProfit += Sweet.Profit * Sweet.Quantity :
-        orderProfit = Sweet.Profit * Sweet.Quantity;
+        orderProfit += primaryItem.Profit * primaryItem.Quantity :
+        orderProfit = primaryItem.Profit * primaryItem.Quantity;
 
-      for (const Product of Sweet.Products) {
-        const product = await this.getProduct(Product.ID!).toPromise();
-        const productPrice: number = product[0].Price * Product.Quantity;
+      for (const secondaryItem of primaryItem.SecondaryItems) {
+        const secondaryItemRes = await this.getSecondaryItemByID(secondaryItem.ID!).toPromise();
+        const primaryItemPartPrice: number = secondaryItemRes[0].Price * secondaryItem.Quantity;
 
-        Order.TotalPrices!.SweetsTotalPrice += productPrice;
+        Order.TotalPrices!.PrimaryItemsTotalPrice += primaryItemPartPrice;
 
-        if (Sweet.Products.indexOf(Product) === Sweet.Products.length - 1) {
-          const sweetPrice: number = Order.TotalPrices!.SweetsTotalPrice * Sweet.Quantity;
+        if (primaryItem.SecondaryItems.indexOf(secondaryItem) === primaryItem.SecondaryItems.length - 1) {
+          const primaryItemPrice: number = Order.TotalPrices!.PrimaryItemsTotalPrice * primaryItem.Quantity;
           OrderProfit.setValue(orderProfit);
-          Sweet.PriceWhenOrdered = sweetPrice;
-          Order.TotalPrices!.OrderTotalPrice += sweetPrice;
+          primaryItem.PriceWhenOrdered = primaryItemPrice;
+          Order.TotalPrices!.OrderTotalPrice += primaryItemPrice;
         }
       }
     }
 
-    Order.TotalPrices!.SweetsTotalPrice = Order.TotalPrices!.OrderTotalPrice - Order.DeliveryPrice!;
+    Order.TotalPrices!.PrimaryItemsTotalPrice = Order.TotalPrices!.OrderTotalPrice;
 
     return Order;
   }
 
-  public async CalculateSweetTotalPrice(ProductsForm: any, SweetTotalPrices: ISweetTotalPrices) {
-    SweetTotalPrices.Profit = 0;
-    SweetTotalPrices.CurrentTotalPrice = 0;
-    SweetTotalPrices.Profit += ProductsForm.Profit;
-    SweetTotalPrices.CurrentTotalPrice += SweetTotalPrices.Profit;
+  public async CalculatePrimaryItemTotalPrice(
+    SecondaryItemForm: any,
+    PrimaryItemTotalPrices: IPrimaryItemTotalPrices
+  ): Promise<void> {
+    PrimaryItemTotalPrices.Profit = 0;
+    PrimaryItemTotalPrices.CurrentTotalPrice = 0;
+    PrimaryItemTotalPrices.Profit += SecondaryItemForm.Profit;
+    PrimaryItemTotalPrices.CurrentTotalPrice += PrimaryItemTotalPrices.Profit;
 
-    for (const Product of ProductsForm.Products) {
-      const product = await this.getProduct(Product.ID!).toPromise();
+    for (const secondaryItem of SecondaryItemForm.SecondaryItems) {
+      const secondaryItemRes = await this.getSecondaryItemByID(secondaryItem.ID!).toPromise();
 
-      const productPrice: number = product[0].Price * Product.Quantity;
+      const secondaryItemPrice: number = secondaryItemRes[0].Price * secondaryItem.Quantity;
 
-      SweetTotalPrices.CurrentTotalPrice += productPrice;
+      PrimaryItemTotalPrices.CurrentTotalPrice += secondaryItemPrice;
     }
   }
 

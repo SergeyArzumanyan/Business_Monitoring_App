@@ -5,9 +5,11 @@ import { IConsumption } from "@Core/interfaces";
 import {
   HistoryService,
   RequestsService,
+  TitleService,
   ToastService
 } from "@Core/services";
 import { TranslateService } from "@ngx-translate/core";
+import { Configs } from "@Core/configs";
 
 @Component({
   selector: 'app-consumptions',
@@ -24,9 +26,11 @@ export class ConsumptionsComponent implements OnDestroy {
     private Request: RequestsService,
     private historyService: HistoryService,
     private toastService: ToastService,
+    private titleService: TitleService,
     public translateService: TranslateService
   ) {
     this.getConsumptions();
+    this.titleService.setTitle(Configs.AppMainTitle, this.translateService.instant('Consumptions'));
   }
 
   ngOnDestroy(): void {

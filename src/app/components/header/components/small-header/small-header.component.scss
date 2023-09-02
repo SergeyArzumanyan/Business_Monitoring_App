@@ -17,7 +17,7 @@
 .header-titles {
   height: 65px;
   background-color: $white-400;
-  border-bottom: 1px solid $skin-100;
+  border-bottom: 1px solid $primary-100;
 
   .header-logo, .header-logo > img {
     width: 65px;
@@ -93,7 +93,7 @@
 }
 
 .header-title-border {
-  border-bottom: 1px solid $skin-100;
+  border-bottom: 1px solid $primary-100;
 }
 
 .header-links-wrapper {
@@ -119,18 +119,18 @@
     cursor: pointer;
 
     &:hover {
-      background-color: $skin-300;
+      background-color: $primary-300;
       color: $white-400;
     }
 
     &:active {
-      background-color: $skin-100;
+      background-color: $primary-100;
     }
   }
 }
 
 .bottom-line {
-  border-bottom: 1px solid $skin-100;
+  border-bottom: 1px solid $primary-100;
 }
 
 .visibility {
@@ -150,7 +150,7 @@
 }
 
 .active {
-  background-color: $skin-200 !important;
+  background-color: $primary-200 !important;
 }
 
 //  Languages Block Start

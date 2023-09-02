@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { BehaviorSubject } from "rxjs";
 
 import { AuthService, LanguageService } from "@Core/services";
-
+import { Configs } from "@Core/configs";
 
 @Component({
   selector: 'app-small-header',
@@ -11,6 +11,7 @@ import { AuthService, LanguageService } from "@Core/services";
 })
 export class SmallHeaderComponent {
   @Input() isAlreadyAuthenticated: boolean = false
+  public Configs = Configs;
 
   public menu: boolean = false;
   public isAuthenticated: BehaviorSubject<boolean> = this.authService.authenticated;

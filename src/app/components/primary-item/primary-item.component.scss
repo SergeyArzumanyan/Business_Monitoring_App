@@ -1,0 +1,192 @@
+@import "/src/app/core/global-css/GlobalCssConfigs";
+
+.sweets-wrapper {
+  .container {
+    width: 100%;
+    height: 100%;
+    padding: 50px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 50px;
+    transition: width $animationTime, height $animationTime;
+
+    .sweet-card {
+      display: block;
+      width: 100%;
+      height: 425px;
+      background-color: $white-300;
+      margin: 0 auto;
+      box-shadow: 2px 4px 0 5px $primary-100;
+      border-radius: $buttonBorderRadius;
+
+      .sweet-image-wrapper, .sweet-image-wrapper > .sweet-image {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        position: relative;
+        border-radius: $buttonBorderRadius $buttonBorderRadius 0 0;
+        background-color: $black;
+        transition: $animationTime;
+        cursor: pointer !important;
+
+        .image-more {
+          visibility: hidden;
+          pointer-events: none;
+          position: absolute;
+          text-align: center;
+          z-index: 10;
+          opacity: 0;
+          transition: $animationTime;
+          color: $white-400;
+        }
+
+
+        &:hover {
+          opacity: 0.8;
+
+          .image-more {
+            opacity: 1;
+            visibility: visible !important;
+          }
+        }
+      }
+
+      .sweet-card-info {
+        padding: 15px;
+
+        .sweet-name {
+          font-size: $large;
+        }
+
+        .sweet-price {
+          font-size: $medium;
+        }
+      }
+
+      .sweet-card-buttons {
+        width: 100%;
+        height: 50px;
+        border-radius: 0 0 $buttonBorderRadius $buttonBorderRadius;
+
+        .sweet-btn {
+          width: 100% !important;
+          height: 100% !important;
+          transition: $animationTime;
+        }
+
+        .edit-sweet-btn {
+          border-radius: 0 0 0 $buttonBorderRadius;
+        }
+
+        .delete-sweet-btn {
+          border-radius: 0 0 $buttonBorderRadius 0;
+          box-shadow: 3px 4px 0 4px $secondary-300;
+        }
+      }
+    }
+  }
+}
+
+
+@media (min-width: 1600px) {
+  .sweet-card {
+    height: 500px !important;
+
+    .sweet-image-wrapper, .sweet-image-wrapper > .sweet-image {
+      height: 325px !important;
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .container {
+    padding: 30px !important;
+    grid-template-columns: 1fr !important;
+    gap: 75px !important;
+
+    .sweet-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 350px !important;
+      margin: 0 auto !important;
+      box-shadow: 2.5px 3.5px 0 6px $primary-100 !important;
+
+      .sweet-image-wrapper, .sweet-image-wrapper > .sweet-image {
+        height: 165px !important;
+      }
+
+      .sweet-card-buttons {
+        height: 60px !important;
+      }
+    }
+  }
+}
+
+@media (max-width: 650px) {
+  .empty-message {
+    width: 80% !important;
+  }
+}
+
+.edit-sweet-btn:focus:focus-visible {
+  box-shadow: 0 1px 0 7px $secondary-300 !important;
+  z-index: 1;
+}
+
+.delete-sweet-btn:focus:focus-visible {
+  box-shadow: 0 1px 0 7px $primary-100 !important;
+  z-index: 1;
+}
+
+.empty-message {
+  width: 50%;
+  height: max-content;
+  background-color: $white-300;
+  padding: 50px 25px 50px 25px;
+  border-radius: 10px;
+  border: 1px solid $primary-100;
+  text-align: center;
+
+  .message {
+    font-size: $large;
+  }
+
+  .link {
+    font-size: $medium;
+
+    .add-sweet-link {
+      color: $link-static;
+    }
+  }
+}
+
+//    Loading Start
+
+.loading-wrapper {
+  .loading-text {
+    font-size: $larger;
+  }
+}
+
+:host ::ng-deep .p-progress-spinner,
+:host ::ng-deep .p-progress-spinner-svg {
+  width: 50px !important;
+  height: 50px !important;
+}
+
+@media (max-width: 600px) {
+  .loading-wrapper {
+    .loading-text {
+      font-size: $large;
+    }
+  }
+
+  :host ::ng-deep .p-progress-spinner,
+  :host ::ng-deep .p-progress-spinner-svg {
+    width: 40px !important;
+    height: 40px !important;
+  }
+}
+
+//    Loading End

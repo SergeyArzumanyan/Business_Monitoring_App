@@ -3,7 +3,7 @@
     <div class="form-container flex col align-items-center gap-20">
 
       <div class="w-100 flex">
-        <button class="rounded-btn skin-btn" type="button" [routerLink]="['add']">
+        <button class="rounded-btn primary-btn" type="button" [routerLink]="['add']">
           <i class="pi pi-arrow-left"></i>
         </button>
         <h3 class="form-header">{{ 'Order' | translate }}</h3>
@@ -37,31 +37,31 @@
       </div>
 
       <div class="form-group flex col gap-10">
-        <label class="form-label" for="Sweets">{{ 'Sweet' | translate }} *</label>
+        <label class="form-label" for="PrimaryItems">{{ 'PrimaryItem' | translate }} *</label>
         <div class="multiselect-container">
-          <p-multiSelect inputId="Sweets"
-                         id="Sweets"
+          <p-multiSelect inputId="PrimaryItems"
+                         id="PrimaryItems"
                          [autofocusFilter]="false"
-                         [(ngModel)]="selectedSweets"
+                         [(ngModel)]="selectedPrimaryItems"
                          [ngModelOptions]="{standalone: true}"
-                         [options]="sweets"
+                         [options]="primaryItems"
                          [showToggleAll]="false"
                          (onChange)="createItem($event)"
-                         [ngClass]="{'ng-invalid ng-dirty': addOrderForm.controls.Sweets.invalid &&
-                         addOrderForm.controls.Sweets.touched}"
+                         [ngClass]="{'ng-invalid ng-dirty': addOrderForm.controls.PrimaryItems.invalid &&
+                         addOrderForm.controls.PrimaryItems.touched}"
                          optionLabel="Name"
-                         [placeholder]="translateService.instant('OrderSweetPlaceholder')">
+                         [placeholder]="translateService.instant('OrderPrimaryItemPlaceholder')">
           </p-multiSelect>
         </div>
 
-        <ng-container formArrayName="Sweets" *ngIf="sweetsAsFormArray().controls.length > 0">
+        <ng-container formArrayName="PrimaryItems" *ngIf="PrimaryItemsAsFormArray().controls.length > 0">
           <div class="form-group flex col gap-10"
-               *ngFor="let group of sweetsAsFormArray().controls; let i = index"
+               *ngFor="let group of PrimaryItemsAsFormArray().controls; let i = index"
                [formGroupName]="i">
             <div class="w-100 flex justify-content-between align-items-center">
               <label for="Quantity">{{ getFormGroup(i).controls['Name'].value }} {{ 'Quantity' | translate }} *</label>
               <button type="button"
-                      class="btn-xs skin-action-btn"
+                      class="btn-xs primary-action-btn"
                       (click)="removeFormGroup(i)">
                 <i class="fa-solid fa-trash icon-md"></i>
               </button>
@@ -82,10 +82,10 @@
         </ng-container>
 
         <div class="p-error-wrapper">
-          <small *ngIf="addOrderForm.controls.Sweets.touched &&
-                  addOrderForm.controls.Sweets.hasError('required')"
+          <small *ngIf="addOrderForm.controls.PrimaryItems.touched &&
+                  addOrderForm.controls.PrimaryItems.hasError('required')"
                  class="p-error">
-            {{ 'SweetSelectionError' | translate }}
+            {{ 'PrimaryItemSelectionError' | translate }}
           </small>
         </div>
       </div>
@@ -114,7 +114,6 @@
         <label for="DeliveryPrice">{{ 'DeliveryPrice' | translate }} *</label>
         <p-inputNumber id="DeliveryPrice"
                        formControlName="DeliveryPrice"
-                       (keyup)="orderSelectionChangedWithInput($event)"
                        [ngClass]="{'ng-invalid ng-dirty': addOrderForm.controls.DeliveryPrice.invalid &&
                        addOrderForm.controls.DeliveryPrice.touched}"
                        [placeholder]="translateService.instant('OrderDeliveryPricePlaceholder')"
@@ -143,7 +142,7 @@
 
     </div>
 
-    <button type="submit" class="btn-md skin-btn form-btn">
+    <button type="submit" class="btn-md primary-btn form-btn">
       <span class="flex justify-content-center align-items-center gap-5">
         {{ 'Add' | translate }}
         <i class="fa-solid fa-square-plus icon-md"></i>

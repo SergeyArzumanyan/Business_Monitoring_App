@@ -6,6 +6,7 @@ import {
   RequestsService,
   ToastService,
   HistoryService,
+  TitleService,
 } from "@Core/services";
 import {
   IPeriod,
@@ -38,6 +39,7 @@ export class ViewHistoryComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private toastService: ToastService,
+    private titleService: TitleService,
     public translateService: TranslateService
   ) {
     this.CheckForClientID();
@@ -97,6 +99,7 @@ export class ViewHistoryComponent implements OnInit, OnDestroy {
       this.historyService.SelectedClientID.getValue()
     ) {
       this.GetOrdersHistoryForClient();
+      this.titleService.setTitle(this.translateService.instant('Client'), this.translateService.instant('Orders'));
     }
   }
 
