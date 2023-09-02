@@ -1,16 +1,13 @@
 {
   "name": "truffle-sweets",
   "version": "2.0.0",
-  "description": "",
-  "main": "index.js",
   "keywords": [],
   "author": "Sergey Arzumanyan",
   "license": "ISC",
   "scripts": {
-    "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
+    "build:stg": "ng build --configuration=development",
+    "build:prod": "ng build --configuration=production",
     "test": "ng test",
     "lint": "ng lint"
   },
