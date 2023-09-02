@@ -2,6 +2,7 @@ export enum Configs {
   // Main Configs Start
 
   AppMainTitle = 'Truffel Sweets',
+  AppPassword = 'Truffle2023',
 
   PrimaryItem = 'Sweet',
   PrimaryItemEndPoint = 'sweets',

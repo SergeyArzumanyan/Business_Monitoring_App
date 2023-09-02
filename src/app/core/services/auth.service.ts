@@ -12,7 +12,7 @@ import { Configs } from "@Core/configs";
 export class AuthService {
 
   public authenticated: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  public password: string = "Truffle2023";
+  public password: string = Configs.AppPassword;
 
   constructor(
     private router: Router,
