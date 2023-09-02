@@ -1,3 +1,4 @@
+export * from './configs';
 export * from './directives';
 export * from './guards';
 export * from './interfaces';

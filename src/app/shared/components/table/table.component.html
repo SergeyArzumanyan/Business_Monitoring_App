@@ -69,10 +69,10 @@
                               [ContextMenuItems]="ContextMenuItems"
                               [ContextMenuPosition]="ContextMenuPosition">
             </app-context-menu>
-            <td class="action-td skin-action-btn" (click)="EnableEditing(ArrayObject)">
+            <td class="action-td primary-action-btn" (click)="EnableEditing(ArrayObject)">
               <i class="pi pi-pencil icon-sm"></i>
             </td>
-            <td class="action-td brown-action-btn" (click)="DeleteItemConfirm(ArrayObject)">
+            <td class="action-td secondary-action-btn" (click)="DeleteItemConfirm(ArrayObject)">
               <i class="pi pi-trash icon-sm"></i>
             </td>
           </ng-container>
@@ -136,7 +136,7 @@
     <ng-template pTemplate="footer">
       <div class="w-100 flex align-items-center justify-content-end">
         <button type="button"
-                class="btn-md brown-action-btn dialog-btn"
+                class="btn-md secondary-action-btn dialog-btn"
                 (click)="HideEditDialog()">
         <span class="flex justify-content-center align-items-center gap-5">
           {{ 'Cancel' | translate }}
@@ -145,9 +145,9 @@
         </button>
 
         <button type="submit"
-                class="btn-md skin-action-btn dialog-btn"
+                class="btn-md primary-action-btn dialog-btn"
                 [disabled]="EditDialogForm.pristine"
-                [ngClass]="{'skin-action-btn-disabled': EditDialogForm.pristine}"
+                [ngClass]="{'primary-action-btn-disabled': EditDialogForm.pristine}"
                 (click)="SaveEditedItem()">
         <span class="flex justify-content-center align-items-center gap-5">
           {{ 'Save' | translate }}
@@ -168,13 +168,13 @@
     <button type="button"
             pButton
             icon="pi pi-times"
-            class="skin-action-btn"
+            class="primary-action-btn"
             [label]="translateService.instant('No')"
             (click)="cd.reject()"></button>
     <button type="button"
             pButton
             icon="pi pi-check"
-            class="brown-action-btn"
+            class="secondary-action-btn"
             [label]="translateService.instant('Yes')"
             (click)="cd.accept()"></button>
   </ng-template>

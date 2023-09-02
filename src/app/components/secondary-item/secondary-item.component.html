@@ -1,0 +1,10 @@
+<div class="w-100 h-100 wrapper flex justify-content-center">
+  <div class="container flex col gap-15">
+    <app-table [TableConfig]="secondaryItemTableConfig"
+               [TableFilters]="secondaryItemTableFilters"
+               [ContextMenuItems]="secondaryItemTableContextMenuOptions"
+               [EditDialogForm]="secondaryItemForm"
+               [Pending]="pending">
+    </app-table>
+  </div>
+</div>

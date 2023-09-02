@@ -1,0 +1,83 @@
+<div class="form-wrapper flex justify-content-center">
+  <form [formGroup]="addProductForm" (ngSubmit)="onAdd()">
+    <div class="form-container flex col align-items-center gap-20">
+
+      <div class="w-100 flex">
+        <button class="rounded-btn primary-btn" type="button" [routerLink]="['add']"><i class="pi pi-arrow-left"></i></button>
+        <h3 class="form-header">{{ 'SecondaryItem' | translate }}</h3>
+      </div>
+
+      <div class="form-group flex col gap-10">
+        <label class="form-label" for="product-name">{{ 'Name' | translate }} *</label>
+        <input formControlName="Name"
+               id="product-name"
+               class="form-input p-inputtext-sm"
+               [ngClass]="{'ng-invalid ng-dirty': addProductForm.controls.Name.touched &&
+               (addProductForm.controls.Name.invalid || !addProductForm.value.Name?.trim())}"
+               type="text"
+               pInputText
+               [placeholder]="translateService.instant('SecondaryItemNamePlaceholder')">
+
+        <div class="p-error-wrapper">
+          <small *ngIf="addProductForm.controls.Name.touched &&
+                  (addProductForm.controls.Name.hasError('required') || !addProductForm.value.Name?.trim())"
+                 class="p-error">
+            {{ 'FieldRequiredError' | translate }}
+          </small>
+
+          <small *ngIf="addProductForm.controls.Name.touched &&
+                  addProductForm.controls.Name.hasError('minlength')"
+                 class="p-error">
+            {{ 'ShortFieldError' | translate }}
+          </small>
+
+          <small *ngIf="addProductForm.controls.Name.touched &&
+                    addProductForm.controls.Name.hasError('maxlength')"
+                 class="p-error">
+            {{ 'LongFieldError' | translate }}
+          </small>
+        </div>
+      </div>
+
+      <div class="form-group flex col gap-10">
+        <label class="form-label" for="product-price">{{ 'Price' | translate }} *</label>
+        <p-inputNumber formControlName="Price"
+                       [ngClass]="{'ng-invalid ng-dirty': addProductForm.controls.Price.touched &&
+                       addProductForm.controls.Price.invalid}"
+                       inputId="product-price"
+                       id="product-price"
+                       [placeholder]="translateService.instant('SecondaryItemPricePlaceholder')">
+        </p-inputNumber>
+
+        <div class="p-error-wrapper">
+          <small *ngIf="addProductForm.controls.Price.touched &&
+                    addProductForm.controls.Price.hasError('required')"
+                 class="p-error">
+            {{ 'FieldRequiredError' | translate }}
+          </small>
+
+          <small *ngIf="addProductForm.controls.Price.touched &&
+                    addProductForm.controls.Price.hasError('isNotPositive')"
+                 class="p-error">
+            {{ 'NegativeFieldError' | translate }}
+          </small>
+
+          <small *ngIf="addProductForm.controls.Price.touched &&
+                    addProductForm.controls.Price.hasError('max')"
+                 class="p-error">
+            {{ 'FieldTooLargeError' | translate }}
+          </small>
+        </div>
+
+      </div>
+
+    </div>
+
+    <button type="submit" class="btn-md primary-btn form-btn">
+      <span class="flex justify-content-center align-items-center gap-5">
+        {{ 'Add' | translate }}
+        <i class="fa-solid fa-square-plus icon-md"></i>
+      </span>
+    </button>
+  </form>
+</div>

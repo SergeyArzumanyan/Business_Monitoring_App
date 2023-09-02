@@ -5,9 +5,9 @@
   margin: 0;
   padding: 0;
   background-color: $white-300;
-  border-radius: $borderRadius;
+  border-radius: $buttonBorderRadius;
   z-index: 1200;
-  box-shadow: 0 0 1px 0 $skin-300;
+  box-shadow: 0 0 1px 0 $primary-300;
 
   ul {
     margin: 0;
@@ -20,7 +20,7 @@
       width: 130px;
       transition: background-color $animationTime;
       cursor: pointer;
-      border-radius: $borderRadius;
+      border-radius: $buttonBorderRadius;
 
 
       &:hover {

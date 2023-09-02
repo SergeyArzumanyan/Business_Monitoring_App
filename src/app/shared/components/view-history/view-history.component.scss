@@ -8,8 +8,8 @@
     padding: 25px 50px 40px;
     margin: 0;
     background-color: $white-300;
-    border-radius: $borderRadius;
-    box-shadow: 0 0 2px 0 $skin-100;
+    border-radius: $buttonBorderRadius;
+    box-shadow: 0 0 2px 0 $primary-100;
     transition: width $animationTime, height $animationTime;
 
     .history-topbar-wrapper {
@@ -29,13 +29,14 @@
 .period-card {
   background-color: $white-200;
   min-height: 75px;
-  border-radius: $borderRadius;
+  border-radius: $buttonBorderRadius;
   box-shadow: 6px 5px 2px 2px $white-100;
 
   .date-wrapper .date-day {
-    padding-bottom: 5px;
-    border-bottom: 2px solid $skin-100;
-    border-radius: 2px;
+      padding-bottom: 5px;
+      border-bottom: 2px solid $primary-100;
+      border-radius: 2px;
+
   }
 
   .order-info-wrapper {
@@ -53,7 +54,7 @@
 
     .item-profit-info-wrapper .order-items-sub-header {
       padding-bottom: 4px;
-      border-bottom: 2px solid $skin-100;
+      border-bottom: 2px solid $primary-100;
     }
 
     .item-profit-info-wrapper .order-items-wrapper {
@@ -163,7 +164,7 @@
   min-height: 130px;
   padding: 10px;
   background-color: $table-loading;
-  border-radius: $borderRadius;
+  border-radius: $buttonBorderRadius;
 
   .message-text {
     font-size: $medium;

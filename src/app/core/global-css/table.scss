@@ -28,19 +28,19 @@ table tr:last-child td:last-child {
 
 @media (max-width: 600px) {
   table th:first-child {
-    border-top-left-radius: $borderRadius !important;
+    border-top-left-radius: $buttonBorderRadius !important;
   }
 
   table th:last-child {
-    border-top-right-radius: $borderRadius !important;
+    border-top-right-radius: $buttonBorderRadius !important;
   }
 
   table tr:last-child td:first-child {
-    border-bottom-left-radius: $borderRadius !important;
+    border-bottom-left-radius: $buttonBorderRadius !important;
   }
 
   table tr:last-child td:last-child {
-    border-bottom-right-radius: $borderRadius !important;
+    border-bottom-right-radius: $buttonBorderRadius !important;
   }
 }
 
@@ -63,7 +63,7 @@ table tr:last-child td:last-child {
 .filters-wrapper {
   padding: 20px 25px;
   background-color: $table-background;
-  border-radius: $borderRadius;
+  border-radius: $buttonBorderRadius;
 
   .filters-header {
     font-size: $medium;
@@ -86,7 +86,7 @@ table tr:last-child td:last-child {
 
   .filter-menu-wrapper {
     width: 40px;
-    border-radius: $borderRadius;
+    border-radius: $buttonBorderRadius;
   }
 }
 
@@ -227,7 +227,7 @@ table tr:last-child td:last-child {
     min-height: 130px;
     padding: 25px;
     background-color: $white-400;
-    border-radius: $borderRadius;
+    border-radius: $buttonBorderRadius;
     box-shadow: 0 0 1px 0 $gray-300;
     text-align: center;
 
@@ -244,7 +244,7 @@ table tr:last-child td:last-child {
     min-height: 130px;
     padding: 10px;
     background-color: $table-loading;
-    border-radius: $borderRadius;
+    border-radius: $buttonBorderRadius;
   }
 }
 

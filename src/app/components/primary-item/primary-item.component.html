@@ -1,0 +1,84 @@
+<ng-container *ngIf="pending">
+  <div class="h-100 loading-wrapper flex gap-15 justify-content-center align-items-center">
+    <span class="loading-text">{{ 'PleaseWait' | translate }}</span>
+    <p-progressSpinner class="p-progress-path"></p-progressSpinner>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="!pending && primaryItems.length === 0">
+  <div class="h-100 flex justify-content-center align-items-center">
+    <div class="empty-message flex col gap-20">
+      <div class="message">
+        {{ 'NoPrimaryItemsMessage' | translate: {key: translateService.instant('PrimaryItem')} }}
+      </div>
+      <div class="link">
+        {{ 'YouCanAddMessage'  | translate }}
+        <a [routerLink]="['/add/' + Configs.PrimaryItemAddRoute]" class="classic-link">
+        {{ 'Here' | translate }}
+      </a>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="!pending && primaryItems.length !== 0">
+  <div class="w-100 h-100 sweets-wrapper flex justify-content-center align-items-center">
+    <div class="container">
+
+      <div class="sweet-card" *ngFor="let primaryItem of primaryItems">
+        <div class="sweet-image-wrapper flex justify-content-center align-items-center">
+          <div class="image-more flex justify-content-center align-items-center">
+            <span>{{ 'ViewMore' | translate }}</span>
+            <i class="pi pi-angle-right icon-md"></i>
+          </div>
+          <img
+            tabindex="-1"
+            [src]="primaryItem.Image"
+            class="sweet-image"
+            [routerLink]="[primaryItem.ID]"
+            [alt]="primaryItem.Name">
+        </div>
+        <div class="sweet-card-info">
+          <h3 class="sweet-name">{{ primaryItem.Name }}</h3>
+          <span class="sweet-price">{{ primaryItem.TotalPrice }} AMD</span>
+        </div>
+        <div class="sweet-card-buttons flex justify-content-center align-items-center">
+          <button class="sweet-btn edit-sweet-btn btn-md primary-action-btn" [routerLink]="[primaryItem.ID]">
+              <span class="flex justify-content-center align-items-center">
+                {{ 'More' | translate }}
+                <i class="pi pi-angle-right icon-md"></i>
+              </span>
+          </button>
+          <button class="sweet-btn delete-sweet-btn btn-md secondary-action-btn" (click)="DeleteItemConfirm(primaryItem)">
+              <span class="flex justify-content-center align-items-center gap-5">
+                {{ 'Delete' | translate }}
+              <i class="pi pi-trash icon-sm"></i>
+              </span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</ng-container>
+
+<p-confirmDialog
+  #cd
+  [dismissableMask]="true"
+  [breakpoints]="{'650px': '85vw'}"
+>
+  <ng-template pTemplate="footer">
+    <button type="button"
+            pButton
+            icon="pi pi-times"
+            class="primary-action-btn"
+            [label]="translateService.instant('No')"
+            (click)="cd.reject()"></button>
+    <button type="button"
+            pButton
+            icon="pi pi-check"
+            class="secondary-action-btn"
+            [label]="translateService.instant('Yes')"
+            (click)="cd.accept()"></button>
+  </ng-template>
+</p-confirmDialog>

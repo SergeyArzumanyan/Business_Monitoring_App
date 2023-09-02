@@ -1,0 +1,111 @@
+<ng-container *ngIf="pending">
+  <div class="w-100 h-100 loading-wrapper flex gap-15 justify-content-center align-items-center">
+    <span class="loading-text">{{ 'PleaseWait' | translate }}</span>
+    <p-progressSpinner class="p-progress-path"></p-progressSpinner>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="!pending">
+  <div class="w-100 h-100 wrapper flex justify-content-center">
+    <div class="container flex">
+
+      <div class="w-100 h-100 image-part">
+        <img class="w-100 h-100" [src]="primaryItem.Image" [alt]="primaryItem.Name">
+      </div>
+
+      <div class="w-100 h-100 info-part flex col">
+        <div class="w-100 h-100 p-30 table-part flex col">
+          <span class="text-center">
+            {{ 'Price' | translate }} {{ primaryItem.TotalPrice }} AMD ({{ 'Profit' | translate }} {{ primaryItem.Profit }} AMD)
+          </span>
+          <div class="sweet-products-table">
+            <app-table [ShowTableFilters]="false"
+                       [IsTableHeightLimited]="true"
+                       [TableConfig]="primaryItemTableConfig">
+            </app-table>
+          </div>
+        </div>
+
+        <div class="w-100 h-25 p-25 buttons-part flex gap-10 justify-content-center align-items-end">
+          <button type="button"
+                  class="btn-md secondary-action-btn"
+                  [routerLink]="['/primary-item']">
+            {{ 'Back' | translate }}
+          </button>
+          <button type="button"
+                  class="btn-md primary-action-btn"
+                  (click)="enableEditing()">
+              <span class="flex gap-5 justify-content-center align-items-center">
+                {{ 'Edit' | translate }}
+                <i class="pi pi-pencil icon-sm"></i>
+              </span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="isEditMode">
+  <p-dialog [(visible)]="isEditMode"
+            [dismissableMask]="true"
+            [resizable]="false"
+            [draggable]="false"
+            [breakpoints]="{'1080px': '50vw','960px': '60vw', '640px': '85vw'}"
+            [style]="{width: '450px'}"
+            [header]="translateService.instant('EditItem',
+             { key: translateService.instant('PrimaryItem') }
+             )"
+            [modal]="true"
+            (onHide)="disableEditing()"
+            styleClass="p-fluid">
+
+    <ng-template pTemplate="content">
+      <app-edit-primary-item
+        (disableEditing)="disableEditingInModal($event)"
+        [editPrimaryItemForm]="editPrimaryItemForm"
+        [primaryItemTotalPrices]="primaryItemTotalPrices"
+        [primaryItem]="primaryItem">
+      </app-edit-primary-item>
+    </ng-template>
+
+
+    <ng-template pTemplate="footer">
+      <div class="p-10 flex col gap-10">
+        <div class="item-total-price-wrapper w-100 flex justify-content-between align-items-center">
+          <span class="item-total-price-text">
+            {{ 'TotalPrice' | translate }}:
+          </span>
+
+          <span class="item-total-price">
+            {{ primaryItemTotalPrices.CurrentTotalPrice ? primaryItemTotalPrices.CurrentTotalPrice : 0 }} AMD
+          </span>
+        </div>
+
+        <div class="w-100 flex align-items-center justify-content-end">
+          <button type="button"
+                  class="btn-md secondary-action-btn dialog-btn"
+                  (click)="disableEditing()">
+            <span class="flex justify-content-center align-items-center gap-5">
+              {{ 'Cancel' | translate }}
+              <i class="pi pi-times icon-sm"></i>
+            </span>
+          </button>
+
+          <button type="submit"
+                  class="btn-md primary-action-btn dialog-btn"
+                  [disabled]="editPrimaryItemForm.pristine"
+                  [ngClass]="{'primary-action-btn-disabled': editPrimaryItemForm.pristine}"
+                  (click)="onEdit()">
+            <span class="flex justify-content-center align-items-center gap-5">
+              {{ 'Save' | translate }}
+              <i class="pi pi-check icon-sm"></i>
+            </span>
+          </button>
+        </div>
+      </div>
+    </ng-template>
+
+  </p-dialog>
+</ng-container>

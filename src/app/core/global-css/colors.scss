@@ -1,50 +1,42 @@
 $primary: #eacabb;
 $secondary: #5b3e2c;
 $black: #212020;
+$error: #e24c4c;
+$table-background: #e0dfdf;
+$table-loading: #e6e6e6;
+$link-static: #467dff;
+$link-hover: #2a79f6;
+
+$primary-100: #e5c0a9;
+$primary-200: #f3dcd1;
+$primary-300: #ecdbd5;
+$primary-background: #f6f1f1;
+$primary-disabled: #ce978e;
+
+$primary-action-btn-300: $primary-100;
+$primary-action-btn-200: #dcb095;
+$primary-action-btn-100: #e1a985;
+$primary-action-btn-disabled: #cc9875;
+
+$secondary-100: #5b3e2c;
+$secondary-200: #795037;
+$secondary-300: #8a593b;
+$secondary-disabled: #563723;
 
 $white-100: #CAC8C8;
 $white-200: #E2E2E2;
 $white-300: #f3f3f3;
 $white-400: #ffffff;
 
+//  ToDo (For DarkMode)
+
+//$black-100: #000000;
+//$black-200: #000000;
+//$black-300: #000000;
+//$black-400: #000000;
+
 $gray-100: #444444;
 $gray-200: #6b6a6a;
 $gray-300: #bbbbbb;
 $gray-disabled: #565454;
 $gray-background: #484848;
-
-$brown-100: #5b3e2c;
-$brown-200: #795037;
-$brown-300: #8a593b;
-$brown-disabled: #563723;
-
-$skin-100: #e5c0a9;
-$skin-200: #f3dcd1;
-$skin-300: #ecdbd5;
-$skin-background: #f6f1f1;
-$skin-disabled: #ce978e;
-
-$green-100: #00AF45;
-$green-200: #00CE51;
-$green-300: #00EA5C;
-$green-disabled: #065b24;
-
-$red-100: #b20101;
-$red-200: #f82a2a;
-$red-300: #ee4636;
-$red-error: #e24c4c;
-$red-disabled: #8d3737;
-
-$blue-100: #0250b6;
-$blue-200: #467dff;
-$blue-300: #2a79f6;
-$blue-400: #5690f5;
-$blue-disabled: #2b4981;
-
-$skin-action-btn-300: $skin-100;
-$skin-action-btn-200: #dcb095;
-$skin-action-btn-100: #e1a985;
-$skin-action-btn-disabled: #cc9875;
-
-$table-background: #e0dfdf;
-$table-loading: #e6e6e6;

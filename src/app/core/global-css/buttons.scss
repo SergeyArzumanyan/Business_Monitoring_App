@@ -1,207 +1,136 @@
 @import "/src/app/core/global-css/fonts";
 @import "/src/app/core/global-css/colors";
 
-$borderRadius: 8px;
+$buttonBorderRadius: 8px;
 $animationTime: 0.2s;
 
-@mixin btn-basic {
+@mixin btn-basic($buttonMinWidth, $buttonWidth, $buttonHeight, $buttonFontSize) {
+  min-width: $buttonMinWidth;
+  width: $buttonWidth;
+  height: $buttonHeight;
+  font-size: $buttonFontSize;
   margin: 0;
   padding: 0;
   border: none;
   outline: none;
-  border-radius: $borderRadius;
+  border-radius: $buttonBorderRadius;
   cursor: pointer;
   transition: $animationTime;
 }
 
 .btn-xs {
-  @include btn-basic;
-  min-width: 50px;
-  width: 50px;
-  height: 30px;
-  font-size: $small;
+  @include btn-basic(50px, 50px, 30px, $small);
 }
 
 .btn-sm {
-  @include btn-basic;
-  width: 100px;
-  height: 30px;
-  font-size: $small;
+  @include btn-basic(initial, 100px, 30px, $small);
 }
 
 .btn-md {
-  @include btn-basic;
-  width: 120px;
-  height: 40px;
-  font-size: $medium;
+  @include btn-basic(initial, 120px, 40px, $medium);
 }
 
 .btn-lg {
-  @include btn-basic;
-  width: 150px;
-  height: 50px;
-  font-size: $big;
+  @include btn-basic(initial, 150px, 50px, $big);
 }
 
 .rounded-btn {
-  @include btn-basic;
+  @include btn-basic(initial, 25px, 25px, $small);
   position: absolute;
-  width: 25px;
-  height: 25px;
   line-height: 25px;
-  font-size: $small;
   border-radius: 999999px;
 }
 
 .classic-link {
-  color: $blue-300;
+  color: $link-static;
   text-decoration: none;
 
   &:active {
-    color: $blue-100;
+    color: $link-hover;
   }
 }
 
-.primary {
-  color: $gray-100 !important;
-  background-color: $primary !important;
-
-  &:hover {
-    color: $black !important;
-    background-color: $skin-100 !important;
-  }
-}
-
-.red-btn {
-  background-color: $red-300 !important;
-  cursor: pointer;
-
-  &:hover {
-    background-color: $red-200 !important;
-  }
-
-  &:active {
-    background-color: $red-100 !important;
-  }
-
-  &:focus:focus-visible {
-    box-shadow: 0 0 0 4px $gray-100 !important;
-  }
-
-  &-disabled {
-    background-color: $red-disabled !important;
-    cursor: not-allowed;
-  }
-
-  &-disabled:hover, &-disabled:active {
-    background-color: $red-disabled !important;
-  }
-}
-
-.blue-btn {
-  background-color: $blue-300 !important;
-  cursor: pointer;
-
-  &:hover {
-    background-color: $blue-200 !important;
-  }
-
-  &:active {
-    background-color: $blue-100 !important;
-  }
-
-  &:focus:focus-visible {
-    box-shadow: 0 0 0 4px $gray-100 !important;
-  }
-
-  &-disabled {
-    background-color: $blue-disabled !important;
-    cursor: not-allowed;
-  }
-
-  &-disabled:hover, &-disabled:active {
-    background-color: $blue-disabled !important;
-  }
-}
-
-.skin-btn {
+.primary-btn {
   color: $black !important;
-  background-color: $skin-300 !important;
+  background-color: $primary-300 !important;
   cursor: pointer;
 
   &:hover {
-    background-color: $skin-200 !important;
+    background-color: $primary-200 !important;
   }
 
   &:active {
-    background-color: $skin-100 !important;
+    background-color: $primary-100 !important;
   }
 
   &:focus:focus-visible {
-    box-shadow: 0 0 0 4px $brown-300 !important;
+    box-shadow: 0 0 0 4px $secondary-300 !important;
   }
 
   &-disabled {
-    background-color: $skin-disabled !important;
+    background-color: $primary-disabled !important;
     cursor: not-allowed;
   }
 
   &-disabled:hover, &-disabled:active {
-    background-color: $skin-disabled !important;
+    background-color: $primary-disabled !important;
   }
 }
 
-.brown-action-btn {
+.primary-action-btn {
+  color: $black;
+  background-color: $primary-action-btn-300 !important;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $primary-action-btn-200 !important;
+  }
+
+  &:active {
+    color: $white-400 !important;
+    background-color: $primary-action-btn-100 !important;
+  }
+
+  &:focus:focus-visible {
+    box-shadow: 0 0 0 4px $secondary-300 !important;
+  }
+
+  &-disabled {
+    background-color: $primary-action-btn-disabled !important;
+    cursor: not-allowed !important;
+  }
+
+  &-disabled:hover, &-disabled:active {
+    background-color: $primary-action-btn-disabled !important;
+    color: $black !important;
+  }
+}
+
+.secondary-action-btn {
   color: $white-300 !important;
-  background-color: $brown-300 !important;
+  background-color: $secondary-300 !important;
   cursor: pointer;
 
   &:hover {
-    background-color: $brown-200 !important;
+    background-color: $secondary-200 !important;
   }
 
   &:active {
-    background-color: $brown-100 !important;
+    background-color: $secondary-100 !important;
   }
 
   &:focus:focus-visible {
-    box-shadow: 0 0 0 4px $skin-100 !important;
+    box-shadow: 0 0 0 4px $primary-100 !important;
   }
 
   &-disabled {
-    background-color: $brown-disabled !important;
+    background-color: $secondary-disabled !important;
     cursor: not-allowed;
   }
 
   &-disabled:hover, &-disabled:active {
-    background-color: $brown-disabled !important;
+    background-color: $secondary-disabled !important;
     color: $white-300 !important;
-  }
-}
-
-.green-btn {
-  background-color: $green-300 !important;
-  cursor: pointer;
-
-  &:hover {
-    background-color: $green-200 !important;
-  }
-
-  &:active {
-    background-color: $green-100 !important;
-  }
-
-  &:focus:focus-visible {
-    box-shadow: 0 0 0 4px $gray-100 !important;
-  }
-
-  &-disabled {
-    background-color: $green-disabled !important;
-    cursor: not-allowed;
-  }
-
-  &-disabled:hover, &-disabled:active {
-    background-color: $green-disabled !important;
   }
 }
 
@@ -228,35 +157,6 @@ $animationTime: 0.2s;
 
   &-disabled:hover, &-disabled:active {
     background-color: $gray-disabled !important;
-  }
-}
-
-.skin-action-btn {
-  color: $black;
-  background-color: $skin-action-btn-300 !important;
-  cursor: pointer;
-
-  &:hover {
-    background-color: $skin-action-btn-200 !important;
-  }
-
-  &:active {
-    color: $white-400 !important;
-    background-color: $skin-action-btn-100 !important;
-  }
-
-  &:focus:focus-visible {
-    box-shadow: 0 0 0 4px $brown-300 !important;
-  }
-
-  &-disabled {
-    background-color: $skin-action-btn-disabled !important;
-    cursor: not-allowed !important;
-  }
-
-  &-disabled:hover, &-disabled:active {
-    background-color: $skin-action-btn-disabled !important;
-    color: $black !important;
   }
 }
 

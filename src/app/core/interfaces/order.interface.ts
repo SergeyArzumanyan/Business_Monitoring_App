@@ -1,11 +1,11 @@
-import { Form, FormArray, FormControl } from "@angular/forms";
+import { FormArray, FormControl } from "@angular/forms";
 
-import { ISweetProduct } from "@Core/interfaces";
+import { IPrimaryItemPart } from "@Core/interfaces";
 
 export interface IOrder {
   Client: string | null;
   ClientID: number | null;
-  Sweets: IOrderSweet[] | null;
+  PrimaryItems: IOrderPrimaryItem[] | null;
   Address: string | null;
   DeliveryPrice: number | null;
   TotalPrices: IOrderTotalPrices | null;
@@ -16,7 +16,7 @@ export interface IOrder {
 export interface IAddOrderForm {
   Client: FormControl<string | null>;
   ClientID: FormControl<number | null>;
-  Sweets: FormArray;
+  PrimaryItems: FormArray;
   Address: FormControl<string | null>;
   DeliveryPrice: FormControl<number | null>;
   TotalPrices: FormControl<IOrderTotalPrices | null>;
@@ -24,18 +24,18 @@ export interface IAddOrderForm {
   Profit: FormControl<number | null>;
 }
 
-export interface IOrderSweetQuantityForm {
+export interface IOrderPrimaryItemQuantityForm {
   ID: FormControl<number | null>;
   Name: FormControl<string | null>;
-  Products: FormControl<ISweetProduct[] | null>;
+  SecondaryItems: FormControl<IPrimaryItemPart[] | null>;
   Quantity: FormControl<number | null>;
   Profit: FormControl<number | null>;
 }
 
-export interface IOrderSweet {
+export interface IOrderPrimaryItem {
   ID: number;
   Name: string;
-  Products: ISweetProduct[];
+  SecondaryItems: IPrimaryItemPart[];
   Quantity: number;
   PriceWhenOrdered: number;
   Profit: number;
@@ -43,5 +43,5 @@ export interface IOrderSweet {
 
 export interface IOrderTotalPrices {
   OrderTotalPrice: number | null;
-  SweetsTotalPrice: number | null;
+  PrimaryItemsTotalPrice: number | null;
 }

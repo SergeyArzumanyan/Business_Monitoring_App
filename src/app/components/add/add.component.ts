@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 
+import { Configs } from '@Core/configs';
 import { TranslateService } from "@ngx-translate/core";
+import { TitleService } from "@Core/services";
 
 @Component({
   selector: 'app-add',
@@ -9,6 +11,13 @@ import { TranslateService } from "@ngx-translate/core";
 })
 export class AddComponent {
 
-  constructor(public translateService: TranslateService) {}
+  public Configs = Configs;
+
+  constructor(
+    private titleService: TitleService,
+    public translateService: TranslateService
+  ) {
+    this.titleService.setTitle(Configs.AppMainTitle, this.translateService.instant('Add'));
+  }
 
 }

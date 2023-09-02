@@ -10,8 +10,8 @@ $links-gap: 25px;
     padding: 20px 50px;
     margin: 0 auto;
     background-color: $white-300;
-    box-shadow: 0 0 2px 0 $skin-100;
-    border-radius: $borderRadius;
+    box-shadow: 0 0 2px 0 $primary-100;
+    border-radius: $buttonBorderRadius;
     transition: width $animationTime, height $animationTime;
 
     .add-header {

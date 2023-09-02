@@ -4,10 +4,12 @@ import { Subject, takeUntil } from "rxjs";
 import {
   HistoryService,
   RequestsService,
+  TitleService,
   ToastService
 } from "@Core/services";
 import { IOrder } from "@Core/interfaces";
 import { TranslateService } from "@ngx-translate/core";
+import { Configs } from "@Core/configs";
 
 @Component({
   selector: 'app-orders',
@@ -26,9 +28,11 @@ export class OrdersComponent implements OnDestroy {
     private Request: RequestsService,
     private historyService: HistoryService,
     private toastService: ToastService,
+    private titleService: TitleService,
     public translateService: TranslateService
   ) {
     this.getAllOrders();
+    this.titleService.setTitle(Configs.AppMainTitle, this.translateService.instant('Orders'));
   }
 
   ngOnDestroy(): void {
