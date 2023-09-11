@@ -8,8 +8,8 @@ Created by [Sergey Arzumanyan](https://github.com/SergeyArzumanyan) In 2023.
 To Configure This Project For Brands Do The Following `
 
 Configure Translations In `src/assets/translations`.\
-Configure Basic Configs In `src/app/core/configs/configs.enum.ts` File. .\
-Configure Project Color Scheme In `src/app/core/global-css/colors.scss` File. .\
+Configure Basic Configs In `src/app/core/configs/configs.enum.ts` File. \
+Configure Project Color Scheme In `src/app/core/global-css/colors.scss` File. \
 Configure Firebase Configs In `/.firebaserc` File.
 
 ## Build
